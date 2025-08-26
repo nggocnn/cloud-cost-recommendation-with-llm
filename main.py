@@ -179,7 +179,7 @@ class CostRecommendationApp:
 async def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(description="AWS Cost Optimization using LLM")
-    parser.add_argument("--account-id", required=True, help="AWS Account ID to analyze")
+    parser.add_argument("--account-id", help="AWS Account ID to analyze")
     parser.add_argument("--billing-file", help="Path to billing CSV file")
     parser.add_argument("--inventory-file", help="Path to inventory JSON file")
     parser.add_argument("--metrics-file", help="Path to metrics CSV file")
@@ -202,6 +202,10 @@ async def main():
             print(json.dumps(status, indent=2))
             return
         
+        # Validate required arguments for analysis
+        if not args.account_id:
+            parser.error("--account-id is required for analysis")
+        
         # Run analysis
         report = await app.run_analysis(
             account_id=args.account_id,
@@ -219,7 +223,7 @@ async def main():
             if args.output_file:
                 import json
                 with open(args.output_file, 'w') as f:
-                    json.dump(report.dict(), f, indent=2, default=str)
+                    json.dump(report.model_dump(), f, indent=2, default=str)
                 print(f"\nDetailed report saved to: {args.output_file}")
     
     except Exception as e:

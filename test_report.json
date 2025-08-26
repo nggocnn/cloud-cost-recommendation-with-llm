@@ -1,0 +1,69 @@
+{
+  "id": "report_test-123_20250826_041240",
+  "account_id": "test-123",
+  "generated_at": "2025-08-26 04:12:47.947475",
+  "total_monthly_savings": 44.45,
+  "total_annual_savings": 533.4000000000001,
+  "total_recommendations": 1,
+  "recommendations": [
+    {
+      "id": "ec2_agent_i-1234567890abcdef0_2025-08-26T04:12:47.947215",
+      "resource_id": "i-1234567890abcdef0",
+      "service": "EC2",
+      "recommendation_type": "rightsizing",
+      "current_config": {
+        "instance_type": "m5.large",
+        "vCPU": 2,
+        "memory_gb": 8,
+        "monthly_cost_usd": 89.28
+      },
+      "recommended_config": {
+        "instance_type": "t3.large",
+        "vCPU": 2,
+        "memory_gb": 8
+      },
+      "current_monthly_cost": 89.28,
+      "estimated_monthly_cost": 44.83,
+      "estimated_monthly_savings": 44.45,
+      "annual_savings": 533.4000000000001,
+      "risk_level": "low",
+      "impact_description": "",
+      "rollback_plan": "",
+      "rationale": "The instance shows low to moderate CPU utilization (p50=15.2%, p90=28.5%, p95=35.1%) and moderate memory utilization (p50=45.8%, p90=62.3%, p95=71.2%). The m5.large is a general purpose instance with fixed CPU and memory. The t3.large instance provides the same vCPU and memory capacity but uses a burstable CPU model, which is more cost-effective for workloads with moderate CPU usage and occasional spikes. Given the CPU utilization pattern, t3.large can handle the workload while reducing cost by approximately 50%. The workload is production, but the risk is low because t3.large supports unlimited bursting and the memory footprint is unchanged. Network throughput and storage are not bottlenecks here.",
+      "evidence": {},
+      "implementation_steps": [
+        "Validate application performance on t3.large in a test environment.",
+        "Schedule a maintenance window to stop the current m5.large instance.",
+        "Launch a new t3.large instance with the same configuration and attach existing storage.",
+        "Monitor CPU and memory utilization closely for 1-2 weeks post-migration.",
+        "Rollback to m5.large if performance issues arise."
+      ],
+      "prerequisites": [],
+      "confidence_score": 0.9,
+      "created_at": "2025-08-26 04:12:47.947247",
+      "agent_id": "ec2_agent",
+      "business_hours_impact": false,
+      "downtime_required": false,
+      "sla_impact": null
+    }
+  ],
+  "low_risk_count": 1,
+  "medium_risk_count": 0,
+  "high_risk_count": 0,
+  "savings_by_service": {
+    "EC2": 44.45
+  },
+  "quick_wins": [],
+  "medium_term": [
+    "ec2_agent_i-1234567890abcdef0_2025-08-26T04:12:47.947215"
+  ],
+  "long_term": [],
+  "coverage": {
+    "total_resources": 2,
+    "total_services": 2,
+    "covered_services": 2,
+    "uncovered_services": [],
+    "analysis_time_seconds": 7.137542
+  },
+  "data_quality_issues": []
+}
