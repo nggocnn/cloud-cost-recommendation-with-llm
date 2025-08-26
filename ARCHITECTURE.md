@@ -6,7 +6,7 @@ This is a **multi-agent LLM-powered AWS cost optimization system** that analyzes
 
 ### Core Components
 
-```
+```txt
 llm_cost_recommendation/
 ├── agents/           # Multi-agent system
 │   ├── coordinator.py    # Orchestrates analysis
@@ -24,29 +24,35 @@ llm_cost_recommendation/
 ## 🎯 System Flow
 
 ### 1. Data Ingestion
-```
+
+```txt
 AWS Data Sources → DataIngestionService → Structured Models
 ```
+
 - **Billing Data**: CSV files with cost information
 - **Inventory Data**: JSON files with resource configurations
 - **Metrics Data**: CSV files with performance metrics
 
 ### 2. Multi-Agent Analysis
-```
+
+```txt
 Coordinator Agent → Service Agents → LLM Analysis → Recommendations
 ```
+
 - **Coordinator**: Orchestrates the analysis workflow
 - **Service Agents**: Specialized agents for each AWS service (EC2, S3, RDS, etc.)
 - **LLM Integration**: Uses GPT-4 for intelligent analysis
 
 ### 3. Report Generation
-```
+
+```txt
 Recommendations → Aggregation → Risk Assessment → Final Report
 ```
 
 ## ⚙️ Configuration System
 
 ### Environment Configuration (`.env`)
+
 ```bash
 # LLM Configuration
 OPENAI_API_KEY=your_api_key_here
@@ -61,6 +67,7 @@ LLM_PROVIDER=openai  # openai, anthropic, etc.
 ### Service Configuration (`config/*.yaml`)
 
 #### Coordinator Settings (`config/coordinator.yaml`)
+
 ```yaml
 enabled_services:
   - EC2
@@ -82,6 +89,7 @@ include_low_impact: false
 ```
 
 #### Service Agent Settings (`config/ec2_agent.yaml`)
+
 ```yaml
 agent_id: ec2_agent
 service: EC2
@@ -119,6 +127,7 @@ min_cost_threshold: 1.0
 ## 🚀 Usage Examples
 
 ### Basic Analysis
+
 ```bash
 # Install and activate
 pip install -e .
@@ -140,6 +149,7 @@ python -m llm_cost_recommendation \
 ```
 
 ### Advanced Options
+
 ```bash
 # Verbose debugging
 python -m llm_cost_recommendation --account-id test --sample-data --verbose
@@ -154,6 +164,7 @@ python -m llm_cost_recommendation --status --log-format json
 ## 🔄 System Workflow
 
 ### 1. Initialization Phase
+
 ```python
 # Load configuration
 config_manager = ConfigManager("config")
@@ -168,6 +179,7 @@ agents = {
 ```
 
 ### 2. Data Processing Phase
+
 ```python
 # Ingest data from various sources
 resources = data_service.ingest_inventory_data(inventory_file)
@@ -176,6 +188,7 @@ billing = data_service.ingest_billing_data(billing_file)
 ```
 
 ### 3. Analysis Phase
+
 ```python
 # Coordinator orchestrates analysis
 for service in enabled_services:
@@ -191,6 +204,7 @@ for service in enabled_services:
 ```
 
 ### 4. Aggregation Phase
+
 ```python
 # Combine recommendations from all agents
 all_recommendations = []
@@ -206,7 +220,9 @@ final_recommendations = deduplicate_and_rank(all_recommendations)
 ### Adding New AWS Services
 
 #### 1. Create Service Agent Configuration
+
 Create `config/newservice_agent.yaml`:
+
 ```yaml
 agent_id: newservice_agent
 service: NEWSERVICE
@@ -228,7 +244,9 @@ base_prompt: "You are an expert in NEWSERVICE optimization..."
 ```
 
 #### 2. Add Service to Models
+
 Update `models/__init__.py`:
+
 ```python
 class ServiceType(str, Enum):
     # ... existing services
@@ -236,7 +254,9 @@ class ServiceType(str, Enum):
 ```
 
 #### 3. Create Specialized Agent Class
+
 Create agent in `agents/base.py`:
+
 ```python
 class NewServiceAgent(BaseAgent):
     """Agent for NEWSERVICE cost optimization"""
@@ -307,7 +327,9 @@ class NewServiceAgent(BaseAgent):
 ```
 
 #### 4. Register Agent in Coordinator
+
 Update `agents/coordinator.py`:
+
 ```python
 def _create_agents(self) -> Dict[ServiceType, BaseAgent]:
     agents = {}
@@ -323,7 +345,9 @@ def _create_agents(self) -> Dict[ServiceType, BaseAgent]:
 ```
 
 #### 5. Update Configuration
+
 Add to `config/coordinator.yaml`:
+
 ```yaml
 enabled_services:
   - EC2
@@ -335,6 +359,7 @@ enabled_services:
 ### Adding New Cloud Providers
 
 #### 1. Create Provider-Specific Models
+
 ```python
 # models/azure.py
 class AzureServiceType(str, Enum):
@@ -350,6 +375,7 @@ class AzureResource(Resource):
 ```
 
 #### 2. Create Provider Interface
+
 ```python
 # services/providers.py
 from abc import ABC, abstractmethod
@@ -374,6 +400,7 @@ class AzureProvider(CloudProvider):
 ```
 
 #### 3. Create Provider-Specific Agents
+
 ```python
 # agents/azure.py
 class AzureVMAgent(BaseAgent):
@@ -384,6 +411,7 @@ class AzureVMAgent(BaseAgent):
 ```
 
 #### 4. Update Configuration System
+
 ```python
 # services/config.py
 class ProviderConfig(BaseModel):
@@ -406,6 +434,7 @@ class ConfigManager:
 ### Input Data Formats
 
 #### Billing Data (CSV)
+
 ```csv
 resource_id,service,cost,date,region
 i-1234567890abcdef0,EC2,45.50,2025-01-01,us-east-1
@@ -413,6 +442,7 @@ vol-0123456789abcdef0,EBS,12.30,2025-01-01,us-east-1
 ```
 
 #### Inventory Data (JSON)
+
 ```json
 [
   {
@@ -434,6 +464,7 @@ vol-0123456789abcdef0,EBS,12.30,2025-01-01,us-east-1
 ```
 
 #### Metrics Data (CSV)
+
 ```csv
 resource_id,metric_name,value,timestamp
 i-1234567890abcdef0,cpu_utilization_p50,15.2,2025-01-01T00:00:00Z
@@ -443,6 +474,7 @@ i-1234567890abcdef0,memory_utilization_p50,45.8,2025-01-01T00:00:00Z
 ## 🎛️ Advanced Configuration
 
 ### LLM Provider Switching
+
 ```python
 # services/llm.py
 class LLMService:
@@ -455,6 +487,7 @@ class LLMService:
 ```
 
 ### Custom Recommendation Types
+
 ```python
 class RecommendationType(str, Enum):
     # Standard types
@@ -468,6 +501,7 @@ class RecommendationType(str, Enum):
 ```
 
 ### Agent Customization
+
 ```python
 class CustomEC2Agent(EC2Agent):
     """Custom EC2 agent with organization-specific logic"""
@@ -483,6 +517,7 @@ class CustomEC2Agent(EC2Agent):
 ## 🔧 Development & Debugging
 
 ### Running Tests
+
 ```bash
 # Install development dependencies
 pip install -e ".[dev]"
@@ -495,6 +530,7 @@ pytest --cov=llm_cost_recommendation tests/
 ```
 
 ### Debugging Tips
+
 ```bash
 # Verbose logging with human-readable output
 python -m llm_cost_recommendation --verbose --log-format human --sample-data --account-id debug

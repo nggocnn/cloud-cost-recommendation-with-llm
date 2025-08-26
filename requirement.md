@@ -1,3 +1,5 @@
+# Requirements
+
 ## EC2 (virtual machines)
 
 * **What to record:** Instance type (vCPU/RAM), attached storage (how many volumes, type, size, throughput), and free disk space.
@@ -95,9 +97,9 @@
 
 ---
 
-# How to design your multi-LLM agent system (no code)
+## How to design your multi-LLM agent system (no code)
 
-## 1) Overall architecture
+### 1 Overall architecture
 
 * **Ingestion layer**
 
@@ -125,7 +127,7 @@
   * Human-readable report: itemized recommendations, estimated monthly saving, risk/impact, and exact “why”.
   * Machine-readable JSON for pipelines/dashboards.
 
-## 2) Prevent “code explosion”
+### 2 Prevent “code explosion”
 
 * **Plugin model**
 
@@ -141,14 +143,14 @@
   * **Service prompt add-ons**: only the deltas (e.g., S3 storage classes, EBS IOPS semantics).
   * **Response schema**: require structured fields (action, rationale, before/after config, cost delta, risk, rollback).
 
-## 3) Vision module (optional, additive)
+### 3 Vision module (optional, additive)
 
 * **Input:** Architecture diagrams (PNG/SVG/PDF) or exported graphs.
 * **Processing:** A vision LLM extracts components (icons, labels), links (data flows), and annotations (regions/AZs).
 * **Fusion:** Cross-check diagram entities with inventory; flag mismatches (e.g., undocumented NAT, overlooked peering).
 * **Value:** Improves **data-transfer** and **topology-driven** recommendations (e.g., move workloads to reduce cross-AZ, add Gateway Endpoint to cut NAT egress).
 
-## 4) Exact pricing with recommended configurations
+### 4 Exact pricing with recommended configurations
 
 * **For each recommendation**, compute:
 
@@ -157,7 +159,7 @@
   * Savings, break-even (if RI/SP), and sensitivity (load growth).
 * **Include**: storage request tiers, retrieval charges, per-hour LCU/NLCU/GLCU, NAT GB processed, data transfer matrices, Lambda duration × memory × invokes.
 
-## 5) Let the agents propose rightsizing
+### 5. Let the agents propose rightsizing
 
 * **Inputs to give the agents:**
 
@@ -170,7 +172,7 @@
   * Price comparison table and performance implications.
   * Rollout plan (test first, canary, revert path).
 
-## 6) Starting with CSV billing data
+### 6 Starting with CSV billing data
 
 * **Minimum columns to include:**
 
@@ -184,7 +186,7 @@
 
   * Missing tags, missing metrics, anomalies (sudden spikes), orphaned spend (no matching resource).
 
-## 7) Extending to new services and providers
+### 7 Extending to new services and providers
 
 * **Service plugin contract** (applies to AWS today; Azure/GCP later):
 

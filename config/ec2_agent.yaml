@@ -9,7 +9,7 @@ capability:
   - cpu_utilization_p50
   - cpu_utilization_p95
   - memory_utilization_p50
-  service: EC2
+  service: AWS.EC2
   supported_recommendation_types:
   - rightsizing
   - purchasing_option
@@ -23,7 +23,7 @@ confidence_threshold: 0.7
 enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
-service: EC2
+service: AWS.EC2
 
 # Custom conditional rules for specialized requirements
 custom_rules:

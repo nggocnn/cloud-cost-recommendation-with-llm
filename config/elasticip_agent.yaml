@@ -4,7 +4,7 @@ capability:
   analysis_window_days: 30
   optional_metrics: []
   required_metrics: []
-  service: ElasticIP
+  service: AWS.ElasticIP
   supported_recommendation_types:
   - idle_resource
   thresholds: {}
@@ -12,7 +12,7 @@ confidence_threshold: 0.7
 enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
-service: ElasticIP
+service: AWS.ElasticIP
 
 # Custom conditional rules for ElasticIP optimization
 custom_rules:

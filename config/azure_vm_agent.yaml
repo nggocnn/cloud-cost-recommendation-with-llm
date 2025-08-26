@@ -1,0 +1,121 @@
+# Azure VM Agent Configuration
+# Example configuration for Azure Virtual Machine optimization
+
+metadata:
+  description: "Agent for Azure VM cost optimization"
+  version: "1.0"
+  author: "LLM Cost Recommendation System"
+  
+capability:
+  service: Azure.VM
+  supported_recommendation_types:
+    - rightsizing
+    - purchasing_option
+    - idle_resource
+  required_metrics:
+    - cpu_utilization_p95
+    - memory_utilization_p95
+  optional_metrics:
+    - disk_utilization_p95
+    - network_utilization_p95
+
+# Agent configuration
+agent_id: azure_vm_agent
+service: Azure.VM
+enabled: true
+
+# Prompts for LLM analysis
+base_prompt: |
+  You are an Azure VM cost optimization expert. Analyze the provided VM data and metrics to identify cost optimization opportunities.
+
+service_specific_prompt: |
+  Focus on Azure-specific optimizations:
+  - Right-sizing based on Azure VM families (B, D, E, F, etc.)
+  - Azure Reserved Instances and Savings Plans
+  - Azure Spot Instances for suitable workloads
+  - Azure Hybrid Benefit for Windows VMs
+  - VM deallocations for development environments
+
+# Custom conditional rules for Azure VM optimization
+custom_rules:
+  - name: "azure_oversized_vm_detection"
+    description: "Detect Azure VMs that are oversized based on utilization"
+    condition:
+      operator: "and"
+      conditions:
+        - field: "properties.vm_size"
+          operator: "in"
+          value: ["Standard_D4s_v3", "Standard_D8s_v3", "Standard_D16s_v3"]
+        - field: "metrics.cpu_utilization_p95"
+          operator: "lt"
+          value: 30
+        - field: "metrics.memory_utilization_p95"
+          operator: "lt"
+          value: 40
+    priority: 8
+    enabled: true
+
+  - name: "azure_idle_vm_cleanup"
+    description: "Identify idle Azure VMs for potential deallocation"
+    condition:
+      operator: "and"
+      conditions:
+        - field: "metrics.cpu_utilization_p95"
+          operator: "lt"
+          value: 5
+        - field: "metrics.network_utilization_p95"
+          operator: "lt"
+          value: 1
+        - field: "tags.Environment"
+          operator: "ne"
+          value: "production"
+    priority: 9
+    enabled: true
+
+  - name: "azure_dev_environment_scheduling"
+    description: "Suggest scheduling for development VMs"
+    condition:
+      operator: "and"
+      conditions:
+        - field: "tags.Environment"
+          operator: "in"
+          value: ["development", "testing", "staging"]
+        - field: "properties.vm_size"
+          operator: "not_in"
+          value: ["Standard_B1s", "Standard_B1ms"]
+    priority: 6
+    enabled: true
+
+  - name: "azure_burstable_vm_recommendation"
+    description: "Recommend B-series VMs for variable workloads"
+    condition:
+      operator: "and"
+      conditions:
+        - field: "metrics.cpu_utilization_p50"
+          operator: "lt"
+          value: 20
+        - field: "metrics.cpu_utilization_p95"
+          operator: "between"
+          value: [20, 60]
+        - field: "properties.vm_size"
+          operator: "not_starts_with"
+          value: "Standard_B"
+    priority: 7
+    enabled: true
+
+  - name: "azure_hybrid_benefit_opportunity"
+    description: "Identify Windows VMs that could benefit from Azure Hybrid Benefit"
+    condition:
+      operator: "and"
+      conditions:
+        - field: "properties.os_type"
+          operator: "eq"
+          value: "Windows"
+        - field: "properties.license_type"
+          operator: "ne"
+          value: "Windows_Server"
+        - field: "tags.HybridBenefit"
+          operator: "ne"
+          value: "applied"
+    priority: 8
+    enabled: true

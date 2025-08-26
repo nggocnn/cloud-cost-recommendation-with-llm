@@ -3,9 +3,8 @@ Condition evaluation service for custom agent rules.
 """
 
 import re
-from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional, Union
-import structlog
+from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 from ..models import (
     CustomCondition,

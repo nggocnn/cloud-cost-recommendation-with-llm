@@ -4,7 +4,7 @@ Configuration management for the LLM cost recommendation system.
 
 import os
 import yaml
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 from pathlib import Path
 from dotenv import load_dotenv
 from pydantic import BaseModel
@@ -342,9 +342,17 @@ Provide specific recommendations with memory settings and architectural improvem
 
         return service_configs[service]
 
-    def get_service_config(self, service: ServiceType) -> Optional[ServiceAgentConfig]:
-        """Get configuration for a specific service"""
-        return self.service_configs.get(service)
+    def get_service_config(self, service: Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP, str]) -> Optional[ServiceAgentConfig]:
+        """Get configuration for a service"""
+        if isinstance(service, str):
+            # Convert string to ServiceType using from_string method
+            service_obj = ServiceType.from_string(service)
+            if not service_obj:
+                return None
+        else:
+            service_obj = service
+            
+        return self.service_configs.get(service_obj.value)
 
     def get_enabled_services(self) -> List[ServiceType]:
         """Get list of enabled services"""
@@ -360,7 +368,7 @@ Provide specific recommendations with memory settings and architectural improvem
 
         # Save to file
         config_file = self.config_dir / f"{service.value.lower()}_agent.yaml"
-        config_dict = config.dict()
+        config_dict = config.model_dump()
 
         with open(config_file, "w") as f:
             yaml.dump(config_dict, f, default_flow_style=False)

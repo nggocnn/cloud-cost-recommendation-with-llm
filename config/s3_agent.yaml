@@ -9,7 +9,7 @@ capability:
   - storage_used
   - requests_get
   - requests_put
-  service: S3
+  service: AWS.S3
   supported_recommendation_types:
   - storage_class
   - lifecycle
@@ -21,7 +21,7 @@ confidence_threshold: 0.7
 enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
-service: S3
+service: AWS.S3
 
 # Custom conditional rules for S3 optimization
 custom_rules:

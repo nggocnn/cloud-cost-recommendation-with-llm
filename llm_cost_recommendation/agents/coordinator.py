@@ -3,10 +3,9 @@ Coordinator agent that orchestrates service agents and consolidates recommendati
 """
 
 import asyncio
-from typing import Dict, List, Optional, Set, Any
+from typing import Dict, List, Optional, Any
 from collections import defaultdict
-import structlog
-from datetime import datetime
+from datetime import datetime, timezone
 
 from ..models import (
     Resource,
@@ -15,7 +14,6 @@ from ..models import (
     Recommendation,
     RecommendationReport,
     ServiceType,
-    CoordinatorConfig,
     ServiceAgentConfig,
     RiskLevel,
 )
@@ -158,7 +156,7 @@ class CoordinatorAgent:
             total_resources=len(resources),
         )
 
-        start_time = datetime.utcnow()
+        start_time = datetime.now(timezone.utc)
 
         # Group resources by service
         resources_by_service = self._group_resources_by_service(resources)
@@ -204,7 +202,7 @@ class CoordinatorAgent:
             account_id=account_id,
             total_recommendations=len(processed_recommendations),
             total_savings=report.total_monthly_savings,
-            analysis_time_seconds=(datetime.utcnow() - start_time).total_seconds(),
+            analysis_time_seconds=(datetime.now(timezone.utc) - start_time).total_seconds(),
         )
 
         return report
@@ -395,7 +393,7 @@ class CoordinatorAgent:
             "total_services": len(analyzed_services),
             "covered_services": len(analyzed_services.intersection(available_agents)),
             "uncovered_services": list(analyzed_services - available_agents),
-            "analysis_time_seconds": (datetime.utcnow() - start_time).total_seconds(),
+            "analysis_time_seconds": (datetime.now(timezone.utc) - start_time).total_seconds(),
         }
 
         report_id = f"report_{account_id}_{start_time.strftime('%Y%m%d_%H%M%S')}"
@@ -403,7 +401,7 @@ class CoordinatorAgent:
         return RecommendationReport(
             id=report_id,
             account_id=account_id,
-            generated_at=datetime.utcnow(),
+            generated_at=datetime.now(timezone.utc),
             total_monthly_savings=total_monthly_savings,
             total_annual_savings=total_annual_savings,
             total_recommendations=len(recommendations),

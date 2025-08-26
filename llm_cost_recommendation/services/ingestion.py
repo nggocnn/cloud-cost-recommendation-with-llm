@@ -4,10 +4,9 @@ Data ingestion service for AWS cost and usage data.
 
 import pandas as pd
 import json
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Union
 from pathlib import Path
-from datetime import datetime, timedelta
-import structlog
+from datetime import datetime
 
 from ..models import Resource, Metrics, BillingData, ServiceType
 from .logging import get_logger
@@ -239,43 +238,43 @@ class DataIngestionService:
             logger.error("Failed to ingest metrics data", error=str(e))
             raise
 
-    def _normalize_service_type(self, service_name: str) -> Optional[ServiceType]:
+    def _normalize_service_type(self, service_name: str) -> Optional[Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP]]:
         """Normalize service name to ServiceType enum"""
         service_mapping = {
-            "EC2": ServiceType.EC2,
-            "ELASTIC COMPUTE CLOUD": ServiceType.EC2,
-            "AMAZON ELASTIC COMPUTE CLOUD": ServiceType.EC2,
-            "EBS": ServiceType.EBS,
-            "ELASTIC BLOCK STORE": ServiceType.EBS,
-            "AMAZON ELASTIC BLOCK STORE": ServiceType.EBS,
-            "S3": ServiceType.S3,
-            "SIMPLE STORAGE SERVICE": ServiceType.S3,
-            "AMAZON SIMPLE STORAGE SERVICE": ServiceType.S3,
-            "EFS": ServiceType.EFS,
-            "ELASTIC FILE SYSTEM": ServiceType.EFS,
-            "AMAZON ELASTIC FILE SYSTEM": ServiceType.EFS,
-            "RDS": ServiceType.RDS,
-            "RELATIONAL DATABASE SERVICE": ServiceType.RDS,
-            "AMAZON RELATIONAL DATABASE SERVICE": ServiceType.RDS,
-            "DYNAMODB": ServiceType.DYNAMODB,
-            "AMAZON DYNAMODB": ServiceType.DYNAMODB,
-            "LAMBDA": ServiceType.LAMBDA,
-            "AWS LAMBDA": ServiceType.LAMBDA,
-            "CLOUDFRONT": ServiceType.CLOUDFRONT,
-            "AMAZON CLOUDFRONT": ServiceType.CLOUDFRONT,
-            "ELASTIC LOAD BALANCING": ServiceType.ALB,
-            "APPLICATION LOAD BALANCER": ServiceType.ALB,
-            "NETWORK LOAD BALANCER": ServiceType.NLB,
-            "GATEWAY LOAD BALANCER": ServiceType.GWLB,
-            "ELASTIC IP": ServiceType.ELASTIC_IP,
-            "NAT GATEWAY": ServiceType.NAT_GATEWAY,
-            "VPC ENDPOINT": ServiceType.VPC_ENDPOINTS,
-            "SQS": ServiceType.SQS,
-            "SIMPLE QUEUE SERVICE": ServiceType.SQS,
-            "AMAZON SIMPLE QUEUE SERVICE": ServiceType.SQS,
-            "SNS": ServiceType.SNS,
-            "SIMPLE NOTIFICATION SERVICE": ServiceType.SNS,
-            "AMAZON SIMPLE NOTIFICATION SERVICE": ServiceType.SNS,
+            "EC2": ServiceType.AWS.EC2,
+            "ELASTIC COMPUTE CLOUD": ServiceType.AWS.EC2,
+            "AMAZON ELASTIC COMPUTE CLOUD": ServiceType.AWS.EC2,
+            "EBS": ServiceType.AWS.EBS,
+            "ELASTIC BLOCK STORE": ServiceType.AWS.EBS,
+            "AMAZON ELASTIC BLOCK STORE": ServiceType.AWS.EBS,
+            "S3": ServiceType.AWS.S3,
+            "SIMPLE STORAGE SERVICE": ServiceType.AWS.S3,
+            "AMAZON SIMPLE STORAGE SERVICE": ServiceType.AWS.S3,
+            "EFS": ServiceType.AWS.EFS,
+            "ELASTIC FILE SYSTEM": ServiceType.AWS.EFS,
+            "AMAZON ELASTIC FILE SYSTEM": ServiceType.AWS.EFS,
+            "RDS": ServiceType.AWS.RDS,
+            "RELATIONAL DATABASE SERVICE": ServiceType.AWS.RDS,
+            "AMAZON RELATIONAL DATABASE SERVICE": ServiceType.AWS.RDS,
+            "DYNAMODB": ServiceType.AWS.DYNAMODB,
+            "AMAZON DYNAMODB": ServiceType.AWS.DYNAMODB,
+            "LAMBDA": ServiceType.AWS.LAMBDA,
+            "AWS LAMBDA": ServiceType.AWS.LAMBDA,
+            "CLOUDFRONT": ServiceType.AWS.CLOUDFRONT,
+            "AMAZON CLOUDFRONT": ServiceType.AWS.CLOUDFRONT,
+            "ELASTIC LOAD BALANCING": ServiceType.AWS.ALB,
+            "APPLICATION LOAD BALANCER": ServiceType.AWS.ALB,
+            "NETWORK LOAD BALANCER": ServiceType.AWS.NLB,
+            "GATEWAY LOAD BALANCER": ServiceType.AWS.GWLB,
+            "ELASTIC IP": ServiceType.AWS.ELASTIC_IP,
+            "NAT GATEWAY": ServiceType.AWS.NAT_GATEWAY,
+            "VPC ENDPOINT": ServiceType.AWS.VPC_ENDPOINTS,
+            "SQS": ServiceType.AWS.SQS,
+            "SIMPLE QUEUE SERVICE": ServiceType.AWS.SQS,
+            "AMAZON SIMPLE QUEUE SERVICE": ServiceType.AWS.SQS,
+            "SNS": ServiceType.AWS.SNS,
+            "SIMPLE NOTIFICATION SERVICE": ServiceType.AWS.SNS,
+            "AMAZON SIMPLE NOTIFICATION SERVICE": ServiceType.AWS.SNS,
         }
 
         return service_mapping.get(service_name.upper())

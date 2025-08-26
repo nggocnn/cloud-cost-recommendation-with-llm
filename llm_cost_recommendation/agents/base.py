@@ -5,7 +5,6 @@ Base agent class for service-specific cost optimization agents.
 import json
 from abc import ABC, abstractmethod
 from typing import Dict, List, Any, Optional
-import structlog
 from datetime import datetime
 
 from ..models import (
@@ -13,7 +12,6 @@ from ..models import (
     Metrics,
     BillingData,
     Recommendation,
-    ServiceType,
     RecommendationType,
     RiskLevel,
     ServiceAgentConfig,

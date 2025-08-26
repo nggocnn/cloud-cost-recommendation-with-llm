@@ -8,26 +8,99 @@ from pydantic import BaseModel, Field, validator
 from enum import Enum
 
 
-class ServiceType(str, Enum):
-    """Supported AWS services"""
+class ServiceType:
+    """Hierarchical cloud service types organized by provider"""
+    
+    class AWS(str, Enum):
+        """AWS Services"""
+        EC2 = "AWS.EC2"
+        EBS = "AWS.EBS"
+        S3 = "AWS.S3"
+        EFS = "AWS.EFS"
+        RDS = "AWS.RDS"
+        RDS_SNAPSHOTS = "AWS.RDS_SNAPSHOTS"
+        DYNAMODB = "AWS.DynamoDB"
+        LAMBDA = "AWS.Lambda"
+        CLOUDFRONT = "AWS.CloudFront"
+        ALB = "AWS.ALB"
+        NLB = "AWS.NLB"
+        GWLB = "AWS.GWLB"
+        ELASTIC_IP = "AWS.ElasticIP"
+        NAT_GATEWAY = "AWS.NATGateway"
+        VPC_ENDPOINTS = "AWS.VPCEndpoints"
+        SQS = "AWS.SQS"
+        SNS = "AWS.SNS"
+    
+    class Azure(str, Enum):
+        """Azure Services"""
+        VM = "Azure.VM"
+        DISK = "Azure.Disk"
+        STORAGE = "Azure.Storage"
+        SQL = "Azure.SQL"
+        COSMOS = "Azure.Cosmos"
+        FUNCTIONS = "Azure.Functions"
+        CDN = "Azure.CDN"
+        LOAD_BALANCER = "Azure.LoadBalancer"
+        PUBLIC_IP = "Azure.PublicIP"
+        NAT_GATEWAY = "Azure.NATGateway"
+    
+    class GCP(str, Enum):
+        """GCP Services"""
+        COMPUTE = "GCP.Compute"
+        DISK = "GCP.Disk"
+        STORAGE = "GCP.Storage"
+        SQL = "GCP.SQL"
+        FIRESTORE = "GCP.Firestore"
+        FUNCTIONS = "GCP.Functions"
+        CDN = "GCP.CDN"
+        LOAD_BALANCER = "GCP.LoadBalancer"
+    
+    @classmethod
+    def get_all_services(cls):
+        """Get all service types from all providers"""
+        services = []
+        services.extend(list(cls.AWS))
+        services.extend(list(cls.Azure))
+        services.extend(list(cls.GCP))
+        return services
+    
+    @classmethod
+    def get_aws_services(cls):
+        """Get all AWS services"""
+        return list(cls.AWS)
+    
+    @classmethod
+    def get_azure_services(cls):
+        """Get all Azure services"""
+        return list(cls.Azure)
+    
+    @classmethod
+    def get_gcp_services(cls):
+        """Get all GCP services"""
+        return list(cls.GCP)
+    
+    @classmethod
+    def get_provider(cls, service_type):
+        """Get the cloud provider for a service type"""
+        return service_type.value.split('.')[0]
+    
+    @classmethod
+    def get_service_name(cls, service_type):
+        """Get the service name without provider prefix"""
+        return service_type.value.split('.')[1]
+    
+    @classmethod
+    def from_string(cls, service_string: str):
+        """Get service type from string value"""
+        for provider_class in [cls.AWS, cls.Azure, cls.GCP]:
+            for service in provider_class:
+                if service.value == service_string:
+                    return service
+        return None
 
-    EC2 = "EC2"
-    EBS = "EBS"
-    S3 = "S3"
-    EFS = "EFS"
-    RDS = "RDS"
-    RDS_SNAPSHOTS = "RDS_SNAPSHOTS"
-    DYNAMODB = "DynamoDB"
-    LAMBDA = "Lambda"
-    CLOUDFRONT = "CloudFront"
-    ALB = "ALB"
-    NLB = "NLB"
-    GWLB = "GWLB"
-    ELASTIC_IP = "ElasticIP"
-    NAT_GATEWAY = "NATGateway"
-    VPC_ENDPOINTS = "VPCEndpoints"
-    SQS = "SQS"
-    SNS = "SNS"
+
+# Union type for Pydantic compatibility
+ServiceTypeUnion = Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP]
 
 
 class RecommendationType(str, Enum):
@@ -159,7 +232,7 @@ class Resource(BaseModel):
     """Base resource model"""
 
     resource_id: str
-    service: ServiceType
+    service: ServiceTypeUnion
     region: str
     availability_zone: Optional[str] = None
     account_id: str
@@ -225,7 +298,7 @@ class Recommendation(BaseModel):
 
     id: str = Field(..., description="Unique recommendation identifier")
     resource_id: str
-    service: ServiceType
+    service: ServiceTypeUnion
     recommendation_type: RecommendationType
 
     # Current configuration
@@ -285,7 +358,7 @@ class RecommendationReport(BaseModel):
     high_risk_count: int = 0
 
     # Service breakdown
-    savings_by_service: Dict[ServiceType, float] = Field(default_factory=dict)
+    savings_by_service: Dict[str, float] = Field(default_factory=dict)
 
     # Implementation timeline
     quick_wins: List[str] = Field(
@@ -302,7 +375,7 @@ class RecommendationReport(BaseModel):
 class AgentCapability(BaseModel):
     """Service agent capability definition"""
 
-    service: ServiceType
+    service: ServiceTypeUnion
     supported_recommendation_types: List[RecommendationType]
     required_metrics: List[str]
     optional_metrics: List[str] = Field(default_factory=list)
@@ -316,7 +389,7 @@ class ServiceAgentConfig(BaseModel):
     """Configuration for service agents"""
 
     agent_id: str
-    service: ServiceType
+    service: ServiceTypeUnion
     enabled: bool = True
 
     # Capability definition
@@ -341,7 +414,7 @@ class ServiceAgentConfig(BaseModel):
 class CoordinatorConfig(BaseModel):
     """Configuration for the coordinator agent"""
 
-    enabled_services: List[ServiceType]
+    enabled_services: List[ServiceTypeUnion]
 
     # Deduplication settings
     similarity_threshold: float = 0.8

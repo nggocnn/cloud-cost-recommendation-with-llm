@@ -9,7 +9,7 @@ capability:
   - invocation_count
   - duration_avg
   - memory_used
-  service: Lambda
+  service: AWS.Lambda
   supported_recommendation_types:
   - rightsizing
   thresholds:
@@ -19,7 +19,7 @@ confidence_threshold: 0.7
 enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
-service: Lambda
+service: AWS.Lambda
 
 # Custom conditional rules for Lambda optimization
 custom_rules:

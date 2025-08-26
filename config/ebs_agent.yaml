@@ -9,7 +9,7 @@ capability:
   - iops_write
   - throughput_read
   - throughput_write
-  service: EBS
+  service: AWS.EBS
   supported_recommendation_types:
   - rightsizing
   - storage_class
@@ -22,7 +22,7 @@ confidence_threshold: 0.7
 enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
-service: EBS
+service: AWS.EBS
 
 # Custom conditional rules for EBS optimization
 custom_rules:
