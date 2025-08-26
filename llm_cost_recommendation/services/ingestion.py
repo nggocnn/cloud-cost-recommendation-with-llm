@@ -9,8 +9,9 @@ from datetime import datetime, timedelta
 import structlog
 
 from ..models import Resource, Metrics, BillingData, ServiceType
+from .logging import get_logger
 
-logger = structlog.get_logger(__name__)
+logger = get_logger(__name__)
 
 
 class DataIngestionService:

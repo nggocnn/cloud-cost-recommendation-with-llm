@@ -10,8 +10,9 @@ from langchain_core.callbacks import AsyncCallbackHandler
 from pydantic import BaseModel
 
 from .config import LLMConfig
+from .logging import get_logger
 
-logger = structlog.get_logger(__name__)
+logger = get_logger(__name__)
 
 
 class LLMResponse(BaseModel):

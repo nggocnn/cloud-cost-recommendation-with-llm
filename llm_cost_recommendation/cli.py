@@ -10,21 +10,10 @@ import sys
 from .services.config import ConfigManager
 from .services.llm import LLMService
 from .services.ingestion import DataIngestionService
+from .services.logging import configure_logging, get_logger
 from .agents.coordinator import CoordinatorAgent
 
-# Configure structured logging
-structlog.configure(
-    processors=[
-        structlog.processors.TimeStamper(fmt="ISO"),
-        structlog.processors.add_log_level,
-        structlog.processors.JSONRenderer()
-    ],
-    wrapper_class=structlog.make_filtering_bound_logger(20),  # INFO level
-    logger_factory=structlog.PrintLoggerFactory(),
-    cache_logger_on_first_use=True,
-)
-
-logger = structlog.get_logger(__name__)
+logger = get_logger(__name__)
 
 
 class CostRecommendationApp:
@@ -192,7 +181,23 @@ async def main():
     parser.add_argument("--output-file", help="Output file for JSON report")
     parser.add_argument("--status", action="store_true", help="Show application status")
     
+    # Logging options
+    parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose (DEBUG) logging")
+    parser.add_argument("--quiet", "-q", action="store_true", help="Reduce output (WARNING+ only)")
+    parser.add_argument("--log-format", choices=["auto", "json", "human"], default="auto",
+                       help="Log output format (auto=detect based on terminal)")
+    
     args = parser.parse_args()
+    
+    # Configure logging based on arguments
+    if args.quiet:
+        log_level = "WARNING"
+    elif args.verbose:
+        log_level = "DEBUG"
+    else:
+        log_level = "INFO"
+    
+    configure_logging(level=log_level, format_type=args.log_format)
     
     try:
         # Initialize application

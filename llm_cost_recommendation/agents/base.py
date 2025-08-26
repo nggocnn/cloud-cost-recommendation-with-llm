@@ -12,8 +12,9 @@ from ..models import (
     ServiceType, RecommendationType, RiskLevel, ServiceAgentConfig
 )
 from ..services.llm import LLMService, PromptTemplates
+from ..services.logging import get_logger
 
-logger = structlog.get_logger(__name__)
+logger = get_logger(__name__)
 
 
 class BaseAgent(ABC):

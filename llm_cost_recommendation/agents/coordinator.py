@@ -13,9 +13,10 @@ from ..models import (
 )
 from ..services.llm import LLMService
 from ..services.config import ConfigManager
+from ..services.logging import get_logger
 from .base import BaseAgent, RuleBasedAgent
 
-logger = structlog.get_logger(__name__)
+logger = get_logger(__name__)
 
 
 class ServiceAgentFactory:
