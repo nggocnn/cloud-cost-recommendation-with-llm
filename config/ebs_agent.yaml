@@ -23,6 +23,98 @@ enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
 service: EBS
+
+# Custom conditional rules for EBS optimization
+custom_rules:
+  # Database volumes need performance buffers
+  - name: "database_volume_performance"
+    description: "Database volumes need IOPS and throughput buffers"
+    enabled: true
+    priority: 100
+    logic: "OR"
+    conditions:
+      - field: "tag.Application"
+        operator: "regex"
+        value: "(database|db|mysql|postgres|oracle|sql)"
+        description: "Database-related volumes"
+      - field: "tag.VolumeType"
+        operator: "equals"
+        value: "database"
+        description: "Tagged as database volume"
+    threshold_overrides:
+      iops_utilization_threshold: 50.0  # Higher buffer for databases
+      throughput_utilization_threshold: 50.0
+    custom_prompt: "This appears to be a database volume. Maintain significant IOPS and throughput buffers (50%) to handle query spikes and ensure consistent database performance."
+    
+  # Log volumes can be optimized aggressively
+  - name: "log_volume_optimization"
+    description: "Log volumes can use cheaper storage classes"
+    enabled: true
+    priority: 80
+    logic: "OR"
+    conditions:
+      - field: "tag.Purpose"
+        operator: "equals"
+        value: "logs"
+        description: "Log storage volume"
+      - field: "property.mount_point"
+        operator: "contains"
+        value: "/var/log"
+        description: "Mounted on log directory"
+    threshold_overrides:
+      iops_utilization_threshold: 5.0  # Logs don't need high IOPS
+    force_recommendation_types:
+      - "storage_class"
+    custom_prompt: "This is a log storage volume. Prioritize cost optimization with st1 or sc1 storage classes as logs typically have sequential access patterns and don't require high IOPS."
+    
+  # Unattached volumes immediate action
+  - name: "unattached_volume_cleanup"
+    description: "Unattached volumes should be flagged for immediate cleanup"
+    enabled: true
+    priority: 95
+    logic: "AND"
+    conditions:
+      - field: "property.state"
+        operator: "equals"
+        value: "available"
+        description: "Volume is unattached"
+    force_recommendation_types:
+      - "idle_resource"
+    custom_prompt: "This volume is unattached and incurring costs without providing value. Recommend immediate snapshot creation (if needed) followed by termination."
+    
+  # Production volumes conservative approach
+  - name: "production_ebs_conservative"
+    description: "Production volumes need conservative optimization"
+    enabled: true
+    priority: 90
+    logic: "AND"
+    conditions:
+      - field: "tag.Environment"
+        operator: "equals"
+        value: "production"
+        description: "Production environment"
+    threshold_overrides:
+      iops_utilization_threshold: 30.0  # Conservative threshold
+      throughput_utilization_threshold: 30.0
+    risk_adjustment: "increase"
+    custom_prompt: "This is a production volume. Be conservative with optimization recommendations and ensure adequate performance buffers for production workloads."
+    
+  # High-cost volumes priority
+  - name: "high_cost_ebs_priority"
+    description: "High-cost EBS volumes should be prioritized"
+    enabled: true
+    priority: 85
+    logic: "AND"
+    conditions:
+      - field: "monthly_cost"
+        operator: "greater_than"
+        value: 200
+        description: "High monthly cost (>$200)"
+    force_recommendation_types:
+      - "storage_class"
+      - "rightsizing"
+    custom_prompt: "This is a high-cost EBS volume (>$200/month). Analyze all optimization opportunities including gp3 migration, IOPS optimization, and size adjustments."
+
 service_specific_prompt: '
 
   Analyze EBS volumes for cost optimization opportunities. Consider:

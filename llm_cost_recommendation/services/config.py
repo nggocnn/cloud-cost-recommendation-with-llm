@@ -1,6 +1,7 @@
 """
 Configuration management for the LLM cost recommendation system.
 """
+
 import os
 import yaml
 from typing import Dict, List, Optional
@@ -8,11 +9,18 @@ from pathlib import Path
 from dotenv import load_dotenv
 from pydantic import BaseModel
 
-from ..models import ServiceAgentConfig, CoordinatorConfig, ServiceType, RecommendationType, AgentCapability
+from ..models import (
+    ServiceAgentConfig,
+    CoordinatorConfig,
+    ServiceType,
+    RecommendationType,
+    AgentCapability,
+)
 
 
 class LLMConfig(BaseModel):
     """LLM configuration"""
+
     provider: str = "openai"
     base_url: str
     api_key: str
@@ -24,19 +32,19 @@ class LLMConfig(BaseModel):
 
 class ConfigManager:
     """Manages configuration for the entire system"""
-    
+
     def __init__(self, config_dir: str = "config"):
         self.config_dir = Path(config_dir)
         self.config_dir.mkdir(exist_ok=True)
-        
+
         # Load environment variables
         load_dotenv()
-        
+
         # Initialize configurations
         self.llm_config = self._load_llm_config()
         self.coordinator_config = self._load_coordinator_config()
         self.service_configs = self._load_service_configs()
-    
+
     def _load_llm_config(self) -> LLMConfig:
         """Load LLM configuration from environment variables"""
         return LLMConfig(
@@ -45,13 +53,13 @@ class ConfigManager:
             model=os.getenv("OPENAI_MODEL", "gpt-4"),
             temperature=float(os.getenv("OPENAI_TEMPERATURE", "0.1")),
             max_tokens=int(os.getenv("OPENAI_MAX_TOKENS", "2000")),
-            timeout=int(os.getenv("OPENAI_TIMEOUT", "30"))
+            timeout=int(os.getenv("OPENAI_TIMEOUT", "30")),
         )
-    
+
     def _load_coordinator_config(self) -> CoordinatorConfig:
         """Load coordinator configuration"""
         config_file = self.config_dir / "coordinator.yaml"
-        
+
         if not config_file.exists():
             # Create default configuration
             default_config = {
@@ -62,46 +70,46 @@ class ConfigManager:
                 "confidence_weight": 0.2,
                 "implementation_ease_weight": 0.1,
                 "max_recommendations_per_service": 50,
-                "include_low_impact": False
+                "include_low_impact": False,
             }
-            
-            with open(config_file, 'w') as f:
+
+            with open(config_file, "w") as f:
                 yaml.dump(default_config, f, default_flow_style=False)
-        
-        with open(config_file, 'r') as f:
+
+        with open(config_file, "r") as f:
             config_data = yaml.safe_load(f)
-        
+
         return CoordinatorConfig(**config_data)
-    
+
     def _load_service_configs(self) -> Dict[ServiceType, ServiceAgentConfig]:
         """Load service agent configurations"""
         configs = {}
-        
+
         for service in ServiceType:
             config_file = self.config_dir / f"{service.value.lower()}_agent.yaml"
-            
+
             if not config_file.exists():
                 # Create default configuration for this service
                 default_config = self._create_default_service_config(service)
-                
-                with open(config_file, 'w') as f:
+
+                with open(config_file, "w") as f:
                     yaml.dump(default_config, f, default_flow_style=False)
-            
-            with open(config_file, 'r') as f:
+
+            with open(config_file, "r") as f:
                 config_data = yaml.safe_load(f)
-            
+
             # Convert to ServiceAgentConfig
-            capability_data = config_data.pop('capability')
+            capability_data = config_data.pop("capability")
             capability = AgentCapability(**capability_data)
-            
-            config_data['capability'] = capability
+
+            config_data["capability"] = capability
             configs[service] = ServiceAgentConfig(**config_data)
-        
+
         return configs
-    
+
     def _create_default_service_config(self, service: ServiceType) -> Dict:
         """Create default configuration for a service"""
-        
+
         # Define service-specific configurations
         service_configs = {
             ServiceType.EC2: {
@@ -113,17 +121,21 @@ class ConfigManager:
                     "supported_recommendation_types": [
                         RecommendationType.RIGHTSIZING.value,
                         RecommendationType.PURCHASING_OPTION.value,
-                        RecommendationType.IDLE_RESOURCE.value
+                        RecommendationType.IDLE_RESOURCE.value,
                     ],
-                    "required_metrics": ["cpu_utilization_p50", "cpu_utilization_p95", "memory_utilization_p50"],
+                    "required_metrics": [
+                        "cpu_utilization_p50",
+                        "cpu_utilization_p95",
+                        "memory_utilization_p50",
+                    ],
                     "optional_metrics": ["network_in", "network_out"],
                     "thresholds": {
                         "cpu_idle_threshold": 5.0,
                         "cpu_low_threshold": 20.0,
                         "memory_low_threshold": 30.0,
-                        "uptime_threshold": 0.95
+                        "uptime_threshold": 0.95,
                     },
-                    "analysis_window_days": 30
+                    "analysis_window_days": 30,
                 },
                 "base_prompt": "You are an expert AWS cost optimization specialist focusing on EC2 instances.",
                 "service_specific_prompt": """
@@ -139,9 +151,8 @@ Provide specific recommendations with exact instance types and cost calculations
                 "temperature": 0.1,
                 "max_tokens": 2000,
                 "min_cost_threshold": 1.0,
-                "confidence_threshold": 0.7
+                "confidence_threshold": 0.7,
             },
-            
             ServiceType.EBS: {
                 "agent_id": "ebs_agent",
                 "service": service.value,
@@ -151,16 +162,21 @@ Provide specific recommendations with exact instance types and cost calculations
                     "supported_recommendation_types": [
                         RecommendationType.RIGHTSIZING.value,
                         RecommendationType.STORAGE_CLASS.value,
-                        RecommendationType.IDLE_RESOURCE.value
+                        RecommendationType.IDLE_RESOURCE.value,
                     ],
-                    "required_metrics": ["iops_read", "iops_write", "throughput_read", "throughput_write"],
+                    "required_metrics": [
+                        "iops_read",
+                        "iops_write",
+                        "throughput_read",
+                        "throughput_write",
+                    ],
                     "optional_metrics": ["burst_credits"],
                     "thresholds": {
                         "iops_utilization_threshold": 10.0,
                         "throughput_utilization_threshold": 10.0,
-                        "idle_threshold": 1.0
+                        "idle_threshold": 1.0,
                     },
-                    "analysis_window_days": 30
+                    "analysis_window_days": 30,
                 },
                 "base_prompt": "You are an expert AWS cost optimization specialist focusing on EBS volumes.",
                 "service_specific_prompt": """
@@ -176,9 +192,8 @@ Provide specific recommendations with volume types and cost calculations.
                 "temperature": 0.1,
                 "max_tokens": 2000,
                 "min_cost_threshold": 1.0,
-                "confidence_threshold": 0.7
+                "confidence_threshold": 0.7,
             },
-            
             ServiceType.S3: {
                 "agent_id": "s3_agent",
                 "service": service.value,
@@ -187,16 +202,20 @@ Provide specific recommendations with volume types and cost calculations.
                     "service": service.value,
                     "supported_recommendation_types": [
                         RecommendationType.STORAGE_CLASS.value,
-                        RecommendationType.LIFECYCLE.value
+                        RecommendationType.LIFECYCLE.value,
                     ],
-                    "required_metrics": ["storage_used", "requests_get", "requests_put"],
+                    "required_metrics": [
+                        "storage_used",
+                        "requests_get",
+                        "requests_put",
+                    ],
                     "optional_metrics": ["data_retrieval", "data_transfer"],
                     "thresholds": {
                         "ia_access_threshold": 30,  # days
                         "glacier_access_threshold": 90,  # days
-                        "deep_archive_threshold": 180  # days
+                        "deep_archive_threshold": 180,  # days
                     },
-                    "analysis_window_days": 90
+                    "analysis_window_days": 90,
                 },
                 "base_prompt": "You are an expert AWS cost optimization specialist focusing on S3 storage.",
                 "service_specific_prompt": """
@@ -212,9 +231,8 @@ Provide specific recommendations with storage classes and lifecycle rules.
                 "temperature": 0.1,
                 "max_tokens": 2000,
                 "min_cost_threshold": 1.0,
-                "confidence_threshold": 0.7
+                "confidence_threshold": 0.7,
             },
-            
             ServiceType.RDS: {
                 "agent_id": "rds_agent",
                 "service": service.value,
@@ -224,16 +242,24 @@ Provide specific recommendations with storage classes and lifecycle rules.
                     "supported_recommendation_types": [
                         RecommendationType.RIGHTSIZING.value,
                         RecommendationType.PURCHASING_OPTION.value,
-                        RecommendationType.STORAGE_CLASS.value
+                        RecommendationType.STORAGE_CLASS.value,
                     ],
-                    "required_metrics": ["cpu_utilization_p50", "cpu_utilization_p95", "memory_utilization_p50"],
-                    "optional_metrics": ["read_iops", "write_iops", "network_throughput"],
+                    "required_metrics": [
+                        "cpu_utilization_p50",
+                        "cpu_utilization_p95",
+                        "memory_utilization_p50",
+                    ],
+                    "optional_metrics": [
+                        "read_iops",
+                        "write_iops",
+                        "network_throughput",
+                    ],
                     "thresholds": {
                         "cpu_low_threshold": 20.0,
                         "memory_low_threshold": 30.0,
-                        "iops_utilization_threshold": 20.0
+                        "iops_utilization_threshold": 20.0,
                     },
-                    "analysis_window_days": 30
+                    "analysis_window_days": 30,
                 },
                 "base_prompt": "You are an expert AWS cost optimization specialist focusing on RDS databases.",
                 "service_specific_prompt": """
@@ -249,9 +275,8 @@ Provide specific recommendations with instance classes and cost calculations.
                 "temperature": 0.1,
                 "max_tokens": 2000,
                 "min_cost_threshold": 1.0,
-                "confidence_threshold": 0.7
+                "confidence_threshold": 0.7,
             },
-            
             ServiceType.LAMBDA: {
                 "agent_id": "lambda_agent",
                 "service": service.value,
@@ -261,13 +286,17 @@ Provide specific recommendations with instance classes and cost calculations.
                     "supported_recommendation_types": [
                         RecommendationType.RIGHTSIZING.value
                     ],
-                    "required_metrics": ["invocation_count", "duration_avg", "memory_used"],
+                    "required_metrics": [
+                        "invocation_count",
+                        "duration_avg",
+                        "memory_used",
+                    ],
                     "optional_metrics": ["errors", "throttles"],
                     "thresholds": {
                         "memory_utilization_threshold": 60.0,
-                        "duration_efficiency_threshold": 80.0
+                        "duration_efficiency_threshold": 80.0,
                     },
-                    "analysis_window_days": 30
+                    "analysis_window_days": 30,
                 },
                 "base_prompt": "You are an expert AWS cost optimization specialist focusing on Lambda functions.",
                 "service_specific_prompt": """
@@ -283,10 +312,10 @@ Provide specific recommendations with memory settings and architectural improvem
                 "temperature": 0.1,
                 "max_tokens": 2000,
                 "min_cost_threshold": 1.0,
-                "confidence_threshold": 0.7
-            }
+                "confidence_threshold": 0.7,
+            },
         }
-        
+
         # For services not explicitly defined, create a basic configuration
         if service not in service_configs:
             return {
@@ -295,37 +324,43 @@ Provide specific recommendations with memory settings and architectural improvem
                 "enabled": False,  # Disabled by default for undefined services
                 "capability": {
                     "service": service.value,
-                    "supported_recommendation_types": [RecommendationType.RIGHTSIZING.value],
+                    "supported_recommendation_types": [
+                        RecommendationType.RIGHTSIZING.value
+                    ],
                     "required_metrics": [],
                     "optional_metrics": [],
                     "thresholds": {},
-                    "analysis_window_days": 30
+                    "analysis_window_days": 30,
                 },
                 "base_prompt": f"You are an expert AWS cost optimization specialist focusing on {service.value}.",
                 "service_specific_prompt": f"Analyze {service.value} resources for cost optimization opportunities.",
                 "temperature": 0.1,
                 "max_tokens": 2000,
                 "min_cost_threshold": 1.0,
-                "confidence_threshold": 0.7
+                "confidence_threshold": 0.7,
             }
-        
+
         return service_configs[service]
-    
+
     def get_service_config(self, service: ServiceType) -> Optional[ServiceAgentConfig]:
         """Get configuration for a specific service"""
         return self.service_configs.get(service)
-    
+
     def get_enabled_services(self) -> List[ServiceType]:
         """Get list of enabled services"""
-        return [service for service, config in self.service_configs.items() if config.enabled]
-    
+        return [
+            service
+            for service, config in self.service_configs.items()
+            if config.enabled
+        ]
+
     def update_service_config(self, service: ServiceType, config: ServiceAgentConfig):
         """Update configuration for a service"""
         self.service_configs[service] = config
-        
+
         # Save to file
         config_file = self.config_dir / f"{service.value.lower()}_agent.yaml"
         config_dict = config.dict()
-        
-        with open(config_file, 'w') as f:
+
+        with open(config_file, "w") as f:
             yaml.dump(config_dict, f, default_flow_style=False)

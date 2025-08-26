@@ -1,8 +1,8 @@
 """
-Agents package for the LLM cost recommendation system.
+Agent package for cost optimization agents.
 """
 
-from .base import BaseAgent, RuleBasedAgent
+from .base import BaseAgent
 from .coordinator import CoordinatorAgent
 
-__all__ = ["BaseAgent", "RuleBasedAgent", "CoordinatorAgent"]
+__all__ = ["BaseAgent", "CoordinatorAgent"]

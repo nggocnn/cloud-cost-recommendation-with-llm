@@ -1,3 +1,0 @@
-bill/BillingPeriodStartDate,bill/BillingPeriodEndDate,lineItem/UsageAccountId,product/ProductName,lineItem/ResourceId,product/region,lineItem/UsageType,lineItem/UsageAmount,lineItem/UsageUnit,lineItem/UnblendedCost,lineItem/NetAmortizedCost,resourceTags/Environment,resourceTags/Owner
-2024-01-01,2024-01-31,123456789012,Amazon Elastic Compute Cloud,i-1234567890abcdef0,us-west-2,BoxUsage:m5.large,744.0,Hrs,89.28,89.28,production,team-alpha
-2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,vol-1234567890abcdef0,us-west-2,VolumeUsage.gp3,100.0,GB-Mo,8.0,8.0,production,

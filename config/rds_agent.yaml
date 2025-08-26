@@ -24,6 +24,98 @@ enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
 service: RDS
+
+# Custom conditional rules for RDS optimization
+custom_rules:
+  # Production databases need performance buffers
+  - name: "production_db_performance_buffer"
+    description: "Production databases need performance buffers for query spikes"
+    enabled: true
+    priority: 100
+    logic: "AND"
+    conditions:
+      - field: "tag.Environment"
+        operator: "equals"
+        value: "production"
+        description: "Production database"
+      - field: "cpu_utilization_p95"
+        operator: "greater_than"
+        value: 60
+        description: "Moderate to high CPU usage"
+    threshold_overrides:
+      cpu_low_threshold: 60.0  # Higher threshold for production
+      memory_low_threshold: 60.0
+    custom_prompt: "This is a production database. Maintain significant performance buffers (40%) to handle query spikes and unexpected load increases."
+    
+  # Multi-AZ databases special considerations
+  - name: "multi_az_ha_requirements"
+    description: "Multi-AZ databases have high availability requirements"
+    enabled: true
+    priority: 95
+    logic: "AND"
+    conditions:
+      - field: "property.multi_az"
+        operator: "equals"
+        value: true
+        description: "Multi-AZ deployment"
+    skip_recommendation_types:
+      - "rightsizing"  # Be conservative with HA databases
+    risk_adjustment: "increase"
+    custom_prompt: "This is a Multi-AZ database deployment. Focus on purchasing optimizations while being extremely conservative about any performance-related changes."
+    
+  # Dev/Test databases can be aggressive
+  - name: "development_db_aggressive"
+    description: "Development databases can handle aggressive optimization"
+    enabled: true
+    priority: 70
+    logic: "OR"
+    conditions:
+      - field: "tag.Environment"
+        operator: "in"
+        value: ["dev", "test", "staging", "qa"]
+        description: "Non-production environment"
+    threshold_overrides:
+      cpu_low_threshold: 10.0  # Very aggressive thresholds
+      memory_low_threshold: 15.0
+    force_recommendation_types:
+      - "rightsizing"
+    custom_prompt: "This is a non-production database. Be aggressive with rightsizing recommendations. Consider smaller instance types and burst-capable instances."
+    
+  # Read replicas optimization
+  - name: "read_replica_optimization"
+    description: "Read replicas can be optimized differently than primary databases"
+    enabled: true
+    priority: 80
+    logic: "OR"
+    conditions:
+      - field: "tag.Role"
+        operator: "equals"
+        value: "read-replica"
+        description: "Read replica database"
+      - field: "property.read_replica"
+        operator: "equals"
+        value: true
+        description: "Read replica instance"
+    threshold_overrides:
+      cpu_low_threshold: 15.0  # Read replicas can run leaner
+    custom_prompt: "This is a read replica. It can typically run with lower resource utilization than primary databases. Consider rightsizing more aggressively."
+    
+  # High-cost databases priority
+  - name: "high_cost_db_priority"
+    description: "High-cost databases should be prioritized for optimization"
+    enabled: true
+    priority: 85
+    logic: "AND"
+    conditions:
+      - field: "monthly_cost"
+        operator: "greater_than"
+        value: 1000
+        description: "High monthly cost (>$1000)"
+    force_recommendation_types:
+      - "purchasing_option"
+      - "rightsizing"
+    custom_prompt: "This is a high-cost database (>$1000/month). Prioritize all optimization opportunities including Reserved Instances and rightsizing analysis."
+
 service_specific_prompt: '
 
   Analyze RDS instances for cost optimization opportunities. Consider:

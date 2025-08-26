@@ -24,6 +24,104 @@ enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
 service: EC2
+
+# Custom conditional rules for specialized requirements
+custom_rules:
+  # Production instances with high CPU should maintain 30% buffer
+  - name: "production_cpu_buffer"
+    description: "Production instances need 30% CPU buffer for traffic spikes"
+    enabled: true
+    priority: 100
+    logic: "AND"
+    conditions:
+      - field: "tag.Environment"
+        operator: "equals"
+        value: "production"
+        description: "Resource tagged as production"
+      - field: "cpu_utilization_p95"
+        operator: "greater_than"
+        value: 70
+        description: "High CPU utilization"
+    threshold_overrides:
+      cpu_low_threshold: 70.0  # Increase threshold to maintain buffer
+    custom_prompt: "For production workloads, ensure recommendations maintain at least 30% CPU headroom for traffic spikes and seasonal load increases."
+    
+  # Critical tagged resources should skip rightsizing
+  - name: "critical_no_rightsizing"
+    description: "Critical resources should not be rightsized due to stability requirements"
+    enabled: true
+    priority: 90
+    logic: "OR"
+    conditions:
+      - field: "tag.Criticality"
+        operator: "equals"
+        value: "critical"
+        description: "Tagged as critical"
+      - field: "tag.Application"
+        operator: "in"
+        value: ["payment-gateway", "auth-service", "core-api"]
+        description: "Critical application services"
+    skip_recommendation_types:
+      - "rightsizing"
+    risk_adjustment: "increase"
+    custom_prompt: "This is a critical resource. Focus on purchasing optimizations only, avoiding any changes that could impact performance."
+    
+  # Development environments can be more aggressive
+  - name: "dev_aggressive_optimization"
+    description: "Development environments can handle more aggressive optimization"
+    enabled: true
+    priority: 50
+    logic: "OR"
+    conditions:
+      - field: "tag.Environment"
+        operator: "in"
+        value: ["dev", "development", "test", "staging"]
+        description: "Non-production environments"
+    threshold_overrides:
+      cpu_low_threshold: 10.0  # More aggressive CPU thresholds
+      memory_low_threshold: 20.0
+    risk_adjustment: "decrease"
+    custom_prompt: "This is a non-production environment. Be more aggressive with rightsizing recommendations as performance impacts are acceptable."
+    
+  # High-cost instances should be prioritized
+  - name: "high_cost_priority"
+    description: "Prioritize optimization for high-cost instances"
+    enabled: true
+    priority: 80
+    logic: "AND"
+    conditions:
+      - field: "monthly_cost"
+        operator: "greater_than"
+        value: 500
+        description: "Monthly cost over $500"
+    force_recommendation_types:
+      - "purchasing_option"
+      - "rightsizing"
+    custom_prompt: "This is a high-cost resource ($500+/month). Prioritize all applicable optimization types and provide detailed savings analysis."
+    
+  # Idle instances detection with custom criteria
+  - name: "extended_idle_detection"
+    description: "Detect instances idle for extended periods with custom criteria"
+    enabled: true
+    priority: 70
+    logic: "AND"
+    conditions:
+      - field: "cpu_utilization_p95"
+        operator: "less_than"
+        value: 5.0
+        description: "Very low CPU usage"
+      - field: "network_out"
+        operator: "less_than"
+        value: 1000000  # Less than 1MB/day average
+        description: "Minimal network activity"
+      - field: "tag.Environment"
+        operator: "not_equals"
+        value: "production"
+        description: "Not production environment"
+    force_recommendation_types:
+      - "idle_resource"
+    custom_prompt: "This instance shows extended idle patterns. Consider termination or scheduling for non-business hours."
+
 service_specific_prompt: '
 
   Analyze EC2 instances for cost optimization opportunities. Consider:

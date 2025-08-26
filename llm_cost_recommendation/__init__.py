@@ -15,8 +15,8 @@ __author__ = "AWS Cost Optimization Team"
 
 __all__ = [
     "CostRecommendationApp",
-    "ConfigManager", 
+    "ConfigManager",
     "LLMService",
     "DataIngestionService",
-    "CoordinatorAgent"
+    "CoordinatorAgent",
 ]

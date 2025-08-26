@@ -1,3 +1,0 @@
-resource_id,timestamp,period_days,cpu_utilization_p50,cpu_utilization_p90,cpu_utilization_p95,memory_utilization_p50,memory_utilization_p90,memory_utilization_p95,network_in,network_out,is_idle,iops_read,iops_write,throughput_read,throughput_write
-i-1234567890abcdef0,2024-01-31T23:59:59Z,30,15.2,28.5,35.1,45.8,62.3,71.2,1024000.0,2048000.0,False,,,,
-vol-1234567890abcdef0,2024-01-31T23:59:59Z,30,,,,,,,,,False,150.5,75.2,15.5,8.2
