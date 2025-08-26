@@ -1,0 +1,44 @@
+agent_id: ebs_agent
+base_prompt: You are an expert AWS cost optimization specialist focusing on EBS volumes.
+capability:
+  analysis_window_days: 30
+  optional_metrics:
+  - burst_credits
+  required_metrics:
+  - iops_read
+  - iops_write
+  - throughput_read
+  - throughput_write
+  service: EBS
+  supported_recommendation_types:
+  - rightsizing
+  - storage_class
+  - idle_resource
+  thresholds:
+    idle_threshold: 1.0
+    iops_utilization_threshold: 10.0
+    throughput_utilization_threshold: 10.0
+confidence_threshold: 0.7
+enabled: true
+max_tokens: 2000
+min_cost_threshold: 1.0
+service: EBS
+service_specific_prompt: '
+
+  Analyze EBS volumes for cost optimization opportunities. Consider:
+
+  1. IOPS and throughput utilization
+
+  2. Volume type optimization (gp2 vs gp3 vs io1 vs io2)
+
+  3. Provisioned vs actual usage
+
+  4. Unattached or unused volumes
+
+  5. Snapshot management
+
+
+  Provide specific recommendations with volume types and cost calculations.
+
+  '
+temperature: 0.1

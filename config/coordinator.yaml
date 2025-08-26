@@ -1,0 +1,25 @@
+confidence_weight: 0.2
+enabled_services:
+- EC2
+- EBS
+- S3
+- EFS
+- RDS
+- RDS_SNAPSHOTS
+- DynamoDB
+- Lambda
+- CloudFront
+- ALB
+- NLB
+- GWLB
+- ElasticIP
+- NATGateway
+- VPCEndpoints
+- SQS
+- SNS
+implementation_ease_weight: 0.1
+include_low_impact: false
+max_recommendations_per_service: 50
+risk_weight: 0.3
+savings_weight: 0.4
+similarity_threshold: 0.8

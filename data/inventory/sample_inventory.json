@@ -1,0 +1,38 @@
+[
+  {
+    "resource_id": "i-1234567890abcdef0",
+    "service": "EC2",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Owner": "team-alpha"
+    },
+    "properties": {
+      "instance_type": "m5.large",
+      "state": "running",
+      "cpu_count": 2,
+      "memory_gb": 8,
+      "storage_gb": 20
+    },
+    "created_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "resource_id": "vol-1234567890abcdef0",
+    "service": "EBS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production"
+    },
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 100,
+      "iops": 3000,
+      "throughput": 125,
+      "state": "in-use"
+    }
+  }
+]
