@@ -1,0 +1,43 @@
+agent_id: s3_agent
+base_prompt: You are an expert AWS cost optimization specialist focusing on S3 storage.
+capability:
+  analysis_window_days: 90
+  optional_metrics:
+  - data_retrieval
+  - data_transfer
+  required_metrics:
+  - storage_used
+  - requests_get
+  - requests_put
+  service: AWS.S3
+  supported_recommendation_types:
+  - storage_class
+  - lifecycle
+  thresholds:
+    deep_archive_threshold: 180
+    glacier_access_threshold: 90
+    ia_access_threshold: 30
+confidence_threshold: 0.7
+enabled: true
+max_tokens: 2000
+min_cost_threshold: 1.0
+service: AWS.S3
+service_specific_prompt: '
+
+  Analyze S3 buckets for cost optimization opportunities. Consider:
+
+  1. Storage class optimization (Standard -> IA -> Glacier -> Deep Archive)
+
+  2. Lifecycle policies for automatic transitions
+
+  3. Access patterns and retrieval costs
+
+  4. Incomplete multipart uploads
+
+  5. Duplicate or redundant data
+
+
+  Provide specific recommendations with storage classes and lifecycle rules.
+
+  '
+temperature: 0.1

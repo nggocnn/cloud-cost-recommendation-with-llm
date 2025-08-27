@@ -85,7 +85,7 @@ class ConfigManager:
         """Load service agent configurations"""
         configs = {}
 
-        for service in ServiceType:
+        for service in ServiceType.get_all_services():
             config_file = self.config_dir / f"{service.value.lower()}_agent.yaml"
 
             if not config_file.exists():
@@ -112,7 +112,7 @@ class ConfigManager:
 
         # Define service-specific configurations
         service_configs = {
-            ServiceType.EC2: {
+            ServiceType.AWS.EC2: {
                 "agent_id": "ec2_agent",
                 "service": service.value,
                 "enabled": True,
@@ -153,7 +153,7 @@ Provide specific recommendations with exact instance types and cost calculations
                 "min_cost_threshold": 1.0,
                 "confidence_threshold": 0.7,
             },
-            ServiceType.EBS: {
+            ServiceType.AWS.EBS: {
                 "agent_id": "ebs_agent",
                 "service": service.value,
                 "enabled": True,
@@ -194,7 +194,7 @@ Provide specific recommendations with volume types and cost calculations.
                 "min_cost_threshold": 1.0,
                 "confidence_threshold": 0.7,
             },
-            ServiceType.S3: {
+            ServiceType.AWS.S3: {
                 "agent_id": "s3_agent",
                 "service": service.value,
                 "enabled": True,
@@ -233,7 +233,7 @@ Provide specific recommendations with storage classes and lifecycle rules.
                 "min_cost_threshold": 1.0,
                 "confidence_threshold": 0.7,
             },
-            ServiceType.RDS: {
+            ServiceType.AWS.RDS: {
                 "agent_id": "rds_agent",
                 "service": service.value,
                 "enabled": True,
@@ -277,7 +277,7 @@ Provide specific recommendations with instance classes and cost calculations.
                 "min_cost_threshold": 1.0,
                 "confidence_threshold": 0.7,
             },
-            ServiceType.LAMBDA: {
+            ServiceType.AWS.LAMBDA: {
                 "agent_id": "lambda_agent",
                 "service": service.value,
                 "enabled": True,
@@ -317,30 +317,27 @@ Provide specific recommendations with memory settings and architectural improvem
         }
 
         # For services not explicitly defined, create a basic configuration
-        if service not in service_configs:
-            return {
-                "agent_id": f"{service.value.lower()}_agent",
+        return {
+            "agent_id": f"{service.value.lower().replace('.', '_')}_agent",
+            "service": service.value,
+            "enabled": True,  # Enable by default for all services
+            "capability": {
                 "service": service.value,
-                "enabled": False,  # Disabled by default for undefined services
-                "capability": {
-                    "service": service.value,
-                    "supported_recommendation_types": [
-                        RecommendationType.RIGHTSIZING.value
-                    ],
-                    "required_metrics": [],
-                    "optional_metrics": [],
-                    "thresholds": {},
-                    "analysis_window_days": 30,
-                },
-                "base_prompt": f"You are an expert AWS cost optimization specialist focusing on {service.value}.",
-                "service_specific_prompt": f"Analyze {service.value} resources for cost optimization opportunities.",
-                "temperature": 0.1,
-                "max_tokens": 2000,
-                "min_cost_threshold": 1.0,
-                "confidence_threshold": 0.7,
-            }
-
-        return service_configs[service]
+                "supported_recommendation_types": [
+                    RecommendationType.RIGHTSIZING.value
+                ],
+                "required_metrics": [],
+                "optional_metrics": [],
+                "thresholds": {},
+                "analysis_window_days": 30,
+            },
+            "base_prompt": f"You are an expert {ServiceType.get_provider(service)} cost optimization specialist focusing on {ServiceType.get_service_name(service)}.",
+            "service_specific_prompt": f"Analyze {ServiceType.get_service_name(service)} resources for cost optimization opportunities.",
+            "temperature": 0.1,
+            "max_tokens": 2000,
+            "min_cost_threshold": 1.0,
+            "confidence_threshold": 0.7,
+        }
 
     def get_service_config(self, service: Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP, str]) -> Optional[ServiceAgentConfig]:
         """Get configuration for a service"""
@@ -352,12 +349,12 @@ Provide specific recommendations with memory settings and architectural improvem
         else:
             service_obj = service
             
-        return self.service_configs.get(service_obj.value)
+        return self.service_configs.get(service_obj)
 
-    def get_enabled_services(self) -> List[ServiceType]:
-        """Get list of enabled services"""
+    def get_enabled_services(self) -> List[str]:
+        """Get list of enabled service strings"""
         return [
-            service
+            service.value
             for service, config in self.service_configs.items()
             if config.enabled
         ]

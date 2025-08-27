@@ -148,6 +148,7 @@ class CoordinatorAgent:
         resources: List[Resource],
         metrics_data: Dict[str, Metrics] = None,
         billing_data: Dict[str, List[BillingData]] = None,
+        batch_mode: bool = True,
     ) -> RecommendationReport:
         """Analyze entire account and generate comprehensive report"""
         logger.info(
@@ -161,31 +162,61 @@ class CoordinatorAgent:
         # Group resources by service
         resources_by_service = self._group_resources_by_service(resources)
 
-        # Analyze each service in parallel
+        # Analyze each service
         all_recommendations = []
-        analysis_tasks = []
+        
+        if batch_mode:
+            # Batch processing: analyze services in parallel
+            analysis_tasks = []
 
-        for service, service_resources in resources_by_service.items():
-            if service in self.service_agents:
-                agent = self.service_agents[service]
+            for service, service_resources in resources_by_service.items():
+                if service in self.service_agents:
+                    agent = self.service_agents[service]
 
-                # Create analysis task
-                task = self._analyze_service_resources(
-                    agent, service_resources, metrics_data, billing_data
+                    # Create analysis task
+                    task = self._analyze_service_resources(
+                        agent, service_resources, metrics_data, billing_data
+                    )
+                    analysis_tasks.append(task)
+
+            # Execute analysis tasks
+            if analysis_tasks:
+                service_recommendations = await asyncio.gather(
+                    *analysis_tasks, return_exceptions=True
                 )
-                analysis_tasks.append(task)
 
-        # Execute analysis tasks
-        if analysis_tasks:
-            service_recommendations = await asyncio.gather(
-                *analysis_tasks, return_exceptions=True
-            )
-
-            for result in service_recommendations:
-                if isinstance(result, Exception):
-                    logger.error("Service analysis failed", error=str(result))
-                else:
-                    all_recommendations.extend(result)
+                for result in service_recommendations:
+                    if isinstance(result, Exception):
+                        logger.error("Service analysis failed", error=str(result))
+                    else:
+                        all_recommendations.extend(result)
+        else:
+            # Individual processing: analyze resources one by one
+            total_resources = len(resources)
+            for i, resource in enumerate(resources, 1):
+                if resource.service in self.service_agents:
+                    logger.info(
+                        f"Analyzing resource {i}/{total_resources}",
+                        resource_id=resource.resource_id,
+                        service=resource.service.value,
+                    )
+                    
+                    # Get relevant metrics and billing data for this resource
+                    resource_metrics = metrics_data.get(resource.resource_id) if metrics_data else None
+                    resource_billing = billing_data.get(resource.resource_id) if billing_data else None
+                    
+                    try:
+                        recommendations = await self.analyze_resource(
+                            resource, resource_metrics, resource_billing
+                        )
+                        all_recommendations.extend(recommendations)
+                    except Exception as e:
+                        logger.error(
+                            "Failed to analyze individual resource",
+                            resource_id=resource.resource_id,
+                            service=resource.service.value,
+                            error=str(e),
+                        )
 
         # Post-process recommendations
         processed_recommendations = self._post_process_recommendations(

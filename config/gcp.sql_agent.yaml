@@ -1,0 +1,17 @@
+agent_id: gcp.sql_agent
+base_prompt: You are an expert AWS cost optimization specialist focusing on GCP.SQL.
+capability:
+  analysis_window_days: 30
+  optional_metrics: []
+  required_metrics: []
+  service: GCP.SQL
+  supported_recommendation_types:
+  - rightsizing
+  thresholds: {}
+confidence_threshold: 0.7
+enabled: false
+max_tokens: 2000
+min_cost_threshold: 1.0
+service: GCP.SQL
+service_specific_prompt: Analyze GCP.SQL resources for cost optimization opportunities.
+temperature: 0.1

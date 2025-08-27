@@ -35,12 +35,14 @@ class CostRecommendationApp:
         inventory_file: str = None,
         metrics_file: str = None,
         use_sample_data: bool = False,
+        individual_processing: bool = False,
     ):
         """Run complete cost analysis"""
         logger.info(
             "Starting cost analysis",
             account_id=account_id,
             use_sample_data=use_sample_data,
+            individual_processing=individual_processing,
         )
 
         try:
@@ -95,12 +97,17 @@ class CostRecommendationApp:
                 return None
 
             # Run analysis
-            logger.info("Starting coordinator analysis")
+            # Determine batch mode (invert individual_processing)
+            batch_mode = not individual_processing
+            mode_desc = "batched" if batch_mode else "individual"
+            
+            logger.info(f"Starting coordinator analysis ({mode_desc})")
             report = await self.coordinator.analyze_account(
                 account_id=account_id,
                 resources=resources,
                 metrics_data=metrics_data,
                 billing_data=billing_data,
+                batch_mode=batch_mode,
             )
 
             # Log summary
@@ -142,7 +149,8 @@ class CostRecommendationApp:
             for service, savings in sorted(
                 report.savings_by_service.items(), key=lambda x: x[1], reverse=True
             ):
-                print(f"  {service.value}: ${savings:,.2f}/month")
+                service_name = service.value if hasattr(service, 'value') else str(service)
+                print(f"  {service_name}: ${savings:,.2f}/month")
             print()
 
         # Implementation timeline
@@ -162,9 +170,133 @@ class CostRecommendationApp:
                 print(f"   Resource: {rec.resource_id}")
                 print(f"   Monthly Savings: ${rec.estimated_monthly_savings:,.2f}")
                 print(f"   Risk Level: {rec.risk_level.value}")
-                print(f"   Rationale: {rec.rationale[:100]}...")
+                print(f"   Rationale: {rec.rationale}")
 
         print("\n" + "=" * 80)
+
+    def export_report(self, report, output_file: str, format_type: str = "json"):
+        """Export report in specified format"""
+        import json
+        import csv
+        from pathlib import Path
+        
+        try:
+            if format_type.lower() == "json":
+                # Export full JSON report
+                with open(output_file, "w") as f:
+                    json.dump(report.model_dump(), f, indent=2, default=str)
+                logger.info("JSON report exported", file=output_file)
+                
+            elif format_type.lower() == "csv":
+                # Export CSV summary
+                with open(output_file, "w", newline="", encoding="utf-8") as f:
+                    writer = csv.writer(f)
+                    
+                    # Write header
+                    writer.writerow([
+                        "Resource ID", "Service", "Recommendation Type", "Risk Level",
+                        "Current Cost", "Recommended Cost", "Monthly Savings", "Annual Savings",
+                        "Rationale", "Implementation Steps"
+                    ])
+                    
+                    # Write recommendations
+                    for rec in report.recommendations:
+                        implementation_steps = "; ".join(rec.implementation_steps) if rec.implementation_steps else ""
+                        writer.writerow([
+                            rec.resource_id,
+                            rec.service.value if hasattr(rec.service, 'value') else str(rec.service),
+                            rec.recommendation_type.value if hasattr(rec.recommendation_type, 'value') else str(rec.recommendation_type),
+                            rec.risk_level.value if hasattr(rec.risk_level, 'value') else str(rec.risk_level),
+                            f"${rec.current_monthly_cost:.2f}",
+                            f"${rec.estimated_monthly_cost:.2f}",
+                            f"${rec.estimated_monthly_savings:.2f}",
+                            f"${rec.annual_savings:.2f}",
+                            rec.rationale[:200] + "..." if len(rec.rationale) > 200 else rec.rationale,
+                            implementation_steps[:300] + "..." if len(implementation_steps) > 300 else implementation_steps
+                        ])
+                logger.info("CSV report exported", file=output_file)
+                
+            elif format_type.lower() == "excel":
+                # Export Excel with multiple sheets
+                try:
+                    import pandas as pd
+                    
+                    # Summary sheet data
+                    summary_data = {
+                        "Metric": [
+                            "Total Recommendations",
+                            "Monthly Savings",
+                            "Annual Savings",
+                            "Low Risk Recommendations",
+                            "Medium Risk Recommendations", 
+                            "High Risk Recommendations"
+                        ],
+                        "Value": [
+                            report.total_recommendations,
+                            f"${report.total_monthly_savings:.2f}",
+                            f"${report.total_annual_savings:.2f}",
+                            len([r for r in report.recommendations if r.risk_level.value == "low"]),
+                            len([r for r in report.recommendations if r.risk_level.value == "medium"]),
+                            len([r for r in report.recommendations if r.risk_level.value == "high"])
+                        ]
+                    }
+                    
+                    # Recommendations sheet data
+                    recommendations_data = []
+                    for rec in report.recommendations:
+                        recommendations_data.append({
+                            "Resource ID": rec.resource_id,
+                            "Service": rec.service.value if hasattr(rec.service, 'value') else str(rec.service),
+                            "Recommendation Type": rec.recommendation_type.value if hasattr(rec.recommendation_type, 'value') else str(rec.recommendation_type),
+                            "Risk Level": rec.risk_level.value if hasattr(rec.risk_level, 'value') else str(rec.risk_level),
+                            "Current Monthly Cost": rec.current_monthly_cost,
+                            "Estimated Monthly Cost": rec.estimated_monthly_cost,
+                            "Monthly Savings": rec.estimated_monthly_savings,
+                            "Annual Savings": rec.annual_savings,
+                            "Confidence Score": rec.confidence_score,
+                            "Rationale": rec.rationale,
+                            "Impact Description": rec.impact_description,
+                            "Implementation Steps": "; ".join(rec.implementation_steps) if rec.implementation_steps else "",
+                            "Rollback Plan": rec.rollback_plan
+                        })
+                    
+                    # Create Excel file with multiple sheets
+                    with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
+                        # Summary sheet
+                        pd.DataFrame(summary_data).to_excel(writer, sheet_name='Summary', index=False)
+                        
+                        # Recommendations sheet
+                        pd.DataFrame(recommendations_data).to_excel(writer, sheet_name='Recommendations', index=False)
+                        
+                        # Service breakdown sheet
+                        service_data = []
+                        for service, savings in report.savings_by_service.items():
+                            service_name = service.value if hasattr(service, 'value') else str(service)
+                            service_recs = [r for r in report.recommendations if (r.service.value if hasattr(r.service, 'value') else str(r.service)) == service_name]
+                            service_data.append({
+                                "Service": service_name,
+                                "Monthly Savings": savings,
+                                "Annual Savings": savings * 12,
+                                "Recommendation Count": len(service_recs),
+                                "Average Savings per Recommendation": savings / len(service_recs) if service_recs else 0
+                            })
+                        pd.DataFrame(service_data).to_excel(writer, sheet_name='Service Breakdown', index=False)
+                    
+                    logger.info("Excel report exported", file=output_file, sheets=3)
+                    
+                except ImportError:
+                    logger.error("pandas and openpyxl are required for Excel export. Install with: pip install pandas openpyxl")
+                    # Fallback to CSV
+                    csv_file = output_file.replace('.xlsx', '.csv').replace('.xls', '.csv')
+                    self.export_report(report, csv_file, "csv")
+                    print(f"Excel export not available. Exported CSV instead: {csv_file}")
+                    
+            else:
+                raise ValueError(f"Unsupported format: {format_type}")
+                
+        except Exception as e:
+            logger.error("Export failed", format=format_type, file=output_file, error=str(e))
+            raise
 
     def get_status(self):
         """Get application status"""
@@ -195,10 +327,22 @@ async def main():
         "--sample-data", action="store_true", help="Use sample data for testing"
     )
     parser.add_argument(
+        "--batch-mode", action="store_true", default=True, help="Use batch processing mode (default). Use --no-batch-mode for individual processing"
+    )
+    parser.add_argument(
+        "--no-batch-mode", action="store_true", help="Process resources individually (one by one) instead of batching"
+    )
+    parser.add_argument(
         "--config-dir", default="config", help="Configuration directory"
     )
     parser.add_argument("--data-dir", default="data", help="Data directory")
-    parser.add_argument("--output-file", help="Output file for JSON report")
+    parser.add_argument("--output-file", help="Output file for detailed report")
+    parser.add_argument(
+        "--output-format", 
+        choices=["json", "csv", "excel"], 
+        default="json",
+        help="Output format for detailed report (json=full details, csv=summary table, excel=multiple sheets)"
+    )
     parser.add_argument("--status", action="store_true", help="Show application status")
 
     # Logging options
@@ -250,18 +394,16 @@ async def main():
             inventory_file=args.inventory_file,
             metrics_file=args.metrics_file,
             use_sample_data=args.sample_data,
+            individual_processing=args.no_batch_mode,
         )
 
         if report:
             # Print summary
             app.print_report_summary(report)
 
-            # Save JSON report if requested
+            # Save detailed report if requested
             if args.output_file:
-                import json
-
-                with open(args.output_file, "w") as f:
-                    json.dump(report.model_dump(), f, indent=2, default=str)
+                app.export_report(report, args.output_file, args.output_format)
                 print(f"\nDetailed report saved to: {args.output_file}")
 
     except Exception as e:

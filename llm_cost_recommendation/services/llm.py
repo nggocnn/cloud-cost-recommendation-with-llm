@@ -3,6 +3,7 @@ LLM service for the cost recommendation system.
 """
 
 import asyncio
+import json
 from typing import Dict, List, Any, Optional
 import structlog
 from langchain_openai import ChatOpenAI
@@ -58,9 +59,19 @@ class LLMService:
     def __init__(self, config: LLMConfig):
         self.config = config
         self.llm = self._create_llm()
+        self.model = config.model
+        self.temperature = config.temperature  
+        self.max_tokens = config.max_tokens
+        
+        # Create direct OpenAI client for batch processing
+        import openai
+        self.client = openai.AsyncOpenAI(
+            api_key=config.api_key,
+            base_url=config.base_url,
+        )
 
     def _create_llm(self) -> ChatOpenAI:
-        """Create LLM instance"""
+        """Create LLM instance with JSON mode enabled"""
         return ChatOpenAI(
             model=self.config.model,
             temperature=self.config.temperature,
@@ -68,6 +79,7 @@ class LLMService:
             timeout=self.config.timeout,
             openai_api_key=self.config.api_key,
             openai_api_base=self.config.base_url,
+            model_kwargs={"response_format": {"type": "json_object"}}
         )
 
     async def generate_recommendation(
@@ -95,10 +107,56 @@ class LLMService:
                 user_prompt_length=len(formatted_prompt),
             )
 
-            # Generate response
+            # Generate response with JSON mode
             response = await self.llm.ainvoke(messages)
 
             response_time = (time.time() - start_time) * 1000
+
+            # Clean and validate JSON response (handle markdown code blocks)
+            response_content = response.content.strip()
+            
+            # Log the raw LLM response for debugging
+            logger.info(
+                "Raw LLM response received",
+                model=self.config.model,
+                response_length=len(response_content),
+                response_content=response_content[:500] + ("..." if len(response_content) > 500 else ""),
+            )
+            
+            # Remove markdown code blocks if present
+            if response_content.startswith("```json"):
+                response_content = response_content[7:]  # Remove ```json
+            elif response_content.startswith("```"):
+                response_content = response_content[3:]   # Remove ```
+                
+            if response_content.endswith("```"):
+                response_content = response_content[:-3]  # Remove trailing ```
+                
+            response_content = response_content.strip()
+
+            try:
+                json_response = json.loads(response_content)
+                # Update the response content with clean JSON
+                response.content = json.dumps(json_response, indent=2)
+                
+                logger.info(
+                    "JSON mode response validated",
+                    model=self.config.model,
+                    response_time_ms=response_time,
+                    recommendations_count=len(json_response.get("recommendations", [])),
+                )
+            except json.JSONDecodeError as e:
+                logger.error(
+                    "Invalid JSON response from LLM with JSON mode",
+                    model=self.config.model,
+                    error=str(e),
+                    response_content=response_content[:500],
+                )
+                # Return valid JSON structure on parse failure
+                response.content = json.dumps({
+                    "recommendations": [],
+                    "error": "Failed to parse LLM response"
+                })
 
             return LLMResponse(
                 content=response.content,
@@ -119,8 +177,33 @@ class LLMService:
             # Convert context data to a readable format
             context_str = self._format_context_data(context_data)
 
-            # Replace placeholders in template
-            formatted_prompt = template.format(**context_data)
+            # Check if template actually has template placeholders (simple word placeholders only)
+            # Avoid treating JSON-like structures as templates
+            import re
+            simple_placeholder_pattern = r'\{[a-zA-Z_][a-zA-Z0-9_]*\}'
+            placeholders = re.findall(simple_placeholder_pattern, template)
+            
+            if placeholders:
+                # Create a safe formatting dict with common expected keys
+                format_dict = {
+                    'resource_id': context_data.get('resource', {}).get('resource_id', ''),
+                    'service': context_data.get('resource', {}).get('service', ''),
+                    'region': context_data.get('resource', {}).get('region', ''),
+                    'account_id': context_data.get('resource', {}).get('account_id', ''),
+                    'analysis_window_days': context_data.get('analysis_window_days', 30)
+                }
+
+                # Only format if all placeholders are available
+                missing_keys = [p.strip('{}') for p in placeholders if p.strip('{}') not in format_dict]
+                if missing_keys:
+                    logger.debug("Template placeholders not available, using template as-is", 
+                               missing_keys=missing_keys, available_keys=list(format_dict.keys()))
+                    formatted_prompt = template
+                else:
+                    formatted_prompt = template.format(**format_dict)
+            else:
+                # No simple placeholders, use template as-is
+                formatted_prompt = template
 
             # Add context data at the end
             formatted_prompt += f"\n\nContext Data:\n{context_str}"
@@ -130,6 +213,13 @@ class LLMService:
         except KeyError as e:
             logger.warning("Missing key in prompt formatting", missing_key=str(e))
             # Return template as-is if formatting fails
+            return (
+                template
+                + f"\n\nContext Data:\n{self._format_context_data(context_data)}"
+            )
+
+        except Exception as e:
+            logger.error("Error formatting prompt", error=str(e))
             return (
                 template
                 + f"\n\nContext Data:\n{self._format_context_data(context_data)}"
@@ -165,14 +255,92 @@ class LLMService:
 
             # Create batch prompt
             batch_prompt = self._create_batch_prompt(batch)
-
+ 
             try:
-                response = await self.generate_recommendation(
-                    system_prompt=system_prompt,
-                    user_prompt=batch_prompt,
-                    context_data={"batch_size": len(batch)},
+                # Use direct client call to avoid template formatting for batch prompts
+                import time
+                start_time = time.time()
+                
+                # Calculate dynamic max_tokens based on batch size
+                # Each resource typically needs 300-500 tokens for a complete recommendation
+                # Add buffer for prompt and overhead
+                estimated_tokens_per_resource = 400
+                dynamic_max_tokens = max(
+                    self.max_tokens, 
+                    len(batch) * estimated_tokens_per_resource + 1000
                 )
-                results.append(response)
+                
+                response = await self.client.chat.completions.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": batch_prompt}
+                    ],
+                    temperature=self.temperature,
+                    max_tokens=dynamic_max_tokens,
+                    response_format={"type": "json_object"}
+                )
+                
+                response_time = (time.time() - start_time) * 1000
+                
+                # Validate JSON response (handle markdown code blocks)
+                response_content = response.choices[0].message.content.strip()
+                
+                # Log the raw batch LLM response for debugging
+                logger.info(
+                    "Raw batch LLM response received",
+                    model=self.model,
+                    batch_index=i,
+                    batch_size=len(batch),
+                    response_length=len(response_content),
+                    response_content=response_content[:500] + ("..." if len(response_content) > 500 else ""),
+                )
+                
+                # Remove markdown code blocks if present
+                if response_content.startswith("```json"):
+                    response_content = response_content[7:]  # Remove ```json
+                elif response_content.startswith("```"):
+                    response_content = response_content[3:]   # Remove ```
+                    
+                if response_content.endswith("```"):
+                    response_content = response_content[:-3]  # Remove trailing ```
+                    
+                response_content = response_content.strip()
+                
+                # Try to parse JSON with repair mechanisms
+                json_response = None
+                try:
+                    json_response = json.loads(response_content)
+                    # Clean the response content
+                    response_content = json.dumps(json_response, indent=2)
+                    
+                    logger.info(
+                        "Batch JSON response validated",
+                        batch_index=i,
+                        batch_size=len(batch),
+                        recommendations_count=len(json_response.get("recommendations", [])),
+                    )
+                except json.JSONDecodeError as e:
+                    logger.error(
+                        "Invalid JSON in batch response",
+                        batch_index=i,
+                        error=str(e),
+                        response_content=response_content[:500],
+                    )
+                    # Create valid JSON structure on parse failure
+                    response_content = json.dumps({
+                        "recommendations": [],
+                        "error": "Failed to parse batch LLM response"
+                    })
+                
+                # Create LLMResponse manually
+                llm_response = LLMResponse(
+                    content=response_content,
+                    usage_tokens=response.usage.total_tokens if response.usage else 0,
+                    model=self.model,
+                    response_time_ms=response_time,
+                )
+                results.append(llm_response)
 
                 # Rate limiting - wait between batches
                 await asyncio.sleep(0.1)
@@ -189,17 +357,48 @@ class LLMService:
     def _create_batch_prompt(self, resources: List[Dict[str, Any]]) -> str:
         """Create prompt for batch resource analysis"""
         prompt_parts = [
-            "Analyze the following resources for cost optimization opportunities:\n"
+            "Analyze the following AWS resources for cost optimization opportunities.",
+            "Respond with valid JSON only - no additional text outside the JSON structure.\n"
         ]
 
         for idx, resource in enumerate(resources, 1):
-            prompt_parts.append(f"\nResource {idx}:")
+            resource_id = resource.get("resource_id", f"resource-{idx}")
+            prompt_parts.append(f"\n=== RESOURCE {idx}: {resource_id} ===")
             prompt_parts.append(self._format_context_data(resource))
-            prompt_parts.append("-" * 50)
+            prompt_parts.append("-" * 60)
 
-        prompt_parts.append(
-            "\nProvide recommendations for each resource in JSON format."
-        )
+        prompt_parts.extend([
+            "\nBATCH ANALYSIS INSTRUCTIONS:",
+            "1. Analyze each resource individually with its specific resource_id",
+            "2. Look for optimization patterns across similar resources", 
+            "3. Consider bulk purchasing opportunities when applicable",
+            "4. Provide specific recommendations for each resource",
+            "5. Include exact resource_id in each recommendation",
+            "6. IMPORTANT: Complete the JSON for ALL resources before ending",
+            "",
+            "REQUIRED JSON RESPONSE FORMAT (return valid JSON only):",
+            "{",
+            '  "recommendations": [',
+            '    {',
+            '      "resource_id": "exact-resource-id-from-above",',
+            '      "recommendation_type": "rightsizing|purchasing_option|idle_resource|lifecycle",',
+            '      "impact_description": "Detailed recommendation description and business impact analysis",',
+            '      "rationale": "Technical reasoning for this recommendation",',
+            '      "current_config": {},',
+            '      "recommended_config": {},',
+            '      "current_monthly_cost": 100.00,',
+            '      "estimated_monthly_cost": 75.00,',
+            '      "estimated_monthly_savings": 25.00,',
+            '      "confidence_score": 0.85,',
+            '      "risk_level": "low|medium|high",',
+            '      "implementation_steps": ["step 1", "step 2", "step 3"],',
+            '      "rollback_plan": "how to revert this change if needed"',
+            '    }',
+            '  ]',
+            '}',
+            "",
+            "CRITICAL: Return only valid JSON. Every recommendation MUST include ALL fields above.",
+        ])
 
         return "\n".join(prompt_parts)
 
@@ -215,6 +414,8 @@ class PromptTemplates:
 
     BASE_SYSTEM_PROMPT = """You are an expert AWS cost optimization specialist with deep knowledge of cloud infrastructure, pricing models, and best practices. Your goal is to analyze AWS resources and provide actionable cost optimization recommendations.
 
+IMPORTANT: You MUST respond in valid JSON format only. No other text outside the JSON structure.
+
 Key principles:
 1. Minimize cost while preserving performance and reliability
 2. Consider business impact and risk levels
@@ -222,76 +423,42 @@ Key principles:
 4. Include exact cost calculations and savings estimates
 5. Consider implementation complexity and timeline
 
-Response format:
-Provide your recommendations in JSON format with the following structure:
+REQUIRED JSON Response format (ALL fields are mandatory):
 {
     "recommendations": [
         {
-            "resource_id": "string",
+            "resource_id": "exact resource identifier",
             "recommendation_type": "rightsizing|purchasing_option|lifecycle|topology|storage_class|idle_resource",
-            "current_config": {...},
-            "recommended_config": {...},
-            "current_monthly_cost": number,
-            "estimated_monthly_cost": number,
-            "estimated_monthly_savings": number,
+            "current_config": {
+                "instance_type": "current type",
+                "storage_size": "current size",
+                "other_relevant_settings": "current values"
+            },
+            "recommended_config": {
+                "instance_type": "recommended type", 
+                "storage_size": "recommended size",
+                "other_relevant_settings": "recommended values"
+            },
+            "current_monthly_cost": 123.45,
+            "estimated_monthly_cost": 98.76,
+            "estimated_monthly_savings": 24.69,
             "risk_level": "low|medium|high",
-            "rationale": "string",
-            "implementation_steps": ["string"],
-            "confidence_score": number
+            "impact_description": "Detailed explanation of the recommendation and its business impact",
+            "rationale": "Technical reasoning behind this recommendation",
+            "implementation_steps": [
+                "Step 1: Specific action to take",
+                "Step 2: Next action to take",
+                "Step 3: Final verification step"
+            ],
+            "rollback_plan": "Detailed plan to revert changes if needed",
+            "confidence_score": 0.85
         }
     ]
-}"""
+}
 
-    EC2_PROMPT = """Analyze EC2 instances for cost optimization. Focus on:
-1. CPU and memory utilization patterns over the analysis period
-2. Right-sizing opportunities based on actual usage
-3. Purchase option recommendations (On-Demand vs Reserved vs Spot)
-4. Idle or underutilized instances
-5. Instance family/generation upgrades for better price-performance
-
-Consider the resource properties, metrics, and billing data provided.
-If CPU utilization is consistently below 20% and memory below 30%, recommend downsizing.
-If utilization patterns are predictable, recommend Reserved Instances.
-Identify completely idle instances (< 5% CPU for extended periods) for termination."""
-
-    EBS_PROMPT = """Analyze EBS volumes for cost optimization. Focus on:
-1. IOPS and throughput utilization vs provisioned capacity
-2. Volume type optimization (gp2 -> gp3, oversized Provisioned IOPS)
-3. Unattached or unused volumes
-4. Snapshot management and lifecycle
-5. Storage rightsizing based on actual usage
-
-Consider burst credits usage for gp2 volumes and recommend gp3 for better cost control.
-Identify volumes with low utilization for downsizing or deletion."""
-
-    S3_PROMPT = """Analyze S3 storage for cost optimization. Focus on:
-1. Storage class optimization based on access patterns
-2. Lifecycle policy implementation for automatic transitions
-3. Incomplete multipart uploads cleanup
-4. Intelligent Tiering opportunities
-5. Cross-region replication costs
-
-Recommend storage class transitions:
-- Standard to IA after 30 days if access is infrequent
-- IA to Glacier after 90 days for archival data
-- Glacier to Deep Archive for long-term retention"""
-
-    RDS_PROMPT = """Analyze RDS instances for cost optimization. Focus on:
-1. CPU, memory, and IOPS utilization patterns
-2. Instance class rightsizing opportunities
-3. Purchase option recommendations (On-Demand vs Reserved)
-4. Storage type optimization and sizing
-5. Multi-AZ vs Single-AZ based on requirements
-
-Consider database engine efficiency and version upgrades.
-Recommend Reserved Instances for predictable workloads."""
-
-    LAMBDA_PROMPT = """Analyze Lambda functions for cost optimization. Focus on:
-1. Memory allocation vs actual usage
-2. Execution duration optimization
-3. Cold start reduction strategies
-4. Invocation patterns and frequency
-5. Architecture improvements for cost efficiency
-
-Recommend memory adjustments based on actual usage patterns.
-Consider Provisioned Concurrency for frequently invoked functions."""
+CRITICAL REQUIREMENTS:
+- Every recommendation MUST include ALL fields above
+- Use exact field names as specified (especially "impact_description")
+- Provide realistic cost estimates based on AWS pricing
+- Include detailed implementation steps
+- Always include proper rollback procedures"""

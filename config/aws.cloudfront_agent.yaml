@@ -1,0 +1,17 @@
+agent_id: aws.cloudfront_agent
+base_prompt: You are an expert AWS cost optimization specialist focusing on AWS.CloudFront.
+capability:
+  analysis_window_days: 30
+  optional_metrics: []
+  required_metrics: []
+  service: AWS.CloudFront
+  supported_recommendation_types:
+  - rightsizing
+  thresholds: {}
+confidence_threshold: 0.7
+enabled: false
+max_tokens: 2000
+min_cost_threshold: 1.0
+service: AWS.CloudFront
+service_specific_prompt: Analyze AWS.CloudFront resources for cost optimization opportunities.
+temperature: 0.1

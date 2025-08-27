@@ -1,0 +1,17 @@
+agent_id: azure_cdn_agent
+base_prompt: You are an expert Azure cost optimization specialist focusing on CDN.
+capability:
+  analysis_window_days: 30
+  optional_metrics: []
+  required_metrics: []
+  service: Azure.CDN
+  supported_recommendation_types:
+  - rightsizing
+  thresholds: {}
+confidence_threshold: 0.7
+enabled: true
+max_tokens: 2000
+min_cost_threshold: 1.0
+service: Azure.CDN
+service_specific_prompt: Analyze CDN resources for cost optimization opportunities.
+temperature: 0.1

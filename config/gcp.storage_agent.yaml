@@ -1,0 +1,17 @@
+agent_id: gcp.storage_agent
+base_prompt: You are an expert AWS cost optimization specialist focusing on GCP.Storage.
+capability:
+  analysis_window_days: 30
+  optional_metrics: []
+  required_metrics: []
+  service: GCP.Storage
+  supported_recommendation_types:
+  - rightsizing
+  thresholds: {}
+confidence_threshold: 0.7
+enabled: false
+max_tokens: 2000
+min_cost_threshold: 1.0
+service: GCP.Storage
+service_specific_prompt: Analyze GCP.Storage resources for cost optimization opportunities.
+temperature: 0.1

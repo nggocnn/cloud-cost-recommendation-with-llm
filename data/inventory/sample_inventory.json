@@ -1,0 +1,3899 @@
+[
+  {
+    "resource_id": "function-processor-305",
+    "service": "Lambda",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-7322",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "runtime": "dotnet6",
+      "memory_size": 512,
+      "timeout": 60,
+      "architecture": "x86_64"
+    },
+    "created_at": "2025-01-25T12:20:43.470694"
+  },
+  {
+    "resource_id": "dynamodb-945426",
+    "service": "DynamoDB",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-6598",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-02-11T12:20:43.470785"
+  },
+  {
+    "resource_id": "ec2-757293",
+    "service": "EC2",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-8130",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "t3.small",
+      "state": "stopped",
+      "cpu_count": 4,
+      "memory_gb": 1,
+      "storage_gb": 8,
+      "platform": "Linux/UNIX"
+    },
+    "created_at": "2024-11-17T12:20:43.470820"
+  },
+  {
+    "resource_id": "dynamodb-557525",
+    "service": "DynamoDB",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-8720",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-07-22T12:20:43.470853"
+  },
+  {
+    "resource_id": "s3-355064",
+    "service": "S3",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-4395",
+      "Project": "project-data"
+    },
+    "properties": {
+      "bucket_name": "bucket-6061",
+      "storage_class": "STANDARD",
+      "versioning": false,
+      "encryption": true
+    },
+    "created_at": "2025-06-11T12:20:43.470880"
+  },
+  {
+    "resource_id": "function-handler-909",
+    "service": "Lambda",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-gamma",
+      "CostCenter": "CC-6763",
+      "Project": "project-web"
+    },
+    "properties": {
+      "runtime": "nodejs18.x",
+      "memory_size": 1024,
+      "timeout": 900,
+      "architecture": "x86_64"
+    },
+    "created_at": "2024-12-30T12:20:43.470906"
+  },
+  {
+    "resource_id": "cloudfront-308810",
+    "service": "CloudFront",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-alpha",
+      "CostCenter": "CC-3803",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-03-15T12:20:43.470950"
+  },
+  {
+    "resource_id": "dynamodb-272221",
+    "service": "DynamoDB",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-3838",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2024-12-03T12:20:43.470971"
+  },
+  {
+    "resource_id": "dynamodb-369984",
+    "service": "DynamoDB",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-4071",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-07-05T12:20:43.470996"
+  },
+  {
+    "resource_id": "s3-690185",
+    "service": "S3",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-6347",
+      "Project": "project-data"
+    },
+    "properties": {
+      "bucket_name": "bucket-4058",
+      "storage_class": "STANDARD",
+      "versioning": false,
+      "encryption": false
+    },
+    "created_at": "2025-03-27T12:20:43.471019"
+  },
+  {
+    "resource_id": "rds-900312",
+    "service": "RDS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-gamma",
+      "CostCenter": "CC-6230",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.micro",
+      "engine": "aurora-mysql",
+      "allocated_storage": 50,
+      "multi_az": false,
+      "backup_retention": 30
+    },
+    "created_at": "2025-04-05T12:20:43.471045"
+  },
+  {
+    "resource_id": "dynamodb-889397",
+    "service": "DynamoDB",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-beta",
+      "CostCenter": "CC-8590",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2024-12-16T12:20:43.471073"
+  },
+  {
+    "resource_id": "function-processor-183",
+    "service": "Lambda",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-7613",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "runtime": "nodejs18.x",
+      "memory_size": 2048,
+      "timeout": 300,
+      "architecture": "arm64"
+    },
+    "created_at": "2024-11-11T12:20:43.471101"
+  },
+  {
+    "resource_id": "ec2-605360",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-8198",
+      "Project": "project-data"
+    },
+    "properties": {
+      "instance_type": "t3.large",
+      "state": "stopped",
+      "cpu_count": 4,
+      "memory_gb": 16,
+      "storage_gb": 100,
+      "platform": "Windows"
+    },
+    "created_at": "2025-05-09T12:20:43.471143"
+  },
+  {
+    "resource_id": "cloudfront-309490",
+    "service": "CloudFront",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-delta",
+      "CostCenter": "CC-2655",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-01-06T12:20:43.471172"
+  },
+  {
+    "resource_id": "ebs-535663",
+    "service": "EBS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-alpha",
+      "CostCenter": "CC-5338",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 20,
+      "iops": 3000,
+      "throughput": 500,
+      "state": "in-use",
+      "encrypted": false
+    },
+    "created_at": "2024-11-17T12:20:43.471197"
+  },
+  {
+    "resource_id": "ec2-983051",
+    "service": "EC2",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-alpha",
+      "CostCenter": "CC-3332",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "m5.xlarge",
+      "state": "stopped",
+      "cpu_count": 2,
+      "memory_gb": 1,
+      "storage_gb": 20,
+      "platform": "Windows"
+    },
+    "created_at": "2024-09-23T12:20:43.471222"
+  },
+  {
+    "resource_id": "s3-396614",
+    "service": "S3",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-4316",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "bucket_name": "bucket-2260",
+      "storage_class": "GLACIER",
+      "versioning": false,
+      "encryption": false
+    },
+    "created_at": "2025-04-20T12:20:43.471279"
+  },
+  {
+    "resource_id": "s3-740490",
+    "service": "S3",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-1123",
+      "Project": "project-data"
+    },
+    "properties": {
+      "bucket_name": "bucket-5487",
+      "storage_class": "STANDARD_IA",
+      "versioning": false,
+      "encryption": false
+    },
+    "created_at": "2025-08-25T12:20:43.471306"
+  },
+  {
+    "resource_id": "s3-127705",
+    "service": "S3",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-gamma",
+      "CostCenter": "CC-4725",
+      "Project": "project-web"
+    },
+    "properties": {
+      "bucket_name": "bucket-7237",
+      "storage_class": "GLACIER",
+      "versioning": true,
+      "encryption": true
+    },
+    "created_at": "2025-07-05T12:20:43.471330"
+  },
+  {
+    "resource_id": "s3-683977",
+    "service": "S3",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-gamma",
+      "CostCenter": "CC-3313",
+      "Project": "project-data"
+    },
+    "properties": {
+      "bucket_name": "bucket-6908",
+      "storage_class": "STANDARD",
+      "versioning": true,
+      "encryption": false
+    },
+    "created_at": "2025-01-19T12:20:43.471353"
+  },
+  {
+    "resource_id": "dynamodb-507894",
+    "service": "DynamoDB",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-1776",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-08-14T12:20:43.471372"
+  },
+  {
+    "resource_id": "function-handler-948",
+    "service": "Lambda",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-2093",
+      "Project": "project-data"
+    },
+    "properties": {
+      "runtime": "dotnet6",
+      "memory_size": 128,
+      "timeout": 900,
+      "architecture": "arm64"
+    },
+    "created_at": "2025-03-18T12:20:43.471400"
+  },
+  {
+    "resource_id": "cloudfront-231768",
+    "service": "CloudFront",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-5961",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-03-14T12:20:43.471428"
+  },
+  {
+    "resource_id": "ec2-474201",
+    "service": "EC2",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-5165",
+      "Project": "project-web"
+    },
+    "properties": {
+      "instance_type": "m5.xlarge",
+      "state": "stopped",
+      "cpu_count": 8,
+      "memory_gb": 2,
+      "storage_gb": 100,
+      "platform": "Windows"
+    },
+    "created_at": "2025-06-01T12:20:43.471457"
+  },
+  {
+    "resource_id": "cloudfront-657377",
+    "service": "CloudFront",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-9157",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-04-29T12:20:43.471485"
+  },
+  {
+    "resource_id": "dynamodb-155446",
+    "service": "DynamoDB",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-1768",
+      "Project": "project-data"
+    },
+    "properties": {},
+    "created_at": "2025-07-24T12:20:43.471505"
+  },
+  {
+    "resource_id": "cloudfront-740193",
+    "service": "CloudFront",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-alpha",
+      "CostCenter": "CC-6796",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2025-01-14T12:20:43.471558"
+  },
+  {
+    "resource_id": "rds-213479",
+    "service": "RDS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-4209",
+      "Project": "project-api"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.xlarge",
+      "engine": "aurora-postgresql",
+      "allocated_storage": 20,
+      "multi_az": false,
+      "backup_retention": 30
+    },
+    "created_at": "2025-05-27T12:20:43.471599"
+  },
+  {
+    "resource_id": "s3-631559",
+    "service": "S3",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-gamma",
+      "CostCenter": "CC-8552",
+      "Project": "project-data"
+    },
+    "properties": {
+      "bucket_name": "bucket-2875",
+      "storage_class": "GLACIER",
+      "versioning": false,
+      "encryption": false
+    },
+    "created_at": "2025-01-02T12:20:43.471644"
+  },
+  {
+    "resource_id": "ec2-818886",
+    "service": "EC2",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-7362",
+      "Project": "project-api"
+    },
+    "properties": {
+      "instance_type": "t3.small",
+      "state": "running",
+      "cpu_count": 8,
+      "memory_gb": 2,
+      "storage_gb": 8,
+      "platform": "Linux/UNIX"
+    },
+    "created_at": "2024-11-12T12:20:43.471670"
+  },
+  {
+    "resource_id": "rds-568853",
+    "service": "RDS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-alpha",
+      "CostCenter": "CC-9929",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.small",
+      "engine": "aurora-postgresql",
+      "allocated_storage": 500,
+      "multi_az": false,
+      "backup_retention": 7
+    },
+    "created_at": "2025-05-28T12:20:43.471702"
+  },
+  {
+    "resource_id": "ec2-453470",
+    "service": "EC2",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-8725",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "r5.large",
+      "state": "running",
+      "cpu_count": 1,
+      "memory_gb": 32,
+      "storage_gb": 8,
+      "platform": "Linux/UNIX"
+    },
+    "created_at": "2025-02-14T12:20:43.471736"
+  },
+  {
+    "resource_id": "cloudfront-928363",
+    "service": "CloudFront",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-8550",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-01-13T12:20:43.471893"
+  },
+  {
+    "resource_id": "cloudfront-289912",
+    "service": "CloudFront",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-3564",
+      "Project": "project-data"
+    },
+    "properties": {},
+    "created_at": "2024-10-02T12:20:43.471918"
+  },
+  {
+    "resource_id": "ec2-410083",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-5943",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "c5.large",
+      "state": "stopped",
+      "cpu_count": 8,
+      "memory_gb": 1,
+      "storage_gb": 50,
+      "platform": "Windows"
+    },
+    "created_at": "2025-08-06T12:20:43.471950"
+  },
+  {
+    "resource_id": "cloudfront-772195",
+    "service": "CloudFront",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-8287",
+      "Project": "project-data"
+    },
+    "properties": {},
+    "created_at": "2024-12-21T12:20:43.471982"
+  },
+  {
+    "resource_id": "function-handler-391",
+    "service": "Lambda",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-delta",
+      "CostCenter": "CC-7295",
+      "Project": "project-web"
+    },
+    "properties": {
+      "runtime": "python3.9",
+      "memory_size": 2048,
+      "timeout": 900,
+      "architecture": "arm64"
+    },
+    "created_at": "2025-04-02T12:20:43.472007"
+  },
+  {
+    "resource_id": "rds-759622",
+    "service": "RDS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-delta",
+      "CostCenter": "CC-3659",
+      "Project": "project-api"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.small",
+      "engine": "mysql",
+      "allocated_storage": 20,
+      "multi_az": true,
+      "backup_retention": 30
+    },
+    "created_at": "2024-12-23T12:20:43.472045"
+  },
+  {
+    "resource_id": "ec2-447058",
+    "service": "EC2",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-2054",
+      "Project": "project-api"
+    },
+    "properties": {
+      "instance_type": "t3.micro",
+      "state": "running",
+      "cpu_count": 16,
+      "memory_gb": 16,
+      "storage_gb": 100,
+      "platform": "Linux/UNIX"
+    },
+    "created_at": "2024-10-01T12:20:43.472140"
+  },
+  {
+    "resource_id": "ec2-284017",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-4864",
+      "Project": "project-api"
+    },
+    "properties": {
+      "instance_type": "r5.large",
+      "state": "stopped",
+      "cpu_count": 4,
+      "memory_gb": 2,
+      "storage_gb": 100,
+      "platform": "Linux/UNIX"
+    },
+    "created_at": "2024-11-16T12:20:43.472201"
+  },
+  {
+    "resource_id": "ec2-327085",
+    "service": "EC2",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-9029",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "t3.small",
+      "state": "running",
+      "cpu_count": 16,
+      "memory_gb": 1,
+      "storage_gb": 8,
+      "platform": "Windows"
+    },
+    "created_at": "2024-11-13T12:20:43.472235"
+  },
+  {
+    "resource_id": "ebs-882442",
+    "service": "EBS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-alpha",
+      "CostCenter": "CC-1102",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 50,
+      "iops": 6000,
+      "throughput": 500,
+      "state": "in-use",
+      "encrypted": false
+    },
+    "created_at": "2024-11-13T12:20:43.472274"
+  },
+  {
+    "resource_id": "ebs-672030",
+    "service": "EBS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-beta",
+      "CostCenter": "CC-7021",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 500,
+      "iops": 6000,
+      "throughput": 125,
+      "state": "in-use",
+      "encrypted": true
+    },
+    "created_at": "2024-12-21T12:20:43.472304"
+  },
+  {
+    "resource_id": "function-processor-253",
+    "service": "Lambda",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-8117",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "runtime": "python3.9",
+      "memory_size": 256,
+      "timeout": 900,
+      "architecture": "x86_64"
+    },
+    "created_at": "2025-07-09T12:20:43.472333"
+  },
+  {
+    "resource_id": "function-api-206",
+    "service": "Lambda",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-7129",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "runtime": "dotnet6",
+      "memory_size": 256,
+      "timeout": 60,
+      "architecture": "arm64"
+    },
+    "created_at": "2025-03-14T12:20:43.472370"
+  },
+  {
+    "resource_id": "function-processor-641",
+    "service": "Lambda",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-delta",
+      "CostCenter": "CC-2275",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "runtime": "java11",
+      "memory_size": 512,
+      "timeout": 300,
+      "architecture": "arm64"
+    },
+    "created_at": "2025-01-25T12:20:43.472406"
+  },
+  {
+    "resource_id": "ebs-591042",
+    "service": "EBS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-alpha",
+      "CostCenter": "CC-8087",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 8,
+      "iops": 6000,
+      "throughput": 250,
+      "state": "in-use",
+      "encrypted": false
+    },
+    "created_at": "2025-05-12T12:20:43.472442"
+  },
+  {
+    "resource_id": "rds-624184",
+    "service": "RDS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-8317",
+      "Project": "project-data"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "mysql",
+      "allocated_storage": 20,
+      "multi_az": true,
+      "backup_retention": 7
+    },
+    "created_at": "2024-11-01T12:20:43.472466"
+  },
+  {
+    "resource_id": "ebs-931628",
+    "service": "EBS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-8150",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 20,
+      "iops": 3000,
+      "throughput": 250,
+      "state": "available",
+      "encrypted": false
+    },
+    "created_at": "2024-12-18T12:20:43.472507"
+  },
+  {
+    "resource_id": "cloudfront-582803",
+    "service": "CloudFront",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-4364",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-04-24T12:20:43.472528"
+  },
+  {
+    "resource_id": "cloudfront-924969",
+    "service": "CloudFront",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-gamma",
+      "CostCenter": "CC-1334",
+      "Project": "project-data"
+    },
+    "properties": {},
+    "created_at": "2024-11-26T12:20:43.472552"
+  },
+  {
+    "resource_id": "dynamodb-786782",
+    "service": "DynamoDB",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-gamma",
+      "CostCenter": "CC-2699",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2024-11-29T12:20:43.472572"
+  },
+  {
+    "resource_id": "s3-237464",
+    "service": "S3",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-beta",
+      "CostCenter": "CC-2274",
+      "Project": "project-web"
+    },
+    "properties": {
+      "bucket_name": "bucket-9006",
+      "storage_class": "STANDARD",
+      "versioning": true,
+      "encryption": true
+    },
+    "created_at": "2025-07-01T12:20:43.472596"
+  },
+  {
+    "resource_id": "ebs-824243",
+    "service": "EBS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-3539",
+      "Project": "project-api"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 1000,
+      "iops": 3000,
+      "throughput": 125,
+      "state": "available",
+      "encrypted": false
+    },
+    "created_at": "2024-09-18T12:20:43.472620"
+  },
+  {
+    "resource_id": "dynamodb-528523",
+    "service": "DynamoDB",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-gamma",
+      "CostCenter": "CC-3152",
+      "Project": "project-data"
+    },
+    "properties": {},
+    "created_at": "2024-09-20T12:20:43.472644"
+  },
+  {
+    "resource_id": "rds-644123",
+    "service": "RDS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-gamma",
+      "CostCenter": "CC-4699",
+      "Project": "project-data"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.micro",
+      "engine": "mysql",
+      "allocated_storage": 20,
+      "multi_az": false,
+      "backup_retention": 30
+    },
+    "created_at": "2025-06-02T12:20:43.472667"
+  },
+  {
+    "resource_id": "ebs-882175",
+    "service": "EBS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-2197",
+      "Project": "project-api"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 20,
+      "iops": 12000,
+      "throughput": 500,
+      "state": "in-use",
+      "encrypted": false
+    },
+    "created_at": "2025-07-30T12:20:43.472708"
+  },
+  {
+    "resource_id": "dynamodb-823060",
+    "service": "DynamoDB",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-2338",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2025-08-06T12:20:43.472728"
+  },
+  {
+    "resource_id": "ec2-504144",
+    "service": "EC2",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-gamma",
+      "CostCenter": "CC-1256",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "c5.large",
+      "state": "running",
+      "cpu_count": 8,
+      "memory_gb": 8,
+      "storage_gb": 8,
+      "platform": "Linux/UNIX"
+    },
+    "created_at": "2024-10-19T12:20:43.472753"
+  },
+  {
+    "resource_id": "function-handler-619",
+    "service": "Lambda",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-gamma",
+      "CostCenter": "CC-6000",
+      "Project": "project-api"
+    },
+    "properties": {
+      "runtime": "python3.9",
+      "memory_size": 512,
+      "timeout": 60,
+      "architecture": "arm64"
+    },
+    "created_at": "2025-02-07T12:20:43.472786"
+  },
+  {
+    "resource_id": "function-processor-247",
+    "service": "Lambda",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-delta",
+      "CostCenter": "CC-4449",
+      "Project": "project-web"
+    },
+    "properties": {
+      "runtime": "nodejs18.x",
+      "memory_size": 2048,
+      "timeout": 900,
+      "architecture": "arm64"
+    },
+    "created_at": "2025-08-18T12:20:43.472824"
+  },
+  {
+    "resource_id": "rds-524743",
+    "service": "RDS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-2103",
+      "Project": "project-api"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.small",
+      "engine": "postgres",
+      "allocated_storage": 100,
+      "multi_az": true,
+      "backup_retention": 30
+    },
+    "created_at": "2025-07-24T12:20:43.472911"
+  },
+  {
+    "resource_id": "cloudfront-267754",
+    "service": "CloudFront",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-6089",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2025-05-31T12:20:43.472948"
+  },
+  {
+    "resource_id": "ebs-700818",
+    "service": "EBS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-delta",
+      "CostCenter": "CC-3056",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 1000,
+      "iops": 12000,
+      "throughput": 250,
+      "state": "available",
+      "encrypted": true
+    },
+    "created_at": "2025-05-29T12:20:43.472975"
+  },
+  {
+    "resource_id": "cloudfront-630330",
+    "service": "CloudFront",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-1180",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2025-02-02T12:20:43.473002"
+  },
+  {
+    "resource_id": "function-handler-366",
+    "service": "Lambda",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-beta",
+      "CostCenter": "CC-1705",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "runtime": "dotnet6",
+      "memory_size": 512,
+      "timeout": 900,
+      "architecture": "x86_64"
+    },
+    "created_at": "2024-09-09T12:20:43.473040"
+  },
+  {
+    "resource_id": "cloudfront-451185",
+    "service": "CloudFront",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-beta",
+      "CostCenter": "CC-5855",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2025-03-31T12:20:43.473070"
+  },
+  {
+    "resource_id": "cloudfront-473205",
+    "service": "CloudFront",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-6454",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2024-10-18T12:20:43.473099"
+  },
+  {
+    "resource_id": "s3-942109",
+    "service": "S3",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-alpha",
+      "CostCenter": "CC-7065",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "bucket_name": "bucket-6511",
+      "storage_class": "GLACIER",
+      "versioning": false,
+      "encryption": false
+    },
+    "created_at": "2024-10-07T12:20:43.473139"
+  },
+  {
+    "resource_id": "dynamodb-415591",
+    "service": "DynamoDB",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-delta",
+      "CostCenter": "CC-2862",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2024-09-13T12:20:43.473169"
+  },
+  {
+    "resource_id": "ebs-387046",
+    "service": "EBS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-1841",
+      "Project": "project-web"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 500,
+      "iops": 6000,
+      "throughput": 125,
+      "state": "in-use",
+      "encrypted": true
+    },
+    "created_at": "2025-02-04T12:20:43.473198"
+  },
+  {
+    "resource_id": "ebs-335014",
+    "service": "EBS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-gamma",
+      "CostCenter": "CC-1232",
+      "Project": "project-web"
+    },
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 1000,
+      "iops": 3000,
+      "throughput": 500,
+      "state": "in-use",
+      "encrypted": true
+    },
+    "created_at": "2024-12-17T12:20:43.473226"
+  },
+  {
+    "resource_id": "ec2-893766",
+    "service": "EC2",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-7375",
+      "Project": "project-api"
+    },
+    "properties": {
+      "instance_type": "m5.large",
+      "state": "stopped",
+      "cpu_count": 2,
+      "memory_gb": 4,
+      "storage_gb": 100,
+      "platform": "Linux/UNIX"
+    },
+    "created_at": "2025-02-16T12:20:43.473250"
+  },
+  {
+    "resource_id": "function-processor-303",
+    "service": "Lambda",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-1748",
+      "Project": "project-api"
+    },
+    "properties": {
+      "runtime": "python3.9",
+      "memory_size": 2048,
+      "timeout": 900,
+      "architecture": "x86_64"
+    },
+    "created_at": "2025-05-23T12:20:43.473288"
+  },
+  {
+    "resource_id": "ebs-806276",
+    "service": "EBS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-3109",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 50,
+      "iops": 6000,
+      "throughput": 125,
+      "state": "available",
+      "encrypted": false
+    },
+    "created_at": "2025-04-22T12:20:43.473325"
+  },
+  {
+    "resource_id": "cloudfront-127740",
+    "service": "CloudFront",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-gamma",
+      "CostCenter": "CC-8536",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2024-12-28T12:20:43.473347"
+  },
+  {
+    "resource_id": "dynamodb-174045",
+    "service": "DynamoDB",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-7591",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2024-10-01T12:20:43.473402"
+  },
+  {
+    "resource_id": "ec2-846521",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-alpha",
+      "CostCenter": "CC-1110",
+      "Project": "project-data"
+    },
+    "properties": {
+      "instance_type": "t3.micro",
+      "state": "running",
+      "cpu_count": 8,
+      "memory_gb": 2,
+      "storage_gb": 20,
+      "platform": "Windows"
+    },
+    "created_at": "2025-08-09T12:20:43.473460"
+  },
+  {
+    "resource_id": "ebs-768693",
+    "service": "EBS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-delta",
+      "CostCenter": "CC-4663",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 20,
+      "iops": 12000,
+      "throughput": 500,
+      "state": "in-use",
+      "encrypted": false
+    },
+    "created_at": "2025-01-12T12:20:43.473530"
+  },
+  {
+    "resource_id": "dynamodb-822413",
+    "service": "DynamoDB",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-beta",
+      "CostCenter": "CC-8636",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-06-05T12:20:43.473565"
+  },
+  {
+    "resource_id": "function-processor-633",
+    "service": "Lambda",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-8500",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "runtime": "java11",
+      "memory_size": 512,
+      "timeout": 900,
+      "architecture": "x86_64"
+    },
+    "created_at": "2025-07-14T12:20:43.473836"
+  },
+  {
+    "resource_id": "dynamodb-978857",
+    "service": "DynamoDB",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-delta",
+      "CostCenter": "CC-8498",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2025-03-23T12:20:43.473918"
+  },
+  {
+    "resource_id": "rds-236550",
+    "service": "RDS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-delta",
+      "CostCenter": "CC-1862",
+      "Project": "project-api"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.micro",
+      "engine": "aurora-postgresql",
+      "allocated_storage": 100,
+      "multi_az": false,
+      "backup_retention": 14
+    },
+    "created_at": "2025-07-26T12:20:43.473956"
+  },
+  {
+    "resource_id": "s3-220784",
+    "service": "S3",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-7604",
+      "Project": "project-data"
+    },
+    "properties": {
+      "bucket_name": "bucket-7144",
+      "storage_class": "STANDARD_IA",
+      "versioning": true,
+      "encryption": false
+    },
+    "created_at": "2025-05-06T12:20:43.474010"
+  },
+  {
+    "resource_id": "ec2-603728",
+    "service": "EC2",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-2591",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "t3.xlarge",
+      "state": "running",
+      "cpu_count": 1,
+      "memory_gb": 2,
+      "storage_gb": 50,
+      "platform": "Windows"
+    },
+    "created_at": "2025-07-13T12:20:43.474037"
+  },
+  {
+    "resource_id": "cloudfront-812243",
+    "service": "CloudFront",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-5911",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-03-08T12:20:43.474066"
+  },
+  {
+    "resource_id": "function-processor-558",
+    "service": "Lambda",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-2828",
+      "Project": "project-web"
+    },
+    "properties": {
+      "runtime": "dotnet6",
+      "memory_size": 1024,
+      "timeout": 900,
+      "architecture": "arm64"
+    },
+    "created_at": "2025-05-08T12:20:43.474109"
+  },
+  {
+    "resource_id": "rds-599597",
+    "service": "RDS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-4255",
+      "Project": "project-api"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "aurora-postgresql",
+      "allocated_storage": 100,
+      "multi_az": false,
+      "backup_retention": 7
+    },
+    "created_at": "2024-08-31T12:20:43.474164"
+  },
+  {
+    "resource_id": "function-api-945",
+    "service": "Lambda",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-5991",
+      "Project": "project-api"
+    },
+    "properties": {
+      "runtime": "java11",
+      "memory_size": 2048,
+      "timeout": 60,
+      "architecture": "x86_64"
+    },
+    "created_at": "2025-02-08T12:20:43.474231"
+  },
+  {
+    "resource_id": "ebs-890652",
+    "service": "EBS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-6848",
+      "Project": "project-web"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 20,
+      "iops": 12000,
+      "throughput": 125,
+      "state": "available",
+      "encrypted": false
+    },
+    "created_at": "2025-08-02T12:20:43.474325"
+  },
+  {
+    "resource_id": "rds-903559",
+    "service": "RDS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-alpha",
+      "CostCenter": "CC-5349",
+      "Project": "project-data"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.small",
+      "engine": "mysql",
+      "allocated_storage": 100,
+      "multi_az": true,
+      "backup_retention": 7
+    },
+    "created_at": "2024-10-17T12:20:43.474377"
+  },
+  {
+    "resource_id": "s3-245570",
+    "service": "S3",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-7111",
+      "Project": "project-api"
+    },
+    "properties": {
+      "bucket_name": "bucket-4037",
+      "storage_class": "GLACIER",
+      "versioning": true,
+      "encryption": true
+    },
+    "created_at": "2025-01-18T12:20:43.474454"
+  },
+  {
+    "resource_id": "ec2-425893",
+    "service": "EC2",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-8484",
+      "Project": "project-data"
+    },
+    "properties": {
+      "instance_type": "t3.xlarge",
+      "state": "stopped",
+      "cpu_count": 2,
+      "memory_gb": 8,
+      "storage_gb": 20,
+      "platform": "Windows"
+    },
+    "created_at": "2024-09-14T12:20:43.474494"
+  },
+  {
+    "resource_id": "s3-760758",
+    "service": "S3",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-gamma",
+      "CostCenter": "CC-3016",
+      "Project": "project-api"
+    },
+    "properties": {
+      "bucket_name": "bucket-6571",
+      "storage_class": "GLACIER",
+      "versioning": false,
+      "encryption": false
+    },
+    "created_at": "2025-08-19T12:20:43.474543"
+  },
+  {
+    "resource_id": "function-api-532",
+    "service": "Lambda",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-9759",
+      "Project": "project-web"
+    },
+    "properties": {
+      "runtime": "nodejs18.x",
+      "memory_size": 512,
+      "timeout": 60,
+      "architecture": "arm64"
+    },
+    "created_at": "2024-12-21T12:20:43.474622"
+  },
+  {
+    "resource_id": "ec2-691118",
+    "service": "EC2",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-gamma",
+      "CostCenter": "CC-3291",
+      "Project": "project-data"
+    },
+    "properties": {
+      "instance_type": "m5.xlarge",
+      "state": "stopped",
+      "cpu_count": 2,
+      "memory_gb": 16,
+      "storage_gb": 50,
+      "platform": "Windows"
+    },
+    "created_at": "2025-07-03T12:20:43.474684"
+  },
+  {
+    "resource_id": "ec2-754780",
+    "service": "EC2",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-7459",
+      "Project": "project-data"
+    },
+    "properties": {
+      "instance_type": "t3.large",
+      "state": "stopped",
+      "cpu_count": 16,
+      "memory_gb": 2,
+      "storage_gb": 8,
+      "platform": "Windows"
+    },
+    "created_at": "2024-09-16T12:20:43.474737"
+  },
+  {
+    "resource_id": "ebs-841627",
+    "service": "EBS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-gamma",
+      "CostCenter": "CC-8600",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 8,
+      "iops": 3000,
+      "throughput": 250,
+      "state": "in-use",
+      "encrypted": true
+    },
+    "created_at": "2025-02-28T12:20:43.474788"
+  },
+  {
+    "resource_id": "dynamodb-890965",
+    "service": "DynamoDB",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-5066",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-01-08T12:20:43.474825"
+  },
+  {
+    "resource_id": "rds-928891",
+    "service": "RDS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-delta",
+      "CostCenter": "CC-5476",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "aurora-postgresql",
+      "allocated_storage": 50,
+      "multi_az": false,
+      "backup_retention": 14
+    },
+    "created_at": "2025-07-17T12:20:43.474858"
+  },
+  {
+    "resource_id": "ec2-661239",
+    "service": "EC2",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-alpha",
+      "CostCenter": "CC-9102",
+      "Project": "project-data"
+    },
+    "properties": {
+      "instance_type": "m5.large",
+      "state": "stopped",
+      "cpu_count": 16,
+      "memory_gb": 8,
+      "storage_gb": 100,
+      "platform": "Windows"
+    },
+    "created_at": "2025-05-14T12:20:43.474910"
+  },
+  {
+    "resource_id": "ec2-743899",
+    "service": "EC2",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-4018",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "m5.large",
+      "state": "running",
+      "cpu_count": 8,
+      "memory_gb": 2,
+      "storage_gb": 20,
+      "platform": "Linux/UNIX"
+    },
+    "created_at": "2025-08-12T12:20:43.475011"
+  },
+  {
+    "resource_id": "ebs-294608",
+    "service": "EBS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-5223",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 50,
+      "iops": 3000,
+      "throughput": 250,
+      "state": "available",
+      "encrypted": true
+    },
+    "created_at": "2024-08-30T12:20:43.475097"
+  },
+  {
+    "resource_id": "cloudfront-690333",
+    "service": "CloudFront",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-delta",
+      "CostCenter": "CC-6352",
+      "Project": "project-data"
+    },
+    "properties": {},
+    "created_at": "2025-06-05T12:20:43.475134"
+  },
+  {
+    "resource_id": "s3-301282",
+    "service": "S3",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-alpha",
+      "CostCenter": "CC-8394",
+      "Project": "project-web"
+    },
+    "properties": {
+      "bucket_name": "bucket-6923",
+      "storage_class": "ONEZONE_IA",
+      "versioning": true,
+      "encryption": true
+    },
+    "created_at": "2025-02-08T12:20:43.475173"
+  },
+  {
+    "resource_id": "cloudfront-392517",
+    "service": "CloudFront",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-beta",
+      "CostCenter": "CC-5354",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-04-20T12:20:43.475213"
+  },
+  {
+    "resource_id": "ebs-762360",
+    "service": "EBS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-7571",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 500,
+      "iops": 3000,
+      "throughput": 125,
+      "state": "available",
+      "encrypted": true
+    },
+    "created_at": "2025-08-04T12:20:43.475255"
+  },
+  {
+    "resource_id": "ebs-128415",
+    "service": "EBS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-alpha",
+      "CostCenter": "CC-8988",
+      "Project": "project-api"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 100,
+      "iops": 6000,
+      "throughput": 125,
+      "state": "available",
+      "encrypted": true
+    },
+    "created_at": "2025-04-23T12:20:43.475300"
+  },
+  {
+    "resource_id": "s3-571334",
+    "service": "S3",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-5572",
+      "Project": "project-api"
+    },
+    "properties": {
+      "bucket_name": "bucket-7180",
+      "storage_class": "GLACIER",
+      "versioning": false,
+      "encryption": false
+    },
+    "created_at": "2025-04-01T12:20:43.475337"
+  },
+  {
+    "resource_id": "rds-948758",
+    "service": "RDS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-4899",
+      "Project": "project-web"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.small",
+      "engine": "postgres",
+      "allocated_storage": 20,
+      "multi_az": false,
+      "backup_retention": 14
+    },
+    "created_at": "2024-10-03T12:20:43.475376"
+  },
+  {
+    "resource_id": "function-handler-616",
+    "service": "Lambda",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-5963",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "runtime": "dotnet6",
+      "memory_size": 512,
+      "timeout": 900,
+      "architecture": "x86_64"
+    },
+    "created_at": "2025-08-18T12:20:43.475433"
+  },
+  {
+    "resource_id": "cloudfront-655832",
+    "service": "CloudFront",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-alpha",
+      "CostCenter": "CC-3743",
+      "Project": "project-data"
+    },
+    "properties": {},
+    "created_at": "2024-12-01T12:20:43.475531"
+  },
+  {
+    "resource_id": "s3-120724",
+    "service": "S3",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-delta",
+      "CostCenter": "CC-9765",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "bucket_name": "bucket-5772",
+      "storage_class": "GLACIER",
+      "versioning": true,
+      "encryption": true
+    },
+    "created_at": "2024-10-16T12:20:43.475582"
+  },
+  {
+    "resource_id": "dynamodb-303281",
+    "service": "DynamoDB",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-2049",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2024-12-11T12:20:43.475617"
+  },
+  {
+    "resource_id": "ec2-700707",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-gamma",
+      "CostCenter": "CC-2272",
+      "Project": "project-api"
+    },
+    "properties": {
+      "instance_type": "c5.large",
+      "state": "running",
+      "cpu_count": 8,
+      "memory_gb": 16,
+      "storage_gb": 50,
+      "platform": "Windows"
+    },
+    "created_at": "2025-08-02T12:20:43.475656"
+  },
+  {
+    "resource_id": "ec2-700487",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-1036",
+      "Project": "project-web"
+    },
+    "properties": {
+      "instance_type": "t3.small",
+      "state": "stopped",
+      "cpu_count": 1,
+      "memory_gb": 1,
+      "storage_gb": 100,
+      "platform": "Windows"
+    },
+    "created_at": "2025-07-27T12:20:43.475728"
+  },
+  {
+    "resource_id": "ec2-142006",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-7021",
+      "Project": "project-web"
+    },
+    "properties": {
+      "instance_type": "t3.micro",
+      "state": "stopped",
+      "cpu_count": 1,
+      "memory_gb": 4,
+      "storage_gb": 100,
+      "platform": "Windows"
+    },
+    "created_at": "2024-12-19T12:20:43.475792"
+  },
+  {
+    "resource_id": "s3-211845",
+    "service": "S3",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-beta",
+      "CostCenter": "CC-8341",
+      "Project": "project-data"
+    },
+    "properties": {
+      "bucket_name": "bucket-9069",
+      "storage_class": "STANDARD",
+      "versioning": true,
+      "encryption": true
+    },
+    "created_at": "2025-01-02T12:20:43.475842"
+  },
+  {
+    "resource_id": "ec2-946857",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-alpha",
+      "CostCenter": "CC-6551",
+      "Project": "project-web"
+    },
+    "properties": {
+      "instance_type": "m5.large",
+      "state": "stopped",
+      "cpu_count": 8,
+      "memory_gb": 8,
+      "storage_gb": 8,
+      "platform": "Windows"
+    },
+    "created_at": "2024-09-06T12:20:43.475891"
+  },
+  {
+    "resource_id": "rds-228977",
+    "service": "RDS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-3730",
+      "Project": "project-data"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "postgres",
+      "allocated_storage": 50,
+      "multi_az": false,
+      "backup_retention": 7
+    },
+    "created_at": "2025-01-20T12:20:43.475947"
+  },
+  {
+    "resource_id": "ebs-778344",
+    "service": "EBS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-1707",
+      "Project": "project-api"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 50,
+      "iops": 12000,
+      "throughput": 125,
+      "state": "in-use",
+      "encrypted": true
+    },
+    "created_at": "2024-09-18T12:20:43.476036"
+  },
+  {
+    "resource_id": "cloudfront-290902",
+    "service": "CloudFront",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-beta",
+      "CostCenter": "CC-9541",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-02-06T12:20:43.476129"
+  },
+  {
+    "resource_id": "rds-575860",
+    "service": "RDS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-9090",
+      "Project": "project-web"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.micro",
+      "engine": "aurora-mysql",
+      "allocated_storage": 100,
+      "multi_az": true,
+      "backup_retention": 7
+    },
+    "created_at": "2024-08-30T12:20:43.476181"
+  },
+  {
+    "resource_id": "ec2-939148",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-3450",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "m5.large",
+      "state": "running",
+      "cpu_count": 8,
+      "memory_gb": 8,
+      "storage_gb": 50,
+      "platform": "Windows"
+    },
+    "created_at": "2024-09-24T12:20:43.476249"
+  },
+  {
+    "resource_id": "dynamodb-198567",
+    "service": "DynamoDB",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-gamma",
+      "CostCenter": "CC-7627",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2024-12-06T12:20:43.476311"
+  },
+  {
+    "resource_id": "rds-917740",
+    "service": "RDS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-gamma",
+      "CostCenter": "CC-1639",
+      "Project": "project-web"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "mysql",
+      "allocated_storage": 100,
+      "multi_az": true,
+      "backup_retention": 30
+    },
+    "created_at": "2024-11-19T12:20:43.476349"
+  },
+  {
+    "resource_id": "dynamodb-493982",
+    "service": "DynamoDB",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-6115",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2024-09-05T12:20:43.476400"
+  },
+  {
+    "resource_id": "function-handler-120",
+    "service": "Lambda",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-beta",
+      "CostCenter": "CC-4439",
+      "Project": "project-web"
+    },
+    "properties": {
+      "runtime": "dotnet6",
+      "memory_size": 128,
+      "timeout": 900,
+      "architecture": "x86_64"
+    },
+    "created_at": "2024-09-19T12:20:43.476483"
+  },
+  {
+    "resource_id": "cloudfront-944461",
+    "service": "CloudFront",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-gamma",
+      "CostCenter": "CC-4616",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-07-08T12:20:43.476543"
+  },
+  {
+    "resource_id": "ebs-855308",
+    "service": "EBS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-beta",
+      "CostCenter": "CC-1695",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 50,
+      "iops": 3000,
+      "throughput": 125,
+      "state": "available",
+      "encrypted": true
+    },
+    "created_at": "2024-10-10T12:20:43.476587"
+  },
+  {
+    "resource_id": "ec2-447777",
+    "service": "EC2",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-beta",
+      "CostCenter": "CC-4844",
+      "Project": "project-data"
+    },
+    "properties": {
+      "instance_type": "m5.xlarge",
+      "state": "running",
+      "cpu_count": 2,
+      "memory_gb": 4,
+      "storage_gb": 8,
+      "platform": "Windows"
+    },
+    "created_at": "2024-12-02T12:20:43.476631"
+  },
+  {
+    "resource_id": "function-api-351",
+    "service": "Lambda",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-gamma",
+      "CostCenter": "CC-6629",
+      "Project": "project-web"
+    },
+    "properties": {
+      "runtime": "java11",
+      "memory_size": 1024,
+      "timeout": 60,
+      "architecture": "x86_64"
+    },
+    "created_at": "2024-08-30T12:20:43.476711"
+  },
+  {
+    "resource_id": "rds-354020",
+    "service": "RDS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-8794",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "aurora-postgresql",
+      "allocated_storage": 500,
+      "multi_az": true,
+      "backup_retention": 7
+    },
+    "created_at": "2024-12-23T12:20:43.476764"
+  },
+  {
+    "resource_id": "ec2-650481",
+    "service": "EC2",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-7371",
+      "Project": "project-web"
+    },
+    "properties": {
+      "instance_type": "t3.large",
+      "state": "running",
+      "cpu_count": 1,
+      "memory_gb": 16,
+      "storage_gb": 20,
+      "platform": "Windows"
+    },
+    "created_at": "2025-05-24T12:20:43.476810"
+  },
+  {
+    "resource_id": "function-handler-823",
+    "service": "Lambda",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-beta",
+      "CostCenter": "CC-9977",
+      "Project": "project-data"
+    },
+    "properties": {
+      "runtime": "nodejs18.x",
+      "memory_size": 256,
+      "timeout": 60,
+      "architecture": "x86_64"
+    },
+    "created_at": "2024-09-07T12:20:43.476887"
+  },
+  {
+    "resource_id": "s3-663844",
+    "service": "S3",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-3975",
+      "Project": "project-web"
+    },
+    "properties": {
+      "bucket_name": "bucket-4837",
+      "storage_class": "STANDARD_IA",
+      "versioning": false,
+      "encryption": false
+    },
+    "created_at": "2025-01-09T12:20:43.476933"
+  },
+  {
+    "resource_id": "rds-742674",
+    "service": "RDS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-3011",
+      "Project": "project-web"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "aurora-mysql",
+      "allocated_storage": 500,
+      "multi_az": true,
+      "backup_retention": 1
+    },
+    "created_at": "2025-05-08T12:20:43.476958"
+  },
+  {
+    "resource_id": "s3-316740",
+    "service": "S3",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-gamma",
+      "CostCenter": "CC-8575",
+      "Project": "project-data"
+    },
+    "properties": {
+      "bucket_name": "bucket-3882",
+      "storage_class": "GLACIER",
+      "versioning": true,
+      "encryption": false
+    },
+    "created_at": "2025-04-12T12:20:43.476990"
+  },
+  {
+    "resource_id": "function-api-840",
+    "service": "Lambda",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-5179",
+      "Project": "project-data"
+    },
+    "properties": {
+      "runtime": "java11",
+      "memory_size": 256,
+      "timeout": 900,
+      "architecture": "arm64"
+    },
+    "created_at": "2025-03-08T12:20:43.477014"
+  },
+  {
+    "resource_id": "rds-450529",
+    "service": "RDS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-delta",
+      "CostCenter": "CC-2489",
+      "Project": "project-web"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "aurora-postgresql",
+      "allocated_storage": 20,
+      "multi_az": false,
+      "backup_retention": 7
+    },
+    "created_at": "2024-10-01T12:20:43.477052"
+  },
+  {
+    "resource_id": "rds-822589",
+    "service": "RDS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-1030",
+      "Project": "project-web"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.micro",
+      "engine": "aurora-mysql",
+      "allocated_storage": 50,
+      "multi_az": true,
+      "backup_retention": 1
+    },
+    "created_at": "2025-06-14T12:20:43.477127"
+  },
+  {
+    "resource_id": "dynamodb-127117",
+    "service": "DynamoDB",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-gamma",
+      "CostCenter": "CC-2734",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-03-08T12:20:43.477191"
+  },
+  {
+    "resource_id": "cloudfront-702911",
+    "service": "CloudFront",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-3144",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-02-23T12:20:43.477218"
+  },
+  {
+    "resource_id": "ebs-975222",
+    "service": "EBS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-gamma",
+      "CostCenter": "CC-5508",
+      "Project": "project-web"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 500,
+      "iops": 3000,
+      "throughput": 125,
+      "state": "in-use",
+      "encrypted": false
+    },
+    "created_at": "2025-05-19T12:20:43.477244"
+  },
+  {
+    "resource_id": "ec2-474778",
+    "service": "EC2",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-delta",
+      "CostCenter": "CC-2198",
+      "Project": "project-data"
+    },
+    "properties": {
+      "instance_type": "t3.medium",
+      "state": "running",
+      "cpu_count": 16,
+      "memory_gb": 2,
+      "storage_gb": 20,
+      "platform": "Windows"
+    },
+    "created_at": "2025-08-15T12:20:43.477276"
+  },
+  {
+    "resource_id": "cloudfront-450555",
+    "service": "CloudFront",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-gamma",
+      "CostCenter": "CC-1480",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-06-17T12:20:43.477317"
+  },
+  {
+    "resource_id": "ebs-372558",
+    "service": "EBS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-9980",
+      "Project": "project-api"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 100,
+      "iops": 6000,
+      "throughput": 250,
+      "state": "in-use",
+      "encrypted": true
+    },
+    "created_at": "2025-05-30T12:20:43.477341"
+  },
+  {
+    "resource_id": "rds-314537",
+    "service": "RDS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-6046",
+      "Project": "project-web"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.micro",
+      "engine": "aurora-mysql",
+      "allocated_storage": 20,
+      "multi_az": true,
+      "backup_retention": 1
+    },
+    "created_at": "2025-08-26T12:20:43.477376"
+  },
+  {
+    "resource_id": "ebs-390398",
+    "service": "EBS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-9331",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 50,
+      "iops": 3000,
+      "throughput": 250,
+      "state": "available",
+      "encrypted": false
+    },
+    "created_at": "2025-02-20T12:20:43.477411"
+  },
+  {
+    "resource_id": "cloudfront-531889",
+    "service": "CloudFront",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-3770",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-01-08T12:20:43.477431"
+  },
+  {
+    "resource_id": "function-api-737",
+    "service": "Lambda",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-3154",
+      "Project": "project-web"
+    },
+    "properties": {
+      "runtime": "java11",
+      "memory_size": 2048,
+      "timeout": 900,
+      "architecture": "x86_64"
+    },
+    "created_at": "2025-08-01T12:20:43.477455"
+  },
+  {
+    "resource_id": "cloudfront-232441",
+    "service": "CloudFront",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-delta",
+      "CostCenter": "CC-4727",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2025-02-05T12:20:43.477492"
+  },
+  {
+    "resource_id": "function-processor-607",
+    "service": "Lambda",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-1072",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "runtime": "nodejs18.x",
+      "memory_size": 128,
+      "timeout": 60,
+      "architecture": "x86_64"
+    },
+    "created_at": "2025-01-03T12:20:43.477515"
+  },
+  {
+    "resource_id": "ebs-626696",
+    "service": "EBS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-9103",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 100,
+      "iops": 12000,
+      "throughput": 250,
+      "state": "in-use",
+      "encrypted": false
+    },
+    "created_at": "2025-08-10T12:20:43.477557"
+  },
+  {
+    "resource_id": "rds-439167",
+    "service": "RDS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-delta",
+      "CostCenter": "CC-2346",
+      "Project": "project-web"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.micro",
+      "engine": "postgres",
+      "allocated_storage": 500,
+      "multi_az": false,
+      "backup_retention": 14
+    },
+    "created_at": "2025-05-10T12:20:43.477581"
+  },
+  {
+    "resource_id": "ec2-449740",
+    "service": "EC2",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-4623",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "m5.xlarge",
+      "state": "running",
+      "cpu_count": 2,
+      "memory_gb": 32,
+      "storage_gb": 100,
+      "platform": "Windows"
+    },
+    "created_at": "2024-12-03T12:20:43.477617"
+  },
+  {
+    "resource_id": "rds-835387",
+    "service": "RDS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-7188",
+      "Project": "project-web"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "mysql",
+      "allocated_storage": 100,
+      "multi_az": false,
+      "backup_retention": 1
+    },
+    "created_at": "2024-09-18T12:20:43.477649"
+  },
+  {
+    "resource_id": "ebs-367983",
+    "service": "EBS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-alpha",
+      "CostCenter": "CC-1777",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 100,
+      "iops": 6000,
+      "throughput": 250,
+      "state": "available",
+      "encrypted": false
+    },
+    "created_at": "2025-01-20T12:20:43.477699"
+  },
+  {
+    "resource_id": "function-api-641",
+    "service": "Lambda",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-gamma",
+      "CostCenter": "CC-4655",
+      "Project": "project-api"
+    },
+    "properties": {
+      "runtime": "nodejs18.x",
+      "memory_size": 2048,
+      "timeout": 300,
+      "architecture": "arm64"
+    },
+    "created_at": "2025-04-14T12:20:43.477722"
+  },
+  {
+    "resource_id": "cloudfront-799481",
+    "service": "CloudFront",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-gamma",
+      "CostCenter": "CC-3271",
+      "Project": "project-data"
+    },
+    "properties": {},
+    "created_at": "2025-03-02T12:20:43.477759"
+  },
+  {
+    "resource_id": "ebs-891583",
+    "service": "EBS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-delta",
+      "CostCenter": "CC-7542",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 100,
+      "iops": 3000,
+      "throughput": 125,
+      "state": "available",
+      "encrypted": false
+    },
+    "created_at": "2024-09-23T12:20:43.477784"
+  },
+  {
+    "resource_id": "s3-544435",
+    "service": "S3",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-gamma",
+      "CostCenter": "CC-1426",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "bucket_name": "bucket-6774",
+      "storage_class": "GLACIER",
+      "versioning": false,
+      "encryption": false
+    },
+    "created_at": "2024-12-19T12:20:43.477807"
+  },
+  {
+    "resource_id": "ec2-628971",
+    "service": "EC2",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-3317",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "r5.large",
+      "state": "stopped",
+      "cpu_count": 16,
+      "memory_gb": 2,
+      "storage_gb": 20,
+      "platform": "Windows"
+    },
+    "created_at": "2025-04-27T12:20:43.477832"
+  },
+  {
+    "resource_id": "dynamodb-839045",
+    "service": "DynamoDB",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-delta",
+      "CostCenter": "CC-4054",
+      "Project": "project-api"
+    },
+    "properties": {},
+    "created_at": "2025-06-19T12:20:43.477871"
+  },
+  {
+    "resource_id": "s3-805273",
+    "service": "S3",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-beta",
+      "CostCenter": "CC-9949",
+      "Project": "project-data"
+    },
+    "properties": {
+      "bucket_name": "bucket-6274",
+      "storage_class": "GLACIER",
+      "versioning": true,
+      "encryption": true
+    },
+    "created_at": "2024-09-01T12:20:43.477900"
+  },
+  {
+    "resource_id": "s3-317192",
+    "service": "S3",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-delta",
+      "CostCenter": "CC-4962",
+      "Project": "project-web"
+    },
+    "properties": {
+      "bucket_name": "bucket-2599",
+      "storage_class": "STANDARD_IA",
+      "versioning": true,
+      "encryption": false
+    },
+    "created_at": "2025-08-01T12:20:43.477929"
+  },
+  {
+    "resource_id": "ec2-960173",
+    "service": "EC2",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-delta",
+      "CostCenter": "CC-9617",
+      "Project": "project-data"
+    },
+    "properties": {
+      "instance_type": "c5.large",
+      "state": "running",
+      "cpu_count": 8,
+      "memory_gb": 8,
+      "storage_gb": 20,
+      "platform": "Windows"
+    },
+    "created_at": "2025-03-23T12:20:43.477952"
+  },
+  {
+    "resource_id": "ec2-282877",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-1135",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "instance_type": "m5.xlarge",
+      "state": "stopped",
+      "cpu_count": 8,
+      "memory_gb": 16,
+      "storage_gb": 50,
+      "platform": "Windows"
+    },
+    "created_at": "2025-03-06T12:20:43.477983"
+  },
+  {
+    "resource_id": "ebs-735683",
+    "service": "EBS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-3057",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 100,
+      "iops": 12000,
+      "throughput": 250,
+      "state": "in-use",
+      "encrypted": false
+    },
+    "created_at": "2025-03-27T12:20:43.478024"
+  },
+  {
+    "resource_id": "dynamodb-852350",
+    "service": "DynamoDB",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-delta",
+      "CostCenter": "CC-1654",
+      "Project": "project-web"
+    },
+    "properties": {},
+    "created_at": "2025-06-20T12:20:43.478046"
+  },
+  {
+    "resource_id": "cloudfront-580514",
+    "service": "CloudFront",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-alpha",
+      "CostCenter": "CC-9485",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2025-08-08T12:20:43.478066"
+  },
+  {
+    "resource_id": "function-processor-609",
+    "service": "Lambda",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-delta",
+      "CostCenter": "CC-3095",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "runtime": "dotnet6",
+      "memory_size": 2048,
+      "timeout": 300,
+      "architecture": "x86_64"
+    },
+    "created_at": "2025-05-22T12:20:43.478099"
+  },
+  {
+    "resource_id": "s3-742500",
+    "service": "S3",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-delta",
+      "CostCenter": "CC-1794",
+      "Project": "project-data"
+    },
+    "properties": {
+      "bucket_name": "bucket-5325",
+      "storage_class": "GLACIER",
+      "versioning": true,
+      "encryption": false
+    },
+    "created_at": "2025-05-10T12:20:43.478132"
+  },
+  {
+    "resource_id": "ebs-732096",
+    "service": "EBS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-1417",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 50,
+      "iops": 12000,
+      "throughput": 250,
+      "state": "in-use",
+      "encrypted": false
+    },
+    "created_at": "2025-03-18T12:20:43.478156"
+  },
+  {
+    "resource_id": "rds-372950",
+    "service": "RDS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-alpha",
+      "CostCenter": "CC-5842",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "aurora-mysql",
+      "allocated_storage": 20,
+      "multi_az": true,
+      "backup_retention": 14
+    },
+    "created_at": "2025-03-04T12:20:43.478184"
+  },
+  {
+    "resource_id": "rds-443219",
+    "service": "RDS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-4490",
+      "Project": "project-api"
+    },
+    "properties": {
+      "db_instance_class": "db.r5.large",
+      "engine": "aurora-mysql",
+      "allocated_storage": 500,
+      "multi_az": false,
+      "backup_retention": 1
+    },
+    "created_at": "2025-05-25T12:20:43.478224"
+  },
+  {
+    "resource_id": "s3-185366",
+    "service": "S3",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-beta",
+      "CostCenter": "CC-3533",
+      "Project": "project-web"
+    },
+    "properties": {
+      "bucket_name": "bucket-7263",
+      "storage_class": "STANDARD",
+      "versioning": false,
+      "encryption": true
+    },
+    "created_at": "2025-01-20T12:20:43.478256"
+  },
+  {
+    "resource_id": "cloudfront-790529",
+    "service": "CloudFront",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-6882",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2024-12-17T12:20:43.478279"
+  },
+  {
+    "resource_id": "dynamodb-820891",
+    "service": "DynamoDB",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-8883",
+      "Project": "project-data"
+    },
+    "properties": {},
+    "created_at": "2025-06-22T12:20:43.478300"
+  },
+  {
+    "resource_id": "ec2-438193",
+    "service": "EC2",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-8056",
+      "Project": "project-api"
+    },
+    "properties": {
+      "instance_type": "m5.xlarge",
+      "state": "stopped",
+      "cpu_count": 8,
+      "memory_gb": 32,
+      "storage_gb": 50,
+      "platform": "Windows"
+    },
+    "created_at": "2025-02-02T12:20:43.478324"
+  },
+  {
+    "resource_id": "s3-895916",
+    "service": "S3",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-delta",
+      "CostCenter": "CC-1590",
+      "Project": "project-web"
+    },
+    "properties": {
+      "bucket_name": "bucket-3428",
+      "storage_class": "GLACIER",
+      "versioning": true,
+      "encryption": true
+    },
+    "created_at": "2025-05-01T12:20:43.478390"
+  },
+  {
+    "resource_id": "rds-633910",
+    "service": "RDS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-5734",
+      "Project": "project-data"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.small",
+      "engine": "aurora-mysql",
+      "allocated_storage": 50,
+      "multi_az": false,
+      "backup_retention": 7
+    },
+    "created_at": "2025-03-12T12:20:43.478415"
+  },
+  {
+    "resource_id": "ebs-583032",
+    "service": "EBS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1a",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-4428",
+      "Project": "project-api"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 20,
+      "iops": 3000,
+      "throughput": 500,
+      "state": "in-use",
+      "encrypted": false
+    },
+    "created_at": "2024-11-12T12:20:43.478460"
+  },
+  {
+    "resource_id": "ebs-448245",
+    "service": "EBS",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-5327",
+      "Project": "project-data"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 1000,
+      "iops": 12000,
+      "throughput": 500,
+      "state": "available",
+      "encrypted": true
+    },
+    "created_at": "2025-05-25T12:20:43.478483"
+  },
+  {
+    "resource_id": "s3-540917",
+    "service": "S3",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "456789012345",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-3824",
+      "Project": "project-web"
+    },
+    "properties": {
+      "bucket_name": "bucket-5033",
+      "storage_class": "STANDARD",
+      "versioning": false,
+      "encryption": true
+    },
+    "created_at": "2025-04-19T12:20:43.478511"
+  },
+  {
+    "resource_id": "rds-661866",
+    "service": "RDS",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-delta",
+      "CostCenter": "CC-5881",
+      "Project": "project-web"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.micro",
+      "engine": "postgres",
+      "allocated_storage": 100,
+      "multi_az": false,
+      "backup_retention": 1
+    },
+    "created_at": "2025-06-16T12:20:43.478537"
+  },
+  {
+    "resource_id": "ebs-443057",
+    "service": "EBS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-gamma",
+      "CostCenter": "CC-1617",
+      "Project": "project-api"
+    },
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 50,
+      "iops": 6000,
+      "throughput": 250,
+      "state": "in-use",
+      "encrypted": true
+    },
+    "created_at": "2024-12-08T12:20:43.478574"
+  },
+  {
+    "resource_id": "function-api-308",
+    "service": "Lambda",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1a",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-6424",
+      "Project": "project-data"
+    },
+    "properties": {
+      "runtime": "nodejs18.x",
+      "memory_size": 1024,
+      "timeout": 30,
+      "architecture": "arm64"
+    },
+    "created_at": "2025-05-25T12:20:43.478599"
+  },
+  {
+    "resource_id": "s3-587361",
+    "service": "S3",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-4195",
+      "Project": "project-api"
+    },
+    "properties": {
+      "bucket_name": "bucket-9643",
+      "storage_class": "STANDARD",
+      "versioning": true,
+      "encryption": false
+    },
+    "created_at": "2024-12-20T12:20:43.478635"
+  },
+  {
+    "resource_id": "function-api-577",
+    "service": "Lambda",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-beta",
+      "CostCenter": "CC-6328",
+      "Project": "project-web"
+    },
+    "properties": {
+      "runtime": "python3.9",
+      "memory_size": 256,
+      "timeout": 30,
+      "architecture": "arm64"
+    },
+    "created_at": "2024-10-14T12:20:43.478662"
+  },
+  {
+    "resource_id": "ebs-498741",
+    "service": "EBS",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-2929",
+      "Project": "project-web"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 8,
+      "iops": 3000,
+      "throughput": 125,
+      "state": "available",
+      "encrypted": true
+    },
+    "created_at": "2025-08-12T12:20:43.478698"
+  },
+  {
+    "resource_id": "rds-556011",
+    "service": "RDS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "testing",
+      "Team": "team-beta",
+      "CostCenter": "CC-7203",
+      "Project": "project-api"
+    },
+    "properties": {
+      "db_instance_class": "db.t3.small",
+      "engine": "aurora-mysql",
+      "allocated_storage": 50,
+      "multi_az": true,
+      "backup_retention": 7
+    },
+    "created_at": "2025-06-12T12:20:43.478721"
+  },
+  {
+    "resource_id": "ec2-890907",
+    "service": "EC2",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-gamma",
+      "CostCenter": "CC-3889",
+      "Project": "project-web"
+    },
+    "properties": {
+      "instance_type": "t3.large",
+      "state": "stopped",
+      "cpu_count": 4,
+      "memory_gb": 8,
+      "storage_gb": 20,
+      "platform": "Windows"
+    },
+    "created_at": "2025-05-15T12:20:43.478753"
+  },
+  {
+    "resource_id": "dynamodb-144308",
+    "service": "DynamoDB",
+    "region": "us-east-1",
+    "availability_zone": "us-east-1a",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-beta",
+      "CostCenter": "CC-1295",
+      "Project": "project-data"
+    },
+    "properties": {},
+    "created_at": "2025-05-23T12:20:43.478783"
+  },
+  {
+    "resource_id": "ebs-580565",
+    "service": "EBS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "development",
+      "Team": "team-delta",
+      "CostCenter": "CC-1715",
+      "Project": "project-ml"
+    },
+    "properties": {
+      "volume_type": "io2",
+      "size_gb": 20,
+      "iops": 6000,
+      "throughput": 125,
+      "state": "available",
+      "encrypted": false
+    },
+    "created_at": "2025-05-06T12:20:43.478825"
+  },
+  {
+    "resource_id": "dynamodb-689034",
+    "service": "DynamoDB",
+    "region": "ap-northeast-1",
+    "availability_zone": "ap-northeast-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-alpha",
+      "CostCenter": "CC-7776",
+      "Project": "project-ml"
+    },
+    "properties": {},
+    "created_at": "2025-06-14T12:20:43.478846"
+  },
+  {
+    "resource_id": "s3-330352",
+    "service": "S3",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "staging",
+      "Team": "team-gamma",
+      "CostCenter": "CC-6355",
+      "Project": "project-web"
+    },
+    "properties": {
+      "bucket_name": "bucket-2146",
+      "storage_class": "STANDARD_IA",
+      "versioning": false,
+      "encryption": true
+    },
+    "created_at": "2025-05-11T12:20:43.478869"
+  },
+  {
+    "resource_id": "function-processor-401",
+    "service": "Lambda",
+    "region": "eu-west-1",
+    "availability_zone": "eu-west-1b",
+    "account_id": "345678901234",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-epsilon",
+      "CostCenter": "CC-7346",
+      "Project": "project-web"
+    },
+    "properties": {
+      "runtime": "python3.9",
+      "memory_size": 256,
+      "timeout": 30,
+      "architecture": "arm64"
+    },
+    "created_at": "2024-09-02T12:20:43.478892"
+  },
+  {
+    "resource_id": "function-processor-710",
+    "service": "Lambda",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2c",
+    "account_id": "234567890123",
+    "tags": {
+      "Environment": "production",
+      "Team": "team-alpha",
+      "CostCenter": "CC-7772",
+      "Project": "project-data"
+    },
+    "properties": {
+      "runtime": "nodejs18.x",
+      "memory_size": 256,
+      "timeout": 30,
+      "architecture": "x86_64"
+    },
+    "created_at": "2025-07-14T12:20:43.478923"
+  }
+]

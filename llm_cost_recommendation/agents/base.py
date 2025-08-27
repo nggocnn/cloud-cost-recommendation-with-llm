@@ -2,6 +2,7 @@
 Base agent class for service-specific cost optimization agents.
 """
 
+import asyncio
 import json
 from abc import ABC, abstractmethod
 from typing import Dict, List, Any, Optional
@@ -51,40 +52,49 @@ class BaseAgent(ABC):
         metrics_data: Dict[str, Metrics] = None,
         billing_data: Dict[str, List[BillingData]] = None,
     ) -> List[Recommendation]:
-        """Analyze multiple resources"""
+        """Analyze multiple resources using intelligent batching strategy"""
         recommendations = []
-
-        for resource in resources:
-            if resource.service != self.service:
-                continue
-
-            try:
-                resource_metrics = (
-                    metrics_data.get(resource.resource_id) if metrics_data else None
-                )
-                resource_billing = (
-                    billing_data.get(resource.resource_id) if billing_data else None
-                )
-
-                resource_recommendations = await self.analyze_resource(
-                    resource, resource_metrics, resource_billing
-                )
-
-                recommendations.extend(resource_recommendations)
-
-            except Exception as e:
+        
+        # Filter resources for this service
+        service_resources = [r for r in resources if r.service == self.service]
+        
+        if not service_resources:
+            return recommendations
+        
+        # Use intelligent batching for efficiency
+        batches = self._create_intelligent_batches(service_resources, metrics_data, billing_data)
+        
+        logger.info(
+            "Starting intelligent batch analysis",
+            agent_id=self.agent_id,
+            total_resources=len(service_resources),
+            total_batches=len(batches),
+        )
+        
+        # Process batches in parallel for different groups
+        batch_tasks = []
+        for batch_info in batches:
+            task = self._process_resource_batch(batch_info, metrics_data, billing_data)
+            batch_tasks.append(task)
+        
+        # Execute batches in parallel
+        batch_results = await asyncio.gather(*batch_tasks, return_exceptions=True)
+        
+        # Collect recommendations from all batches
+        for result in batch_results:
+            if isinstance(result, Exception):
                 logger.error(
-                    "Failed to analyze resource",
-                    resource_id=resource.resource_id,
+                    "Batch processing failed",
                     agent_id=self.agent_id,
-                    error=str(e),
+                    error=str(result),
                 )
                 continue
+            recommendations.extend(result)
 
         logger.info(
             "Resource analysis completed",
             agent_id=self.agent_id,
-            total_resources=len(resources),
+            total_resources=len(service_resources),
             total_recommendations=len(recommendations),
         )
 
@@ -388,6 +398,20 @@ class BaseAgent(ABC):
     ) -> Optional[Recommendation]:
         """Convert LLM recommendation dict to Recommendation model"""
         try:
+            # Validate required fields - but be flexible for now
+            required_fields = ["recommendation_type", "current_monthly_cost", 
+                             "estimated_monthly_cost", "confidence_score"]
+            missing_fields = [field for field in required_fields if field not in llm_recommendation]
+            
+            if missing_fields:
+                logger.warning(
+                    "LLM response missing critical fields",
+                    agent_id=self.agent_id,
+                    resource_id=resource.resource_id,
+                    missing_fields=missing_fields,
+                )
+                return None
+
             # Generate unique ID
             rec_id = f"{self.agent_id}_{resource.resource_id}_{datetime.utcnow().isoformat()}"
 
@@ -444,7 +468,7 @@ class BaseAgent(ABC):
                 estimated_monthly_savings=monthly_savings,
                 annual_savings=annual_savings,
                 risk_level=risk_level,
-                impact_description=llm_recommendation.get("impact_description", ""),
+                impact_description=llm_recommendation["impact_description"],
                 rollback_plan=llm_recommendation.get("rollback_plan", ""),
                 rationale=llm_recommendation.get("rationale", ""),
                 implementation_steps=llm_recommendation.get("implementation_steps", []),
@@ -486,3 +510,333 @@ class BaseAgent(ABC):
             "thresholds": self.config.capability.thresholds,
             "enabled": self.config.enabled,
         }
+
+    def _create_intelligent_batches(
+        self,
+        resources: List[Resource],
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> List[Dict[str, Any]]:
+        """Create intelligent batches based on resource similarity and complexity"""
+        batches = []
+        
+        # Group resources by similarity criteria
+        resource_groups = self._group_resources_by_similarity(resources, metrics_data, billing_data)
+        
+        for group_key, group_resources in resource_groups.items():
+            # Determine optimal batch size for this group
+            batch_size = self._calculate_optimal_batch_size(group_resources, group_key)
+            
+            # Create batches within the group
+            for i in range(0, len(group_resources), batch_size):
+                batch_resources = group_resources[i:i + batch_size]
+                
+                batches.append({
+                    "group_key": group_key,
+                    "resources": batch_resources,
+                    "batch_size": len(batch_resources),
+                    "batch_index": i // batch_size,
+                    "total_batches_in_group": (len(group_resources) + batch_size - 1) // batch_size,
+                })
+        
+        return batches
+
+    def _group_resources_by_similarity(
+        self,
+        resources: List[Resource],
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> Dict[str, List[Resource]]:
+        """Group resources by similarity for efficient batching"""
+        groups = {}
+        
+        for resource in resources:
+            # Create grouping key based on resource characteristics
+            group_key = self._create_resource_group_key(resource, metrics_data, billing_data)
+            
+            if group_key not in groups:
+                groups[group_key] = []
+            groups[group_key].append(resource)
+        
+        return groups
+
+    def _create_resource_group_key(
+        self,
+        resource: Resource,
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> str:
+        """Create a grouping key for similar resources"""
+        key_parts = [
+            resource.service.value,
+            resource.region or "unknown",
+        ]
+        
+        # Add resource type/configuration similarity from properties
+        if 'instance_type' in resource.properties:
+            key_parts.append(resource.properties['instance_type'] or "unknown")
+        elif 'storage_class' in resource.properties:
+            key_parts.append(resource.properties['storage_class'] or "unknown")
+        elif 'engine' in resource.properties:
+            key_parts.append(resource.properties['engine'] or "unknown")
+        else:
+            key_parts.append("unknown")
+        
+        # Add cost tier for batch sizing
+        cost_tier = self._get_resource_cost_tier(resource, billing_data)
+        key_parts.append(cost_tier)
+        
+        # Add complexity tier based on available metrics
+        complexity_tier = self._get_resource_complexity_tier(resource, metrics_data)
+        key_parts.append(complexity_tier)
+        
+        return "|".join(key_parts)
+
+    def _get_resource_cost_tier(
+        self,
+        resource: Resource,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> str:
+        """Determine cost tier for batching strategy"""
+        if not billing_data or resource.resource_id not in billing_data:
+            return "unknown_cost"
+        
+        monthly_cost = sum(bd.unblended_cost for bd in billing_data[resource.resource_id])
+        
+        if monthly_cost >= 1000:
+            return "high_cost"
+        elif monthly_cost >= 100:
+            return "medium_cost"
+        elif monthly_cost >= 10:
+            return "low_cost"
+        else:
+            return "minimal_cost"
+
+    def _get_resource_complexity_tier(
+        self,
+        resource: Resource,
+        metrics_data: Dict[str, Metrics] = None,
+    ) -> str:
+        """Determine complexity tier for batching strategy"""
+        if not metrics_data or resource.resource_id not in metrics_data:
+            return "simple"
+        
+        metrics = metrics_data[resource.resource_id]
+        metric_count = len([v for v in metrics.metrics.values() if v is not None])
+        
+        if metric_count >= 10:
+            return "complex"
+        elif metric_count >= 5:
+            return "moderate"
+        else:
+            return "simple"
+
+    def _calculate_optimal_batch_size(
+        self,
+        resources: List[Resource],
+        group_key: str,
+    ) -> int:
+        """Calculate optimal batch size based on resource characteristics"""
+        # Parse group key to understand resource characteristics
+        key_parts = group_key.split("|")
+        cost_tier = key_parts[-2] if len(key_parts) >= 2 else "unknown_cost"
+        complexity_tier = key_parts[-1] if len(key_parts) >= 1 else "simple"
+        
+        # Base batch size
+        if complexity_tier == "complex":
+            base_size = 2  # Smaller batches for complex resources
+        elif complexity_tier == "moderate":
+            base_size = 4
+        else:
+            base_size = 6  # Larger batches for simple resources
+        
+        # Adjust based on cost tier (high-cost resources get more individual attention)
+        if cost_tier == "high_cost":
+            base_size = max(1, base_size - 2)
+        elif cost_tier == "minimal_cost":
+            base_size = min(8, base_size + 2)
+        
+        return max(1, min(base_size, len(resources)))
+
+    async def _process_resource_batch(
+        self,
+        batch_info: Dict[str, Any],
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> List[Recommendation]:
+        """Process a batch of resources using LLM batch analysis"""
+        recommendations = []
+        batch_resources = batch_info["resources"]
+        
+        logger.info(
+            "Processing resource batch",
+            agent_id=self.agent_id,
+            group_key=batch_info["group_key"],
+            batch_size=batch_info["batch_size"],
+            batch_index=batch_info["batch_index"],
+        )
+        
+        try:
+            if len(batch_resources) == 1:
+                # Single resource - use individual analysis for high precision
+                resource = batch_resources[0]
+                resource_metrics = metrics_data.get(resource.resource_id) if metrics_data else None
+                resource_billing = billing_data.get(resource.resource_id) if billing_data else None
+                
+                recommendations = await self.analyze_resource(
+                    resource, resource_metrics, resource_billing
+                )
+            else:
+                # Multiple resources - use batch analysis
+                recommendations = await self._analyze_resource_batch_llm(
+                    batch_resources, metrics_data, billing_data
+                )
+            
+            logger.info(
+                "Batch processing completed",
+                agent_id=self.agent_id,
+                group_key=batch_info["group_key"],
+                batch_size=batch_info["batch_size"],
+                recommendations_count=len(recommendations),
+            )
+            
+        except Exception as e:
+            logger.error(
+                "Failed to process resource batch",
+                agent_id=self.agent_id,
+                group_key=batch_info["group_key"],
+                batch_size=batch_info["batch_size"],
+                error=str(e),
+            )
+        
+        return recommendations
+
+    async def _analyze_resource_batch_llm(
+        self,
+        resources: List[Resource],
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> List[Recommendation]:
+        """Analyze a batch of resources using LLM batch processing"""
+        recommendations = []
+        
+        # Prepare batch context data
+        batch_context = []
+        for resource in resources:
+            resource_metrics = metrics_data.get(resource.resource_id) if metrics_data else None
+            resource_billing = billing_data.get(resource.resource_id) if billing_data else None
+            
+            context_data = self._prepare_context_data(resource, resource_metrics, resource_billing)
+            batch_context.append(context_data)
+        
+        try:
+            # Create batch system prompt
+            system_prompt = self._create_batch_system_prompt(len(resources))
+            
+            # Use LLM service batch analysis
+            batch_responses = await self.llm_service.analyze_resource_batch(
+                system_prompt=system_prompt,
+                resources_data=batch_context,
+                batch_size=len(resources),
+            )
+            
+            # Process batch responses
+            for response in batch_responses:
+                try:
+                    response_data = json.loads(response.content)
+                    batch_recommendations = response_data.get("recommendations", [])
+                    
+                    # Convert batch recommendations to individual recommendations
+                    for rec_data in batch_recommendations:
+                        if "resource_id" in rec_data:
+                            # Find the corresponding resource
+                            resource = next(
+                                (r for r in resources if r.resource_id == rec_data["resource_id"]),
+                                None
+                            )
+                            if resource:
+                                rec = self._convert_llm_recommendation_to_model(rec_data, resource)
+                                if rec:
+                                    recommendations.append(rec)
+                
+                except json.JSONDecodeError as e:
+                    logger.error(
+                        "Failed to parse batch LLM response",
+                        agent_id=self.agent_id,
+                        error=str(e),
+                    )
+                    continue
+            
+        except Exception as e:
+            logger.error(
+                "Failed to analyze resource batch with LLM",
+                agent_id=self.agent_id,
+                batch_size=len(resources),
+                error=str(e),
+            )
+            
+            # Fallback to individual analysis
+            logger.info(
+                "Falling back to individual resource analysis",
+                agent_id=self.agent_id,
+                batch_size=len(resources),
+            )
+            
+            for resource in resources:
+                try:
+                    resource_metrics = metrics_data.get(resource.resource_id) if metrics_data else None
+                    resource_billing = billing_data.get(resource.resource_id) if billing_data else None
+                    
+                    individual_recs = await self.analyze_resource(
+                        resource, resource_metrics, resource_billing
+                    )
+                    recommendations.extend(individual_recs)
+                    
+                except Exception as individual_error:
+                    logger.error(
+                        "Failed individual resource analysis in fallback",
+                        resource_id=resource.resource_id,
+                        agent_id=self.agent_id,
+                        error=str(individual_error),
+                    )
+                    continue
+        
+        return recommendations
+
+    def _create_batch_system_prompt(self, batch_size: int) -> str:
+        """Create system prompt optimized for batch analysis"""
+        base_prompt = self._create_system_prompt()
+        
+        batch_instructions = f"""
+
+BATCH ANALYSIS MODE: You are analyzing {batch_size} resources simultaneously.
+
+IMPORTANT BATCH GUIDELINES:
+1. Analyze each resource individually but consider relationships between them
+2. Look for patterns across similar resources in the batch
+3. Provide recommendations for each resource with their specific resource_id
+4. Consider bulk optimization opportunities when applicable
+5. Return results in the standard JSON format with an array of recommendations
+
+RESPONSE FORMAT:
+{{
+  "recommendations": [
+    {{
+      "resource_id": "specific-resource-id-1",
+      "recommendation_type": "...",
+      "description": "...",
+      // ... other fields
+    }},
+    {{
+      "resource_id": "specific-resource-id-2",
+      "recommendation_type": "...",
+      "description": "...",
+      // ... other fields
+    }}
+  ]
+}}
+
+Ensure each recommendation includes the exact resource_id it applies to.
+"""
+        
+        return base_prompt + batch_instructions
