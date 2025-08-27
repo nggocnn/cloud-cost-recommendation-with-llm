@@ -714,7 +714,6 @@ class CostRecommendationApp:
     
     async def run_analysis(
         self,
-        account_id: str,
         billing_file: Optional[str] = None,
         inventory_file: Optional[str] = None,
         metrics_file: Optional[str] = None,
@@ -724,7 +723,7 @@ class CostRecommendationApp:
         
         if sample_data:
             logger.info("Generating sample data for analysis")
-            self.data_service.generate_sample_data(account_id)
+            self.data_service.generate_sample_data("multi-account")  # Default account ID
             billing_file = "data/billing/sample_billing.csv"
             inventory_file = "data/inventory/sample_inventory.json"
             metrics_file = "data/metrics/sample_metrics.csv"
@@ -744,7 +743,7 @@ class CostRecommendationApp:
         )
         
         return {
-            "account_id": account_id,
+            "account_id": "multi-account",  # Default for multi-account analysis
             "resources": resources,
             "recommendations": recommendations,
             "summary": self._generate_summary(recommendations)
@@ -798,7 +797,7 @@ class CostRecommendationApp:
 
 def main():
     parser = argparse.ArgumentParser(description="LLM Cost Recommendation System")
-    parser.add_argument("--account-id", required=True, help="Cloud account ID")
+
     parser.add_argument("--billing-file", help="Path to billing data CSV")
     parser.add_argument("--inventory-file", help="Path to inventory data JSON")
     parser.add_argument("--metrics-file", help="Path to metrics data CSV")
@@ -821,7 +820,6 @@ def main():
     
     # Run analysis
     report = asyncio.run(app.run_analysis(
-        args.account_id,
         args.billing_file,
         args.inventory_file, 
         args.metrics_file,
@@ -1068,12 +1066,13 @@ warn_unused_configs = true
 
 The implementation is complete when:
 
-1. **CLI Functionality**: System runs with `python -m llm_cost_recommendation --account-id test --sample-data`
+1. **CLI Functionality**: System runs with `python -m llm_cost_recommendation --sample-data`
 2. **Multi-format Export**: Generates JSON, CSV, and Excel reports successfully
 3. **Multi-cloud Support**: Handles AWS, Azure, and GCP resources in configuration
 4. **Agent System**: 35+ service agents load from configuration files
 5. **LLM Integration**: OpenAI API generates realistic cost optimization recommendations
 6. **Sample Data**: System works with generated test data out of the box
-7. **Documentation**: Complete README, ARCHITECTURE, and this REQUIREMENTS guide
+7. **Multi-account Support**: Processes resources from multiple accounts without filtering
+8. **Documentation**: Complete README, ARCHITECTURE, and this REQUIREMENTS guide
 
 This implementation creates a robust, extensible foundation for multi-cloud cost optimization that can be easily recreated and enhanced.

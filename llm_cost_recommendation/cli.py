@@ -30,7 +30,6 @@ class CostRecommendationApp:
 
     async def run_analysis(
         self,
-        account_id: str,
         billing_file: str = None,
         inventory_file: str = None,
         metrics_file: str = None,
@@ -40,7 +39,6 @@ class CostRecommendationApp:
         """Run complete cost analysis"""
         logger.info(
             "Starting cost analysis",
-            account_id=account_id,
             use_sample_data=use_sample_data,
             individual_processing=individual_processing,
         )
@@ -103,7 +101,6 @@ class CostRecommendationApp:
             
             logger.info(f"Starting coordinator analysis ({mode_desc})")
             report = await self.coordinator.analyze_account(
-                account_id=account_id,
                 resources=resources,
                 metrics_data=metrics_data,
                 billing_data=billing_data,
@@ -319,7 +316,7 @@ async def main():
         description="AWS Cost Optimization using LLM",
         prog="python -m llm_cost_recommendation",
     )
-    parser.add_argument("--account-id", help="AWS Account ID to analyze")
+    parser.add_argument("--account-id", help="AWS Account ID to analyze (deprecated - no longer used)")
     parser.add_argument("--billing-file", help="Path to billing CSV file")
     parser.add_argument("--inventory-file", help="Path to inventory JSON file")
     parser.add_argument("--metrics-file", help="Path to metrics CSV file")
@@ -383,13 +380,8 @@ async def main():
             print(json.dumps(status, indent=2))
             return
 
-        # Validate required arguments for analysis
-        if not args.account_id:
-            parser.error("--account-id is required for analysis")
-
         # Run analysis
         report = await app.run_analysis(
-            account_id=args.account_id,
             billing_file=args.billing_file,
             inventory_file=args.inventory_file,
             metrics_file=args.metrics_file,

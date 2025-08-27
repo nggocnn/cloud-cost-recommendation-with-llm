@@ -144,7 +144,6 @@ class CoordinatorAgent:
 
     async def analyze_account(
         self,
-        account_id: str,
         resources: List[Resource],
         metrics_data: Dict[str, Metrics] = None,
         billing_data: Dict[str, List[BillingData]] = None,
@@ -153,7 +152,6 @@ class CoordinatorAgent:
         """Analyze entire account and generate comprehensive report"""
         logger.info(
             "Starting account analysis",
-            account_id=account_id,
             total_resources=len(resources),
         )
 
@@ -225,12 +223,11 @@ class CoordinatorAgent:
 
         # Generate report
         report = self._generate_report(
-            account_id, processed_recommendations, resources, start_time
+            processed_recommendations, resources, start_time
         )
 
         logger.info(
             "Account analysis completed",
-            account_id=account_id,
             total_recommendations=len(processed_recommendations),
             total_savings=report.total_monthly_savings,
             analysis_time_seconds=(datetime.now(timezone.utc) - start_time).total_seconds(),
@@ -377,7 +374,6 @@ class CoordinatorAgent:
 
     def _generate_report(
         self,
-        account_id: str,
         recommendations: List[Recommendation],
         resources: List[Resource],
         start_time: datetime,
@@ -427,11 +423,11 @@ class CoordinatorAgent:
             "analysis_time_seconds": (datetime.now(timezone.utc) - start_time).total_seconds(),
         }
 
-        report_id = f"report_{account_id}_{start_time.strftime('%Y%m%d_%H%M%S')}"
+        report_id = f"report_{start_time.strftime('%Y%m%d_%H%M%S')}"
 
         return RecommendationReport(
             id=report_id,
-            account_id=account_id,
+            account_id="multi-account",  # Default value since we support multiple accounts
             generated_at=datetime.now(timezone.utc),
             total_monthly_savings=total_monthly_savings,
             total_annual_savings=total_annual_savings,

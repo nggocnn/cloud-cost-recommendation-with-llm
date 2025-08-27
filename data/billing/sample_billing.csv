@@ -1,201 +1,201 @@
 bill/BillingPeriodStartDate,bill/BillingPeriodEndDate,lineItem/UsageAccountId,product/ProductName,lineItem/ResourceId,product/region,lineItem/UsageType,lineItem/UsageAmount,lineItem/UsageUnit,lineItem/UnblendedCost,lineItem/NetAmortizedCost,resourceTags/Environment,resourceTags/Team,resourceTags/CostCenter,resourceTags/Project
-2024-01-01,2024-01-31,234567890123,AWS Lambda,function-processor-305,us-east-1,Request,78355.64,GB-Mo,38.96,31.26122066921943,development,team-epsilon,CC-8184,project-web
-2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-945426,us-east-1,ReadCapacityUnit-Hrs,1980.65,GB-Mo,106.69,102.30134621127328,staging,team-alpha,CC-3761,project-web
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-757293,eu-west-1,BoxUsage:t3.small,143.74,Hrs,306.03,304.8435218233855,development,team-epsilon,CC-9662,project-api
-2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-557525,us-east-1,ReadCapacityUnit-Hrs,8887.77,GB-Mo,98.79,96.91735133975631,production,team-alpha,CC-2485,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-355064,ap-northeast-1,StorageUsage.StandardIAStorage,18351.8,GB-Mo,892.28,865.5372081776254,development,team-epsilon,CC-1981,project-ml
-2024-01-01,2024-01-31,234567890123,AWS Lambda,function-handler-909,ap-southeast-1,Duration,563116.1,GB-Mo,17.86,15.18706641749052,production,team-gamma,CC-2636,project-data
-2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-308810,ap-southeast-1,Requests-HTTP,70455.16,GB-Mo,99.27,86.26865460100396,development,team-alpha,CC-8257,project-web
-2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-272221,us-east-1,StorageUsage,5786.16,GB-Mo,33.41,27.358258171671157,production,team-alpha,CC-4633,project-api
-2024-01-01,2024-01-31,456789012345,Amazon DynamoDB,dynamodb-369984,ap-southeast-1,ReadCapacityUnit-Hrs,2356.9,GB-Mo,93.06,84.44795023024167,production,team-epsilon,CC-8421,project-data
-2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-690185,eu-west-1,StorageUsage.IntelligentTieringFAStorage,9134.3,GB-Mo,303.23,268.61662377276895,production,team-epsilon,CC-9786,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-900312,ap-southeast-1,InstanceUsage:db.t3.micro,710.55,Hrs,667.13,602.9826558533241,development,team-gamma,CC-7580,project-ml
-2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-889397,us-west-2,StorageUsage,3692.86,GB-Mo,128.26,116.98341702247323,development,team-beta,CC-8444,project-api
-2024-01-01,2024-01-31,345678901234,AWS Lambda,function-processor-183,ap-southeast-1,Request,444544.13,GB-Mo,14.69,12.051753523341967,staging,team-beta,CC-7274,project-web
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-605360,ap-northeast-1,BoxUsage:t3.large,465.01,Hrs,240.26,206.3527879674882,production,team-epsilon,CC-8915,project-ml
-2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-309490,ap-northeast-1,Requests-HTTP,79623.58,GB-Mo,169.43,142.0805187371194,testing,team-delta,CC-5119,project-data
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-535663,us-west-2,VolumeUsage.io2,1464.08,GB-Mo,67.58,54.16259049574776,development,team-alpha,CC-4334,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-983051,us-west-2,BoxUsage:m5.xlarge,664.94,Hrs,321.66,313.3465925132855,development,team-alpha,CC-4084,project-data
-2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-396614,us-east-1,StorageUsage.OneZoneIAStorage,30126.47,GB-Mo,697.08,599.0695679816641,staging,team-delta,CC-3173,project-api
-2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-740490,us-west-2,StorageUsage.OneZoneIAStorage,22260.81,GB-Mo,288.69,282.5791808391127,testing,team-epsilon,CC-6472,project-web
-2024-01-01,2024-01-31,234567890123,Amazon Simple Storage Service,s3-127705,ap-southeast-1,StorageUsage.StandardStorage,40287.39,GB-Mo,427.34,410.33321083605296,production,team-gamma,CC-3704,project-api
-2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-683977,us-west-2,StorageUsage.IntelligentTieringFAStorage,4712.47,GB-Mo,387.79,331.54142601171526,development,team-gamma,CC-1356,project-data
-2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-507894,us-west-2,ReadCapacityUnit-Hrs,7895.85,GB-Mo,47.44,44.558952053530106,testing,team-epsilon,CC-8421,project-api
-2024-01-01,2024-01-31,456789012345,AWS Lambda,function-handler-948,ap-northeast-1,Request,320764.46,GB-Mo,22.02,20.145762811692194,development,team-epsilon,CC-5346,project-data
-2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-231768,ap-northeast-1,Requests-HTTP,86672.99,GB-Mo,17.83,16.082301604436257,production,team-beta,CC-4833,project-data
-2024-01-01,2024-01-31,123456789012,Amazon Elastic Compute Cloud,ec2-474201,us-west-2,BoxUsage:m5.xlarge,109.26,Hrs,427.63,410.69452005243977,production,team-beta,CC-1814,project-data
-2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-657377,ap-northeast-1,Requests-HTTPS,31043.05,GB-Mo,188.03,168.09236514580834,staging,team-epsilon,CC-6098,project-data
-2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-155446,us-west-2,WriteCapacityUnit-Hrs,2752.44,GB-Mo,18.92,16.71895138696065,production,team-alpha,CC-2148,project-web
-2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-740193,ap-southeast-1,Requests-HTTP,11599.05,GB-Mo,214.01,213.24376411353316,testing,team-alpha,CC-7875,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-213479,us-west-2,InstanceUsage:db.r5.xlarge,123.78,Hrs,137.96,130.76565288604834,staging,team-beta,CC-8375,project-ml
-2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-631559,ap-northeast-1,StorageUsage.OneZoneIAStorage,41060.56,GB-Mo,695.44,607.5318196633457,production,team-gamma,CC-1909,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-818886,eu-west-1,BoxUsage:t3.small,287.14,Hrs,435.94,421.5610103013868,production,team-epsilon,CC-8047,project-web
-2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-568853,us-west-2,InstanceUsage:db.t3.small,120.31,Hrs,366.38,328.19511979451084,testing,team-alpha,CC-4638,project-api
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-453470,eu-west-1,BoxUsage:r5.large,440.39,Hrs,354.86,294.23530157488227,staging,team-beta,CC-1813,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-928363,eu-west-1,Requests-HTTP,37499.67,GB-Mo,251.87,222.92194794226057,staging,team-delta,CC-5869,project-data
-2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-289912,eu-west-1,Requests-HTTPS,9450.41,GB-Mo,87.89,77.61666430122067,production,team-epsilon,CC-6277,project-api
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-410083,ap-northeast-1,BoxUsage:c5.large,492.8,Hrs,199.81,179.33892906945832,production,team-alpha,CC-8162,project-ml
-2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-772195,ap-northeast-1,DataTransfer-Out-Bytes,46782.53,GB-Mo,175.3,153.51368996283796,development,team-epsilon,CC-1267,project-data
-2024-01-01,2024-01-31,234567890123,AWS Lambda,function-handler-391,eu-west-1,Request-ARM,780210.49,GB-Mo,10.56,10.148490272900604,testing,team-delta,CC-4799,project-data
-2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-759622,us-west-2,InstanceUsage:db.t3.small,615.32,Hrs,73.63,63.39255426610821,production,team-delta,CC-5072,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-447058,us-west-2,BoxUsage:t3.micro,326.63,Hrs,451.78,442.32473240003736,staging,team-alpha,CC-9829,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-284017,ap-northeast-1,BoxUsage:r5.large,627.73,Hrs,176.8,172.83067670074604,development,team-epsilon,CC-8795,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-327085,us-west-2,BoxUsage:t3.small,739.83,Hrs,456.09,391.2737323964982,staging,team-epsilon,CC-5437,project-api
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-882442,us-east-1,VolumeUsage.io2,186.42,GB-Mo,119.34,105.86906907650987,development,team-alpha,CC-4323,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-672030,ap-northeast-1,VolumeUsage.gp3,544.35,GB-Mo,26.26,21.097670215015523,development,team-beta,CC-6432,project-data
-2024-01-01,2024-01-31,456789012345,AWS Lambda,function-processor-253,ap-southeast-1,Request,304285.08,GB-Mo,21.99,21.707528376925964,staging,team-beta,CC-8014,project-data
-2024-01-01,2024-01-31,345678901234,AWS Lambda,function-api-206,ap-southeast-1,Duration-ARM,633677.56,GB-Mo,33.6,32.48881542004692,development,team-epsilon,CC-2602,project-api
-2024-01-01,2024-01-31,456789012345,AWS Lambda,function-processor-641,us-east-1,Request-ARM,277969.18,GB-Mo,39.83,33.73717188359305,development,team-delta,CC-7809,project-api
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-591042,us-east-1,VolumeUsage.gp2,1450.12,GB-Mo,126.03,103.15730073507892,testing,team-alpha,CC-4220,project-api
-2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-624184,us-west-2,InstanceUsage:db.r5.large,138.31,Hrs,555.29,477.1041489713072,staging,team-delta,CC-9378,project-ml
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-931628,eu-west-1,VolumeUsage.gp3,1492.92,GB-Mo,73.94,65.20151117403418,production,team-alpha,CC-6603,project-web
-2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-582803,eu-west-1,DataTransfer-Out-Bytes,68324.55,GB-Mo,69.24,68.12485752184774,staging,team-delta,CC-1605,project-data
-2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-924969,us-west-2,DataTransfer-Out-Bytes,57629.09,GB-Mo,26.23,21.760184799849135,staging,team-gamma,CC-1161,project-web
-2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-786782,ap-southeast-1,StorageUsage,3708.7,GB-Mo,41.08,35.85932149753161,testing,team-gamma,CC-6786,project-web
-2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-237464,us-east-1,StorageUsage.StandardStorage,11604.17,GB-Mo,571.73,529.8873015092843,development,team-beta,CC-8317,project-api
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-824243,ap-northeast-1,VolumeUsage.io2,1084.93,GB-Mo,166.22,150.77774144958673,staging,team-epsilon,CC-9798,project-data
-2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-528523,us-east-1,WriteCapacityUnit-Hrs,6767.18,GB-Mo,61.97,49.79705070181555,staging,team-gamma,CC-7433,project-web
-2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-644123,eu-west-1,InstanceUsage:db.t3.micro,571.15,Hrs,195.32,171.5213085615533,staging,team-gamma,CC-6230,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-882175,us-east-1,VolumeUsage.gp2,681.82,GB-Mo,157.1,144.73580499879014,staging,team-epsilon,CC-7889,project-data
-2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-823060,eu-west-1,ReadCapacityUnit-Hrs,2121.38,GB-Mo,37.68,30.660871214293802,production,team-beta,CC-1969,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-504144,us-east-1,BoxUsage:c5.large,529.0,Hrs,403.29,368.5154583223532,development,team-gamma,CC-7996,project-data
-2024-01-01,2024-01-31,345678901234,AWS Lambda,function-handler-619,us-west-2,Request,723684.24,GB-Mo,12.88,10.707617350257433,testing,team-gamma,CC-2156,project-api
-2024-01-01,2024-01-31,345678901234,AWS Lambda,function-processor-247,us-east-1,Duration,781026.12,GB-Mo,39.38,31.690709344531477,development,team-delta,CC-5557,project-data
-2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-524743,us-west-2,InstanceUsage:db.t3.small,101.9,Hrs,119.85,108.07593449218483,staging,team-beta,CC-9230,project-web
-2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-267754,eu-west-1,Requests-HTTPS,57827.33,GB-Mo,225.81,210.40517978252632,staging,team-alpha,CC-9728,project-web
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-700818,ap-northeast-1,VolumeUsage.gp3,976.17,GB-Mo,72.27,70.48242470349153,development,team-delta,CC-1267,project-data
-2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-630330,ap-southeast-1,Requests-HTTP,34276.41,GB-Mo,299.84,272.64373073178166,testing,team-epsilon,CC-8711,project-ml
-2024-01-01,2024-01-31,345678901234,AWS Lambda,function-handler-366,ap-southeast-1,Duration,493095.17,GB-Mo,27.16,24.016847649275935,development,team-beta,CC-4253,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-451185,us-west-2,DataTransfer-Out-Bytes,12949.69,GB-Mo,269.38,228.11945449469349,development,team-beta,CC-8973,project-api
-2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-473205,us-west-2,DataTransfer-Out-Bytes,59754.32,GB-Mo,246.29,218.37637622876912,staging,team-beta,CC-4100,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-942109,eu-west-1,StorageUsage.OneZoneIAStorage,6943.48,GB-Mo,907.82,834.7036495304939,development,team-alpha,CC-4786,project-api
-2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-415591,us-east-1,StorageUsage,594.78,GB-Mo,74.12,62.84964294262836,testing,team-delta,CC-2269,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-387046,us-west-2,VolumeUsage.gp2,1596.94,GB-Mo,45.66,36.93533647171077,staging,team-delta,CC-5331,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-335014,us-west-2,VolumeUsage.gp3,1113.14,GB-Mo,106.62,86.60190419740682,staging,team-gamma,CC-6557,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-893766,eu-west-1,BoxUsage:m5.large,702.23,Hrs,253.45,230.4101061580948,production,team-alpha,CC-7137,project-data
-2024-01-01,2024-01-31,234567890123,AWS Lambda,function-processor-303,eu-west-1,Request-ARM,30905.47,GB-Mo,37.47,33.951994746968865,development,team-epsilon,CC-4457,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-806276,us-west-2,VolumeUsage.gp2,480.35,GB-Mo,90.31,79.72991642418407,staging,team-alpha,CC-1564,project-api
-2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-127740,eu-west-1,DataTransfer-Out-Bytes,12342.54,GB-Mo,286.24,262.9726716635486,production,team-gamma,CC-7186,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-174045,us-west-2,StorageUsage,9004.3,GB-Mo,66.45,66.1505464891604,staging,team-beta,CC-9637,project-ml
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-846521,ap-northeast-1,BoxUsage:t3.micro,563.48,Hrs,161.07,146.18809227338335,testing,team-alpha,CC-3689,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-768693,ap-southeast-1,VolumeUsage.gp3,930.93,GB-Mo,137.34,135.8888293261707,production,team-delta,CC-8483,project-data
-2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-822413,us-east-1,StorageUsage,4962.15,GB-Mo,43.05,37.247525833339125,development,team-beta,CC-6979,project-web
-2024-01-01,2024-01-31,456789012345,AWS Lambda,function-processor-633,eu-west-1,Duration-ARM,942875.15,GB-Mo,40.94,32.81713672954602,staging,team-epsilon,CC-9087,project-web
-2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-978857,ap-northeast-1,StorageUsage,8623.92,GB-Mo,40.96,34.31015461926238,development,team-delta,CC-8296,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-236550,us-east-1,InstanceUsage:db.t3.micro,127.99,Hrs,190.87,178.7881892091906,production,team-delta,CC-7186,project-web
-2024-01-01,2024-01-31,234567890123,Amazon Simple Storage Service,s3-220784,eu-west-1,StorageUsage.OneZoneIAStorage,15546.63,GB-Mo,343.49,312.3061328568182,development,team-epsilon,CC-3256,project-api
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-603728,us-west-2,BoxUsage:t3.xlarge,329.88,Hrs,61.53,55.90738478430788,production,team-epsilon,CC-9357,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-812243,us-east-1,Requests-HTTPS,99778.69,GB-Mo,167.93,152.6491666200314,staging,team-alpha,CC-8630,project-web
-2024-01-01,2024-01-31,234567890123,AWS Lambda,function-processor-558,ap-southeast-1,Duration-ARM,618194.13,GB-Mo,13.54,12.486813947316952,staging,team-beta,CC-9049,project-api
-2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-599597,eu-west-1,InstanceUsage:db.r5.large,188.61,Hrs,593.38,585.6596430543643,staging,team-epsilon,CC-9905,project-api
-2024-01-01,2024-01-31,345678901234,AWS Lambda,function-api-945,us-east-1,Request,494982.87,GB-Mo,18.94,16.88279440530458,testing,team-epsilon,CC-1665,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-890652,us-east-1,VolumeUsage.gp2,647.81,GB-Mo,72.15,66.78357718427112,production,team-beta,CC-5554,project-data
-2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-903559,ap-northeast-1,InstanceUsage:db.t3.small,287.36,Hrs,691.12,568.6497350855807,development,team-alpha,CC-9458,project-ml
-2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-245570,ap-southeast-1,StorageUsage.StandardIAStorage,47459.16,GB-Mo,368.95,366.8710831548063,production,team-alpha,CC-3994,project-api
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-425893,us-east-1,BoxUsage:t3.xlarge,492.01,Hrs,453.16,396.80193293017646,production,team-beta,CC-9155,project-api
-2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-760758,ap-southeast-1,StorageUsage.OneZoneIAStorage,13889.34,GB-Mo,843.52,798.4834373249137,production,team-gamma,CC-6446,project-data
-2024-01-01,2024-01-31,234567890123,AWS Lambda,function-api-532,ap-southeast-1,Request-ARM,958630.52,GB-Mo,49.4,45.96138349862532,staging,team-alpha,CC-7671,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-691118,us-east-1,BoxUsage:m5.xlarge,548.28,Hrs,342.1,334.41794933200555,production,team-gamma,CC-5481,project-ml
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-754780,us-east-1,BoxUsage:t3.large,414.44,Hrs,40.94,39.17078228058124,staging,team-delta,CC-5185,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-841627,ap-southeast-1,VolumeUsage.io2,347.87,GB-Mo,114.82,111.44957560976032,development,team-gamma,CC-6696,project-ml
-2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-890965,ap-northeast-1,WriteCapacityUnit-Hrs,7851.66,GB-Mo,71.25,61.63025423459599,staging,team-epsilon,CC-4952,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-928891,us-east-1,InstanceUsage:db.r5.large,497.86,Hrs,546.67,490.1636018624387,testing,team-delta,CC-7308,project-api
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-661239,eu-west-1,BoxUsage:m5.large,637.23,Hrs,257.36,207.3610851040745,testing,team-alpha,CC-1228,project-data
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-743899,eu-west-1,BoxUsage:m5.large,545.13,Hrs,158.92,158.6469546510006,development,team-epsilon,CC-8134,project-web
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-294608,us-east-1,VolumeUsage.gp2,1614.25,GB-Mo,181.37,153.0411036038186,staging,team-alpha,CC-9551,project-web
-2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-690333,us-east-1,DataTransfer-Out-Bytes,93820.22,GB-Mo,35.12,32.30740585354478,testing,team-delta,CC-9113,project-data
-2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-301282,ap-southeast-1,StorageUsage.StandardStorage,158.28,GB-Mo,80.92,74.49419447265895,testing,team-alpha,CC-4142,project-api
-2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-392517,ap-northeast-1,Requests-HTTP,49920.2,GB-Mo,169.74,152.12962778748732,testing,team-beta,CC-8420,project-data
-2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,ebs-762360,ap-northeast-1,VolumeUsage.io2,451.3,GB-Mo,80.09,72.34467133840643,testing,team-epsilon,CC-7851,project-ml
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-128415,ap-southeast-1,VolumeUsage.io2,596.19,GB-Mo,142.46,123.7799370404004,testing,team-alpha,CC-5284,project-web
-2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-571334,us-east-1,StorageUsage.StandardStorage,25319.6,GB-Mo,708.34,627.8702697625823,testing,team-epsilon,CC-9944,project-data
-2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-948758,ap-southeast-1,InstanceUsage:db.t3.small,534.14,Hrs,431.29,416.95299028659997,testing,team-epsilon,CC-2868,project-ml
-2024-01-01,2024-01-31,345678901234,AWS Lambda,function-handler-616,us-east-1,Request,317362.26,GB-Mo,16.96,13.607323502770576,testing,team-epsilon,CC-2688,project-api
-2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-655832,eu-west-1,DataTransfer-Out-Bytes,29130.89,GB-Mo,272.09,218.45800730375976,development,team-alpha,CC-1353,project-web
-2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-120724,ap-northeast-1,StorageUsage.OneZoneIAStorage,2174.92,GB-Mo,370.07,337.4267108672285,testing,team-delta,CC-6697,project-web
-2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-303281,ap-northeast-1,ReadCapacityUnit-Hrs,6275.21,GB-Mo,86.05,77.64019480829788,development,team-epsilon,CC-6667,project-api
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-700707,ap-northeast-1,BoxUsage:c5.large,280.39,Hrs,265.94,265.8303733815031,development,team-gamma,CC-7632,project-api
-2024-01-01,2024-01-31,123456789012,Amazon Elastic Compute Cloud,ec2-700487,ap-northeast-1,BoxUsage:t3.small,416.77,Hrs,228.16,203.12489162230523,development,team-epsilon,CC-4115,project-ml
-2024-01-01,2024-01-31,123456789012,Amazon Elastic Compute Cloud,ec2-142006,ap-northeast-1,BoxUsage:t3.micro,175.08,Hrs,473.01,384.6768169081959,staging,team-epsilon,CC-9671,project-web
-2024-01-01,2024-01-31,234567890123,Amazon Simple Storage Service,s3-211845,us-west-2,StorageUsage.StandardIAStorage,17346.05,GB-Mo,327.49,290.6651808749487,development,team-beta,CC-5196,project-data
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-946857,ap-northeast-1,BoxUsage:m5.large,525.27,Hrs,15.11,14.237824949186566,development,team-alpha,CC-4800,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-228977,us-west-2,InstanceUsage:db.r5.large,377.11,Hrs,426.9,389.9662886322519,staging,team-epsilon,CC-4376,project-data
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-778344,ap-northeast-1,VolumeUsage.io2,1488.01,GB-Mo,5.83,5.52427302659933,production,team-beta,CC-2745,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-290902,ap-southeast-1,DataTransfer-Out-Bytes,98799.61,GB-Mo,10.63,9.985384075540146,testing,team-beta,CC-2508,project-ml
-2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-575860,eu-west-1,InstanceUsage:db.t3.micro,287.49,Hrs,45.3,36.29965690035542,development,team-epsilon,CC-9549,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-939148,ap-northeast-1,BoxUsage:m5.large,158.89,Hrs,11.17,10.597722840358626,production,team-beta,CC-7688,project-api
-2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-198567,ap-southeast-1,WriteCapacityUnit-Hrs,1550.53,GB-Mo,42.64,35.17568805537964,development,team-gamma,CC-1048,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-917740,eu-west-1,InstanceUsage:db.r5.large,131.61,Hrs,488.62,439.0917900016009,development,team-gamma,CC-5949,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-493982,ap-northeast-1,WriteCapacityUnit-Hrs,919.41,GB-Mo,138.58,131.97578834161337,staging,team-delta,CC-4842,project-ml
-2024-01-01,2024-01-31,234567890123,AWS Lambda,function-handler-120,ap-northeast-1,Duration-ARM,353912.45,GB-Mo,10.51,10.346788610746627,testing,team-beta,CC-4965,project-api
-2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-944461,ap-southeast-1,DataTransfer-Out-Bytes,98720.31,GB-Mo,84.71,69.94796328446323,staging,team-gamma,CC-7669,project-web
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-855308,us-east-1,VolumeUsage.gp3,600.76,GB-Mo,129.32,126.14541674577634,testing,team-beta,CC-2557,project-api
-2024-01-01,2024-01-31,123456789012,Amazon Elastic Compute Cloud,ec2-447777,eu-west-1,BoxUsage:m5.xlarge,485.6,Hrs,193.33,163.42754991383882,development,team-beta,CC-9018,project-api
-2024-01-01,2024-01-31,456789012345,AWS Lambda,function-api-351,ap-northeast-1,Duration,968588.22,GB-Mo,24.75,22.148945782001576,testing,team-gamma,CC-6820,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-354020,eu-west-1,InstanceUsage:db.r5.large,243.8,Hrs,37.52,36.48350241060378,testing,team-epsilon,CC-3195,project-data
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-650481,us-east-1,BoxUsage:t3.large,404.33,Hrs,29.48,27.68479055327909,production,team-epsilon,CC-3623,project-api
-2024-01-01,2024-01-31,456789012345,AWS Lambda,function-handler-823,us-east-1,Duration-ARM,176154.4,GB-Mo,34.86,34.06637814948481,testing,team-beta,CC-6812,project-web
-2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-663844,us-east-1,StorageUsage.StandardStorage,49585.32,GB-Mo,39.18,34.05999417538044,development,team-epsilon,CC-7166,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-742674,eu-west-1,InstanceUsage:db.r5.large,123.25,Hrs,646.76,551.0827529214222,staging,team-beta,CC-6710,project-data
-2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-316740,us-east-1,StorageUsage.StandardIAStorage,18982.1,GB-Mo,422.96,394.33956041684337,production,team-gamma,CC-9401,project-web
-2024-01-01,2024-01-31,456789012345,AWS Lambda,function-api-840,ap-northeast-1,Duration,544814.05,GB-Mo,23.18,21.219523181159165,staging,team-epsilon,CC-7301,project-web
-2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-450529,ap-southeast-1,InstanceUsage:db.r5.large,421.34,Hrs,214.56,214.01505013558818,testing,team-delta,CC-4196,project-ml
-2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-822589,eu-west-1,InstanceUsage:db.t3.micro,342.87,Hrs,380.61,361.74802518569606,production,team-alpha,CC-7442,project-web
-2024-01-01,2024-01-31,456789012345,Amazon DynamoDB,dynamodb-127117,ap-northeast-1,ReadCapacityUnit-Hrs,8634.16,GB-Mo,137.93,113.5409973146278,development,team-gamma,CC-9085,project-web
-2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-702911,ap-southeast-1,Requests-HTTPS,51321.74,GB-Mo,179.77,161.20702268735906,production,team-beta,CC-3395,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-975222,ap-southeast-1,VolumeUsage.gp2,1386.09,GB-Mo,157.56,140.17639011496482,production,team-gamma,CC-3237,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-474778,ap-southeast-1,BoxUsage:t3.medium,134.92,Hrs,456.01,368.8114438915274,production,team-delta,CC-9490,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-450555,ap-northeast-1,Requests-HTTP,30167.85,GB-Mo,121.36,111.67314640231301,testing,team-gamma,CC-9643,project-data
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-372558,ap-southeast-1,VolumeUsage.io2,1273.33,GB-Mo,182.61,175.40633383558784,production,team-epsilon,CC-8869,project-web
-2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-314537,ap-northeast-1,InstanceUsage:db.t3.micro,356.41,Hrs,705.9,602.1627692166545,staging,team-epsilon,CC-6201,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-390398,eu-west-1,VolumeUsage.io2,758.11,GB-Mo,92.66,89.1729105143168,staging,team-delta,CC-5713,project-api
-2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-531889,us-east-1,Requests-HTTPS,62645.1,GB-Mo,209.39,173.10463086127106,production,team-beta,CC-2428,project-data
-2024-01-01,2024-01-31,345678901234,AWS Lambda,function-api-737,us-east-1,Duration,196697.76,GB-Mo,20.82,18.238972810875495,staging,team-alpha,CC-9175,project-api
-2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-232441,ap-southeast-1,Requests-HTTP,26720.35,GB-Mo,150.74,144.78620833817538,testing,team-delta,CC-9162,project-web
-2024-01-01,2024-01-31,123456789012,AWS Lambda,function-processor-607,us-east-1,Duration,326031.14,GB-Mo,6.92,6.882180692854991,staging,team-delta,CC-6974,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-626696,us-east-1,VolumeUsage.gp2,1088.18,GB-Mo,84.69,80.49908110548468,staging,team-delta,CC-6887,project-ml
-2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-439167,ap-southeast-1,InstanceUsage:db.t3.micro,330.15,Hrs,45.71,40.77429132022918,development,team-delta,CC-7040,project-api
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-449740,us-east-1,BoxUsage:m5.xlarge,238.66,Hrs,222.52,191.29503342243032,production,team-beta,CC-7839,project-api
-2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-835387,us-west-2,InstanceUsage:db.r5.large,160.98,Hrs,627.54,538.0279144972545,testing,team-epsilon,CC-6537,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-367983,eu-west-1,VolumeUsage.io2,777.61,GB-Mo,74.78,61.924508778531994,development,team-alpha,CC-7248,project-api
-2024-01-01,2024-01-31,123456789012,AWS Lambda,function-api-641,ap-southeast-1,Duration,185275.01,GB-Mo,10.8,8.69160736410632,development,team-gamma,CC-1261,project-web
-2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-799481,ap-southeast-1,DataTransfer-Out-Bytes,3364.91,GB-Mo,14.42,14.183604394540662,testing,team-gamma,CC-6006,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-891583,ap-northeast-1,VolumeUsage.io2,972.81,GB-Mo,67.48,67.35341669433399,development,team-delta,CC-5228,project-data
-2024-01-01,2024-01-31,234567890123,Amazon Simple Storage Service,s3-544435,eu-west-1,StorageUsage.OneZoneIAStorage,43218.73,GB-Mo,622.88,573.809885841442,staging,team-gamma,CC-3263,project-data
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-628971,ap-southeast-1,BoxUsage:r5.large,497.59,Hrs,374.45,372.65422655512725,production,team-epsilon,CC-8538,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-839045,us-east-1,WriteCapacityUnit-Hrs,6587.49,GB-Mo,67.9,57.29961095659967,production,team-delta,CC-4795,project-ml
-2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-805273,ap-southeast-1,StorageUsage.StandardIAStorage,17879.99,GB-Mo,894.44,739.5817575006826,testing,team-beta,CC-6563,project-ml
-2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-317192,us-west-2,StorageUsage.StandardStorage,33496.42,GB-Mo,71.76,67.22499476179158,development,team-delta,CC-2130,project-web
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-960173,ap-southeast-1,BoxUsage:c5.large,259.35,Hrs,25.02,23.98172587703381,production,team-delta,CC-8148,project-web
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-282877,ap-northeast-1,BoxUsage:m5.xlarge,437.96,Hrs,164.31,148.72699124697823,staging,team-beta,CC-7330,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-735683,ap-northeast-1,VolumeUsage.io2,214.72,GB-Mo,83.76,83.40318404035693,staging,team-alpha,CC-5571,project-data
-2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-852350,ap-southeast-1,StorageUsage,3231.8,GB-Mo,54.47,49.58024923848292,testing,team-delta,CC-4120,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-580514,ap-northeast-1,DataTransfer-Out-Bytes,5031.69,GB-Mo,265.92,239.48150226931674,development,team-alpha,CC-1751,project-data
-2024-01-01,2024-01-31,123456789012,AWS Lambda,function-processor-609,eu-west-1,Duration,288778.52,GB-Mo,14.51,12.974877574464232,staging,team-delta,CC-4759,project-web
-2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-742500,us-west-2,StorageUsage.OneZoneIAStorage,38440.85,GB-Mo,342.96,319.1075999846972,testing,team-delta,CC-8656,project-web
-2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,ebs-732096,ap-southeast-1,VolumeUsage.io2,982.77,GB-Mo,26.36,25.538188784371556,staging,team-alpha,CC-7616,project-data
-2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-372950,us-east-1,InstanceUsage:db.r5.large,356.81,Hrs,302.72,252.81464344282455,testing,team-alpha,CC-3128,project-data
-2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-443219,us-west-2,InstanceUsage:db.r5.large,347.28,Hrs,696.81,612.9546509221317,production,team-alpha,CC-4695,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-185366,ap-northeast-1,StorageUsage.StandardStorage,19303.76,GB-Mo,791.31,683.4352871423412,development,team-beta,CC-5594,project-api
-2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-790529,us-east-1,Requests-HTTP,78555.71,GB-Mo,67.94,57.4999179470331,production,team-alpha,CC-2176,project-ml
-2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-820891,us-west-2,StorageUsage,7949.79,GB-Mo,149.74,142.0495886390554,staging,team-beta,CC-7273,project-ml
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-438193,ap-northeast-1,BoxUsage:m5.xlarge,490.98,Hrs,253.23,221.0091722004061,production,team-beta,CC-8553,project-data
-2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-895916,ap-northeast-1,StorageUsage.OneZoneIAStorage,28061.56,GB-Mo,524.59,443.0160992053124,development,team-delta,CC-8243,project-web
-2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-633910,ap-northeast-1,InstanceUsage:db.t3.small,153.95,Hrs,229.26,224.1415134500315,staging,team-alpha,CC-8658,project-ml
-2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-583032,ap-northeast-1,VolumeUsage.gp2,693.58,GB-Mo,84.24,80.9661521916624,staging,team-alpha,CC-8440,project-data
-2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-448245,eu-west-1,VolumeUsage.gp2,1834.78,GB-Mo,122.32,98.40255995578455,development,team-epsilon,CC-6332,project-api
-2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-540917,ap-northeast-1,StorageUsage.IntelligentTieringFAStorage,39126.82,GB-Mo,755.08,644.5644857815977,development,team-epsilon,CC-6091,project-web
-2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-661866,us-east-1,InstanceUsage:db.t3.micro,343.4,Hrs,363.81,347.94224515363004,production,team-delta,CC-9787,project-web
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-443057,us-west-2,VolumeUsage.gp3,806.92,GB-Mo,51.24,50.01287467811403,staging,team-gamma,CC-3139,project-data
-2024-01-01,2024-01-31,345678901234,AWS Lambda,function-api-308,ap-southeast-1,Request,268837.19,GB-Mo,42.87,35.28347079823109,staging,team-alpha,CC-6755,project-data
-2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-587361,ap-northeast-1,StorageUsage.StandardIAStorage,38662.62,GB-Mo,568.64,529.9656318170731,staging,team-alpha,CC-3499,project-web
-2024-01-01,2024-01-31,234567890123,AWS Lambda,function-api-577,us-west-2,Duration,70772.4,GB-Mo,49.42,43.908522308220554,staging,team-beta,CC-3683,project-ml
-2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,ebs-498741,ap-northeast-1,VolumeUsage.gp2,1454.09,GB-Mo,75.65,66.89165401200906,production,team-epsilon,CC-8226,project-data
-2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-556011,us-west-2,InstanceUsage:db.t3.small,309.37,Hrs,795.17,725.4261601802624,testing,team-beta,CC-1921,project-api
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-890907,us-east-1,BoxUsage:t3.large,669.54,Hrs,429.17,356.8643596338827,development,team-gamma,CC-6629,project-web
-2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-144308,us-east-1,WriteCapacityUnit-Hrs,7457.82,GB-Mo,88.33,75.23009057506817,production,team-beta,CC-8372,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-580565,us-west-2,VolumeUsage.io2,1677.9,GB-Mo,174.82,156.05280243290517,development,team-delta,CC-3042,project-web
-2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-689034,ap-northeast-1,ReadCapacityUnit-Hrs,7853.85,GB-Mo,49.37,41.50125740078143,staging,team-alpha,CC-8155,project-ml
-2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-330352,us-west-2,StorageUsage.StandardStorage,23383.65,GB-Mo,998.28,852.0157230943265,staging,team-gamma,CC-2840,project-data
-2024-01-01,2024-01-31,345678901234,AWS Lambda,function-processor-401,eu-west-1,Duration-ARM,36833.17,GB-Mo,37.39,33.67124077333282,production,team-epsilon,CC-5525,project-api
-2024-01-01,2024-01-31,234567890123,AWS Lambda,function-processor-710,us-west-2,Request,678644.18,GB-Mo,49.03,45.38955711098732,production,team-alpha,CC-4282,project-data
+2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-585923,eu-west-1,InstanceUsage:db.t3.micro,260.42,Hrs,206.99,204.96608000178358,development,team-epsilon,CC-6252,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-938523,us-east-1,StorageUsage.IntelligentTieringFAStorage,48878.97,GB-Mo,432.2,404.35195898814595,testing,team-epsilon,CC-3137,project-data
+2024-01-01,2024-01-31,456789012345,Amazon DynamoDB,dynamodb-717811,us-west-2,WriteCapacityUnit-Hrs,2102.94,GB-Mo,92.92,83.61866222863482,development,team-beta,CC-5987,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-386142,ap-northeast-1,InstanceUsage:db.t3.micro,173.24,Hrs,709.41,668.7314356923383,development,team-alpha,CC-3012,project-data
+2024-01-01,2024-01-31,345678901234,AWS Lambda,function-processor-212,eu-west-1,Duration,901720.1,GB-Mo,20.14,19.264365541345576,staging,team-gamma,CC-5751,project-data
+2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-500913,eu-west-1,StorageUsage.StandardStorage,23673.67,GB-Mo,703.89,617.034621489898,production,team-gamma,CC-4218,project-web
+2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-438075,ap-northeast-1,InstanceUsage:db.t3.small,172.46,Hrs,436.84,364.28692858500193,testing,team-alpha,CC-8918,project-ml
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-973893,ap-northeast-1,BoxUsage:t3.xlarge,228.59,Hrs,145.32,130.1226883745,testing,team-delta,CC-8978,project-web
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-242964,ap-northeast-1,BoxUsage:t3.xlarge,134.87,Hrs,152.67,126.39203926948363,staging,team-epsilon,CC-9507,project-data
+2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-938659,us-east-1,StorageUsage.OneZoneIAStorage,24469.17,GB-Mo,826.04,821.6010978569071,testing,team-epsilon,CC-5328,project-web
+2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-621457,us-west-2,InstanceUsage:db.r5.large,721.25,Hrs,340.43,295.73126807074584,staging,team-beta,CC-3730,project-api
+2024-01-01,2024-01-31,123456789012,AWS Lambda,function-api-516,ap-northeast-1,Duration-ARM,312168.64,GB-Mo,45.66,44.6599810518401,production,team-delta,CC-7186,project-data
+2024-01-01,2024-01-31,123456789012,AWS Lambda,function-processor-139,ap-northeast-1,Request-ARM,528895.09,GB-Mo,45.39,40.338158530583065,staging,team-beta,CC-5368,project-data
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-231591,us-east-1,BoxUsage:r5.large,715.58,Hrs,48.17,39.90320256521008,development,team-delta,CC-9791,project-web
+2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-726067,us-east-1,InstanceUsage:db.r5.xlarge,689.83,Hrs,214.22,212.03856323142713,production,team-gamma,CC-8818,project-api
+2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-334427,us-east-1,Requests-HTTP,1616.18,GB-Mo,227.83,197.4326005950221,testing,team-delta,CC-6768,project-ml
+2024-01-01,2024-01-31,456789012345,AWS Lambda,function-handler-278,ap-southeast-1,Duration,800212.66,GB-Mo,16.03,15.853894837703452,production,team-gamma,CC-9751,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-290614,us-east-1,BoxUsage:t3.micro,625.43,Hrs,419.79,373.6983084833807,staging,team-epsilon,CC-7615,project-ml
+2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-912773,ap-northeast-1,DataTransfer-Out-Bytes,39529.38,GB-Mo,188.12,151.6725079422246,testing,team-gamma,CC-9304,project-ml
+2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-255589,eu-west-1,InstanceUsage:db.t3.small,237.83,Hrs,648.32,615.8880785578501,development,team-epsilon,CC-3628,project-api
+2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-765905,us-east-1,WriteCapacityUnit-Hrs,5436.47,GB-Mo,127.06,115.19628177953682,development,team-epsilon,CC-1426,project-ml
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Compute Cloud,ec2-512159,us-east-1,BoxUsage:t3.medium,432.35,Hrs,461.43,456.95210217828054,development,team-delta,CC-2869,project-ml
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-882915,ap-northeast-1,BoxUsage:m5.large,156.43,Hrs,383.09,320.0791809617935,production,team-delta,CC-3917,project-web
+2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-363250,us-east-1,StorageUsage.StandardIAStorage,25589.94,GB-Mo,370.98,328.206837577459,staging,team-beta,CC-1622,project-ml
+2024-01-01,2024-01-31,456789012345,AWS Lambda,function-processor-953,eu-west-1,Duration,727641.61,GB-Mo,38.49,31.332441206620047,testing,team-gamma,CC-5158,project-api
+2024-01-01,2024-01-31,345678901234,AWS Lambda,function-processor-978,eu-west-1,Duration-ARM,99318.64,GB-Mo,34.52,29.644091746431563,staging,team-gamma,CC-4898,project-ml
+2024-01-01,2024-01-31,456789012345,Amazon DynamoDB,dynamodb-343778,eu-west-1,ReadCapacityUnit-Hrs,6821.85,GB-Mo,68.33,63.1949887210531,staging,team-gamma,CC-6539,project-ml
+2024-01-01,2024-01-31,345678901234,AWS Lambda,function-handler-471,us-west-2,Duration-ARM,661057.95,GB-Mo,19.17,16.258861159333108,development,team-alpha,CC-1703,project-data
+2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-665575,ap-northeast-1,StorageUsage.OneZoneIAStorage,33145.48,GB-Mo,26.98,26.65420296175329,testing,team-epsilon,CC-2096,project-data
+2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-702594,ap-northeast-1,StorageUsage.StandardIAStorage,31830.68,GB-Mo,112.42,104.9580618135538,testing,team-epsilon,CC-4492,project-api
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Compute Cloud,ec2-165939,ap-northeast-1,BoxUsage:t3.micro,206.46,Hrs,307.65,276.6243908740708,development,team-gamma,CC-2153,project-data
+2024-01-01,2024-01-31,345678901234,AWS Lambda,function-handler-604,ap-northeast-1,Duration-ARM,183184.93,GB-Mo,38.67,35.003995702742884,development,team-delta,CC-4951,project-data
+2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-455658,us-west-2,InstanceUsage:db.r5.xlarge,426.36,Hrs,159.81,141.34387383054988,staging,team-beta,CC-6444,project-web
+2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-274115,us-east-1,InstanceUsage:db.t3.small,254.1,Hrs,181.84,172.13741189473012,staging,team-beta,CC-3319,project-ml
+2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-222591,ap-northeast-1,StorageUsage.StandardIAStorage,10160.42,GB-Mo,928.52,889.9827576708623,testing,team-delta,CC-3889,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-903060,ap-southeast-1,BoxUsage:m5.xlarge,502.28,Hrs,299.21,282.223525092824,testing,team-alpha,CC-4486,project-api
+2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-951852,eu-west-1,StorageUsage.StandardIAStorage,15546.73,GB-Mo,717.05,612.5553684830971,testing,team-beta,CC-7570,project-web
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-662027,eu-west-1,VolumeUsage.gp2,925.49,GB-Mo,152.15,135.02849135660918,testing,team-delta,CC-5201,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-326978,ap-northeast-1,VolumeUsage.gp3,1911.26,GB-Mo,67.45,54.27194139047004,production,team-beta,CC-6768,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-529951,eu-west-1,BoxUsage:t3.medium,485.93,Hrs,204.84,174.9235743358987,production,team-delta,CC-7793,project-api
+2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-636820,ap-northeast-1,DataTransfer-Out-Bytes,40634.15,GB-Mo,7.95,7.4578243551891035,staging,team-alpha,CC-2536,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-723915,us-west-2,BoxUsage:t3.micro,631.32,Hrs,369.97,354.08138383545025,testing,team-alpha,CC-5462,project-data
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-763789,ap-southeast-1,Requests-HTTP,13662.25,GB-Mo,100.24,99.77911602747601,production,team-beta,CC-4452,project-data
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-822823,us-east-1,VolumeUsage.io2,1340.0,GB-Mo,197.55,197.12602174257222,testing,team-delta,CC-3076,project-web
+2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-189994,ap-southeast-1,ReadCapacityUnit-Hrs,1635.04,GB-Mo,118.22,111.71730367465622,testing,team-alpha,CC-9639,project-api
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-835643,us-west-2,BoxUsage:t3.large,218.3,Hrs,398.68,324.3870039217777,testing,team-epsilon,CC-7813,project-api
+2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-211179,ap-northeast-1,ReadCapacityUnit-Hrs,7997.72,GB-Mo,86.04,73.56340641323378,production,team-alpha,CC-8679,project-ml
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-515658,eu-west-1,BoxUsage:m5.xlarge,456.57,Hrs,112.11,100.92255052651302,development,team-epsilon,CC-7712,project-api
+2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-817530,eu-west-1,DataTransfer-Out-Bytes,2581.74,GB-Mo,86.6,85.86821269631466,development,team-alpha,CC-8008,project-api
+2024-01-01,2024-01-31,234567890123,AWS Lambda,function-api-119,ap-northeast-1,Duration,393578.48,GB-Mo,47.26,40.70766065397831,staging,team-beta,CC-3331,project-api
+2024-01-01,2024-01-31,234567890123,AWS Lambda,function-handler-391,eu-west-1,Duration-ARM,132146.23,GB-Mo,47.64,44.469637271774324,testing,team-delta,CC-5161,project-data
+2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-454347,us-west-2,ReadCapacityUnit-Hrs,3851.6,GB-Mo,5.63,4.874825854405642,production,team-gamma,CC-3375,project-web
+2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-876078,us-east-1,StorageUsage.IntelligentTieringFAStorage,33110.95,GB-Mo,649.23,646.8759203406267,staging,team-delta,CC-3256,project-data
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-468252,ap-northeast-1,DataTransfer-Out-Bytes,44335.95,GB-Mo,8.4,8.37757565023018,production,team-epsilon,CC-8510,project-ml
+2024-01-01,2024-01-31,345678901234,AWS Lambda,function-api-503,ap-southeast-1,Request-ARM,55663.59,GB-Mo,18.94,16.911113288828762,staging,team-gamma,CC-8883,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-578239,eu-west-1,BoxUsage:t3.medium,604.25,Hrs,413.94,344.1139069178739,development,team-epsilon,CC-9366,project-data
+2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-794842,ap-southeast-1,ReadCapacityUnit-Hrs,3465.0,GB-Mo,114.35,113.33444053181199,staging,team-delta,CC-4155,project-ml
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-152918,ap-northeast-1,BoxUsage:t3.large,718.94,Hrs,480.99,406.8619818583343,staging,team-beta,CC-2182,project-web
+2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-239069,ap-southeast-1,StorageUsage.OneZoneIAStorage,37166.73,GB-Mo,808.56,720.9313487279101,development,team-epsilon,CC-8914,project-ml
+2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-889611,eu-west-1,InstanceUsage:db.t3.small,587.96,Hrs,187.57,150.21699774054073,production,team-epsilon,CC-9141,project-data
+2024-01-01,2024-01-31,345678901234,AWS Lambda,function-handler-925,us-east-1,Request-ARM,916562.05,GB-Mo,27.73,25.93972799241281,testing,team-beta,CC-6967,project-web
+2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-308405,eu-west-1,StorageUsage.OneZoneIAStorage,948.17,GB-Mo,195.44,168.36734172515511,testing,team-alpha,CC-3515,project-web
+2024-01-01,2024-01-31,123456789012,AWS Lambda,function-handler-571,us-west-2,Request-ARM,829436.25,GB-Mo,40.33,35.37185004215712,testing,team-epsilon,CC-6970,project-data
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-886241,us-west-2,Requests-HTTP,81817.06,GB-Mo,158.73,151.89600806414322,production,team-beta,CC-3632,project-data
+2024-01-01,2024-01-31,456789012345,Amazon DynamoDB,dynamodb-845875,us-west-2,ReadCapacityUnit-Hrs,6370.78,GB-Mo,46.42,45.33690093694143,staging,team-delta,CC-5197,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-659401,ap-northeast-1,StorageUsage.IntelligentTieringFAStorage,22653.77,GB-Mo,546.21,490.02597536734737,testing,team-epsilon,CC-5877,project-api
+2024-01-01,2024-01-31,234567890123,Amazon Simple Storage Service,s3-624755,ap-southeast-1,StorageUsage.OneZoneIAStorage,21270.43,GB-Mo,725.0,633.1410825276622,testing,team-beta,CC-3065,project-api
+2024-01-01,2024-01-31,234567890123,AWS Lambda,function-api-665,eu-west-1,Request-ARM,353810.14,GB-Mo,43.55,37.16098091740255,testing,team-beta,CC-5279,project-web
+2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-851983,eu-west-1,InstanceUsage:db.r5.xlarge,581.47,Hrs,227.69,196.29002354165067,development,team-gamma,CC-2582,project-data
+2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-594238,ap-southeast-1,InstanceUsage:db.r5.large,470.03,Hrs,457.36,391.3668483443081,testing,team-gamma,CC-9464,project-web
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-123672,us-east-1,BoxUsage:c5.large,421.46,Hrs,188.23,158.3734159823077,testing,team-alpha,CC-8668,project-data
+2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-372458,ap-northeast-1,StorageUsage.OneZoneIAStorage,39123.51,GB-Mo,334.22,320.1214032091423,development,team-epsilon,CC-7746,project-data
+2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-487364,us-east-1,ReadCapacityUnit-Hrs,5787.8,GB-Mo,110.8,91.72610026688345,testing,team-epsilon,CC-6104,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-274102,eu-west-1,VolumeUsage.gp3,1994.41,GB-Mo,181.78,156.78337598041833,staging,team-delta,CC-5523,project-ml
+2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-940185,ap-southeast-1,DataTransfer-Out-Bytes,35536.4,GB-Mo,179.26,172.83700543280972,staging,team-beta,CC-2913,project-web
+2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-604805,eu-west-1,InstanceUsage:db.t3.micro,641.8,Hrs,747.27,675.6521332446559,staging,team-alpha,CC-3274,project-ml
+2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-975425,us-east-1,Requests-HTTP,40924.82,GB-Mo,14.99,14.954472619290643,development,team-alpha,CC-7203,project-ml
+2024-01-01,2024-01-31,345678901234,Amazon CloudFront,cloudfront-449856,ap-northeast-1,Requests-HTTP,17213.09,GB-Mo,181.76,177.12372858901747,production,team-gamma,CC-7537,project-web
+2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-850975,us-east-1,StorageUsage.OneZoneIAStorage,12648.04,GB-Mo,560.42,515.0781352401104,production,team-alpha,CC-3029,project-data
+2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-401377,us-east-1,Requests-HTTPS,23121.02,GB-Mo,96.52,78.92242321407959,development,team-delta,CC-7536,project-ml
+2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-505127,ap-northeast-1,InstanceUsage:db.t3.small,500.84,Hrs,101.58,84.98095546559757,testing,team-beta,CC-1243,project-api
+2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-674197,ap-northeast-1,InstanceUsage:db.t3.micro,480.55,Hrs,421.41,369.9761577727442,testing,team-epsilon,CC-6488,project-data
+2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-131972,eu-west-1,InstanceUsage:db.t3.small,144.34,Hrs,187.4,164.6734378072464,production,team-gamma,CC-4813,project-ml
+2024-01-01,2024-01-31,234567890123,AWS Lambda,function-processor-722,eu-west-1,Duration,34299.27,GB-Mo,3.41,3.2611302102616673,staging,team-delta,CC-7729,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-208032,us-west-2,VolumeUsage.gp2,1710.52,GB-Mo,57.31,53.21787943128661,staging,team-beta,CC-5321,project-api
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-195799,us-west-2,BoxUsage:m5.xlarge,731.89,Hrs,93.79,93.36227187890529,development,team-gamma,CC-2224,project-web
+2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-124199,us-east-1,StorageUsage,9705.68,GB-Mo,52.01,48.35660575255254,production,team-gamma,CC-6661,project-ml
+2024-01-01,2024-01-31,123456789012,AWS Lambda,function-handler-536,us-west-2,Duration,517907.89,GB-Mo,43.58,38.64353525136253,staging,team-delta,CC-7187,project-web
+2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-405471,us-east-1,InstanceUsage:db.t3.micro,612.31,Hrs,146.72,145.59333828126285,production,team-epsilon,CC-9840,project-web
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,ebs-512248,us-west-2,VolumeUsage.gp2,1843.77,GB-Mo,156.2,132.19656222294975,testing,team-delta,CC-9911,project-ml
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-105209,us-east-1,BoxUsage:r5.large,169.79,Hrs,286.18,242.72060308955594,staging,team-beta,CC-1364,project-api
+2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-422472,eu-west-1,ReadCapacityUnit-Hrs,4839.84,GB-Mo,130.94,118.69118440918344,testing,team-delta,CC-9120,project-ml
+2024-01-01,2024-01-31,234567890123,Amazon Simple Storage Service,s3-602621,ap-southeast-1,StorageUsage.IntelligentTieringFAStorage,32138.92,GB-Mo,670.64,590.9482020300086,staging,team-gamma,CC-2100,project-data
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-650369,eu-west-1,Requests-HTTPS,81531.28,GB-Mo,274.69,240.2152919905366,testing,team-gamma,CC-8168,project-web
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-231911,eu-west-1,BoxUsage:t3.medium,597.66,Hrs,148.94,124.12677551306747,staging,team-delta,CC-9514,project-api
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-985505,ap-northeast-1,VolumeUsage.gp3,275.48,GB-Mo,42.79,36.90922538272516,production,team-epsilon,CC-5323,project-api
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-604361,eu-west-1,Requests-HTTP,1886.48,GB-Mo,148.43,145.91800932451696,development,team-epsilon,CC-1920,project-api
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,ebs-924025,us-west-2,VolumeUsage.gp2,1572.6,GB-Mo,75.94,73.26265998237481,testing,team-gamma,CC-1556,project-data
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,ebs-973287,eu-west-1,VolumeUsage.gp3,1009.8,GB-Mo,50.17,44.551396420178385,testing,team-delta,CC-4249,project-ml
+2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-710814,us-west-2,StorageUsage.StandardStorage,44914.74,GB-Mo,671.15,573.501429733742,development,team-epsilon,CC-8428,project-api
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-342504,ap-southeast-1,Requests-HTTPS,44203.62,GB-Mo,126.72,124.38766232704172,staging,team-beta,CC-5648,project-data
+2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-707321,ap-southeast-1,WriteCapacityUnit-Hrs,5122.9,GB-Mo,69.31,64.77260157339474,production,team-gamma,CC-7213,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-249519,eu-west-1,StorageUsage.OneZoneIAStorage,44510.35,GB-Mo,244.92,215.15345865386308,production,team-alpha,CC-7540,project-data
+2024-01-01,2024-01-31,345678901234,AWS Lambda,function-api-256,us-west-2,Duration,742888.86,GB-Mo,12.66,11.62860504034867,development,team-alpha,CC-8421,project-web
+2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-106991,eu-west-1,InstanceUsage:db.t3.micro,441.6,Hrs,580.63,504.23290463023113,development,team-delta,CC-7989,project-web
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-991099,ap-northeast-1,Requests-HTTP,84506.51,GB-Mo,78.97,63.72358523683208,production,team-beta,CC-1364,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-861911,us-west-2,VolumeUsage.gp2,1953.24,GB-Mo,130.22,110.50192553955922,production,team-epsilon,CC-8474,project-api
+2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-619370,eu-west-1,StorageUsage,3335.67,GB-Mo,125.18,106.22856024693881,development,team-beta,CC-5927,project-web
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-271783,ap-northeast-1,BoxUsage:t3.large,127.92,Hrs,250.12,210.4011638453842,development,team-delta,CC-2745,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Compute Cloud,ec2-160741,us-west-2,BoxUsage:t3.micro,546.62,Hrs,465.03,428.1774059696898,staging,team-beta,CC-8805,project-data
+2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-118012,us-east-1,InstanceUsage:db.r5.large,691.34,Hrs,622.03,522.9301450820129,development,team-beta,CC-1372,project-api
+2024-01-01,2024-01-31,456789012345,Amazon DynamoDB,dynamodb-259191,eu-west-1,ReadCapacityUnit-Hrs,3136.18,GB-Mo,144.64,141.0704448748541,staging,team-beta,CC-1469,project-ml
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,ebs-985541,ap-northeast-1,VolumeUsage.io2,1242.61,GB-Mo,178.93,148.8457002804253,testing,team-beta,CC-1366,project-ml
+2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-533318,ap-southeast-1,StorageUsage,4242.32,GB-Mo,18.92,17.428512799265974,staging,team-alpha,CC-4951,project-web
+2024-01-01,2024-01-31,345678901234,AWS Lambda,function-handler-742,ap-northeast-1,Duration-ARM,575534.34,GB-Mo,26.25,22.902887550722383,production,team-alpha,CC-2894,project-api
+2024-01-01,2024-01-31,456789012345,Amazon DynamoDB,dynamodb-240212,ap-southeast-1,StorageUsage,1291.3,GB-Mo,84.32,77.9168969131112,development,team-beta,CC-5850,project-data
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,ebs-911556,ap-southeast-1,VolumeUsage.gp2,1010.83,GB-Mo,53.53,45.33463804919169,development,team-gamma,CC-2196,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-503705,ap-northeast-1,InstanceUsage:db.t3.small,557.61,Hrs,510.35,499.2994277795661,development,team-beta,CC-5839,project-web
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Compute Cloud,ec2-754560,us-east-1,BoxUsage:t3.large,630.46,Hrs,432.93,411.7850485598677,development,team-alpha,CC-9789,project-api
+2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-862356,ap-southeast-1,InstanceUsage:db.r5.xlarge,589.25,Hrs,548.66,497.1202411603408,production,team-gamma,CC-1541,project-web
+2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-921352,eu-west-1,StorageUsage.StandardIAStorage,42490.64,GB-Mo,73.2,61.72567442372593,development,team-epsilon,CC-4281,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-617500,eu-west-1,StorageUsage.IntelligentTieringFAStorage,32582.95,GB-Mo,425.24,373.01578008713034,development,team-alpha,CC-6333,project-web
+2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-263060,ap-southeast-1,StorageUsage,5837.02,GB-Mo,88.79,87.71449768065753,production,team-beta,CC-3453,project-web
+2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-722537,us-east-1,Requests-HTTPS,8685.26,GB-Mo,132.37,113.29215973040166,production,team-gamma,CC-1253,project-data
+2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-694957,ap-northeast-1,StorageUsage.StandardIAStorage,8806.4,GB-Mo,232.35,228.72097745174332,production,team-epsilon,CC-3712,project-api
+2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-617741,us-east-1,ReadCapacityUnit-Hrs,8623.6,GB-Mo,13.09,12.38027276803026,development,team-delta,CC-3171,project-data
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-491697,us-west-2,Requests-HTTPS,30597.55,GB-Mo,236.01,209.04401626259457,production,team-alpha,CC-5721,project-web
+2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-827567,ap-northeast-1,InstanceUsage:db.r5.xlarge,675.84,Hrs,604.0,591.9834186067043,staging,team-beta,CC-8185,project-ml
+2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-582093,ap-southeast-1,InstanceUsage:db.r5.large,417.89,Hrs,89.17,80.97489053741415,development,team-alpha,CC-7860,project-data
+2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-282218,ap-northeast-1,DataTransfer-Out-Bytes,45615.18,GB-Mo,280.13,234.6255291563194,staging,team-beta,CC-2749,project-ml
+2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-829355,ap-northeast-1,InstanceUsage:db.t3.small,548.62,Hrs,391.17,374.1225485678186,staging,team-alpha,CC-7440,project-api
+2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-369060,ap-northeast-1,Requests-HTTP,15742.36,GB-Mo,171.9,145.2652754154648,testing,team-alpha,CC-8496,project-data
+2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-276182,eu-west-1,InstanceUsage:db.t3.small,511.9,Hrs,744.45,602.2832139602413,development,team-beta,CC-7985,project-api
+2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-230019,us-west-2,StorageUsage,149.42,GB-Mo,47.94,40.77793477869988,production,team-alpha,CC-7623,project-api
+2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-987802,eu-west-1,StorageUsage,1172.96,GB-Mo,93.66,85.46817352689357,development,team-alpha,CC-5666,project-ml
+2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-703132,eu-west-1,InstanceUsage:db.r5.large,490.52,Hrs,42.96,38.57201919730214,development,team-alpha,CC-7174,project-data
+2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-221959,ap-northeast-1,InstanceUsage:db.r5.large,569.29,Hrs,458.61,407.9178672921317,development,team-gamma,CC-2945,project-ml
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-967728,us-east-1,VolumeUsage.gp3,434.19,GB-Mo,33.68,30.35301168282493,staging,team-alpha,CC-9836,project-data
+2024-01-01,2024-01-31,456789012345,AWS Lambda,function-api-793,us-west-2,Request-ARM,209283.84,GB-Mo,41.07,40.88650861070439,development,team-beta,CC-7874,project-ml
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-420366,us-east-1,VolumeUsage.gp2,279.67,GB-Mo,95.84,77.7202238346193,testing,team-beta,CC-7294,project-api
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-858708,us-west-2,BoxUsage:m5.large,436.28,Hrs,471.31,455.2543279916608,production,team-alpha,CC-9813,project-ml
+2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-277458,ap-southeast-1,StorageUsage,5629.76,GB-Mo,99.34,88.33515006464536,development,team-epsilon,CC-3223,project-ml
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-604544,us-west-2,VolumeUsage.gp3,652.32,GB-Mo,141.8,127.01887235113921,staging,team-delta,CC-1540,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-841751,ap-southeast-1,VolumeUsage.gp3,528.58,GB-Mo,191.84,178.30580147021735,testing,team-alpha,CC-2169,project-api
+2024-01-01,2024-01-31,234567890123,AWS Lambda,function-processor-596,eu-west-1,Duration-ARM,963629.08,GB-Mo,46.57,42.8852970576201,production,team-delta,CC-8136,project-data
+2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-177341,us-west-2,WriteCapacityUnit-Hrs,7416.46,GB-Mo,127.82,121.53120513915708,testing,team-gamma,CC-9269,project-web
+2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-151436,ap-southeast-1,Requests-HTTP,49885.58,GB-Mo,28.56,26.50698251116674,staging,team-delta,CC-5106,project-data
+2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-573239,us-east-1,Requests-HTTPS,78381.02,GB-Mo,118.51,97.57908375271622,staging,team-beta,CC-7878,project-ml
+2024-01-01,2024-01-31,345678901234,Amazon Relational Database Service,rds-615159,ap-southeast-1,InstanceUsage:db.t3.micro,491.75,Hrs,694.07,646.4149798891085,production,team-alpha,CC-6253,project-web
+2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-549602,us-east-1,InstanceUsage:db.t3.small,292.81,Hrs,312.64,278.3419557003692,staging,team-delta,CC-7244,project-web
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-663837,ap-northeast-1,VolumeUsage.gp2,1893.09,GB-Mo,54.26,49.51593351955432,staging,team-epsilon,CC-5243,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Block Store,ebs-147280,us-east-1,VolumeUsage.gp3,1176.76,GB-Mo,185.83,172.46848050341242,testing,team-epsilon,CC-5176,project-api
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Compute Cloud,ec2-248311,ap-northeast-1,BoxUsage:c5.large,676.4,Hrs,498.84,494.29011849428895,development,team-gamma,CC-5887,project-data
+2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-343182,eu-west-1,InstanceUsage:db.r5.xlarge,645.39,Hrs,401.43,394.4065155275613,development,team-epsilon,CC-5286,project-web
+2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-927831,us-west-2,Requests-HTTPS,14475.68,GB-Mo,23.83,21.348593434128325,development,team-alpha,CC-4932,project-ml
+2024-01-01,2024-01-31,345678901234,AWS Lambda,function-handler-236,us-east-1,Request,898700.67,GB-Mo,1.54,1.5213012657202039,production,team-alpha,CC-3369,project-ml
+2024-01-01,2024-01-31,456789012345,Amazon DynamoDB,dynamodb-296498,ap-northeast-1,ReadCapacityUnit-Hrs,945.23,GB-Mo,43.55,42.05469872045116,development,team-beta,CC-6587,project-ml
+2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-736410,eu-west-1,StorageUsage.IntelligentTieringFAStorage,17746.23,GB-Mo,50.99,42.6360983023382,development,team-gamma,CC-4075,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Relational Database Service,rds-264898,ap-southeast-1,InstanceUsage:db.t3.micro,568.14,Hrs,292.69,250.05539493411666,testing,team-delta,CC-7405,project-api
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-846870,us-west-2,VolumeUsage.gp3,1937.62,GB-Mo,171.58,155.56059656681427,production,team-alpha,CC-8173,project-data
+2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-429054,ap-northeast-1,DataTransfer-Out-Bytes,14331.87,GB-Mo,231.4,226.27876991152493,development,team-beta,CC-7290,project-api
+2024-01-01,2024-01-31,123456789012,Amazon Relational Database Service,rds-489181,ap-northeast-1,InstanceUsage:db.t3.micro,422.05,Hrs,493.3,479.68063160365676,staging,team-delta,CC-1998,project-api
+2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-824241,us-east-1,DataTransfer-Out-Bytes,19694.12,GB-Mo,94.41,77.98883488104485,staging,team-delta,CC-9309,project-ml
+2024-01-01,2024-01-31,345678901234,AWS Lambda,function-api-837,ap-northeast-1,Duration-ARM,811451.94,GB-Mo,37.97,34.584997700986754,testing,team-alpha,CC-9162,project-api
+2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-831907,ap-southeast-1,InstanceUsage:db.t3.micro,131.72,Hrs,672.32,556.498365954932,testing,team-delta,CC-9984,project-web
+2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-764930,ap-northeast-1,StorageUsage.StandardIAStorage,6072.18,GB-Mo,549.52,499.6645018635139,development,team-epsilon,CC-2177,project-data
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-611551,ap-southeast-1,VolumeUsage.gp2,873.31,GB-Mo,108.43,106.46916289082556,development,team-delta,CC-7789,project-api
+2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-118507,us-west-2,ReadCapacityUnit-Hrs,2259.4,GB-Mo,76.48,73.48174411102767,production,team-gamma,CC-8410,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Simple Storage Service,s3-570645,eu-west-1,StorageUsage.OneZoneIAStorage,40831.69,GB-Mo,920.88,776.6607593707313,production,team-delta,CC-5642,project-web
+2024-01-01,2024-01-31,456789012345,Amazon Elastic Block Store,ebs-201501,ap-northeast-1,VolumeUsage.gp2,1581.51,GB-Mo,138.11,115.42383162200204,testing,team-beta,CC-3789,project-data
+2024-01-01,2024-01-31,234567890123,Amazon DynamoDB,dynamodb-643902,ap-northeast-1,StorageUsage,3142.59,GB-Mo,94.45,81.83837304541653,staging,team-alpha,CC-2114,project-web
+2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-510890,ap-southeast-1,StorageUsage.IntelligentTieringFAStorage,8267.24,GB-Mo,917.23,907.1643250320383,staging,team-gamma,CC-5936,project-web
+2024-01-01,2024-01-31,234567890123,AWS Lambda,function-processor-625,ap-southeast-1,Duration,427508.46,GB-Mo,10.64,8.913062032972988,testing,team-epsilon,CC-7822,project-api
+2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-612452,us-east-1,Requests-HTTPS,58430.16,GB-Mo,181.8,162.31857289568092,staging,team-gamma,CC-9941,project-api
+2024-01-01,2024-01-31,123456789012,Amazon DynamoDB,dynamodb-973330,eu-west-1,WriteCapacityUnit-Hrs,7429.23,GB-Mo,10.77,8.73922877622808,staging,team-epsilon,CC-8390,project-api
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Compute Cloud,ec2-483141,ap-northeast-1,BoxUsage:t3.medium,561.88,Hrs,462.49,449.7018296029794,staging,team-gamma,CC-6423,project-ml
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-411929,eu-west-1,Requests-HTTP,66766.94,GB-Mo,89.67,82.78048647470894,testing,team-delta,CC-4321,project-ml
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-951133,ap-southeast-1,Requests-HTTP,27256.44,GB-Mo,118.87,111.4843380553511,production,team-delta,CC-5747,project-data
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-351913,eu-west-1,BoxUsage:m5.large,397.49,Hrs,174.03,141.09626690326968,production,team-beta,CC-9996,project-web
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-392414,us-west-2,BoxUsage:t3.xlarge,295.49,Hrs,283.54,262.27370522728717,development,team-delta,CC-8538,project-web
+2024-01-01,2024-01-31,456789012345,Amazon DynamoDB,dynamodb-504898,ap-northeast-1,WriteCapacityUnit-Hrs,883.24,GB-Mo,95.18,84.19662195019404,staging,team-epsilon,CC-7086,project-data
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-807982,eu-west-1,Requests-HTTPS,18978.45,GB-Mo,121.25,118.3552958270034,production,team-beta,CC-2091,project-web
+2024-01-01,2024-01-31,345678901234,Amazon Elastic Compute Cloud,ec2-675616,ap-southeast-1,BoxUsage:r5.large,318.79,Hrs,383.76,353.4405882318523,development,team-epsilon,CC-1392,project-api
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-480677,ap-northeast-1,VolumeUsage.gp2,231.1,GB-Mo,196.42,196.0109944328818,testing,team-gamma,CC-3107,project-web
+2024-01-01,2024-01-31,456789012345,Amazon CloudFront,cloudfront-943679,us-west-2,Requests-HTTPS,19831.11,GB-Mo,93.13,81.33520750963052,development,team-alpha,CC-2457,project-ml
+2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-406259,eu-west-1,DataTransfer-Out-Bytes,69938.96,GB-Mo,200.41,197.62997544150642,testing,team-delta,CC-5524,project-web
+2024-01-01,2024-01-31,456789012345,AWS Lambda,function-handler-671,ap-northeast-1,Duration,835868.79,GB-Mo,47.33,37.950655378410936,staging,team-epsilon,CC-5556,project-api
+2024-01-01,2024-01-31,234567890123,Amazon CloudFront,cloudfront-905707,us-west-2,Requests-HTTPS,26693.27,GB-Mo,147.3,142.18683828521446,production,team-alpha,CC-2552,project-data
+2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-345030,ap-northeast-1,StorageUsage,8603.76,GB-Mo,112.26,108.31310865318558,development,team-alpha,CC-5689,project-ml
+2024-01-01,2024-01-31,123456789012,AWS Lambda,function-api-362,ap-southeast-1,Duration-ARM,212045.34,GB-Mo,41.35,35.15198201766069,testing,team-delta,CC-3832,project-ml
+2024-01-01,2024-01-31,456789012345,AWS Lambda,function-processor-417,us-west-2,Duration-ARM,398417.97,GB-Mo,46.72,40.383793965870574,testing,team-beta,CC-2122,project-data
+2024-01-01,2024-01-31,123456789012,Amazon CloudFront,cloudfront-502248,ap-southeast-1,DataTransfer-Out-Bytes,87430.13,GB-Mo,231.21,221.38874787500927,production,team-delta,CC-3555,project-data
+2024-01-01,2024-01-31,234567890123,Amazon Relational Database Service,rds-838518,ap-northeast-1,InstanceUsage:db.t3.small,672.14,Hrs,137.86,137.17134302528214,staging,team-alpha,CC-9066,project-data
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-119428,ap-northeast-1,VolumeUsage.io2,1758.6,GB-Mo,29.05,24.951755386547052,development,team-gamma,CC-8226,project-api
+2024-01-01,2024-01-31,456789012345,Amazon Simple Storage Service,s3-184546,eu-west-1,StorageUsage.StandardStorage,35662.85,GB-Mo,607.03,520.4244343118457,staging,team-epsilon,CC-6933,project-ml
+2024-01-01,2024-01-31,345678901234,Amazon DynamoDB,dynamodb-766448,eu-west-1,ReadCapacityUnit-Hrs,1644.26,GB-Mo,137.91,129.73822482546257,production,team-beta,CC-2627,project-ml
+2024-01-01,2024-01-31,234567890123,Amazon Elastic Block Store,ebs-562521,ap-southeast-1,VolumeUsage.io2,1326.52,GB-Mo,45.34,37.16877139428842,testing,team-epsilon,CC-2149,project-web
+2024-01-01,2024-01-31,456789012345,AWS Lambda,function-handler-854,us-east-1,Request,414727.27,GB-Mo,10.4,9.24782076010311,production,team-gamma,CC-8051,project-web
+2024-01-01,2024-01-31,123456789012,Amazon Simple Storage Service,s3-104067,ap-northeast-1,StorageUsage.OneZoneIAStorage,30292.36,GB-Mo,358.04,348.4769551679488,staging,team-gamma,CC-6395,project-web
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,ebs-106329,eu-west-1,VolumeUsage.gp3,1818.71,GB-Mo,188.71,184.5730082250174,staging,team-delta,CC-6354,project-web

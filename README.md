@@ -80,7 +80,7 @@ A multi-agent system for cloud cost optimization using Large Language Models (LL
 ### Test with Sample Data
 
 ```bash
-python -m llm_cost_recommendation --account-id 123456789012 --sample-data
+python -m llm_cost_recommendation --sample-data
 ```
 
 This will:
@@ -93,7 +93,6 @@ This will:
 
 ```bash
 python -m llm_cost_recommendation \
-  --account-id 123456789012 \
   --billing-file data/billing/sample_billing.csv \
   --inventory-file data/inventory/sample_inventory.json \
   --metrics-file data/metrics/sample_metrics.csv \
@@ -111,10 +110,10 @@ The system supports multiple output formats:
 
 ```bash
 # Generate Excel report with multiple sheets
-python -m llm_cost_recommendation --account-id 123456789012 --sample-data --output-format excel --output-file report.xlsx
+python -m llm_cost_recommendation --sample-data --output-format excel --output-file report.xlsx
 
 # Generate CSV summary table
-python -m llm_cost_recommendation --account-id 123456789012 --sample-data --output-format csv --output-file summary.csv
+python -m llm_cost_recommendation --sample-data --output-format csv --output-file summary.csv
 ```
 
 ### Check System Status
@@ -323,7 +322,7 @@ llm-cost-recommendation/
 Run with sample data:
 
 ```bash
-python -m llm_cost_recommendation --account-id test --sample-data
+python -m llm_cost_recommendation --sample-data
 ```
 
 ### Installing as Package
@@ -333,7 +332,7 @@ python -m llm_cost_recommendation --account-id test --sample-data
 pip install -e .
 
 # Run from anywhere
-llm-cost-recommendation --account-id test --sample-data
+llm-cost-recommendation --sample-data
 ```
 
 ### Logging

@@ -172,18 +172,14 @@ source .venv/bin/activate
 
 # Run with sample data  
 python -m llm_cost_recommendation \
-  --account-id "123456789012" \
   --sample-data
 
 # Run with real data
 python -m llm_cost_recommendation \
-  --account-id "123456789012" \
   --billing-file data/billing/sample_billing.csv \
   --inventory-file data/inventory/sample_inventory.json \
   --metrics-file data/metrics/sample_metrics.csv \
   --output-file report.json
-
-# Account ID is provided as a placeholder for AWS Account ID in case of multiple account data is provided (will be remove to support multiple cloud)
 ```
 
 ### Export Format Options
@@ -191,21 +187,18 @@ python -m llm_cost_recommendation \
 ```bash
 # Generate detailed JSON report (default)
 python -m llm_cost_recommendation \
-  --account-id "123456789012" \
   --sample-data \
   --output-format json \
   --output-file detailed_report.json
 
 # Generate CSV summary table
 python -m llm_cost_recommendation \
-  --account-id "123456789012" \
   --sample-data \
   --output-format csv \
   --output-file summary.csv
 
 # Generate Excel workbook with multiple sheets
 python -m llm_cost_recommendation \
-  --account-id "123456789012" \
   --sample-data \
   --output-format excel \
   --output-file comprehensive_report.xlsx
@@ -215,7 +208,7 @@ python -m llm_cost_recommendation \
 
 ```bash
 # Verbose debugging
-python -m llm_cost_recommendation --account-id test --sample-data --verbose
+python -m llm_cost_recommendation --sample-data --verbose
 
 # Check system status
 python -m llm_cost_recommendation --status
@@ -534,25 +527,24 @@ class RecommendationType(str, Enum):
 pip install -e .
 
 # Run with sample data for testing
-python -m llm_cost_recommendation --account-id test --sample-data
+python -m llm_cost_recommendation --sample-data
 
 # Test specific export formats
-python -m llm_cost_recommendation --account-id test --sample-data --output-format csv
-python -m llm_cost_recommendation --account-id test --sample-data --output-format excel
+python -m llm_cost_recommendation --sample-data --output-format csv
+python -m llm_cost_recommendation --sample-data --output-format excel
 ```
 
 ### Debugging Multi-Cloud Analysis
 
 ```bash
 # Verbose logging for debugging
-python -m llm_cost_recommendation --verbose --sample-data --account-id debug
+python -m llm_cost_recommendation --verbose --sample-data
 
 # Check system status and configuration
 python -m llm_cost_recommendation --status
 
 # Test with real data
 python -m llm_cost_recommendation \
-  --account-id "production-123" \
   --billing-file data/billing/sample_billing.csv \
   --inventory-file data/inventory/sample_inventory.json \
   --metrics-file data/metrics/sample_metrics.csv \

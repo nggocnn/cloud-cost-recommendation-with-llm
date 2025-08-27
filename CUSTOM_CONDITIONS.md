@@ -32,7 +32,7 @@ conditions:
 - `service` - AWS service type (EC2, S3, RDS, etc.)
 - `region` - AWS region
 - `availability_zone` - AZ for the resource
-- `account_id` - AWS account ID
+- `account_id` - AWS account ID (for reference, system processes multi-account data)
 
 #### Tag Fields (prefix with `tag.`)
 
