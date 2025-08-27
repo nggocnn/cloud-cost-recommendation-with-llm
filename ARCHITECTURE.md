@@ -1,80 +1,103 @@
 # LLM Cost Recommendation System - Architecture & Usage Guide
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
-This is a **multi-agent LLM-powered AWS cost optimization system** that analyzes cloud resources and provides actionable cost reduction recommendations.
+This is a **multi-agent LLM-powered multi-cloud cost optimization system** that analyzes cloud resources across AWS, Azure, and Google Cloud Platform to provide actionable cost reduction recommendations.
 
 ### Core Components
 
-```txt
+```text
 llm_cost_recommendation/
-├── agents/           # Multi-agent system
-│   ├── coordinator.py    # Orchestrates analysis
-│   └── base.py          # Service-specific agents (EC2, S3, RDS, etc.)
-├── models/           # Data models & schemas
-├── services/         # Core services
-│   ├── config.py        # Configuration management
-│   ├── llm.py          # LangChain/OpenAI integration
-│   ├── ingestion.py    # Data ingestion & processing
-│   └── logging.py      # Enhanced logging system
-├── cli.py           # Command-line interface
-└── __main__.py      # Module entry point
+├── agents/                  # Multi-agent system
+│   ├── coordinator.py       # Orchestrates analysis across all cloud providers
+│   └── base.py             # Service-specific agents (EC2, VMs, Compute Engine, etc.)
+├── models/                 # Data models & schemas
+│   ├── __init__.py         # Core models and enums
+│   └── *.py               # Provider-specific models
+├── services/              # Core services
+│   ├── config.py          # Configuration management
+│   ├── llm.py             # LangChain/OpenAI integration
+│   ├── ingestion.py       # Data ingestion & processing
+│   └── logging.py         # Enhanced logging system
+├── cli.py                 # Command-line interface with export options
+├── console.py             # Console output formatting
+└── __main__.py           # Module entry point
 ```
 
-## 🎯 System Flow
+## System Flow
 
 ### 1. Data Ingestion
 
-```txt
-AWS Data Sources → DataIngestionService → Structured Models
+```text
+Multi-Cloud Data Sources → DataIngestionService → Structured Models
 ```
 
-- **Billing Data**: CSV files with cost information
+- **Billing Data**: CSV files with cost information from any cloud provider
 - **Inventory Data**: JSON files with resource configurations
 - **Metrics Data**: CSV files with performance metrics
+- **Export Formats**: JSON (detailed), CSV (summary), Excel (multi-sheet)
 
 ### 2. Multi-Agent Analysis
 
-```txt
-Coordinator Agent → Service Agents → LLM Analysis → Recommendations
+```text
+Coordinator Agent → Cloud Provider Agents → Service Agents → LLM Analysis → Recommendations
 ```
 
-- **Coordinator**: Orchestrates the analysis workflow
-- **Service Agents**: Specialized agents for each AWS service (EC2, S3, RDS, etc.)
-- **LLM Integration**: Uses GPT-4 for intelligent analysis
+- **Coordinator**: Orchestrates the analysis workflow across all providers
+- **Provider Agents**: AWS, Azure, GCP-specific logic
+- **Service Agents**: Specialized agents for each service (EC2/VMs/Compute, Storage, Databases, etc.)
+- **LLM Integration**: Uses OpenAI GPT models for intelligent analysis
 
-### 3. Report Generation
+### 3. Report Generation & Export
 
-```txt
-Recommendations → Aggregation → Risk Assessment → Final Report
+```text
+Recommendations → Aggregation → Risk Assessment → Multi-Format Export
 ```
 
-## ⚙️ Configuration System
+- **JSON**: Complete detailed report with all metadata
+- **CSV**: Summary table for spreadsheet analysis
+- **Excel**: Multi-sheet workbook with comprehensive data
+
+## Configuration System
 
 ### Environment Configuration (`.env`)
 
 ```bash
 # LLM Configuration
+OPENAI_BASE_URL=https://api.openai.com/v1
 OPENAI_API_KEY=your_api_key_here
-LLM_MODEL=gpt-4o-mini
-LLM_TEMPERATURE=0.1
-LLM_MAX_TOKENS=4000
-
-# Optional: Model provider settings
-LLM_PROVIDER=openai  # openai, anthropic, etc.
+OPENAI_MODEL=gpt-4
 ```
 
-### Service Configuration (`config/*.yaml`)
+### Multi-Cloud Service Configuration (`config/*.yaml`)
 
 #### Coordinator Settings (`config/coordinator.yaml`)
 
 ```yaml
 enabled_services:
+  # AWS Services
   - EC2
   - EBS
   - S3
   - RDS
-  # ... more services
+  - Lambda
+  - ALB
+  - CloudFront
+  - DynamoDB
+  
+  # Azure Services  (not work yet)
+  - VirtualMachines
+  - ManagedDisks
+  - StorageAccounts
+  - SQLDatabase
+  - AzureFunctions
+  
+  # GCP Services (not work yet)
+  - ComputeEngine
+  - PersistentDisks
+  - CloudStorage
+  - CloudSQL
+  - CloudFunctions
 
 # Recommendation weighting
 savings_weight: 0.4          # 40% weight on cost savings
@@ -88,43 +111,57 @@ similarity_threshold: 0.8
 include_low_impact: false
 ```
 
-#### Service Agent Settings (`config/ec2_agent.yaml`)
+#### AWS Service Agent Settings (`config/aws.ec2_agent.yaml`)
 
 ```yaml
 agent_id: ec2_agent
-service: EC2
-enabled: true
-
+base_prompt: You are an expert AWS cost optimization specialist focusing on EC2 instances.
 capability:
-  supported_recommendation_types:
-    - rightsizing
-    - purchasing_option
-    - idle_resource
-  
-  required_metrics:
-    - cpu_utilization_p50
-    - cpu_utilization_p95
-    - memory_utilization_p50
-  
+  analysis_window_days: 30
   optional_metrics:
-    - network_in
-    - network_out
-  
+  - network_in
+  - network_out
+  required_metrics:
+  - cpu_utilization_p50
+  - cpu_utilization_p95
+  - memory_utilization_p50
+  service: AWS.EC2
+  supported_recommendation_types:
+  - rightsizing
+  - purchasing_option
+  - idle_resource
   thresholds:
     cpu_idle_threshold: 5.0
     cpu_low_threshold: 20.0
     memory_low_threshold: 30.0
     uptime_threshold: 0.95
-
-# LLM settings
-base_prompt: "You are an expert AWS cost optimization specialist..."
-service_specific_prompt: "Analyze EC2 instances for cost optimization..."
-max_tokens: 2000
 confidence_threshold: 0.7
+enabled: true
+max_tokens: 2000
 min_cost_threshold: 1.0
+service: AWS.EC2
+service_specific_prompt: '
+
+  Analyze EC2 instances for cost optimization opportunities. Consider:
+
+  1. CPU and memory utilization patterns
+
+  2. Instance family and generation efficiency
+
+  3. Purchase options (On-Demand vs Reserved vs Spot)
+
+  4. Idle or underutilized instances
+
+  5. Right-sizing opportunities based on actual usage
+
+
+  Provide specific recommendations with exact instance types and cost calculations.
+
+  '
+temperature: 0.1
 ```
 
-## 🚀 Usage Examples
+## Usage Examples
 
 ### Basic Analysis
 
@@ -133,19 +170,45 @@ min_cost_threshold: 1.0
 pip install -e .
 source .venv/bin/activate
 
-# Run with sample data
+# Run with sample data  
 python -m llm_cost_recommendation \
   --account-id "123456789012" \
-  --sample-data \
-  --log-format human
+  --sample-data
 
 # Run with real data
 python -m llm_cost_recommendation \
   --account-id "123456789012" \
-  --billing-file data/billing/costs.csv \
-  --inventory-file data/inventory/resources.json \
-  --metrics-file data/metrics/performance.csv \
+  --billing-file data/billing/sample_billing.csv \
+  --inventory-file data/inventory/sample_inventory.json \
+  --metrics-file data/metrics/sample_metrics.csv \
   --output-file report.json
+
+# Account ID is provided as a placeholder for AWS Account ID in case of multiple account data is provided (will be remove to support multiple cloud)
+```
+
+### Export Format Options
+
+```bash
+# Generate detailed JSON report (default)
+python -m llm_cost_recommendation \
+  --account-id "123456789012" \
+  --sample-data \
+  --output-format json \
+  --output-file detailed_report.json
+
+# Generate CSV summary table
+python -m llm_cost_recommendation \
+  --account-id "123456789012" \
+  --sample-data \
+  --output-format csv \
+  --output-file summary.csv
+
+# Generate Excel workbook with multiple sheets
+python -m llm_cost_recommendation \
+  --account-id "123456789012" \
+  --sample-data \
+  --output-format excel \
+  --output-file comprehensive_report.xlsx
 ```
 
 ### Advanced Options
@@ -154,14 +217,11 @@ python -m llm_cost_recommendation \
 # Verbose debugging
 python -m llm_cost_recommendation --account-id test --sample-data --verbose
 
-# Quiet mode (warnings only)
-python -m llm_cost_recommendation --account-id test --sample-data --quiet
-
-# JSON logging for automation
-python -m llm_cost_recommendation --status --log-format json
+# Check system status
+python -m llm_cost_recommendation --status
 ```
 
-## 🔄 System Workflow
+## System Workflow
 
 ### 1. Initialization Phase
 
@@ -215,17 +275,19 @@ for agent_recs in agent_recommendations.values():
 final_recommendations = deduplicate_and_rank(all_recommendations)
 ```
 
-## 🛠️ Extending the System
+## Extending the System
 
-### Adding New AWS Services
+### Adding New Cloud Services
 
 #### 1. Create Service Agent Configuration
 
-Create `config/newservice_agent.yaml`:
+Create `config/{provider}.{service}_agent.yaml`:
 
 ```yaml
-agent_id: newservice_agent
+# Example: config/aws.newservice_agent.yaml
+agent_id: aws.newservice_agent
 service: NEWSERVICE
+cloud_provider: AWS
 enabled: true
 
 capability:
@@ -240,205 +302,129 @@ capability:
   thresholds:
     utilization_threshold: 80.0
 
-base_prompt: "You are an expert in NEWSERVICE optimization..."
+base_prompt: "You are an expert AWS NEWSERVICE optimization specialist..."
+service_specific_prompt: "Analyze NEWSERVICE resources for cost optimization..."
 ```
 
 #### 2. Add Service to Models
 
-Update `models/__init__.py`:
+Update `llm_cost_recommendation/models/__init__.py`:
 
 ```python
 class ServiceType(str, Enum):
+    # AWS Services
+    EC2 = "EC2"
+    EBS = "EBS"
+    S3 = "S3"
+    RDS = "RDS"
+    LAMBDA = "Lambda"
     # ... existing services
-    NEWSERVICE = "NEWSERVICE"
+    NEWSERVICE = "NEWSERVICE"  # Add new service
+    
+    # Azure Services
+    VIRTUAL_MACHINES = "VirtualMachines"
+    # ... existing Azure services
+    
+    # GCP Services  
+    COMPUTE_ENGINE = "ComputeEngine"
+    # ... existing GCP services
+
+class CloudProvider(str, Enum):
+    AWS = "AWS"
+    AZURE = "Azure"
+    GCP = "GCP"
 ```
 
-#### 3. Create Specialized Agent Class
-
-Create agent in `agents/base.py`:
-
-```python
-class NewServiceAgent(BaseAgent):
-    """Agent for NEWSERVICE cost optimization"""
-    
-    def __init__(self, config: ServiceAgentConfig, llm_service: LLMService):
-        super().__init__(config, llm_service)
-    
-    async def analyze_resource(
-        self,
-        resource: Resource,
-        metrics: Optional[Metrics] = None,
-        billing_data: Optional[List[BillingData]] = None,
-    ) -> List[Recommendation]:
-        """Analyze a single resource and generate recommendations"""
-        recommendations = []
-        
-        if not self._validate_resource_data(resource):
-            return recommendations
-            
-        # Apply custom rules
-        rule_results = self._apply_custom_rules(resource, metrics, billing_data)
-        
-        # Merge thresholds with custom overrides
-        merged_thresholds = self._merge_thresholds(
-            self.config.capability.thresholds,
-            rule_results.get("threshold_overrides", {})
-        )
-        
-        # Apply service-specific analysis logic
-        context_data = self._prepare_context_data(resource, metrics, billing_data)
-        context_data["thresholds"] = merged_thresholds
-        
-        # Generate LLM recommendations with custom rule context
-        llm_recommendations = await self._generate_recommendations_from_llm(
-            context_data, rule_results
-        )
-        
-        # Convert to recommendation models
-        for llm_rec in llm_recommendations:
-            rec = self._convert_llm_recommendation_to_model(llm_rec, resource)
-            if rec:
-                recommendations.append(rec)
-        
-        return recommendations
-        billing_data: Dict[str, List[BillingData]],
-        **kwargs
-    ) -> List[Recommendation]:
-        """Custom analysis logic for NEWSERVICE"""
-        recommendations = []
-        
-        for resource in resources:
-            # Custom analysis logic
-            if self._should_optimize(resource, metrics_data.get(resource.resource_id)):
-                rec = await self._generate_recommendation(resource, metrics_data, billing_data)
-                recommendations.append(rec)
-        
-        return recommendations
-    
-    def _should_optimize(self, resource: Resource, metrics: Metrics) -> bool:
-        """Service-specific optimization criteria"""
-        # Implement your logic
-        return True
-    
-    async def _generate_recommendation(self, resource, metrics, billing) -> Recommendation:
-        """Generate LLM-powered recommendation"""
-        # Use LLM service to generate recommendation
-        pass
-```
-
-#### 4. Register Agent in Coordinator
-
-Update `agents/coordinator.py`:
-
-```python
-def _create_agents(self) -> Dict[ServiceType, BaseAgent]:
-    agents = {}
-    
-    for service in self.enabled_services:
-        if service == ServiceType.NEWSERVICE:
-            agents[service] = NewServiceAgent(
-                self.config_manager.get_agent_config(service)
-            )
-        # ... existing services
-    
-    return agents
-```
-
-#### 5. Update Configuration
+#### 3. Update Coordinator Configuration
 
 Add to `config/coordinator.yaml`:
 
 ```yaml
 enabled_services:
+  # AWS Services
   - EC2
   - S3
   # ... existing services
-  - NEWSERVICE
+  - NEWSERVICE  # Add new service
+  
+  # Azure Services
+  - VirtualMachines
+  # ... existing Azure services
+  
+  # GCP Services
+  - ComputeEngine
+  # ... existing GCP services
 ```
 
 ### Adding New Cloud Providers
 
-#### 1. Create Provider-Specific Models
+#### 1. Create Provider-Specific Configuration Files
+
+Create configuration files with provider prefix:
+
+```bash
+# Create new provider configurations
+touch config/newprovider.compute_agent.yaml
+touch config/newprovider.storage_agent.yaml
+touch config/newprovider.database_agent.yaml
+```
+
+#### 2. Create Provider-Specific Models
 
 ```python
-# models/azure.py
-class AzureServiceType(str, Enum):
-    VIRTUAL_MACHINES = "VIRTUAL_MACHINES"
-    STORAGE_ACCOUNTS = "STORAGE_ACCOUNTS"
-    SQL_DATABASE = "SQL_DATABASE"
+# llm_cost_recommendation/models/newprovider.py
+from enum import Enum
+from .base import Resource
 
-class AzureResource(Resource):
-    """Azure-specific resource model"""
+class NewProviderServiceType(str, Enum):
+    COMPUTE = "Compute"
+    STORAGE = "Storage"
+    DATABASE = "Database"
+
+class NewProviderResource(Resource):
+    """New provider-specific resource model"""
     subscription_id: str
     resource_group: str
     location: str
+    provider_specific_field: str
 ```
 
-#### 2. Create Provider Interface
+#### 3. Update Core Models
 
 ```python
-# services/providers.py
-from abc import ABC, abstractmethod
-
-class CloudProvider(ABC):
-    """Abstract base class for cloud providers"""
-    
-    @abstractmethod
-    async def get_resources(self, subscription_id: str) -> List[Resource]:
-        pass
-    
-    @abstractmethod
-    async def get_metrics(self, resource_id: str) -> Metrics:
-        pass
-
-class AzureProvider(CloudProvider):
-    """Azure cloud provider implementation"""
-    
-    async def get_resources(self, subscription_id: str) -> List[Resource]:
-        # Implement Azure API calls
-        pass
+# llm_cost_recommendation/models/__init__.py
+class CloudProvider(str, Enum):
+    AWS = "AWS"
+    AZURE = "Azure"
+    GCP = "GCP"
+    NEWPROVIDER = "NewProvider"  # Add new provider
 ```
 
-#### 3. Create Provider-Specific Agents
+#### 4. Create Provider-Specific Agent Classes
 
 ```python
-# agents/azure.py
-class AzureVMAgent(BaseAgent):
-    """Azure Virtual Machine optimization agent"""
+# llm_cost_recommendation/agents/newprovider.py
+from .base import BaseAgent
+from ..models.newprovider import NewProviderServiceType
+
+class NewProviderComputeAgent(BaseAgent):
+    """New provider compute optimization agent"""
     
-    def __init__(self, config: ServiceAgentConfig):
-        super().__init__(config, AzureServiceType.VIRTUAL_MACHINES)
-```
-
-#### 4. Update Configuration System
-
-```python
-# services/config.py
-class ProviderConfig(BaseModel):
-    name: str  # "aws", "azure", "gcp"
-    enabled: bool
-    credentials: Dict[str, str]
-    services: List[str]
-
-class ConfigManager:
-    def __init__(self, config_dir: str):
-        self.providers = self._load_provider_configs()
-    
-    def _load_provider_configs(self) -> Dict[str, ProviderConfig]:
-        # Load provider-specific configurations
-        pass
-```
-
-## 📊 Data Flow & Integration
+    def __init__(self, config: ServiceAgentConfig, llm_service: LLMService):
+        super().__init__(config, llm_service)
+        self.provider = CloudProvider.NEWPROVIDER
+        self.service_type = NewProviderServiceType.COMPUTE
+## Data Flow & Integration
 
 ### Input Data Formats
 
 #### Billing Data (CSV)
 
 ```csv
-resource_id,service,cost,date,region
-i-1234567890abcdef0,EC2,45.50,2025-01-01,us-east-1
-vol-0123456789abcdef0,EBS,12.30,2025-01-01,us-east-1
+resource_id,service,cost,date,region,cloud_provider
+i-1234567890abcdef0,EC2,45.50,2025-01-01,us-east-1,AWS
+vm-abcd1234,VirtualMachines,38.20,2025-01-01,eastus,Azure
+instance-xyz789,ComputeEngine,42.10,2025-01-01,us-central1-a,GCP
 ```
 
 #### Inventory Data (JSON)
@@ -447,7 +433,8 @@ vol-0123456789abcdef0,EBS,12.30,2025-01-01,us-east-1
 [
   {
     "resource_id": "i-1234567890abcdef0",
-    "service": "EC2",
+    "service": "EC2", 
+    "cloud_provider": "AWS",
     "region": "us-east-1",
     "instance_type": "t3.medium",
     "configuration": {
@@ -459,6 +446,22 @@ vol-0123456789abcdef0,EBS,12.30,2025-01-01,us-east-1
       "Environment": "production",
       "Owner": "team-alpha"
     }
+  },
+  {
+    "resource_id": "vm-abcd1234",
+    "service": "VirtualMachines",
+    "cloud_provider": "Azure", 
+    "region": "eastus",
+    "vm_size": "Standard_B2s",
+    "configuration": {
+      "vcpus": 2,
+      "memory_gb": 4,
+      "os_disk": {"type": "Premium_LRS", "size": 30}
+    },
+    "tags": {
+      "Environment": "development",
+      "Team": "backend"
+    }
   }
 ]
 ```
@@ -466,86 +469,113 @@ vol-0123456789abcdef0,EBS,12.30,2025-01-01,us-east-1
 #### Metrics Data (CSV)
 
 ```csv
-resource_id,metric_name,value,timestamp
-i-1234567890abcdef0,cpu_utilization_p50,15.2,2025-01-01T00:00:00Z
-i-1234567890abcdef0,memory_utilization_p50,45.8,2025-01-01T00:00:00Z
+resource_id,metric_name,value,timestamp,cloud_provider
+i-1234567890abcdef0,cpu_utilization_p50,15.2,2025-01-01T00:00:00Z,AWS
+i-1234567890abcdef0,memory_utilization_p50,45.8,2025-01-01T00:00:00Z,AWS
+vm-abcd1234,cpu_utilization_p50,12.5,2025-01-01T00:00:00Z,Azure
+vm-abcd1234,memory_utilization_p50,38.2,2025-01-01T00:00:00Z,Azure
 ```
 
-## 🎛️ Advanced Configuration
+## Advanced Configuration
 
-### LLM Provider Switching
+### Multi-Cloud Agent Configuration
+
+The system automatically loads agent configurations based on naming conventions:
+
+```text
+config/
+├── aws.ec2_agent.yaml          # AWS EC2 agent
+├── aws.s3_agent.yaml           # AWS S3 agent
+├── azure.vm_agent.yaml         # Azure VM agent
+├── azure.storage_agent.yaml    # Azure Storage agent
+├── gcp.compute_agent.yaml      # GCP Compute agent
+├── gcp.storage_agent.yaml      # GCP Storage agent
+└── coordinator.yaml            # Global coordination settings
+```
+
+### Export Format Configuration
 
 ```python
-# services/llm.py
-class LLMService:
-    def __init__(self, config: LLMConfig):
-        if config.provider == "openai":
-            self.client = ChatOpenAI(model=config.model)
-        elif config.provider == "anthropic":
-            self.client = ChatAnthropic(model=config.model)
-        # Add more providers as needed
+# llm_cost_recommendation/cli.py
+class ExportFormat(str, Enum):
+    JSON = "json"      # Detailed report with all metadata
+    CSV = "csv"        # Summary table for spreadsheet analysis  
+    EXCEL = "excel"    # Multi-sheet workbook with comprehensive data
+
+# Usage examples:
+# --output-format json    # Default: detailed JSON report
+# --output-format csv     # Summary CSV table  
+# --output-format excel   # Excel workbook with multiple sheets
 ```
 
 ### Custom Recommendation Types
 
 ```python
 class RecommendationType(str, Enum):
-    # Standard types
+    # Standard optimization types
     RIGHTSIZING = "rightsizing"
-    PURCHASING_OPTION = "purchasing_option"
+    PURCHASING_OPTION = "purchasing_option" 
+    IDLE_RESOURCE = "idle_resource"
+    STORAGE_CLASS = "storage_class"
     
-    # Custom types
-    SECURITY_OPTIMIZATION = "security_optimization"
-    PERFORMANCE_TUNING = "performance_tuning"
-    COST_ALLOCATION = "cost_allocation"
+    # Cloud-specific types
+    RESERVED_INSTANCES = "reserved_instances"      # AWS/Azure
+    SPOT_INSTANCES = "spot_instances"              # AWS
+    PREEMPTIBLE_INSTANCES = "preemptible_instances" # GCP
+    COMMITTED_USE_DISCOUNTS = "committed_use_discounts" # GCP
 ```
 
-### Agent Customization
-
-```python
-class CustomEC2Agent(EC2Agent):
-    """Custom EC2 agent with organization-specific logic"""
-    
-    def _should_recommend_spot(self, resource: Resource) -> bool:
-        """Custom logic for Spot instance recommendations"""
-        # Organization-specific rules
-        if resource.tags.get("Environment") == "production":
-            return False  # Never recommend Spot for production
-        return super()._should_recommend_spot(resource)
-```
-
-## 🔧 Development & Debugging
+## Development & Debugging
 
 ### Running Tests
 
 ```bash
 # Install development dependencies
-pip install -e ".[dev]"
+pip install -e .
 
-# Run tests
-pytest tests/
+# Run with sample data for testing
+python -m llm_cost_recommendation --account-id test --sample-data
 
-# Run with coverage
-pytest --cov=llm_cost_recommendation tests/
+# Test specific export formats
+python -m llm_cost_recommendation --account-id test --sample-data --output-format csv
+python -m llm_cost_recommendation --account-id test --sample-data --output-format excel
 ```
 
-### Debugging Tips
+### Debugging Multi-Cloud Analysis
 
 ```bash
-# Verbose logging with human-readable output
-python -m llm_cost_recommendation --verbose --log-format human --sample-data --account-id debug
+# Verbose logging for debugging
+python -m llm_cost_recommendation --verbose --sample-data --account-id debug
 
-# JSON logging for parsing
-python -m llm_cost_recommendation --log-format json --sample-data --account-id debug | jq
+# Check system status and configuration
+python -m llm_cost_recommendation --status
 
-# Test specific service
-python -c "
-from llm_cost_recommendation.agents.base import EC2Agent
-from llm_cost_recommendation.services.config import ConfigManager
-config = ConfigManager('config')
-agent = EC2Agent(config.get_agent_config('EC2'))
-print(agent.get_agent_status())
-"
+# Test with real data
+python -m llm_cost_recommendation \
+  --account-id "production-123" \
+  --billing-file data/billing/sample_billing.csv \
+  --inventory-file data/inventory/sample_inventory.json \
+  --metrics-file data/metrics/sample_metrics.csv \
+  --output-format excel \
+  --output-file analysis_report.xlsx
 ```
 
-This architecture provides a robust, extensible foundation for multi-cloud cost optimization using LLM intelligence!
+### Configuration Validation
+
+```python
+# Test agent configuration loading
+from llm_cost_recommendation.services.config import ConfigManager
+
+config = ConfigManager('config')
+
+# List all available agents
+print("Available agents:")
+for agent_config in config.agent_configs.values():
+    print(f"- {agent_config.agent_id} ({agent_config.cloud_provider}.{agent_config.service})")
+
+# Test specific agent
+ec2_config = config.get_agent_config('aws.ec2_agent')
+print(f"EC2 Agent: {ec2_config.service_specific_prompt[:100]}...")
+```
+
+This multi-cloud architecture provides a robust, extensible foundation for cost optimization across AWS, Azure, and Google Cloud Platform using LLM intelligence!
