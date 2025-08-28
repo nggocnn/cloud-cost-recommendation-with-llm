@@ -58,7 +58,7 @@ class ConfigManager:
 
     def _load_coordinator_config(self) -> CoordinatorConfig:
         """Load coordinator configuration"""
-        config_file = self.config_dir / "coordinator.yaml"
+        config_file = self.config_dir / "global" / "coordinator.yaml"
 
         if not config_file.exists():
             # Create default configuration
@@ -81,17 +81,41 @@ class ConfigManager:
 
         return CoordinatorConfig(**config_data)
 
+    def _get_agent_config_path(self, service: ServiceType) -> Path:
+        """Get the config file path for a service agent based on new hierarchical structure"""
+        service_str = service.value.lower()
+        
+        # Map service types to cloud provider
+        if service_str.startswith('aws.'):
+            cloud = 'aws'
+            service_name = service_str[4:]  # Remove 'aws.' prefix
+        elif service_str.startswith('azure.'):
+            cloud = 'azure'
+            service_name = service_str[6:]  # Remove 'azure.' prefix
+        elif service_str.startswith('gcp.'):
+            cloud = 'gcp'
+            service_name = service_str[4:]  # Remove 'gcp.' prefix
+        else:
+            # Legacy service names without cloud prefix - assume AWS
+            cloud = 'aws'
+            service_name = service_str
+        
+        return self.config_dir / "agents" / cloud / f"{service_name}.yaml"
+
     def _load_service_configs(self) -> Dict[ServiceType, ServiceAgentConfig]:
         """Load service agent configurations"""
         configs = {}
 
         for service in ServiceType.get_all_services():
-            config_file = self.config_dir / f"{service.value.lower()}_agent.yaml"
+            config_file = self._get_agent_config_path(service)
 
             if not config_file.exists():
                 # Create default configuration for this service
                 default_config = self._create_default_service_config(service)
-
+                
+                # Ensure directory exists
+                config_file.parent.mkdir(parents=True, exist_ok=True)
+                
                 with open(config_file, "w") as f:
                     yaml.dump(default_config, f, default_flow_style=False)
 
@@ -363,8 +387,9 @@ Provide specific recommendations with memory settings and architectural improvem
         """Update configuration for a service"""
         self.service_configs[service] = config
 
-        # Save to file
-        config_file = self.config_dir / f"{service.value.lower()}_agent.yaml"
+        # Save to file using new hierarchical structure
+        config_file = self._get_agent_config_path(service)
+        config_file.parent.mkdir(parents=True, exist_ok=True)
         config_dict = config.model_dump()
 
         with open(config_file, "w") as f:
