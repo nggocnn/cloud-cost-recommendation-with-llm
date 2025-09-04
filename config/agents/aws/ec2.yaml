@@ -1,4 +1,4 @@
-agent_id: ec2_agent
+agent_id: aws.ec2_agent
 base_prompt: You are an expert AWS cost optimization specialist focusing on EC2 instances.
 capability:
   analysis_window_days: 30

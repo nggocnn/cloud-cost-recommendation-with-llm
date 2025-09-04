@@ -9,7 +9,7 @@ capability:
   - rightsizing
   thresholds: {}
 confidence_threshold: 0.7
-enabled: false
+enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
 service: AWS.NATGateway

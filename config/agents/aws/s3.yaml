@@ -1,4 +1,4 @@
-agent_id: s3_agent
+agent_id: aws.s3_agent
 base_prompt: You are an expert AWS cost optimization specialist focusing on S3 storage.
 capability:
   analysis_window_days: 90

@@ -12,9 +12,8 @@ from .services.config import ConfigManager
 from .services.llm import LLMService
 from .services.ingestion import DataIngestionService
 from .utils.logging import configure_logging, get_logger
-from .services.pricing_manager import PricingManager
 from .agents.coordinator import CoordinatorAgent
-from .models import Resource, CloudProvider
+from .models import Resource
 
 logger = get_logger(__name__)
 
@@ -26,7 +25,6 @@ class CostRecommendationApp:
         self.config_manager = ConfigManager(config_dir)
         self.data_service = DataIngestionService(data_dir)
         self.llm_service = LLMService(self.config_manager.llm_config)
-        self.pricing_manager = PricingManager(self.config_manager)
         self.coordinator = CoordinatorAgent(self.config_manager, self.llm_service)
 
         logger.info("Application initialized", config_dir=config_dir, data_dir=data_dir)
@@ -122,118 +120,6 @@ class CostRecommendationApp:
 
         except Exception as e:
             logger.error("Analysis failed", error=str(e))
-            raise
-
-    async def test_pricing(self):
-        """Test pricing module functionality"""
-        logger.info("Testing pricing module functionality")
-        
-        try:
-            # Test 1: Validate pricing configuration
-            print("\n🔧 Testing pricing configuration...")
-            validation_results = await self.pricing_manager.validate_pricing_configuration()
-            print(f"Overall status: {validation_results['overall_status']}")
-            
-            for provider, status in validation_results['providers'].items():
-                print(f"  {provider}: {'✅' if status['available'] else '❌'}")
-                if status['configuration_loaded']:
-                    print(f"    - Configuration loaded: ✅")
-                if status['cache_enabled']:
-                    print(f"    - Cache enabled: ✅")
-            
-            if validation_results['issues']:
-                print("  Issues found:")
-                for issue in validation_results['issues']:
-                    print(f"    - {issue}")
-            
-            # Test 2: Create test resources
-            print("\n💰 Testing cost calculations...")
-            test_resources = [
-                Resource(
-                    resource_id="test-ec2-1",
-                    service="AWS.EC2",
-                    region="us-east-1",
-                    account_id="123456789012",
-                    cloud_provider="AWS",
-                    properties={
-                        "instance_type": "t3.medium",
-                        "state": "running"
-                    }
-                ),
-                Resource(
-                    resource_id="test-s3-1", 
-                    service="AWS.S3",
-                    region="us-east-1",
-                    account_id="123456789012",
-                    cloud_provider="AWS",
-                    properties={
-                        "storage_class": "STANDARD",
-                        "size_gb": 100
-                    }
-                ),
-                Resource(
-                    resource_id="test-rds-1",
-                    service="AWS.RDS", 
-                    region="us-east-1",
-                    account_id="123456789012",
-                    cloud_provider="AWS",
-                    properties={
-                        "instance_type": "db.t3.micro",
-                        "engine": "mysql",
-                        "deployment_option": "Single-AZ"
-                    }
-                )
-            ]
-            
-            # Test 3: Calculate costs for test resources
-            for resource in test_resources:
-                print(f"\n  Testing {resource.service} ({resource.resource_id})...")
-                
-                try:
-                    cost_calc = await self.pricing_manager.calculate_resource_cost(resource)
-                    if cost_calc:
-                        print(f"    ✅ Monthly cost: ${cost_calc.current_monthly_cost:.2f}")
-                        print(f"    ✅ Annual cost: ${cost_calc.current_annual_cost:.2f}")
-                    else:
-                        print(f"    ❌ Failed to calculate cost (no pricing data)")
-                        
-                except Exception as e:
-                    print(f"    ❌ Error: {str(e)}")
-            
-            # Test 4: Get pricing cache stats
-            print("\n📊 Pricing cache statistics...")
-            cache_stats = self.pricing_manager.get_pricing_cache_stats()
-            for provider, stats in cache_stats.items():
-                print(f"  {provider}:")
-                print(f"    - Total entries: {stats['total_entries']}")
-                print(f"    - Valid entries: {stats['valid_entries']}")
-                print(f"    - Cache hits: {stats['total_cache_hits']}")
-                print(f"    - Hit rate: {stats['cache_hit_rate']:.2%}")
-            
-            # Test 5: Test specific service pricing
-            print("\n🎯 Testing specific service pricing...")
-            try:
-                ec2_pricing = await self.pricing_manager.get_service_pricing(
-                    cloud_provider=CloudProvider.AWS,
-                    service_type="AWS.EC2",
-                    region="us-east-1",
-                    instance_type="t3.medium"
-                )
-                
-                if ec2_pricing and ec2_pricing.on_demand:
-                    print(f"  ✅ EC2 t3.medium pricing: ${ec2_pricing.on_demand.amount}/hour")
-                    print(f"    Source: {ec2_pricing.source}")
-                else:
-                    print(f"  ❌ Could not retrieve EC2 pricing")
-                    
-            except Exception as e:
-                print(f"  ❌ EC2 pricing error: {str(e)}")
-            
-            print("\n✅ Pricing module test completed!")
-            
-        except Exception as e:
-            logger.error("Pricing test failed", error=str(e))
-            print(f"\n❌ Pricing test failed: {str(e)}")
             raise
 
     def print_report_summary(self, report):
@@ -456,7 +342,6 @@ async def main():
         help="Output format for detailed report (json=full details, csv=summary table, excel=multiple sheets)"
     )
     parser.add_argument("--status", action="store_true", help="Show application status")
-    parser.add_argument("--test-pricing", action="store_true", help="Test pricing module functionality")
 
     # Logging options
     parser.add_argument(
@@ -494,11 +379,6 @@ async def main():
             import json
 
             print(json.dumps(status, indent=2))
-            return
-
-        if args.test_pricing:
-            # Test pricing module
-            await app.test_pricing()
             return
 
         # Run analysis

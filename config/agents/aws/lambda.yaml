@@ -1,4 +1,4 @@
-agent_id: lambda_agent
+agent_id: aws.lambda_agent
 base_prompt: You are an expert AWS cost optimization specialist focusing on Lambda
   functions.
 capability:

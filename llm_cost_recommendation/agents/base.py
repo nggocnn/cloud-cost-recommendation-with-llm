@@ -393,7 +393,54 @@ class BaseAgent(ABC):
 
         return filtered_recommendations
 
-    def _convert_llm_recommendation_to_model(
+    def _create_recommended_resource(self, original_resource: Resource, llm_recommendation: Dict[str, Any]) -> Optional[Resource]:
+        """Create a new resource with recommended configuration for pricing calculation"""
+        try:
+            recommended_config = llm_recommendation.get("recommended_config", {})
+            if not recommended_config:
+                return None
+            
+            # Create a copy of the resource with modified properties
+            modified_properties = original_resource.properties.copy()
+            
+            # Update properties based on recommendation type and config
+            recommendation_type = llm_recommendation.get("recommendation_type", "")
+            
+            if recommendation_type == "rightsizing":
+                if "instance_type" in recommended_config:
+                    modified_properties["instance_type"] = recommended_config["instance_type"]
+                if "memory_size" in recommended_config:
+                    modified_properties["memory_size"] = recommended_config["memory_size"]
+                if "storage_size" in recommended_config:
+                    modified_properties["storage_size"] = recommended_config["storage_size"]
+            
+            elif recommendation_type == "storage_class":
+                if "storage_class" in recommended_config:
+                    modified_properties["storage_class"] = recommended_config["storage_class"]
+            
+            # For terminated/idle resources, return None (no cost)
+            elif recommendation_type in ["idle_resource", "lifecycle"] and "terminated" in str(recommended_config):
+                return None
+            
+            # Create new resource with updated properties
+            return Resource(
+                resource_id=f"{original_resource.resource_id}_recommended",
+                service=original_resource.service,
+                region=original_resource.region,
+                account_id=original_resource.account_id,
+                properties=modified_properties,
+                tags=original_resource.tags,
+                extensions=original_resource.extensions
+            )
+        except Exception as e:
+            logger.warning(
+                "Failed to create recommended resource",
+                resource_id=original_resource.resource_id,
+                error=str(e)
+            )
+            return None
+
+    async def _convert_llm_recommendation_to_model(
         self, llm_recommendation: Dict[str, Any], resource: Resource
     ) -> Optional[Recommendation]:
         """Convert LLM recommendation dict to Recommendation model"""
@@ -429,9 +476,10 @@ class BaseAgent(ABC):
             except ValueError:
                 risk_level = RiskLevel.MEDIUM
 
-            # Calculate savings
+            # Calculate costs using LLM estimates
             current_cost = float(llm_recommendation.get("current_monthly_cost", 0))
             estimated_cost = float(llm_recommendation.get("estimated_monthly_cost", 0))
+            
             monthly_savings = current_cost - estimated_cost
             annual_savings = monthly_savings * 12
 
@@ -755,7 +803,7 @@ class BaseAgent(ABC):
                                 None
                             )
                             if resource:
-                                rec = self._convert_llm_recommendation_to_model(rec_data, resource)
+                                rec = await self._convert_llm_recommendation_to_model(rec_data, resource)
                                 if rec:
                                     recommendations.append(rec)
                 

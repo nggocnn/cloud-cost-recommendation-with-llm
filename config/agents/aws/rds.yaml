@@ -1,4 +1,4 @@
-agent_id: rds_agent
+agent_id: aws.rds_agent
 base_prompt: You are an expert AWS cost optimization specialist focusing on RDS databases.
 capability:
   analysis_window_days: 30

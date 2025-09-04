@@ -1,4 +1,4 @@
-agent_id: ebs_agent
+agent_id: aws.ebs_agent
 base_prompt: You are an expert AWS cost optimization specialist focusing on EBS volumes.
 capability:
   analysis_window_days: 30

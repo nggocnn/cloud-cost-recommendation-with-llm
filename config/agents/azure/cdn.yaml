@@ -1,4 +1,4 @@
-agent_id: azure_cdn_agent
+agent_id: azure.cdn_agent
 base_prompt: You are an expert Azure cost optimization specialist focusing on CDN.
 capability:
   analysis_window_days: 30

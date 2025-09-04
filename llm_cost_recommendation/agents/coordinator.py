@@ -77,7 +77,7 @@ class LLMServiceAgent(BaseAgent):
 
             # Convert to recommendation models
             for llm_rec in llm_recommendations:
-                rec = self._convert_llm_recommendation_to_model(llm_rec, resource)
+                rec = await self._convert_llm_recommendation_to_model(llm_rec, resource)
                 if rec:
                     recommendations.append(rec)
 

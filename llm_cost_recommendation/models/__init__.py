@@ -10,7 +10,6 @@ The models are organized into separate modules for better maintainability:
 - recommendations: Recommendation and report models
 - agents: Agent configuration models
 - conditions: Custom conditions and rules
-- pricing: Pricing models and calculations
 """
 
 # Core types and enums
@@ -38,21 +37,6 @@ from .recommendations import Recommendation, RecommendationReport
 
 # Agent configuration
 from .agents import AgentCapability, ServiceAgentConfig, CoordinatorConfig
-
-# Pricing models
-from .pricing import (
-    PricingModel,
-    ReservationTerm,
-    PaymentOption,
-    Currency,
-    PricingUnit,
-    ReservationPricing,
-    ServicePricing,
-    PricingRule,
-    CostCalculation,
-    PricingCache,
-    PricingConfig,
-)
 
 # For backwards compatibility, export all models at package level
 __all__ = [
@@ -84,17 +68,4 @@ __all__ = [
     "AgentCapability",
     "ServiceAgentConfig", 
     "CoordinatorConfig",
-    
-    # Pricing
-    "PricingModel",
-    "ReservationTerm",
-    "PaymentOption",
-    "Currency",
-    "PricingUnit",
-    "ReservationPricing",
-    "ServicePricing",
-    "PricingRule",
-    "CostCalculation",
-    "PricingCache",
-    "PricingConfig",
 ]
