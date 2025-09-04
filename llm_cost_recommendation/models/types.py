@@ -149,7 +149,6 @@ class ConditionField(str, Enum):
     SERVICE = "service"
     REGION = "region"
     AZ = "availability_zone"
-    ACCOUNT_ID = "account_id"
 
     # Tag fields (use tag.key_name)
     TAG = "tag"

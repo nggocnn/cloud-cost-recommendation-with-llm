@@ -11,7 +11,7 @@ from pydantic import BaseModel
 
 from ..models import (
     ServiceAgentConfig,
-    CoordinatorConfig,
+    GlobalConfig,
     ServiceType,
     RecommendationType,
     AgentCapability,
@@ -42,7 +42,7 @@ class ConfigManager:
 
         # Initialize configurations
         self.llm_config = self._load_llm_config()
-        self.coordinator_config = self._load_coordinator_config()
+        self.global_config = self._load_global_config()
         self.service_configs = self._load_service_configs()
 
     def _load_llm_config(self) -> LLMConfig:
@@ -56,8 +56,8 @@ class ConfigManager:
             timeout=int(os.getenv("OPENAI_TIMEOUT", "30")),
         )
 
-    def _load_coordinator_config(self) -> CoordinatorConfig:
-        """Load coordinator configuration"""
+    def _load_global_config(self) -> GlobalConfig:
+        """Load global configuration shared across all agents"""
         config_file = self.config_dir / "global" / "coordinator.yaml"
 
         if not config_file.exists():
@@ -71,6 +71,23 @@ class ConfigManager:
                 "implementation_ease_weight": 0.1,
                 "max_recommendations_per_service": 50,
                 "include_low_impact": False,
+                "cost_tiers": {
+                    "minimal_cost": {"min": 0, "max": 10, "batch_adjustment": 2},
+                    "low_cost": {"min": 10, "max": 100, "batch_adjustment": 0},
+                    "medium_cost": {"min": 100, "max": 1000, "batch_adjustment": -1},
+                    "high_cost": {"min": 1000, "max": float('inf'), "batch_adjustment": -2}
+                },
+                "complexity_tiers": {
+                    "simple": {"metric_threshold": 3, "base_batch_size": 6},
+                    "moderate": {"metric_threshold": 8, "base_batch_size": 4},
+                    "complex": {"metric_threshold": float('inf'), "base_batch_size": 2}
+                },
+                "batch_config": {
+                    "min_batch_size": 1,
+                    "max_batch_size": 10,
+                    "default_batch_size": 4,
+                    "single_resource_threshold_cost": 5000
+                }
             }
 
             with open(config_file, "w") as f:
@@ -79,7 +96,26 @@ class ConfigManager:
         with open(config_file, "r") as f:
             config_data = yaml.safe_load(f)
 
-        return CoordinatorConfig(**config_data)
+        # Fix 'inf' strings from YAML to proper float('inf')
+        config_data = self._fix_yaml_inf_values(config_data)
+
+        return GlobalConfig(**config_data)
+
+    def _fix_yaml_inf_values(self, data):
+        """Recursively fix 'inf' strings from YAML to proper float('inf')"""
+        if isinstance(data, dict):
+            for key, value in data.items():
+                if isinstance(value, str) and value.lower() == 'inf':
+                    data[key] = float('inf')
+                elif isinstance(value, (dict, list)):
+                    data[key] = self._fix_yaml_inf_values(value)
+        elif isinstance(data, list):
+            for i, item in enumerate(data):
+                if isinstance(item, str) and item.lower() == 'inf':
+                    data[i] = float('inf')
+                elif isinstance(item, (dict, list)):
+                    data[i] = self._fix_yaml_inf_values(item)
+        return data
 
     def _get_agent_config_path(self, service: ServiceType) -> Path:
         """Get the config file path for a service agent based on new hierarchical structure"""
@@ -341,7 +377,7 @@ Provide specific recommendations with memory settings and architectural improvem
         }
 
         # For services not explicitly defined, create a basic configuration
-        return {
+        config = service_configs.get(service, {
             "agent_id": f"{service.value.lower().replace('.', '_')}_agent",
             "service": service.value,
             "enabled": True,  # Enable by default for all services
@@ -361,7 +397,9 @@ Provide specific recommendations with memory settings and architectural improvem
             "max_tokens": 2000,
             "min_cost_threshold": 1.0,
             "confidence_threshold": 0.7,
-        }
+        })
+        
+        return config
 
     def get_service_config(self, service: Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP, str]) -> Optional[ServiceAgentConfig]:
         """Get configuration for a service"""

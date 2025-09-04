@@ -15,6 +15,7 @@ from ..models import (
     RecommendationReport,
     ServiceType,
     ServiceAgentConfig,
+    GlobalConfig,
     RiskLevel,
 )
 from ..services.llm import LLMService
@@ -29,17 +30,21 @@ class ServiceAgentFactory:
     """Factory for creating service agents"""
 
     @staticmethod
-    def create_agent(config: ServiceAgentConfig, llm_service: LLMService) -> BaseAgent:
+    def create_agent(
+        config: ServiceAgentConfig, 
+        llm_service: LLMService, 
+        global_config: GlobalConfig
+    ) -> BaseAgent:
         """Create appropriate agent for service"""
         
         # All services now use the unified LLM-based agent with custom rules
-        return LLMServiceAgent(config, llm_service)
+        return LLMServiceAgent(config, llm_service, global_config)
 
 
 class LLMServiceAgent(BaseAgent):
     """Generic LLM-based service agent"""
 
-    async def analyze_resource(
+    async def analyze_single_resource(
         self,
         resource: Resource,
         metrics: Optional[Metrics] = None,
@@ -107,7 +112,7 @@ class CoordinatorAgent:
     def __init__(self, config_manager: ConfigManager, llm_service: LLMService):
         self.config_manager = config_manager
         self.llm_service = llm_service
-        self.config = config_manager.coordinator_config
+        self.config = config_manager.global_config
 
         # Initialize service agents
         self.service_agents: Dict[ServiceType, BaseAgent] = {}
@@ -125,7 +130,7 @@ class CoordinatorAgent:
             if service_config and service_config.enabled:
                 try:
                     agent = ServiceAgentFactory.create_agent(
-                        service_config, self.llm_service
+                        service_config, self.llm_service, self.config
                     )
                     self.service_agents[service] = agent
 
@@ -142,54 +147,57 @@ class CoordinatorAgent:
                         error=str(e),
                     )
 
-    async def analyze_account(
+    async def analyze_resources_and_generate_report(
         self,
         resources: List[Resource],
         metrics_data: Dict[str, Metrics] = None,
         billing_data: Dict[str, List[BillingData]] = None,
         batch_mode: bool = True,
     ) -> RecommendationReport:
-        """Analyze entire account and generate comprehensive report"""
+        """Analyze resources and generate comprehensive cost optimization report"""
         logger.info(
-            "Starting account analysis",
+            "Starting resource analysis",
             total_resources=len(resources),
         )
 
         start_time = datetime.now(timezone.utc)
 
-        # Group resources by service
+        # Group resources by service type for targeted analysis
         resources_by_service = self._group_resources_by_service(resources)
 
-        # Analyze each service
+        # Analyze resources using appropriate service agents
         all_recommendations = []
         
         if batch_mode:
-            # Batch processing: analyze services in parallel
+            # Batch processing: Analyze services in parallel for efficiency
+            # Each service agent will use intelligent batching internally
             analysis_tasks = []
 
             for service, service_resources in resources_by_service.items():
                 if service in self.service_agents:
                     agent = self.service_agents[service]
 
-                    # Create analysis task
+                    # Create parallel analysis task for this service
                     task = self._analyze_service_resources(
                         agent, service_resources, metrics_data, billing_data
                     )
                     analysis_tasks.append(task)
 
-            # Execute analysis tasks
+            # Execute all service analyses in parallel
             if analysis_tasks:
                 service_recommendations = await asyncio.gather(
                     *analysis_tasks, return_exceptions=True
                 )
 
+                # Collect results from all services
                 for result in service_recommendations:
                     if isinstance(result, Exception):
                         logger.error("Service analysis failed", error=str(result))
                     else:
                         all_recommendations.extend(result)
         else:
-            # Individual processing: analyze resources one by one
+            # Individual processing: Analyze each resource one by one for maximum precision
+            # Useful for debugging or when dealing with problematic resources
             total_resources = len(resources)
             for i, resource in enumerate(resources, 1):
                 if resource.service in self.service_agents:
@@ -199,12 +207,13 @@ class CoordinatorAgent:
                         service=resource.service.value,
                     )
                     
-                    # Get relevant metrics and billing data for this resource
+                    # Get relevant metrics and billing data for this specific resource
                     resource_metrics = metrics_data.get(resource.resource_id) if metrics_data else None
                     resource_billing = billing_data.get(resource.resource_id) if billing_data else None
                     
                     try:
-                        recommendations = await self.analyze_resource(
+                        agent = self.service_agents[resource.service]
+                        recommendations = await agent.analyze_single_resource(
                             resource, resource_metrics, resource_billing
                         )
                         all_recommendations.extend(recommendations)
@@ -216,20 +225,21 @@ class CoordinatorAgent:
                             error=str(e),
                         )
 
-        # Post-process recommendations
+        # Post-process recommendations (deduplicate, filter, rank)
         processed_recommendations = self._post_process_recommendations(
             all_recommendations
         )
 
-        # Generate report
+        # Generate comprehensive report with metrics and insights
         report = self._generate_report(
             processed_recommendations, resources, start_time
         )
 
         logger.info(
-            "Account analysis completed",
+            "Resource analysis completed successfully",
             total_recommendations=len(processed_recommendations),
-            total_savings=report.total_monthly_savings,
+            total_monthly_savings=report.total_monthly_savings,
+            total_annual_savings=report.total_annual_savings,
             analysis_time_seconds=(datetime.now(timezone.utc) - start_time).total_seconds(),
         )
 
@@ -427,7 +437,6 @@ class CoordinatorAgent:
 
         return RecommendationReport(
             id=report_id,
-            account_id="multi-account",  # Default value since we support multiple accounts
             generated_at=datetime.now(timezone.utc),
             total_monthly_savings=total_monthly_savings,
             total_annual_savings=total_annual_savings,
@@ -479,4 +488,4 @@ class CoordinatorAgent:
             return []
 
         agent = self.service_agents[resource.service]
-        return await agent.analyze_resource(resource, metrics, billing_data)
+        return await agent.analyze_single_resource(resource, metrics, billing_data)

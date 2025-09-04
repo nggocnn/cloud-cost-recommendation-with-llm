@@ -1,4 +1,36 @@
 confidence_weight: 0.2
+cost_tiers:
+  minimal_cost:
+    min: 0
+    max: 10
+    batch_adjustment: 2
+  low_cost:
+    min: 10
+    max: 100
+    batch_adjustment: 0
+  medium_cost:
+    min: 100
+    max: 1000
+    batch_adjustment: -1
+  high_cost:
+    min: 1000
+    max: inf
+    batch_adjustment: -2
+complexity_tiers:
+  simple:
+    metric_threshold: 3
+    base_batch_size: 6
+  moderate:
+    metric_threshold: 8
+    base_batch_size: 4
+  complex:
+    metric_threshold: inf
+    base_batch_size: 2
+batch_config:
+  min_batch_size: 1
+  max_batch_size: 10
+  default_batch_size: 4
+  single_resource_threshold_cost: 5000
 enabled_services:
 - AWS.EC2
 - AWS.EBS

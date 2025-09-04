@@ -40,7 +40,7 @@ class LoggingCallbackHandler(AsyncCallbackHandler):
         import time
 
         self.start_time = time.time()
-        logger.info(
+        logger.debug(
             "LLM request started", prompt_length=len(prompts[0]) if prompts else 0
         )
 
@@ -50,7 +50,7 @@ class LoggingCallbackHandler(AsyncCallbackHandler):
 
         if self.start_time:
             response_time = (time.time() - self.start_time) * 1000
-            logger.info("LLM request completed", response_time_ms=response_time)
+            logger.debug("LLM request completed", response_time_ms=response_time)
 
 
 class LLMService:
@@ -83,93 +83,155 @@ class LLMService:
         )
 
     async def generate_recommendation(
-        self, system_prompt: str, user_prompt: str, context_data: Dict[str, Any]
+        self, system_prompt: str, user_prompt: str, context_data: Dict[str, Any] = None
     ) -> LLMResponse:
-        """Generate recommendation using LLM"""
+        """Generate single recommendation using LLM"""
+        return await self._generate_llm_response(
+            system_prompt=system_prompt, 
+            user_prompt=user_prompt,
+            context_data=context_data
+        )
+
+    async def generate_batch_recommendations(
+        self,
+        system_prompt: str,
+        resources_data: List[Dict[str, Any]],
+        batch_size: int = 5,
+    ) -> List[LLMResponse]:
+        """Generate LLM recommendations for multiple resources in batches"""
+        results = []
+        logger.debug("Starting batch processing", batch_size=batch_size, total_resources=len(resources_data))
+
+        for i in range(0, len(resources_data), batch_size):
+            batch = resources_data[i : i + batch_size]
+            
+            # Create batch prompt
+            batch_prompt = self._create_batch_prompt(batch)
+            
+            # Generate response for this batch
+            batch_response = await self._generate_llm_response(
+                system_prompt=system_prompt,
+                user_prompt=batch_prompt,
+                max_tokens_override=self._calculate_batch_tokens(len(batch))
+            )
+            
+            results.append(batch_response)
+            
+            # Rate limiting - wait between batches
+            await asyncio.sleep(0.1)
+
+        return results
+
+    async def _generate_llm_response(
+        self, 
+        system_prompt: str, 
+        user_prompt: str, 
+        context_data: Dict[str, Any] = None,
+        max_tokens_override: int = None
+    ) -> LLMResponse:
+        """Core LLM response generation logic"""
         try:
             import time
-
             start_time = time.time()
 
-            # Format the user prompt with context data
-            formatted_prompt = self._format_prompt(user_prompt, context_data)
+            # Format the user prompt with context data if provided
+            if context_data:
+                formatted_prompt = self._format_prompt(user_prompt, context_data)
+            else:
+                formatted_prompt = user_prompt
 
-            # Create messages
-            messages = [
-                SystemMessage(content=system_prompt),
-                HumanMessage(content=formatted_prompt),
-            ]
+            # Determine max tokens
+            max_tokens = max_tokens_override or self.max_tokens
 
-            logger.info(
-                "Generating LLM recommendation",
+            logger.debug(
+                "Generating LLM response",
                 model=self.config.model,
                 system_prompt_length=len(system_prompt),
                 user_prompt_length=len(formatted_prompt),
+                max_tokens=max_tokens
             )
 
-            # Generate response with JSON mode
-            response = await self.llm.ainvoke(messages)
+            # Make API call
+            response = await self.client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": formatted_prompt}
+                ],
+                temperature=self.temperature,
+                max_tokens=max_tokens,
+                response_format={"type": "json_object"}
+            )
 
             response_time = (time.time() - start_time) * 1000
 
-            # Clean and validate JSON response (handle markdown code blocks)
-            response_content = response.content.strip()
+            # Clean and validate JSON response
+            response_content = response.choices[0].message.content.strip()
             
-            # Log the raw LLM response for debugging
-            logger.info(
+            logger.debug(
                 "Raw LLM response received",
                 model=self.config.model,
                 response_length=len(response_content),
-                response_content=response_content[:500] + ("..." if len(response_content) > 500 else ""),
+                response_content=response_content[:200] + ("..." if len(response_content) > 200 else ""),
             )
             
             # Remove markdown code blocks if present
-            if response_content.startswith("```json"):
-                response_content = response_content[7:]  # Remove ```json
-            elif response_content.startswith("```"):
-                response_content = response_content[3:]   # Remove ```
-                
-            if response_content.endswith("```"):
-                response_content = response_content[:-3]  # Remove trailing ```
-                
-            response_content = response_content.strip()
+            response_content = self._clean_json_response(response_content)
 
+            # Validate JSON
             try:
                 json_response = json.loads(response_content)
-                # Update the response content with clean JSON
-                response.content = json.dumps(json_response, indent=2)
+                response_content = json.dumps(json_response, indent=2)
                 
-                logger.info(
-                    "JSON mode response validated",
+                logger.debug(
+                    "JSON response validated",
                     model=self.config.model,
                     response_time_ms=response_time,
                     recommendations_count=len(json_response.get("recommendations", [])),
                 )
             except json.JSONDecodeError as e:
                 logger.error(
-                    "Invalid JSON response from LLM with JSON mode",
+                    "Invalid JSON response from LLM",
                     model=self.config.model,
                     error=str(e),
                     response_content=response_content[:500],
                 )
                 # Return valid JSON structure on parse failure
-                response.content = json.dumps({
+                response_content = json.dumps({
                     "recommendations": [],
                     "error": "Failed to parse LLM response"
                 })
 
             return LLMResponse(
-                content=response.content,
-                usage_tokens=getattr(response, "usage_metadata", {}).get(
-                    "total_tokens", 0
-                ),
+                content=response_content,
+                usage_tokens=response.usage.total_tokens if response.usage else 0,
                 model=self.config.model,
                 response_time_ms=response_time,
             )
 
         except Exception as e:
-            logger.error("Failed to generate LLM recommendation", error=str(e))
+            logger.error("Failed to generate LLM response", error=str(e))
             raise
+
+    def _clean_json_response(self, response_content: str) -> str:
+        """Remove markdown code blocks from JSON response"""
+        if response_content.startswith("```json"):
+            response_content = response_content[7:]
+        elif response_content.startswith("```"):
+            response_content = response_content[3:]
+            
+        if response_content.endswith("```"):
+            response_content = response_content[:-3]
+            
+        return response_content.strip()
+
+    def _calculate_batch_tokens(self, batch_size: int) -> int:
+        """Calculate dynamic max tokens for batch processing"""
+        estimated_tokens_per_resource = 400
+        return max(
+            self.max_tokens, 
+            batch_size * estimated_tokens_per_resource + 1000
+        )
 
     def _format_prompt(self, template: str, context_data: Dict[str, Any]) -> str:
         """Format prompt template with context data"""
@@ -189,7 +251,6 @@ class LLMService:
                     'resource_id': context_data.get('resource', {}).get('resource_id', ''),
                     'service': context_data.get('resource', {}).get('service', ''),
                     'region': context_data.get('resource', {}).get('region', ''),
-                    'account_id': context_data.get('resource', {}).get('account_id', ''),
                     'analysis_window_days': context_data.get('analysis_window_days', 30)
                 }
 
@@ -240,119 +301,6 @@ class LLMService:
                 formatted_lines.append(f"{key}: {value}")
 
         return "\n".join(formatted_lines)
-
-    async def analyze_resource_batch(
-        self,
-        system_prompt: str,
-        resources_data: List[Dict[str, Any]],
-        batch_size: int = 5,
-    ) -> List[LLMResponse]:
-        """Analyze multiple resources in batches"""
-        results = []
-
-        for i in range(0, len(resources_data), batch_size):
-            batch = resources_data[i : i + batch_size]
-
-            # Create batch prompt
-            batch_prompt = self._create_batch_prompt(batch)
- 
-            try:
-                # Use direct client call to avoid template formatting for batch prompts
-                import time
-                start_time = time.time()
-                
-                # Calculate dynamic max_tokens based on batch size
-                # Each resource typically needs 300-500 tokens for a complete recommendation
-                # Add buffer for prompt and overhead
-                estimated_tokens_per_resource = 400
-                dynamic_max_tokens = max(
-                    self.max_tokens, 
-                    len(batch) * estimated_tokens_per_resource + 1000
-                )
-                
-                response = await self.client.chat.completions.create(
-                    model=self.model,
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": batch_prompt}
-                    ],
-                    temperature=self.temperature,
-                    max_tokens=dynamic_max_tokens,
-                    response_format={"type": "json_object"}
-                )
-                
-                response_time = (time.time() - start_time) * 1000
-                
-                # Validate JSON response (handle markdown code blocks)
-                response_content = response.choices[0].message.content.strip()
-                
-                # Log the raw batch LLM response for debugging
-                logger.info(
-                    "Raw batch LLM response received",
-                    model=self.model,
-                    batch_index=i,
-                    batch_size=len(batch),
-                    response_length=len(response_content),
-                    response_content=response_content[:500] + ("..." if len(response_content) > 500 else ""),
-                )
-                
-                # Remove markdown code blocks if present
-                if response_content.startswith("```json"):
-                    response_content = response_content[7:]  # Remove ```json
-                elif response_content.startswith("```"):
-                    response_content = response_content[3:]   # Remove ```
-                    
-                if response_content.endswith("```"):
-                    response_content = response_content[:-3]  # Remove trailing ```
-                    
-                response_content = response_content.strip()
-                
-                # Try to parse JSON with repair mechanisms
-                json_response = None
-                try:
-                    json_response = json.loads(response_content)
-                    # Clean the response content
-                    response_content = json.dumps(json_response, indent=2)
-                    
-                    logger.info(
-                        "Batch JSON response validated",
-                        batch_index=i,
-                        batch_size=len(batch),
-                        recommendations_count=len(json_response.get("recommendations", [])),
-                    )
-                except json.JSONDecodeError as e:
-                    logger.error(
-                        "Invalid JSON in batch response",
-                        batch_index=i,
-                        error=str(e),
-                        response_content=response_content[:500],
-                    )
-                    # Create valid JSON structure on parse failure
-                    response_content = json.dumps({
-                        "recommendations": [],
-                        "error": "Failed to parse batch LLM response"
-                    })
-                
-                # Create LLMResponse manually
-                llm_response = LLMResponse(
-                    content=response_content,
-                    usage_tokens=response.usage.total_tokens if response.usage else 0,
-                    model=self.model,
-                    response_time_ms=response_time,
-                )
-                results.append(llm_response)
-
-                # Rate limiting - wait between batches
-                await asyncio.sleep(0.1)
-
-            except Exception as e:
-                logger.error(
-                    "Failed to analyze resource batch", batch_index=i, error=str(e)
-                )
-                # Continue with next batch
-                continue
-
-        return results
 
     def _create_batch_prompt(self, resources: List[Dict[str, Any]]) -> str:
         """Create prompt for batch resource analysis"""
@@ -406,7 +354,7 @@ class LLMService:
         """Update LLM configuration"""
         self.config = new_config
         self.llm = self._create_llm()
-        logger.info("LLM configuration updated", model=new_config.model)
+        logger.debug("LLM configuration updated", model=new_config.model)
 
 
 class PromptTemplates:
@@ -456,9 +404,11 @@ REQUIRED JSON Response format (ALL fields are mandatory):
     ]
 }
 
-CRITICAL REQUIREMENTS:
-- Every recommendation MUST include ALL fields above
-- Use exact field names as specified (especially "impact_description")
-- Provide realistic cost estimates based on AWS pricing
-- Include detailed implementation steps
-- Always include proper rollback procedures"""
+CRITICAL JSON REQUIREMENTS:
+- Respond ONLY with valid JSON - no extra text before or after
+- ALL numeric values must be actual calculated numbers (e.g., 1151.33, not "1.5 * 767.55")
+- current_config and recommended_config must be non-empty objects, never null
+- Calculate all costs yourself and provide final dollar amounts
+- estimated_monthly_savings = current_monthly_cost - estimated_monthly_cost
+- All fields are mandatory - include every single field shown above
+- Use exact field names (especially "impact_description", not "impact")"""

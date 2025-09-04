@@ -36,7 +36,7 @@ from .conditions import CustomCondition, ConditionalRule
 from .recommendations import Recommendation, RecommendationReport
 
 # Agent configuration
-from .agents import AgentCapability, ServiceAgentConfig, CoordinatorConfig
+from .agents import AgentCapability, ServiceAgentConfig, GlobalConfig
 
 # For backwards compatibility, export all models at package level
 __all__ = [
@@ -67,5 +67,5 @@ __all__ = [
     # Agents
     "AgentCapability",
     "ServiceAgentConfig", 
-    "CoordinatorConfig",
+    "GlobalConfig",
 ]

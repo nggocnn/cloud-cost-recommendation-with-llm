@@ -57,7 +57,6 @@ class RecommendationReport(BaseModel):
     """Complete recommendation report"""
 
     id: str
-    account_id: str
     generated_at: datetime = Field(default_factory=datetime.utcnow)
 
     # Summary metrics

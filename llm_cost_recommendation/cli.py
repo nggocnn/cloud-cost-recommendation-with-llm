@@ -27,7 +27,7 @@ class CostRecommendationApp:
         self.llm_service = LLMService(self.config_manager.llm_config)
         self.coordinator = CoordinatorAgent(self.config_manager, self.llm_service)
 
-        logger.info("Application initialized", config_dir=config_dir, data_dir=data_dir)
+        logger.debug("Application initialized", config_dir=config_dir, data_dir=data_dir)
 
     async def run_analysis(
         self,
@@ -95,39 +95,38 @@ class CostRecommendationApp:
                 logger.error("No resources found to analyze")
                 return None
 
-            # Run analysis
-            # Determine batch mode (invert individual_processing)
+            # Execute comprehensive cost optimization analysis
+            # Determine processing strategy (batch processing for efficiency vs individual for precision)
             batch_mode = not individual_processing
-            mode_desc = "batched" if batch_mode else "individual"
+            processing_strategy = "batched" if batch_mode else "individual"
             
-            logger.info(f"Starting coordinator analysis ({mode_desc})")
-            report = await self.coordinator.analyze_account(
+            logger.info(f"Starting comprehensive cost analysis ({processing_strategy} processing)")
+            
+            # Generate cost optimization recommendations across all cloud resources
+            cost_optimization_report = await self.coordinator. analyze_resources_and_generate_report(
                 resources=resources,
                 metrics_data=metrics_data,
                 billing_data=billing_data,
                 batch_mode=batch_mode,
             )
 
-            # Log summary
+            # Log analysis completion summary
             logger.info(
-                "Analysis completed",
-                total_recommendations=report.total_recommendations,
-                monthly_savings=report.total_monthly_savings,
-                annual_savings=report.total_annual_savings,
+                "Cost optimization analysis completed successfully",
+                total_recommendations=cost_optimization_report.total_recommendations,
+                monthly_savings=cost_optimization_report.total_monthly_savings,
+                annual_savings=cost_optimization_report.total_annual_savings,
             )
 
-            return report
+            return cost_optimization_report
 
         except Exception as e:
-            logger.error("Analysis failed", error=str(e))
+            logger.critical("Analysis failed", error=str(e))
             raise
 
     def print_report_summary(self, report):
         """Print a human-readable report summary"""
         print("\n" + "=" * 80)
-        print(f"AWS COST OPTIMIZATION REPORT")
-        print("=" * 80)
-        print(f"Account ID: {report.account_id}")
         print(f"Generated: {report.generated_at}")
         print(f"Total Recommendations: {report.total_recommendations}")
         print(f"Monthly Savings: ${report.total_monthly_savings:,.2f}")
@@ -302,8 +301,7 @@ class CostRecommendationApp:
             "config": {
                 "llm_model": self.config_manager.llm_config.model,
                 "enabled_services": [
-                    s.value
-                    for s in self.config_manager.coordinator_config.enabled_services
+                    s for s in self.config_manager.global_config.enabled_services
                 ],
             },
             "agents": self.coordinator.get_agent_status(),
@@ -317,7 +315,6 @@ async def main():
         description="AWS Cost Optimization using LLM",
         prog="python -m llm_cost_recommendation",
     )
-    parser.add_argument("--account-id", help="AWS Account ID to analyze (deprecated - no longer used)")
     parser.add_argument("--billing-file", help="Path to billing CSV file")
     parser.add_argument("--inventory-file", help="Path to inventory JSON file")
     parser.add_argument("--metrics-file", help="Path to metrics CSV file")
@@ -325,10 +322,8 @@ async def main():
         "--sample-data", action="store_true", help="Use sample data for testing"
     )
     parser.add_argument(
-        "--batch-mode", action="store_true", default=True, help="Use batch processing mode (default). Use --no-batch-mode for individual processing"
-    )
-    parser.add_argument(
-        "--no-batch-mode", action="store_true", help="Process resources individually (one by one) instead of batching"
+        "--individual-processing", action="store_true", 
+        help="Process resources individually instead of batch processing (slower but more precise)"
     )
     parser.add_argument(
         "--config-dir", default="config", help="Configuration directory"
@@ -387,7 +382,7 @@ async def main():
             inventory_file=args.inventory_file,
             metrics_file=args.metrics_file,
             use_sample_data=args.sample_data,
-            individual_processing=args.no_batch_mode,
+            individual_processing=args.individual_processing,
         )
 
         if report:
@@ -400,5 +395,5 @@ async def main():
                 print(f"\nDetailed report saved to: {args.output_file}")
 
     except Exception as e:
-        logger.error("Application failed", error=str(e))
+        logger.critical("Application failed", error=str(e))
         sys.exit(1)

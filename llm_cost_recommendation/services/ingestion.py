@@ -38,7 +38,6 @@ class DataIngestionService:
             column_mapping = {
                 "bill_period_start": "bill/BillingPeriodStartDate",
                 "bill_period_end": "bill/BillingPeriodEndDate",
-                "account_id": "lineItem/UsageAccountId",
                 "service": "product/ProductName",
                 "resource_id": "lineItem/ResourceId",
                 "region": "product/region",
@@ -64,7 +63,7 @@ class DataIngestionService:
                             actual_columns[key] = col
                             break
 
-            logger.info("Column mapping", mapping=actual_columns)
+            logger.debug("Column mapping", mapping=actual_columns)
 
             for _, row in df.iterrows():
                 try:
@@ -77,9 +76,6 @@ class DataIngestionService:
                                 tags[tag_key] = str(row[col])
 
                     billing_record = BillingData(
-                        account_id=str(
-                            row.get(actual_columns.get("account_id", ""), "")
-                        ),
                         service=str(row.get(actual_columns.get("service", ""), "")),
                         resource_id=(
                             str(row.get(actual_columns.get("resource_id", ""), ""))
@@ -151,7 +147,6 @@ class DataIngestionService:
                         service=service_type,
                         region=item.get("region", ""),
                         availability_zone=item.get("availability_zone"),
-                        account_id=item.get("account_id", ""),
                         tags=item.get("tags", {}),
                         properties=item.get("properties", {}),
                         created_at=(
@@ -402,7 +397,6 @@ class DataIngestionService:
                 "service": service_config["service_name"],
                 "region": region,
                 "availability_zone": f"{region}{'abc'[random.randint(0, 2)]}",
-                "account_id": account,
                 "tags": {
                     "Environment": environment,
                     "Team": team,

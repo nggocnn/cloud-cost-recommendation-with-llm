@@ -2,7 +2,7 @@
 Agent configuration and capability models.
 """
 
-from typing import Dict, List
+from typing import Dict, List, Any
 from pydantic import BaseModel, Field
 
 from .types import ServiceTypeUnion, RecommendationType
@@ -48,8 +48,8 @@ class ServiceAgentConfig(BaseModel):
     custom_rules: List[ConditionalRule] = Field(default_factory=list)
 
 
-class CoordinatorConfig(BaseModel):
-    """Configuration for the coordinator agent"""
+class GlobalConfig(BaseModel):
+    """Global configuration shared across all agents and coordinator"""
 
     enabled_services: List[ServiceTypeUnion]
 
@@ -65,3 +65,26 @@ class CoordinatorConfig(BaseModel):
     # Report settings
     max_recommendations_per_service: int = 50
     include_low_impact: bool = False  # Include recommendations < $10/month savings
+    
+    # Global cost tier configuration for resource batching strategy
+    cost_tiers: Dict[str, Dict[str, float]] = Field(default_factory=lambda: {
+        "minimal_cost": {"min": 0, "max": 10, "batch_adjustment": 2},
+        "low_cost": {"min": 10, "max": 100, "batch_adjustment": 0},
+        "medium_cost": {"min": 100, "max": 1000, "batch_adjustment": -1},
+        "high_cost": {"min": 1000, "max": float('inf'), "batch_adjustment": -2}
+    })
+    
+    # Global complexity tier configuration for resource batching strategy
+    complexity_tiers: Dict[str, Dict[str, Any]] = Field(default_factory=lambda: {
+        "simple": {"metric_threshold": 3, "base_batch_size": 6},
+        "moderate": {"metric_threshold": 8, "base_batch_size": 4},
+        "complex": {"metric_threshold": float('inf'), "base_batch_size": 2}
+    })
+    
+    # Global batch size configuration
+    batch_config: Dict[str, Any] = Field(default_factory=lambda: {
+        "min_batch_size": 1,
+        "max_batch_size": 10,
+        "default_batch_size": 4,
+        "single_resource_threshold_cost": 5000  # Resources above this cost get individual analysis
+    })

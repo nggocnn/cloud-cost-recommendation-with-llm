@@ -16,6 +16,7 @@ from ..models import (
     RecommendationType,
     RiskLevel,
     ServiceAgentConfig,
+    GlobalConfig,
 )
 from ..services.llm import LLMService, PromptTemplates
 from ..utils.logging import get_logger
@@ -27,17 +28,23 @@ logger = get_logger(__name__)
 class BaseAgent(ABC):
     """Base class for service-specific cost optimization agents"""
 
-    def __init__(self, config: ServiceAgentConfig, llm_service: LLMService):
+    def __init__(
+        self, 
+        config: ServiceAgentConfig, 
+        llm_service: LLMService, 
+        global_config: GlobalConfig
+    ):
         self.config = config
         self.llm_service = llm_service
+        self.global_config = global_config
         self.service = config.service
         self.agent_id = config.agent_id
         self.rule_processor = RuleProcessor()
 
-        logger.info("Agent initialized", agent_id=self.agent_id, service=self.service)
+        logger.debug("Agent initialized", agent_id=self.agent_id, service=self.service)
 
     @abstractmethod
-    async def analyze_resource(
+    async def analyze_single_resource(
         self,
         resource: Resource,
         metrics: Optional[Metrics] = None,
@@ -74,7 +81,7 @@ class BaseAgent(ABC):
         # Process batches in parallel for different groups
         batch_tasks = []
         for batch_info in batches:
-            task = self._process_resource_batch(batch_info, metrics_data, billing_data)
+            task = self._route_batch_analysis(batch_info, metrics_data, billing_data)
             batch_tasks.append(task)
         
         # Execute batches in parallel
@@ -113,7 +120,6 @@ class BaseAgent(ABC):
                 "service": resource.service.value,
                 "region": resource.region,
                 "availability_zone": resource.availability_zone,
-                "account_id": resource.account_id,
                 "tags": resource.tags,
                 "properties": resource.properties,
                 "extensions": resource.extensions,
@@ -382,7 +388,7 @@ class BaseAgent(ABC):
 
             filtered_recommendations.append(rec)
 
-        logger.info(
+        logger.debug(
             "Recommendations filtered by custom rules",
             agent_id=self.agent_id,
             original_count=len(recommendations),
@@ -427,7 +433,6 @@ class BaseAgent(ABC):
                 resource_id=f"{original_resource.resource_id}_recommended",
                 service=original_resource.service,
                 region=original_resource.region,
-                account_id=original_resource.account_id,
                 properties=modified_properties,
                 tags=original_resource.tags,
                 extensions=original_resource.extensions
@@ -650,15 +655,32 @@ class BaseAgent(ABC):
             return "unknown_cost"
         
         monthly_cost = sum(bd.unblended_cost for bd in billing_data[resource.resource_id])
+        cost_tiers = self.global_config.cost_tiers
         
-        if monthly_cost >= 1000:
-            return "high_cost"
-        elif monthly_cost >= 100:
-            return "medium_cost"
-        elif monthly_cost >= 10:
-            return "low_cost"
-        else:
-            return "minimal_cost"
+        # Find the appropriate cost tier based on monthly cost
+        for tier_name, tier_config in cost_tiers.items():
+            min_cost = tier_config.get("min", 0)
+            max_cost = tier_config.get("max", float('inf'))
+            
+            if min_cost <= monthly_cost < max_cost:
+                return tier_name
+        
+        # Fallback to unknown if no tier matches
+        return "unknown_cost"
+
+    def _should_analyze_individually(
+        self,
+        resource: Resource,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> bool:
+        """Determine if a resource should be analyzed individually based on cost threshold"""
+        if not billing_data or resource.resource_id not in billing_data:
+            return False
+        
+        monthly_cost = sum(bd.unblended_cost for bd in billing_data[resource.resource_id])
+        threshold = self.global_config.batch_config.get("single_resource_threshold_cost", 5000)
+        
+        return monthly_cost >= threshold
 
     def _get_resource_complexity_tier(
         self,
@@ -671,53 +693,92 @@ class BaseAgent(ABC):
         
         metrics = metrics_data[resource.resource_id]
         metric_count = len([v for v in metrics.metrics.values() if v is not None])
+        complexity_tiers = self.global_config.complexity_tiers
         
-        if metric_count >= 10:
-            return "complex"
-        elif metric_count >= 5:
-            return "moderate"
-        else:
-            return "simple"
+        # Find the appropriate complexity tier based on metric count
+        # Sort tiers by metric_threshold to process from lowest to highest
+        def get_threshold(item):
+            threshold = item[1].get("metric_threshold", float('inf'))
+            # Handle 'inf' string from YAML
+            if isinstance(threshold, str) and threshold.lower() == 'inf':
+                return float('inf')
+            return float(threshold)
+        
+        sorted_tiers = sorted(complexity_tiers.items(), key=get_threshold)
+        
+        for tier_name, tier_config in sorted_tiers:
+            threshold = tier_config.get("metric_threshold", float('inf'))
+            # Handle 'inf' string from YAML
+            if isinstance(threshold, str) and threshold.lower() == 'inf':
+                threshold = float('inf')
+            else:
+                threshold = float(threshold)
+                
+            if metric_count <= threshold:
+                return tier_name
+        
+        # Fallback to the last tier if metric count exceeds all thresholds
+        return sorted_tiers[-1][0] if sorted_tiers else "simple"
 
     def _calculate_optimal_batch_size(
         self,
         resources: List[Resource],
         group_key: str,
     ) -> int:
-        """Calculate optimal batch size based on resource characteristics"""
+        """Calculate optimal batch size"""
         # Parse group key to understand resource characteristics
         key_parts = group_key.split("|")
         cost_tier = key_parts[-2] if len(key_parts) >= 2 else "unknown_cost"
         complexity_tier = key_parts[-1] if len(key_parts) >= 1 else "simple"
         
-        # Base batch size
-        if complexity_tier == "complex":
-            base_size = 2  # Smaller batches for complex resources
-        elif complexity_tier == "moderate":
-            base_size = 4
+        # Get batch configuration
+        batch_config = self.global_config.batch_config
+        complexity_tiers = self.global_config.complexity_tiers
+        
+        # Get base batch size from complexity tier configuration
+        if complexity_tier in complexity_tiers:
+            base_size = complexity_tiers[complexity_tier].get("base_batch_size", batch_config.get("default_batch_size", 4))
         else:
-            base_size = 6  # Larger batches for simple resources
+            base_size = batch_config.get("default_batch_size", 4)
         
-        # Adjust based on cost tier (high-cost resources get more individual attention)
-        if cost_tier == "high_cost":
-            base_size = max(1, base_size - 2)
-        elif cost_tier == "minimal_cost":
-            base_size = min(8, base_size + 2)
+        # Adjust based on cost tier using configuration
+        cost_tier_adjustment = self._get_cost_tier_batch_adjustment(cost_tier)
+        adjusted_size = base_size + cost_tier_adjustment
         
-        return max(1, min(base_size, len(resources)))
+        # Apply global batch size constraints
+        min_batch_size = batch_config.get("min_batch_size", 1)
+        max_batch_size = batch_config.get("max_batch_size", 10)
+        
+        # Ensure batch size is within configured limits
+        final_size = max(min_batch_size, min(adjusted_size, max_batch_size, len(resources)))
+        
+        return final_size
 
-    async def _process_resource_batch(
+    def _get_cost_tier_batch_adjustment(self, cost_tier: str) -> int:
+        """Get batch size adjustment based on dynamic cost tier configuration"""
+        # Get cost tier configuration from global config
+        cost_tiers = self.global_config.cost_tiers
+        
+        # Return configured batch adjustment if available
+        if cost_tier in cost_tiers:
+            tier_config = cost_tiers[cost_tier]
+            return int(tier_config.get("batch_adjustment", 0))
+        
+        # Fallback: no adjustment for unknown tiers
+        return 0
+
+    async def _route_batch_analysis(
         self,
         batch_info: Dict[str, Any],
         metrics_data: Dict[str, Metrics] = None,
         billing_data: Dict[str, List[BillingData]] = None,
     ) -> List[Recommendation]:
-        """Process a batch of resources using LLM batch analysis"""
+        """Route batch to appropriate analysis method (individual vs batch processing)"""
         recommendations = []
         batch_resources = batch_info["resources"]
         
         logger.info(
-            "Processing resource batch",
+            "Routing batch analysis",
             agent_id=self.agent_id,
             group_key=batch_info["group_key"],
             batch_size=batch_info["batch_size"],
@@ -725,23 +786,54 @@ class BaseAgent(ABC):
         )
         
         try:
-            if len(batch_resources) == 1:
-                # Single resource - use individual analysis for high precision
-                resource = batch_resources[0]
+            # Check if any resource in the batch should be analyzed individually
+            individual_analysis_resources = []
+            batch_analysis_resources = []
+            
+            for resource in batch_resources:
+                resource_billing = billing_data.get(resource.resource_id) if billing_data else None
+                if self._should_analyze_individually(resource, billing_data):
+                    individual_analysis_resources.append(resource)
+                else:
+                    batch_analysis_resources.append(resource)
+            
+            # Process individual analysis resources
+            for resource in individual_analysis_resources:
                 resource_metrics = metrics_data.get(resource.resource_id) if metrics_data else None
                 resource_billing = billing_data.get(resource.resource_id) if billing_data else None
                 
-                recommendations = await self.analyze_resource(
+                individual_recs = await self.analyze_single_resource(
                     resource, resource_metrics, resource_billing
                 )
-            else:
-                # Multiple resources - use batch analysis
-                recommendations = await self._analyze_resource_batch_llm(
-                    batch_resources, metrics_data, billing_data
+                recommendations.extend(individual_recs)
+                
+                logger.info(
+                    "High-cost resource analyzed individually",
+                    agent_id=self.agent_id,
+                    resource_id=resource.resource_id,
+                    cost=sum(bd.unblended_cost for bd in resource_billing) if resource_billing else 0,
                 )
             
-            logger.info(
-                "Batch processing completed",
+            # Process batch analysis resources
+            if len(batch_analysis_resources) == 1:
+                # Single resource - use individual analysis for high precision
+                resource = batch_analysis_resources[0]
+                resource_metrics = metrics_data.get(resource.resource_id) if metrics_data else None
+                resource_billing = billing_data.get(resource.resource_id) if billing_data else None
+                
+                individual_recs = await self.analyze_single_resource(
+                    resource, resource_metrics, resource_billing
+                )
+                recommendations.extend(individual_recs)
+            elif len(batch_analysis_resources) > 1:
+                # Multiple resources - use batch analysis
+                batch_recs = await self._analyze_batch(
+                    batch_analysis_resources, metrics_data, billing_data
+                )
+                recommendations.extend(batch_recs)
+            
+            logger.debug(
+                "Batch routing completed",
                 agent_id=self.agent_id,
                 group_key=batch_info["group_key"],
                 batch_size=batch_info["batch_size"],
@@ -750,7 +842,7 @@ class BaseAgent(ABC):
             
         except Exception as e:
             logger.error(
-                "Failed to process resource batch",
+                "Failed to route batch analysis",
                 agent_id=self.agent_id,
                 group_key=batch_info["group_key"],
                 batch_size=batch_info["batch_size"],
@@ -759,13 +851,13 @@ class BaseAgent(ABC):
         
         return recommendations
 
-    async def _analyze_resource_batch_llm(
+    async def _analyze_batch(
         self,
         resources: List[Resource],
         metrics_data: Dict[str, Metrics] = None,
         billing_data: Dict[str, List[BillingData]] = None,
     ) -> List[Recommendation]:
-        """Analyze a batch of resources using LLM batch processing"""
+        """Analyze multiple similar resources together using LLM batch processing"""
         recommendations = []
         
         # Prepare batch context data
@@ -781,8 +873,8 @@ class BaseAgent(ABC):
             # Create batch system prompt
             system_prompt = self._create_batch_system_prompt(len(resources))
             
-            # Use LLM service batch analysis
-            batch_responses = await self.llm_service.analyze_resource_batch(
+            # Use LLM service for batch recommendation generation
+            batch_responses = await self.llm_service.generate_batch_recommendations(
                 system_prompt=system_prompt,
                 resources_data=batch_context,
                 batch_size=len(resources),
@@ -835,7 +927,7 @@ class BaseAgent(ABC):
                     resource_metrics = metrics_data.get(resource.resource_id) if metrics_data else None
                     resource_billing = billing_data.get(resource.resource_id) if billing_data else None
                     
-                    individual_recs = await self.analyze_resource(
+                    individual_recs = await self.analyze_single_resource(
                         resource, resource_metrics, resource_billing
                     )
                     recommendations.extend(individual_recs)

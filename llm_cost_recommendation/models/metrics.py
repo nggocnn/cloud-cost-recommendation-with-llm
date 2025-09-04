@@ -41,7 +41,6 @@ class Metrics(BaseModel):
 class BillingData(BaseModel):
     """Billing data model"""
 
-    account_id: str
     service: str
     resource_id: Optional[str] = None
     region: str

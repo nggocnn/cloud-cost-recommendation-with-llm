@@ -59,10 +59,11 @@ class ConditionEvaluator:
             results.append(result)
 
             logger.debug(
-                "Condition evaluated",
+                "Evaluating condition",
                 rule_name=rule.name,
+                resource_id=resource.resource_id,
                 condition_field=condition.field,
-                condition_operator=condition.operator.value,
+                condition_operator=condition.operator,
                 condition_value=condition.value,
                 result=result,
             )
@@ -73,7 +74,7 @@ class ConditionEvaluator:
         else:  # OR
             final_result = any(results)
 
-        logger.info(
+        logger.debug(
             "Rule evaluated",
             rule_name=rule.name,
             logic=rule.logic,
@@ -150,7 +151,6 @@ class ConditionEvaluator:
             "service": resource.service.value,
             "region": resource.region,
             "availability_zone": resource.availability_zone,
-            "account_id": resource.account_id,
         }
 
         if field in resource_fields:
@@ -337,7 +337,7 @@ class RuleProcessor:
             set(result["force_recommendation_types"])
         )
 
-        logger.info(
+        logger.debug(
             "Rules processing completed",
             resource_id=resource.resource_id,
             total_rules=len(rules),
