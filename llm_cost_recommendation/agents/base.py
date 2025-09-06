@@ -4,7 +4,6 @@ Base agent class for service-specific cost optimization agents.
 
 import asyncio
 import json
-from abc import ABC, abstractmethod
 from typing import Dict, List, Any, Optional
 from datetime import datetime
 
@@ -25,8 +24,8 @@ from ..services.conditions import RuleProcessor
 logger = get_logger(__name__)
 
 
-class BaseAgent(ABC):
-    """Base class for service-specific cost optimization agents"""
+class BaseAgent:
+    """Service-specific cost optimization agent"""
 
     def __init__(
         self, 
@@ -43,7 +42,6 @@ class BaseAgent(ABC):
 
         logger.debug("Agent initialized", agent_id=self.agent_id, service=self.service)
 
-    @abstractmethod
     async def analyze_single_resource(
         self,
         resource: Resource,
@@ -51,9 +49,61 @@ class BaseAgent(ABC):
         billing_data: Optional[List[BillingData]] = None,
     ) -> List[Recommendation]:
         """Analyze a single resource and generate recommendations"""
-        pass
+        recommendations = []
 
-    async def analyze_resources(
+        if not self._validate_resource_data(resource):
+            return recommendations
+
+        try:
+            # Calculate estimated monthly cost for rule evaluation
+            estimated_cost = None
+            if billing_data:
+                estimated_cost = sum(bd.unblended_cost for bd in billing_data)
+
+            # Apply custom rules to get configuration overrides
+            rule_results = self._apply_custom_rules(
+                resource, metrics, billing_data, estimated_cost
+            )
+
+            # Merge thresholds with rule overrides
+            context_data = self._prepare_context_data(resource, metrics, billing_data)
+            original_thresholds = context_data.get("thresholds", {})
+            merged_thresholds = self._merge_thresholds(
+                original_thresholds, rule_results.get("threshold_overrides", {})
+            )
+            context_data["thresholds"] = merged_thresholds
+
+            # Generate recommendations using LLM with rule-modified context
+            llm_recommendations = await self._generate_recommendations_from_llm(
+                context_data, rule_results
+            )
+
+            # Convert to recommendation models
+            for llm_rec in llm_recommendations:
+                rec = await self._convert_llm_recommendation_to_model(llm_rec, resource)
+                if rec:
+                    recommendations.append(rec)
+
+            logger.info(
+                "Resource analysis completed",
+                agent_id=self.agent_id,
+                resource_id=resource.resource_id,
+                recommendations_count=len(recommendations),
+                rules_applied=len([r for r in self.config.custom_rules if r.enabled]),
+                threshold_overrides=rule_results.get("threshold_overrides", {}),
+            )
+
+        except Exception as e:
+            logger.error(
+                "Failed to analyze resource with LLM",
+                agent_id=self.agent_id,
+                resource_id=resource.resource_id,
+                error=str(e),
+            )
+
+        return recommendations
+
+    async def analyze_multiple_resources(
         self,
         resources: List[Resource],
         metrics_data: Dict[str, Metrics] = None,

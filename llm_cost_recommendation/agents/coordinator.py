@@ -26,86 +26,6 @@ from .base import BaseAgent
 logger = get_logger(__name__)
 
 
-class ServiceAgentFactory:
-    """Factory for creating service agents"""
-
-    @staticmethod
-    def create_agent(
-        config: ServiceAgentConfig, 
-        llm_service: LLMService, 
-        global_config: GlobalConfig
-    ) -> BaseAgent:
-        """Create appropriate agent for service"""
-        
-        # All services now use the unified LLM-based agent with custom rules
-        return LLMServiceAgent(config, llm_service, global_config)
-
-
-class LLMServiceAgent(BaseAgent):
-    """Generic LLM-based service agent"""
-
-    async def analyze_single_resource(
-        self,
-        resource: Resource,
-        metrics: Optional[Metrics] = None,
-        billing_data: Optional[List[BillingData]] = None,
-    ) -> List[Recommendation]:
-        """Analyze resource using LLM with custom rules support"""
-        recommendations = []
-
-        if not self._validate_resource_data(resource):
-            return recommendations
-
-        try:
-            # Calculate estimated monthly cost for rule evaluation
-            estimated_cost = None
-            if billing_data:
-                estimated_cost = sum(bd.unblended_cost for bd in billing_data)
-
-            # Apply custom rules to get configuration overrides
-            rule_results = self._apply_custom_rules(
-                resource, metrics, billing_data, estimated_cost
-            )
-
-            # Merge thresholds with rule overrides
-            context_data = self._prepare_context_data(resource, metrics, billing_data)
-            original_thresholds = context_data.get("thresholds", {})
-            merged_thresholds = self._merge_thresholds(
-                original_thresholds, rule_results.get("threshold_overrides", {})
-            )
-            context_data["thresholds"] = merged_thresholds
-
-            # Generate recommendations using LLM with rule-modified context
-            llm_recommendations = await self._generate_recommendations_from_llm(
-                context_data, rule_results
-            )
-
-            # Convert to recommendation models
-            for llm_rec in llm_recommendations:
-                rec = await self._convert_llm_recommendation_to_model(llm_rec, resource)
-                if rec:
-                    recommendations.append(rec)
-
-            logger.info(
-                "Resource analysis completed",
-                agent_id=self.agent_id,
-                resource_id=resource.resource_id,
-                recommendations_count=len(recommendations),
-                rules_applied=len([r for r in self.config.custom_rules if r.enabled]),
-                threshold_overrides=rule_results.get("threshold_overrides", {}),
-            )
-
-        except Exception as e:
-            logger.error(
-                "Failed to analyze resource with LLM",
-                agent_id=self.agent_id,
-                resource_id=resource.resource_id,
-                error=str(e),
-            )
-
-        return recommendations
-
-
 class CoordinatorAgent:
     """Coordinator agent that orchestrates service agents"""
 
@@ -129,9 +49,8 @@ class CoordinatorAgent:
 
             if service_config and service_config.enabled:
                 try:
-                    agent = ServiceAgentFactory.create_agent(
-                        service_config, self.llm_service, self.config
-                    )
+
+                    agent = BaseAgent(service_config, self.llm_service, self.config)
                     self.service_agents[service] = agent
 
                     logger.info(
@@ -265,7 +184,7 @@ class CoordinatorAgent:
     ) -> List[Recommendation]:
         """Analyze resources for a specific service"""
         try:
-            recommendations = await agent.analyze_resources(
+            recommendations = await agent.analyze_multiple_resources(
                 resources, metrics_data, billing_data
             )
 
