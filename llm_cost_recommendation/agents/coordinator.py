@@ -14,14 +14,12 @@ from ..models import (
     Recommendation,
     RecommendationReport,
     ServiceType,
-    ServiceAgentConfig,
-    GlobalConfig,
     RiskLevel,
 )
 from ..services.llm import LLMService
 from ..services.config import ConfigManager
 from ..utils.logging import get_logger
-from .base import BaseAgent
+from .base import ServiceAgent
 
 logger = get_logger(__name__)
 
@@ -35,22 +33,51 @@ class CoordinatorAgent:
         self.config = config_manager.global_config
 
         # Initialize service agents
-        self.service_agents: Dict[ServiceType, BaseAgent] = {}
+        self.service_agents: Dict[ServiceType, ServiceAgent] = {}
         self._initialize_agents()
 
+        # Verify default agent is available (critical for system functionality)
+        if ServiceType.DEFAULT not in self.service_agents:
+            logger.critical("CRITICAL: Default agent not available - system will have coverage gaps")
+            raise RuntimeError("Failed to initialize default agent - system cannot guarantee coverage")
+
         logger.info(
-            "Coordinator agent initialized", enabled_services=len(self.service_agents)
+            "Coordinator agent initialized", 
+            enabled_services=len(self.service_agents),
+            agents=[agent.value for agent in self.service_agents.keys()]
         )
 
     def _initialize_agents(self):
         """Initialize service agents based on configuration"""
+        # Always initialize default agent
+        default_config = self.config_manager.get_service_config(ServiceType.DEFAULT)
+        if default_config:
+            try:
+                default_agent = ServiceAgent(
+                    default_config, self.llm_service, self.config
+                )
+                self.service_agents[ServiceType.DEFAULT] = default_agent
+                logger.info(
+                    "Default agent initialized",
+                    agent_id=default_agent.agent_id,
+                )
+            except Exception as e:
+                logger.error(
+                    "Failed to initialize default agent",
+                    error=str(e),
+                )
+
+        # Initialize service-specific agents
         for service in self.config.enabled_services:
+            # Skip DEFAULT as it's already initialized
+            if service == ServiceType.DEFAULT:
+                continue
+
             service_config = self.config_manager.get_service_config(service)
 
             if service_config and service_config.enabled:
                 try:
-
-                    agent = BaseAgent(service_config, self.llm_service, self.config)
+                    agent = ServiceAgent(service_config, self.llm_service, self.config)
                     self.service_agents[service] = agent
 
                     logger.info(
@@ -86,7 +113,7 @@ class CoordinatorAgent:
 
         # Analyze resources using appropriate service agents
         all_recommendations = []
-        
+
         if batch_mode:
             # Batch processing: Analyze services in parallel for efficiency
             # Each service agent will use intelligent batching internally
@@ -95,12 +122,27 @@ class CoordinatorAgent:
             for service, service_resources in resources_by_service.items():
                 if service in self.service_agents:
                     agent = self.service_agents[service]
-
-                    # Create parallel analysis task for this service
-                    task = self._analyze_service_resources(
-                        agent, service_resources, metrics_data, billing_data
+                # Fall back to default agent
+                elif ServiceType.DEFAULT in self.service_agents:
+                    agent = self.service_agents[ServiceType.DEFAULT]
+                    logger.info(
+                        "Using default agent for unsupported service",
+                        service=service.value,
+                        resource_count=len(service_resources),
                     )
-                    analysis_tasks.append(task)
+                else:
+                    logger.warning(
+                        "No agent available for service (no default agent configured)",
+                        service=service.value,
+                        resource_count=len(service_resources),
+                    )
+                    continue
+
+                # Create parallel analysis task for this service
+                task = self._analyze_service_resources(
+                    agent, service_resources, metrics_data, billing_data
+                )
+                analysis_tasks.append(task)
 
             # Execute all service analyses in parallel
             if analysis_tasks:
@@ -120,29 +162,49 @@ class CoordinatorAgent:
             total_resources = len(resources)
             for i, resource in enumerate(resources, 1):
                 if resource.service in self.service_agents:
+                    agent = self.service_agents[resource.service]
+                # Fall back to default agent
+                elif ServiceType.DEFAULT in self.service_agents:
+                    agent = self.service_agents[ServiceType.DEFAULT]
                     logger.info(
-                        f"Analyzing resource {i}/{total_resources}",
+                        f"Using default agent for resource {i}/{total_resources}",
                         resource_id=resource.resource_id,
                         service=resource.service.value,
                     )
-                    
-                    # Get relevant metrics and billing data for this specific resource
-                    resource_metrics = metrics_data.get(resource.resource_id) if metrics_data else None
-                    resource_billing = billing_data.get(resource.resource_id) if billing_data else None
-                    
-                    try:
-                        agent = self.service_agents[resource.service]
-                        recommendations = await agent.analyze_single_resource(
-                            resource, resource_metrics, resource_billing
-                        )
-                        all_recommendations.extend(recommendations)
-                    except Exception as e:
-                        logger.error(
-                            "Failed to analyze individual resource",
-                            resource_id=resource.resource_id,
-                            service=resource.service.value,
-                            error=str(e),
-                        )
+                else:
+                    logger.warning(
+                        f"No agent available for resource {i}/{total_resources}",
+                        resource_id=resource.resource_id,
+                        service=resource.service.value,
+                    )
+                    continue
+
+                logger.info(
+                    f"Analyzing resource {i}/{total_resources}",
+                    resource_id=resource.resource_id,
+                    service=resource.service.value,
+                )
+
+                # Get relevant metrics and billing data for this specific resource
+                resource_metrics = (
+                    metrics_data.get(resource.resource_id) if metrics_data else None
+                )
+                resource_billing = (
+                    billing_data.get(resource.resource_id) if billing_data else None
+                )
+
+                try:
+                    recommendations = await agent.analyze_single_resource(
+                        resource, resource_metrics, resource_billing
+                    )
+                    all_recommendations.extend(recommendations)
+                except Exception as e:
+                    logger.error(
+                        "Failed to analyze individual resource",
+                        resource_id=resource.resource_id,
+                        service=resource.service.value,
+                        error=str(e),
+                    )
 
         # Post-process recommendations (deduplicate, filter, rank)
         processed_recommendations = self._post_process_recommendations(
@@ -150,16 +212,27 @@ class CoordinatorAgent:
         )
 
         # Generate comprehensive report with metrics and insights
-        report = self._generate_report(
-            processed_recommendations, resources, start_time
-        )
+        report = self._generate_report(processed_recommendations, resources, start_time)
 
         logger.info(
             "Resource analysis completed successfully",
             total_recommendations=len(processed_recommendations),
             total_monthly_savings=report.total_monthly_savings,
             total_annual_savings=report.total_annual_savings,
-            analysis_time_seconds=(datetime.now(timezone.utc) - start_time).total_seconds(),
+            analysis_time_seconds=(
+                datetime.now(timezone.utc) - start_time
+            ).total_seconds(),
+        )
+
+        # Log detailed coverage summary
+        logger.info(
+            "Analysis Summary",
+            total_resources=len(resources),
+            resources_with_specific_agents=report.coverage["resources_with_specific_agents"],
+            resources_falling_back_to_default=report.coverage["resources_falling_back_to_default"],
+            services_with_specific_agents=report.coverage["services_with_specific_agents"],
+            services_falling_back_to_default=report.coverage["services_falling_back_to_default"],
+            fallback_service_types=report.coverage["services_falling_back_to_default_list"] if report.coverage["services_falling_back_to_default_list"] else "None",
         )
 
         return report
@@ -177,7 +250,7 @@ class CoordinatorAgent:
 
     async def _analyze_service_resources(
         self,
-        agent: BaseAgent,
+        agent: ServiceAgent,
         resources: List[Resource],
         metrics_data: Dict[str, Metrics] = None,
         billing_data: Dict[str, List[BillingData]] = None,
@@ -340,16 +413,45 @@ class CoordinatorAgent:
             else:
                 long_term.append(rec.id)
 
-        # Coverage metrics
+        # Coverage metrics - default agent fallback
         analyzed_services = set(resource.service for resource in resources)
         available_agents = set(self.service_agents.keys())
+        
+        # Services with specific agents
+        services_with_specific_agents = analyzed_services.intersection(available_agents - {ServiceType.DEFAULT})
+        
+        # Services that fall back to default agent
+        services_falling_back_to_default = analyzed_services - (available_agents - {ServiceType.DEFAULT})
+        
+        # Track resources by coverage type with detailed information
+        resources_with_specific_agents = []
+        resources_falling_back_to_default = []
+        fallback_services_list = []
+        
+        for resource in resources:
+            if resource.service in available_agents and resource.service != ServiceType.DEFAULT:
+                # Resource has a specific agent
+                resources_with_specific_agents.append(resource.resource_id)
+            else:
+                # Resource falls back to default agent
+                resources_falling_back_to_default.append(resource.resource_id)
+                # Track which services are falling back
+                if resource.service.value not in fallback_services_list:
+                    fallback_services_list.append(resource.service.value)
 
         coverage = {
             "total_resources": len(resources),
-            "total_services": len(analyzed_services),
-            "covered_services": len(analyzed_services.intersection(available_agents)),
-            "uncovered_services": list(analyzed_services - available_agents),
-            "analysis_time_seconds": (datetime.now(timezone.utc) - start_time).total_seconds(),
+            "resources_with_specific_agents": len(resources_with_specific_agents),
+            "services_with_specific_agents": len(services_with_specific_agents),
+            "resources_with_specific_agents_list": resources_with_specific_agents,
+            "services_with_specific_agents_list": [s.value for s in services_with_specific_agents],
+            "resources_falling_back_to_default": len(resources_falling_back_to_default),
+            "services_falling_back_to_default": len(services_falling_back_to_default),
+            "resources_falling_back_to_default_list": resources_falling_back_to_default,
+            "services_falling_back_to_default_list": fallback_services_list,
+            "analysis_time_seconds": (
+                datetime.now(timezone.utc) - start_time
+            ).total_seconds(),
         }
 
         report_id = f"report_{start_time.strftime('%Y%m%d_%H%M%S')}"
@@ -390,21 +492,3 @@ class CoordinatorAgent:
             status["agents"][service.value] = agent.get_capabilities()
 
         return status
-
-    async def analyze_resource(
-        self,
-        resource: Resource,
-        metrics: Optional[Metrics] = None,
-        billing_data: Optional[List[BillingData]] = None,
-    ) -> List[Recommendation]:
-        """Analyze a single resource"""
-        if resource.service not in self.service_agents:
-            logger.warning(
-                "No agent available for service",
-                service=resource.service.value,
-                resource_id=resource.resource_id,
-            )
-            return []
-
-        agent = self.service_agents[resource.service]
-        return await agent.analyze_single_resource(resource, metrics, billing_data)

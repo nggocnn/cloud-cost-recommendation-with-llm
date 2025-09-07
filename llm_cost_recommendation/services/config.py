@@ -75,19 +75,23 @@ class ConfigManager:
                     "minimal_cost": {"min": 0, "max": 10, "batch_adjustment": 2},
                     "low_cost": {"min": 10, "max": 100, "batch_adjustment": 0},
                     "medium_cost": {"min": 100, "max": 1000, "batch_adjustment": -1},
-                    "high_cost": {"min": 1000, "max": float('inf'), "batch_adjustment": -2}
+                    "high_cost": {
+                        "min": 1000,
+                        "max": float("inf"),
+                        "batch_adjustment": -2,
+                    },
                 },
                 "complexity_tiers": {
                     "simple": {"metric_threshold": 3, "base_batch_size": 6},
                     "moderate": {"metric_threshold": 8, "base_batch_size": 4},
-                    "complex": {"metric_threshold": float('inf'), "base_batch_size": 2}
+                    "complex": {"metric_threshold": float("inf"), "base_batch_size": 2},
                 },
                 "batch_config": {
                     "min_batch_size": 1,
                     "max_batch_size": 10,
                     "default_batch_size": 4,
-                    "single_resource_threshold_cost": 5000
-                }
+                    "single_resource_threshold_cost": 5000,
+                },
             }
 
             with open(config_file, "w") as f:
@@ -105,14 +109,14 @@ class ConfigManager:
         """Recursively fix 'inf' strings from YAML to proper float('inf')"""
         if isinstance(data, dict):
             for key, value in data.items():
-                if isinstance(value, str) and value.lower() == 'inf':
-                    data[key] = float('inf')
+                if isinstance(value, str) and value.lower() == "inf":
+                    data[key] = float("inf")
                 elif isinstance(value, (dict, list)):
                     data[key] = self._fix_yaml_inf_values(value)
         elif isinstance(data, list):
             for i, item in enumerate(data):
-                if isinstance(item, str) and item.lower() == 'inf':
-                    data[i] = float('inf')
+                if isinstance(item, str) and item.lower() == "inf":
+                    data[i] = float("inf")
                 elif isinstance(item, (dict, list)):
                     data[i] = self._fix_yaml_inf_values(item)
         return data
@@ -120,22 +124,26 @@ class ConfigManager:
     def _get_agent_config_path(self, service: ServiceType) -> Path:
         """Get the config file path for a service agent based on new hierarchical structure"""
         service_str = service.value.lower()
-        
+
+        # Handle default service type
+        if service_str == "default":
+            return self.config_dir / "agents" / "default" / "default.yaml"
+
         # Map service types to cloud provider
-        if service_str.startswith('aws.'):
-            cloud = 'aws'
+        if service_str.startswith("aws."):
+            cloud = "aws"
             service_name = service_str[4:]  # Remove 'aws.' prefix
-        elif service_str.startswith('azure.'):
-            cloud = 'azure'
+        elif service_str.startswith("azure."):
+            cloud = "azure"
             service_name = service_str[6:]  # Remove 'azure.' prefix
-        elif service_str.startswith('gcp.'):
-            cloud = 'gcp'
+        elif service_str.startswith("gcp."):
+            cloud = "gcp"
             service_name = service_str[4:]  # Remove 'gcp.' prefix
         else:
             # Legacy service names without cloud prefix - assume AWS
-            cloud = 'aws'
+            cloud = "aws"
             service_name = service_str
-        
+
         return self.config_dir / "agents" / cloud / f"{service_name}.yaml"
 
     def _load_service_configs(self) -> Dict[ServiceType, ServiceAgentConfig]:
@@ -148,10 +156,10 @@ class ConfigManager:
             if not config_file.exists():
                 # Create default configuration for this service
                 default_config = self._create_default_service_config(service)
-                
+
                 # Ensure directory exists
                 config_file.parent.mkdir(parents=True, exist_ok=True)
-                
+
                 with open(config_file, "w") as f:
                     yaml.dump(default_config, f, default_flow_style=False)
 
@@ -169,6 +177,55 @@ class ConfigManager:
 
     def _create_default_service_config(self, service: ServiceType) -> Dict:
         """Create default configuration for a service"""
+        default_config = {
+            "agent_id": "default_agent",
+            "service": ServiceType.DEFAULT,
+            "enabled": True,
+            "capability": {
+                "service": ServiceType.DEFAULT,
+                "supported_recommendation_types": [
+                    RecommendationType.COST_ANALYSIS.value,
+                    RecommendationType.GENERAL_OPTIMIZATION.value,
+                ],
+                "required_metrics": ["monthly_cost"],
+                "optional_metrics": [
+                    "cost_per_hour",
+                    "usage_hours",
+                    "network_in",
+                    "network_out",
+                ],
+                "thresholds": {
+                    "cost_threshold": 1.0,
+                    "usage_threshold": 0.1,
+                },
+                "analysis_window_days": 30,
+            },
+            "base_prompt": "You are a cloud cost optimization specialist with expertise across multiple cloud providers.",
+            "service_specific_prompt": """
+You are analyzing a cloud resource that doesn't have a specialized agent yet.
+
+Provide general cost optimization recommendations based on:
+1. Resource utilization patterns
+2. Cost trends and billing data
+3. Industry best practices
+4. General cloud optimization principles
+
+Focus on:
+- Identifying obviously underutilized resources
+- Suggesting general cost optimization strategies
+- Recommending further analysis with specialized tools
+- Highlighting potential savings opportunities
+
+Be conservative in your recommendations since you don't have service-specific expertise.
+Always suggest consulting with service-specific specialists for detailed analysis.
+
+Provide actionable but general recommendations with cost estimates when possible.
+""",
+            "temperature": 0.2,
+            "max_tokens": 2000,
+            "min_cost_threshold": 1.0,
+            "confidence_threshold": 0.6,
+        }
 
         # Define service-specific configurations
         service_configs = {
@@ -376,32 +433,14 @@ Provide specific recommendations with memory settings and architectural improvem
             },
         }
 
-        # For services not explicitly defined, create a basic configuration
-        config = service_configs.get(service, {
-            "agent_id": f"{service.value.lower().replace('.', '_')}_agent",
-            "service": service.value,
-            "enabled": True,  # Enable by default for all services
-            "capability": {
-                "service": service.value,
-                "supported_recommendation_types": [
-                    RecommendationType.RIGHTSIZING.value
-                ],
-                "required_metrics": [],
-                "optional_metrics": [],
-                "thresholds": {},
-                "analysis_window_days": 30,
-            },
-            "base_prompt": f"You are an expert {ServiceType.get_provider(service)} cost optimization specialist focusing on {ServiceType.get_service_name(service)}.",
-            "service_specific_prompt": f"Analyze {ServiceType.get_service_name(service)} resources for cost optimization opportunities.",
-            "temperature": 0.1,
-            "max_tokens": 2000,
-            "min_cost_threshold": 1.0,
-            "confidence_threshold": 0.7,
-        })
-        
+        # For services not explicitly defined, create a default agent configuration
+        config = service_configs.get(service, default_config)
+
         return config
 
-    def get_service_config(self, service: Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP, str]) -> Optional[ServiceAgentConfig]:
+    def get_service_config(
+        self, service: Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP, str]
+    ) -> Optional[ServiceAgentConfig]:
         """Get configuration for a service"""
         if isinstance(service, str):
             # Convert string to ServiceType using from_string method
@@ -410,25 +449,5 @@ Provide specific recommendations with memory settings and architectural improvem
                 return None
         else:
             service_obj = service
-            
+
         return self.service_configs.get(service_obj)
-
-    def get_enabled_services(self) -> List[str]:
-        """Get list of enabled service strings"""
-        return [
-            service.value
-            for service, config in self.service_configs.items()
-            if config.enabled
-        ]
-
-    def update_service_config(self, service: ServiceType, config: ServiceAgentConfig):
-        """Update configuration for a service"""
-        self.service_configs[service] = config
-
-        # Save to file using new hierarchical structure
-        config_file = self._get_agent_config_path(service)
-        config_file.parent.mkdir(parents=True, exist_ok=True)
-        config_dict = config.model_dump()
-
-        with open(config_file, "w") as f:
-            yaml.dump(config_dict, f, default_flow_style=False)

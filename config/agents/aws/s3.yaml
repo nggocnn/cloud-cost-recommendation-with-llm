@@ -41,3 +41,84 @@ service_specific_prompt: '
 
   '
 temperature: 0.1
+
+# Custom conditional rules for S3 storage optimization
+custom_rules:
+  - name: "compliance_data_retention"
+    description: "Compliance data needs special handling and longer retention"
+    enabled: true
+    priority: 100
+    logic: "OR"
+    conditions:
+      - field: "tag.DataClass"
+        operator: "in"
+        value: ["PII", "PHI", "financial", "legal"]
+      - field: "tag.Compliance"
+        operator: "exists"
+        value: true
+      - field: "tag.Retention"
+        operator: "regex"
+        value: "^(7|10|forever)$"  # 7 years, 10 years, or forever
+    threshold_overrides:
+      deep_archive_threshold: 90   # Shorter transition for compliance data
+      glacier_access_threshold: 30
+    custom_prompt: "Compliance data detected. Ensure lifecycle policies meet regulatory requirements. Consider legal hold and audit trail requirements."
+    
+  - name: "backup_data_optimization"
+    description: "Backup data can be moved to cheaper storage classes faster"
+    enabled: true
+    priority: 80
+    logic: "OR"
+    conditions:
+      - field: "tag.Purpose"
+        operator: "contains"
+        value: "backup"
+      - field: "tag.DataType"
+        operator: "equals"
+        value: "archive"
+      - field: "resource_id"
+        operator: "contains"
+        value: "backup"
+    threshold_overrides:
+      deep_archive_threshold: 30   # Move backups to Deep Archive quickly
+      glacier_access_threshold: 7
+      ia_access_threshold: 1       # Move to IA immediately
+    risk_adjustment: "decrease"
+    custom_prompt: "Backup data identified. Apply aggressive storage class optimization for maximum cost savings."
+    
+  - name: "active_application_data"
+    description: "Active application data needs careful lifecycle management"
+    enabled: true
+    priority: 70
+    logic: "AND"
+    conditions:
+      - field: "tag.Environment"
+        operator: "equals"
+        value: "production"
+      - field: "requests_get"
+        operator: "greater_than"
+        value: 1000  # High access frequency
+    threshold_overrides:
+      ia_access_threshold: 90      # Keep in Standard longer for active data
+      glacier_access_threshold: 365
+    custom_prompt: "Active production data with high access frequency. Be conservative with storage class transitions to avoid retrieval costs."
+    
+  - name: "log_data_lifecycle"
+    description: "Log data follows predictable access patterns"
+    enabled: true
+    priority: 60
+    logic: "OR"
+    conditions:
+      - field: "tag.DataType"
+        operator: "equals"
+        value: "logs"
+      - field: "resource_id"
+        operator: "regex"
+        value: ".*log.*"
+    threshold_overrides:
+      ia_access_threshold: 30
+      glacier_access_threshold: 90
+      deep_archive_threshold: 365
+    force_recommendation_types:
+      - "lifecycle"
+    custom_prompt: "Log data detected. Implement automated lifecycle policies: Standard (30d) -> IA (90d) -> Glacier (1y) -> Deep Archive."

@@ -8,6 +8,7 @@ from typing import Union
 
 class CloudProvider(str, Enum):
     """Supported cloud providers"""
+
     AWS = "AWS"
     AZURE = "Azure"
     GCP = "GCP"
@@ -15,9 +16,18 @@ class CloudProvider(str, Enum):
 
 class ServiceType:
     """Hierarchical cloud service types organized by provider"""
-    
+
+    class Default(str, Enum):
+        """Default service type for unsupported services"""
+
+        DEFAULT = "DEFAULT"
+
+    # Make DEFAULT accessible at class level
+    DEFAULT = Default.DEFAULT
+
     class AWS(str, Enum):
         """AWS Services"""
+
         EC2 = "AWS.EC2"
         EBS = "AWS.EBS"
         S3 = "AWS.S3"
@@ -35,9 +45,10 @@ class ServiceType:
         VPC_ENDPOINTS = "AWS.VPCEndpoints"
         SQS = "AWS.SQS"
         SNS = "AWS.SNS"
-    
+
     class Azure(str, Enum):
         """Azure Services"""
+
         VM = "Azure.VM"
         DISK = "Azure.Disk"
         STORAGE = "Azure.Storage"
@@ -48,9 +59,10 @@ class ServiceType:
         LOAD_BALANCER = "Azure.LoadBalancer"
         PUBLIC_IP = "Azure.PublicIP"
         NAT_GATEWAY = "Azure.NATGateway"
-    
+
     class GCP(str, Enum):
         """GCP Services"""
+
         COMPUTE = "GCP.Compute"
         DISK = "GCP.Disk"
         STORAGE = "GCP.Storage"
@@ -59,44 +71,49 @@ class ServiceType:
         FUNCTIONS = "GCP.Functions"
         CDN = "GCP.CDN"
         LOAD_BALANCER = "GCP.LoadBalancer"
-    
+
     @classmethod
     def get_all_services(cls):
         """Get all service types from all providers"""
         services = []
+        services.append(cls.DEFAULT)
         services.extend(list(cls.AWS))
         services.extend(list(cls.Azure))
         services.extend(list(cls.GCP))
         return services
-    
+
     @classmethod
     def get_aws_services(cls):
         """Get all AWS services"""
         return list(cls.AWS)
-    
+
     @classmethod
     def get_azure_services(cls):
         """Get all Azure services"""
         return list(cls.Azure)
-    
+
     @classmethod
     def get_gcp_services(cls):
         """Get all GCP services"""
         return list(cls.GCP)
-    
+
     @classmethod
     def get_provider(cls, service_type):
         """Get the cloud provider for a service type"""
-        return service_type.value.split('.')[0]
-    
+        return service_type.value.split(".")[0]
+
     @classmethod
     def get_service_name(cls, service_type):
         """Get the service name without provider prefix"""
-        return service_type.value.split('.')[1]
-    
+        return service_type.value.split(".")[1]
+
     @classmethod
     def from_string(cls, service_string: str):
         """Get service type from string value"""
+        # Check default first
+        if service_string == "DEFAULT":
+            return cls.DEFAULT
+
         for provider_class in [cls.AWS, cls.Azure, cls.GCP]:
             for service in provider_class:
                 if service.value == service_string:
@@ -105,21 +122,27 @@ class ServiceType:
 
 
 # Union type for Pydantic compatibility
-ServiceTypeUnion = Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP]
+ServiceTypeUnion = Union[
+    ServiceType.AWS, ServiceType.Azure, ServiceType.GCP, ServiceType.Default
+]
 
 
 class RecommendationType(str, Enum):
     """Types of recommendations"""
+
     RIGHTSIZING = "rightsizing"
     PURCHASING_OPTION = "purchasing_option"
     LIFECYCLE = "lifecycle"
     TOPOLOGY = "topology"
     STORAGE_CLASS = "storage_class"
     IDLE_RESOURCE = "idle_resource"
+    COST_ANALYSIS = "cost_analysis"
+    GENERAL_OPTIMIZATION = "general_optimization"
 
 
 class RiskLevel(str, Enum):
     """Risk levels for recommendations"""
+
     LOW = "low"
     MEDIUM = "medium"
     HIGH = "high"
@@ -127,6 +150,7 @@ class RiskLevel(str, Enum):
 
 class ConditionOperator(str, Enum):
     """Operators for custom conditions"""
+
     EQUALS = "equals"
     NOT_EQUALS = "not_equals"
     GREATER_THAN = "greater_than"
@@ -144,6 +168,7 @@ class ConditionOperator(str, Enum):
 
 class ConditionField(str, Enum):
     """Available fields for conditions"""
+
     # Resource fields
     RESOURCE_ID = "resource_id"
     SERVICE = "service"

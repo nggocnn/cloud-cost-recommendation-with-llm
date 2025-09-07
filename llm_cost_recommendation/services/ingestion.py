@@ -233,7 +233,9 @@ class DataIngestionService:
             logger.error("Failed to ingest metrics data", error=str(e))
             raise
 
-    def _normalize_service_type(self, service_name: str) -> Optional[Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP]]:
+    def _normalize_service_type(
+        self, service_name: str
+    ) -> Optional[Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP]]:
         """Normalize service name to ServiceType enum"""
         service_mapping = {
             "EC2": ServiceType.AWS.EC2,
@@ -280,97 +282,135 @@ class DataIngestionService:
     def create_sample_data(self, num_resources: int = 200):
         """Create realistic AWS data files for comprehensive testing"""
         logger.info("Creating realistic AWS data files", num_resources=num_resources)
-        
+
         import random
         from datetime import datetime, timedelta
-        
+
         # Realistic AWS service configurations
         aws_services = {
             "Amazon Elastic Compute Cloud": {
                 "service_name": "EC2",
-                "usage_types": ["BoxUsage:t3.micro", "BoxUsage:t3.small", "BoxUsage:t3.medium", 
-                              "BoxUsage:t3.large", "BoxUsage:t3.xlarge", "BoxUsage:m5.large", 
-                              "BoxUsage:m5.xlarge", "BoxUsage:c5.large", "BoxUsage:r5.large"],
+                "usage_types": [
+                    "BoxUsage:t3.micro",
+                    "BoxUsage:t3.small",
+                    "BoxUsage:t3.medium",
+                    "BoxUsage:t3.large",
+                    "BoxUsage:t3.xlarge",
+                    "BoxUsage:m5.large",
+                    "BoxUsage:m5.xlarge",
+                    "BoxUsage:c5.large",
+                    "BoxUsage:r5.large",
+                ],
                 "cost_range": (10, 500),
-                "usage_range": (100, 744)  # hours per month
+                "usage_range": (100, 744),  # hours per month
             },
             "Amazon Elastic Block Store": {
                 "service_name": "EBS",
-                "usage_types": ["VolumeUsage.gp3", "VolumeUsage.gp2", "VolumeUsage.io2"],
+                "usage_types": [
+                    "VolumeUsage.gp3",
+                    "VolumeUsage.gp2",
+                    "VolumeUsage.io2",
+                ],
                 "cost_range": (5, 200),
-                "usage_range": (50, 2000)  # GB-Mo
+                "usage_range": (50, 2000),  # GB-Mo
             },
             "Amazon Simple Storage Service": {
                 "service_name": "S3",
-                "usage_types": ["StorageUsage.StandardStorage", "StorageUsage.IntelligentTieringFAStorage",
-                              "StorageUsage.StandardIAStorage", "StorageUsage.OneZoneIAStorage"],
+                "usage_types": [
+                    "StorageUsage.StandardStorage",
+                    "StorageUsage.IntelligentTieringFAStorage",
+                    "StorageUsage.StandardIAStorage",
+                    "StorageUsage.OneZoneIAStorage",
+                ],
                 "cost_range": (1, 1000),
-                "usage_range": (10, 50000)  # GB-Mo
+                "usage_range": (10, 50000),  # GB-Mo
             },
             "Amazon Relational Database Service": {
                 "service_name": "RDS",
-                "usage_types": ["InstanceUsage:db.t3.micro", "InstanceUsage:db.t3.small",
-                              "InstanceUsage:db.r5.large", "InstanceUsage:db.r5.xlarge"],
+                "usage_types": [
+                    "InstanceUsage:db.t3.micro",
+                    "InstanceUsage:db.t3.small",
+                    "InstanceUsage:db.r5.large",
+                    "InstanceUsage:db.r5.xlarge",
+                ],
                 "cost_range": (20, 800),
-                "usage_range": (100, 744)
+                "usage_range": (100, 744),
             },
             "AWS Lambda": {
                 "service_name": "Lambda",
                 "usage_types": ["Request-ARM", "Duration-ARM", "Request", "Duration"],
                 "cost_range": (0.1, 50),
-                "usage_range": (1000, 1000000)
+                "usage_range": (1000, 1000000),
             },
             "Amazon CloudFront": {
                 "service_name": "CloudFront",
-                "usage_types": ["DataTransfer-Out-Bytes", "Requests-HTTP", "Requests-HTTPS"],
+                "usage_types": [
+                    "DataTransfer-Out-Bytes",
+                    "Requests-HTTP",
+                    "Requests-HTTPS",
+                ],
                 "cost_range": (5, 300),
-                "usage_range": (1000, 100000)
+                "usage_range": (1000, 100000),
             },
             "Amazon DynamoDB": {
                 "service_name": "DynamoDB",
-                "usage_types": ["StorageUsage", "ReadCapacityUnit-Hrs", "WriteCapacityUnit-Hrs"],
+                "usage_types": [
+                    "StorageUsage",
+                    "ReadCapacityUnit-Hrs",
+                    "WriteCapacityUnit-Hrs",
+                ],
                 "cost_range": (2, 150),
-                "usage_range": (100, 10000)
-            }
+                "usage_range": (100, 10000),
+            },
         }
-        
+
         environments = ["production", "staging", "development", "testing"]
         teams = ["team-alpha", "team-beta", "team-gamma", "team-delta", "team-epsilon"]
-        regions = ["us-east-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-northeast-1"]
+        regions = [
+            "us-east-1",
+            "us-west-2",
+            "eu-west-1",
+            "ap-southeast-1",
+            "ap-northeast-1",
+        ]
         accounts = ["123456789012", "234567890123", "345678901234", "456789012345"]
-        
+
         # Generate billing data
         billing_records = []
         inventory_records = []
         metrics_records = []
-        
+
         for i in range(num_resources):
             # Pick random service
             service_name, service_config = random.choice(list(aws_services.items()))
             usage_type = random.choice(service_config["usage_types"])
-            
+
             # Generate resource ID based on service
             if "EC2" in service_name:
-                resource_id = f"i-{random.randint(100000000000000, 999999999999999):015x}"
+                resource_id = (
+                    f"i-{random.randint(100000000000000, 999999999999999):015x}"
+                )
             elif "EBS" in service_name:
-                resource_id = f"vol-{random.randint(100000000000000, 999999999999999):015x}"
+                resource_id = (
+                    f"vol-{random.randint(100000000000000, 999999999999999):015x}"
+                )
             elif "RDS" in service_name:
                 resource_id = f"db-{random.choice(['mysql', 'postgres', 'aurora'])}-{random.randint(1000, 9999)}"
             elif "Lambda" in service_name:
                 resource_id = f"function-{random.choice(['api', 'processor', 'handler'])}-{random.randint(100, 999)}"
             else:
                 resource_id = f"{service_config['service_name'].lower()}-{random.randint(100000, 999999)}"
-            
+
             # Generate realistic costs and usage
             cost = round(random.uniform(*service_config["cost_range"]), 2)
             usage = round(random.uniform(*service_config["usage_range"]), 2)
-            
+
             # Random metadata
             environment = random.choice(environments)
             team = random.choice(teams)
             region = random.choice(regions)
             account = random.choice(accounts)
-            
+
             # Billing record
             billing_record = {
                 "bill/BillingPeriodStartDate": "2024-01-01",
@@ -383,14 +423,15 @@ class DataIngestionService:
                 "lineItem/UsageAmount": usage,
                 "lineItem/UsageUnit": "Hrs" if "Usage:" in usage_type else "GB-Mo",
                 "lineItem/UnblendedCost": cost,
-                "lineItem/NetAmortizedCost": cost * random.uniform(0.8, 1.0),  # Slight discount
+                "lineItem/NetAmortizedCost": cost
+                * random.uniform(0.8, 1.0),  # Slight discount
                 "resourceTags/Environment": environment,
                 "resourceTags/Team": team,
                 "resourceTags/CostCenter": f"CC-{random.randint(1000, 9999)}",
                 "resourceTags/Project": f"project-{random.choice(['web', 'api', 'ml', 'data'])}",
             }
             billing_records.append(billing_record)
-            
+
             # Inventory record
             inventory_record = {
                 "resource_id": resource_id,
@@ -401,13 +442,17 @@ class DataIngestionService:
                     "Environment": environment,
                     "Team": team,
                     "CostCenter": f"CC-{random.randint(1000, 9999)}",
-                    "Project": f"project-{random.choice(['web', 'api', 'ml', 'data'])}"
+                    "Project": f"project-{random.choice(['web', 'api', 'ml', 'data'])}",
                 },
-                "properties": self._generate_sample_properties(service_config["service_name"], usage_type),
-                "created_at": (datetime.now() - timedelta(days=random.randint(1, 365))).isoformat(),
+                "properties": self._generate_sample_properties(
+                    service_config["service_name"], usage_type
+                ),
+                "created_at": (
+                    datetime.now() - timedelta(days=random.randint(1, 365))
+                ).isoformat(),
             }
             inventory_records.append(inventory_record)
-            
+
             # Metrics record (for compute resources)
             if service_config["service_name"] in ["EC2", "RDS", "Lambda"]:
                 metrics_record = {
@@ -425,42 +470,52 @@ class DataIngestionService:
                     "is_idle": random.random() < 0.1,  # 10% chance of being idle
                 }
                 metrics_records.append(metrics_record)
-        
+
         # Save to files
         billing_df = pd.DataFrame(billing_records)
         billing_df.to_csv(self.data_dir / "billing" / "sample_billing.csv", index=False)
-        
+
         with open(self.data_dir / "inventory" / "sample_inventory.json", "w") as f:
             json.dump(inventory_records, f, indent=2)
-        
+
         metrics_df = pd.DataFrame(metrics_records)
         metrics_df.to_csv(self.data_dir / "metrics" / "sample_metrics.csv", index=False)
-        
+
         logger.info(
             "Sample AWS data files created",
             billing_records=len(billing_records),
             inventory_records=len(inventory_records),
             metrics_records=len(metrics_records),
-            total_cost=round(sum(r["lineItem/UnblendedCost"] for r in billing_records), 2),
+            total_cost=round(
+                sum(r["lineItem/UnblendedCost"] for r in billing_records), 2
+            ),
             billing_file=str(self.data_dir / "billing" / "sample_billing.csv"),
             inventory_file=str(self.data_dir / "inventory" / "sample_inventory.json"),
             metrics_file=str(self.data_dir / "metrics" / "sample_metrics.csv"),
         )
-        
+
         return {
             "billing_file": str(self.data_dir / "billing" / "sample_billing.csv"),
-            "inventory_file": str(self.data_dir / "inventory" / "sample_inventory.json"),
+            "inventory_file": str(
+                self.data_dir / "inventory" / "sample_inventory.json"
+            ),
             "metrics_file": str(self.data_dir / "metrics" / "sample_metrics.csv"),
             "total_records": len(billing_records),
-            "total_cost": round(sum(r["lineItem/UnblendedCost"] for r in billing_records), 2)
+            "total_cost": round(
+                sum(r["lineItem/UnblendedCost"] for r in billing_records), 2
+            ),
         }
-    
-    def _generate_sample_properties(self, service: str, usage_type: str) -> Dict[str, Any]:
+
+    def _generate_sample_properties(
+        self, service: str, usage_type: str
+    ) -> Dict[str, Any]:
         """Generate realistic properties for different service types"""
         import random
-        
+
         if service == "EC2":
-            instance_type = usage_type.split(":")[-1] if ":" in usage_type else "t3.micro"
+            instance_type = (
+                usage_type.split(":")[-1] if ":" in usage_type else "t3.micro"
+            )
             return {
                 "instance_type": instance_type,
                 "state": random.choice(["running", "stopped"]),
@@ -471,7 +526,9 @@ class DataIngestionService:
             }
         elif service == "EBS":
             return {
-                "volume_type": usage_type.split(".")[-1] if "." in usage_type else "gp3",
+                "volume_type": (
+                    usage_type.split(".")[-1] if "." in usage_type else "gp3"
+                ),
                 "size_gb": random.choice([8, 20, 50, 100, 500, 1000]),
                 "iops": random.choice([3000, 6000, 12000]),
                 "throughput": random.choice([125, 250, 500]),
@@ -481,7 +538,9 @@ class DataIngestionService:
         elif service == "S3":
             return {
                 "bucket_name": f"bucket-{random.randint(1000, 9999)}",
-                "storage_class": random.choice(["STANDARD", "STANDARD_IA", "ONEZONE_IA", "GLACIER"]),
+                "storage_class": random.choice(
+                    ["STANDARD", "STANDARD_IA", "ONEZONE_IA", "GLACIER"]
+                ),
                 "versioning": random.choice([True, False]),
                 "encryption": random.choice([True, False]),
             }
@@ -489,28 +548,21 @@ class DataIngestionService:
             db_type = usage_type.split(":")[-1] if ":" in usage_type else "db.t3.micro"
             return {
                 "db_instance_class": db_type,
-                "engine": random.choice(["mysql", "postgres", "aurora-mysql", "aurora-postgresql"]),
+                "engine": random.choice(
+                    ["mysql", "postgres", "aurora-mysql", "aurora-postgresql"]
+                ),
                 "allocated_storage": random.choice([20, 50, 100, 500]),
                 "multi_az": random.choice([True, False]),
                 "backup_retention": random.choice([1, 7, 14, 30]),
             }
         elif service == "Lambda":
             return {
-                "runtime": random.choice(["python3.9", "nodejs18.x", "java11", "dotnet6"]),
+                "runtime": random.choice(
+                    ["python3.9", "nodejs18.x", "java11", "dotnet6"]
+                ),
                 "memory_size": random.choice([128, 256, 512, 1024, 2048]),
                 "timeout": random.choice([30, 60, 300, 900]),
                 "architecture": random.choice(["x86_64", "arm64"]),
             }
         else:
             return {}
-
-    def get_resource_data(self, resource_id: str) -> Dict[str, Any]:
-        """Get combined data for a specific resource"""
-        # This would typically query a database or combine data from multiple sources
-        # For now, return a placeholder implementation
-        return {
-            "resource_id": resource_id,
-            "billing_data": [],
-            "inventory_data": None,
-            "metrics_data": [],
-        }

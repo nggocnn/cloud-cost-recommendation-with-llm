@@ -43,3 +43,86 @@ service_specific_prompt: '
 
   '
 temperature: 0.1
+
+# Custom conditional rules to modify agent behavior based on resource characteristics
+custom_rules:
+  - name: "production_cpu_buffer"
+    description: "Production instances need higher CPU buffer for reliability"
+    enabled: true
+    priority: 100
+    logic: "AND"
+    conditions:
+      - field: "tag.Environment"
+        operator: "equals"
+        value: "production"
+      - field: "cpu_utilization_p95"
+        operator: "greater_than"
+        value: 60
+    threshold_overrides:
+      cpu_low_threshold: 50.0  # Higher threshold for production
+    custom_prompt: "For production workloads, maintain at least 50% CPU headroom for traffic spikes and ensure high availability."
+    
+  - name: "critical_no_rightsizing"
+    description: "Critical applications should avoid rightsizing recommendations"
+    enabled: true
+    priority: 90
+    logic: "OR"
+    conditions:
+      - field: "tag.Criticality"
+        operator: "equals"
+        value: "critical"
+      - field: "tag.Application"
+        operator: "in"
+        value: ["payment-gateway", "auth-service", "database-primary"]
+    skip_recommendation_types:
+      - "rightsizing"
+    risk_adjustment: "increase"
+    custom_prompt: "This is a critical system component. Focus on purchasing optimizations and avoid any performance-impacting changes."
+    
+  - name: "development_aggressive_optimization"
+    description: "Development environments can be optimized more aggressively"
+    enabled: true
+    priority: 70
+    logic: "OR"
+    conditions:
+      - field: "tag.Environment"
+        operator: "in"
+        value: ["dev", "test", "staging"]
+      - field: "tag.Owner"
+        operator: "contains"
+        value: "dev-team"
+    threshold_overrides:
+      cpu_low_threshold: 10.0   # More aggressive CPU threshold
+      memory_low_threshold: 15.0 # More aggressive memory threshold
+    risk_adjustment: "decrease"
+    custom_prompt: "Development environment detected. Apply aggressive optimization strategies to minimize costs."
+    
+  - name: "high_cost_individual_analysis"
+    description: "High-cost instances get individual attention"
+    enabled: true
+    priority: 80
+    logic: "AND"
+    conditions:
+      - field: "monthly_cost"
+        operator: "greater_than"
+        value: 1000
+    force_recommendation_types:
+      - "purchasing_option"
+      - "rightsizing"
+    custom_prompt: "High-cost resource detected. Provide detailed cost analysis and multiple optimization strategies."
+    
+  - name: "spot_eligible_instances"
+    description: "Fault-tolerant workloads eligible for spot instances"
+    enabled: true
+    priority: 60
+    logic: "OR"
+    conditions:
+      - field: "tag.SpotEligible"
+        operator: "equals"
+        value: "true"
+      - field: "tag.WorkloadType"
+        operator: "in"
+        value: ["batch", "data-processing", "ml-training"]
+    force_recommendation_types:
+      - "purchasing_option"
+    custom_prompt: "This workload is suitable for Spot instances. Prioritize Spot recommendations for maximum cost savings."

@@ -5,10 +5,8 @@ LLM service for the cost recommendation system.
 import asyncio
 import json
 from typing import Dict, List, Any, Optional
-import structlog
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_core.callbacks import AsyncCallbackHandler
 from pydantic import BaseModel
 
 from .config import LLMConfig
@@ -26,33 +24,6 @@ class LLMResponse(BaseModel):
     response_time_ms: float
 
 
-class LoggingCallbackHandler(AsyncCallbackHandler):
-    """Callback handler for logging LLM interactions"""
-
-    def __init__(self):
-        self.start_time = None
-        self.tokens_used = 0
-
-    async def on_llm_start(
-        self, serialized: Dict[str, Any], prompts: List[str], **kwargs: Any
-    ) -> None:
-        """Called when LLM starts running"""
-        import time
-
-        self.start_time = time.time()
-        logger.debug(
-            "LLM request started", prompt_length=len(prompts[0]) if prompts else 0
-        )
-
-    async def on_llm_end(self, response, **kwargs: Any) -> None:
-        """Called when LLM ends running"""
-        import time
-
-        if self.start_time:
-            response_time = (time.time() - self.start_time) * 1000
-            logger.debug("LLM request completed", response_time_ms=response_time)
-
-
 class LLMService:
     """Service for interacting with LLM"""
 
@@ -60,11 +31,12 @@ class LLMService:
         self.config = config
         self.llm = self._create_llm()
         self.model = config.model
-        self.temperature = config.temperature  
+        self.temperature = config.temperature
         self.max_tokens = config.max_tokens
-        
+
         # Create direct OpenAI client for batch processing
         import openai
+
         self.client = openai.AsyncOpenAI(
             api_key=config.api_key,
             base_url=config.base_url,
@@ -79,7 +51,7 @@ class LLMService:
             timeout=self.config.timeout,
             openai_api_key=self.config.api_key,
             openai_api_base=self.config.base_url,
-            model_kwargs={"response_format": {"type": "json_object"}}
+            model_kwargs={"response_format": {"type": "json_object"}},
         )
 
     async def generate_recommendation(
@@ -87,9 +59,9 @@ class LLMService:
     ) -> LLMResponse:
         """Generate single recommendation using LLM"""
         return await self._generate_llm_response(
-            system_prompt=system_prompt, 
+            system_prompt=system_prompt,
             user_prompt=user_prompt,
-            context_data=context_data
+            context_data=context_data,
         )
 
     async def generate_batch_recommendations(
@@ -100,38 +72,43 @@ class LLMService:
     ) -> List[LLMResponse]:
         """Generate LLM recommendations for multiple resources in batches"""
         results = []
-        logger.debug("Starting batch processing", batch_size=batch_size, total_resources=len(resources_data))
+        logger.debug(
+            "Starting batch processing",
+            batch_size=batch_size,
+            total_resources=len(resources_data),
+        )
 
         for i in range(0, len(resources_data), batch_size):
             batch = resources_data[i : i + batch_size]
-            
+
             # Create batch prompt
             batch_prompt = self._create_batch_prompt(batch)
-            
+
             # Generate response for this batch
             batch_response = await self._generate_llm_response(
                 system_prompt=system_prompt,
                 user_prompt=batch_prompt,
-                max_tokens_override=self._calculate_batch_tokens(len(batch))
+                max_tokens_override=self._calculate_batch_tokens(len(batch)),
             )
-            
+
             results.append(batch_response)
-            
+
             # Rate limiting - wait between batches
             await asyncio.sleep(0.1)
 
         return results
 
     async def _generate_llm_response(
-        self, 
-        system_prompt: str, 
-        user_prompt: str, 
+        self,
+        system_prompt: str,
+        user_prompt: str,
         context_data: Dict[str, Any] = None,
-        max_tokens_override: int = None
+        max_tokens_override: int = None,
     ) -> LLMResponse:
         """Core LLM response generation logic"""
         try:
             import time
+
             start_time = time.time()
 
             # Format the user prompt with context data if provided
@@ -148,7 +125,7 @@ class LLMService:
                 model=self.config.model,
                 system_prompt_length=len(system_prompt),
                 user_prompt_length=len(formatted_prompt),
-                max_tokens=max_tokens
+                max_tokens=max_tokens,
             )
 
             # Make API call
@@ -156,25 +133,26 @@ class LLMService:
                 model=self.model,
                 messages=[
                     {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": formatted_prompt}
+                    {"role": "user", "content": formatted_prompt},
                 ],
                 temperature=self.temperature,
                 max_tokens=max_tokens,
-                response_format={"type": "json_object"}
+                response_format={"type": "json_object"},
             )
 
             response_time = (time.time() - start_time) * 1000
 
             # Clean and validate JSON response
             response_content = response.choices[0].message.content.strip()
-            
+
             logger.debug(
                 "Raw LLM response received",
                 model=self.config.model,
                 response_length=len(response_content),
-                response_content=response_content[:200] + ("..." if len(response_content) > 200 else ""),
+                response_content=response_content[:200]
+                + ("..." if len(response_content) > 200 else ""),
             )
-            
+
             # Remove markdown code blocks if present
             response_content = self._clean_json_response(response_content)
 
@@ -182,7 +160,7 @@ class LLMService:
             try:
                 json_response = json.loads(response_content)
                 response_content = json.dumps(json_response, indent=2)
-                
+
                 logger.debug(
                     "JSON response validated",
                     model=self.config.model,
@@ -197,10 +175,9 @@ class LLMService:
                     response_content=response_content[:500],
                 )
                 # Return valid JSON structure on parse failure
-                response_content = json.dumps({
-                    "recommendations": [],
-                    "error": "Failed to parse LLM response"
-                })
+                response_content = json.dumps(
+                    {"recommendations": [], "error": "Failed to parse LLM response"}
+                )
 
             return LLMResponse(
                 content=response_content,
@@ -219,19 +196,16 @@ class LLMService:
             response_content = response_content[7:]
         elif response_content.startswith("```"):
             response_content = response_content[3:]
-            
+
         if response_content.endswith("```"):
             response_content = response_content[:-3]
-            
+
         return response_content.strip()
 
     def _calculate_batch_tokens(self, batch_size: int) -> int:
         """Calculate dynamic max tokens for batch processing"""
         estimated_tokens_per_resource = 400
-        return max(
-            self.max_tokens, 
-            batch_size * estimated_tokens_per_resource + 1000
-        )
+        return max(self.max_tokens, batch_size * estimated_tokens_per_resource + 1000)
 
     def _format_prompt(self, template: str, context_data: Dict[str, Any]) -> str:
         """Format prompt template with context data"""
@@ -242,23 +216,35 @@ class LLMService:
             # Check if template actually has template placeholders (simple word placeholders only)
             # Avoid treating JSON-like structures as templates
             import re
-            simple_placeholder_pattern = r'\{[a-zA-Z_][a-zA-Z0-9_]*\}'
+
+            simple_placeholder_pattern = r"\{[a-zA-Z_][a-zA-Z0-9_]*\}"
             placeholders = re.findall(simple_placeholder_pattern, template)
-            
+
             if placeholders:
                 # Create a safe formatting dict with common expected keys
                 format_dict = {
-                    'resource_id': context_data.get('resource', {}).get('resource_id', ''),
-                    'service': context_data.get('resource', {}).get('service', ''),
-                    'region': context_data.get('resource', {}).get('region', ''),
-                    'analysis_window_days': context_data.get('analysis_window_days', 30)
+                    "resource_id": context_data.get("resource", {}).get(
+                        "resource_id", ""
+                    ),
+                    "service": context_data.get("resource", {}).get("service", ""),
+                    "region": context_data.get("resource", {}).get("region", ""),
+                    "analysis_window_days": context_data.get(
+                        "analysis_window_days", 30
+                    ),
                 }
 
                 # Only format if all placeholders are available
-                missing_keys = [p.strip('{}') for p in placeholders if p.strip('{}') not in format_dict]
+                missing_keys = [
+                    p.strip("{}")
+                    for p in placeholders
+                    if p.strip("{}") not in format_dict
+                ]
                 if missing_keys:
-                    logger.debug("Template placeholders not available, using template as-is", 
-                               missing_keys=missing_keys, available_keys=list(format_dict.keys()))
+                    logger.debug(
+                        "Template placeholders not available, using template as-is",
+                        missing_keys=missing_keys,
+                        available_keys=list(format_dict.keys()),
+                    )
                     formatted_prompt = template
                 else:
                     formatted_prompt = template.format(**format_dict)
@@ -306,7 +292,7 @@ class LLMService:
         """Create prompt for batch resource analysis"""
         prompt_parts = [
             "Analyze the following AWS resources for cost optimization opportunities.",
-            "Respond with valid JSON only - no additional text outside the JSON structure.\n"
+            "Respond with valid JSON only - no additional text outside the JSON structure.\n",
         ]
 
         for idx, resource in enumerate(resources, 1):
@@ -315,46 +301,42 @@ class LLMService:
             prompt_parts.append(self._format_context_data(resource))
             prompt_parts.append("-" * 60)
 
-        prompt_parts.extend([
-            "\nBATCH ANALYSIS INSTRUCTIONS:",
-            "1. Analyze each resource individually with its specific resource_id",
-            "2. Look for optimization patterns across similar resources", 
-            "3. Consider bulk purchasing opportunities when applicable",
-            "4. Provide specific recommendations for each resource",
-            "5. Include exact resource_id in each recommendation",
-            "6. IMPORTANT: Complete the JSON for ALL resources before ending",
-            "",
-            "REQUIRED JSON RESPONSE FORMAT (return valid JSON only):",
-            "{",
-            '  "recommendations": [',
-            '    {',
-            '      "resource_id": "exact-resource-id-from-above",',
-            '      "recommendation_type": "rightsizing|purchasing_option|idle_resource|lifecycle",',
-            '      "impact_description": "Detailed recommendation description and business impact analysis",',
-            '      "rationale": "Technical reasoning for this recommendation",',
-            '      "current_config": {},',
-            '      "recommended_config": {},',
-            '      "current_monthly_cost": 100.00,',
-            '      "estimated_monthly_cost": 75.00,',
-            '      "estimated_monthly_savings": 25.00,',
-            '      "confidence_score": 0.85,',
-            '      "risk_level": "low|medium|high",',
-            '      "implementation_steps": ["step 1", "step 2", "step 3"],',
-            '      "rollback_plan": "how to revert this change if needed"',
-            '    }',
-            '  ]',
-            '}',
-            "",
-            "CRITICAL: Return only valid JSON. Every recommendation MUST include ALL fields above.",
-        ])
+        prompt_parts.extend(
+            [
+                "\nBATCH ANALYSIS INSTRUCTIONS:",
+                "1. Analyze each resource individually with its specific resource_id",
+                "2. Look for optimization patterns across similar resources",
+                "3. Consider bulk purchasing opportunities when applicable",
+                "4. Provide specific recommendations for each resource",
+                "5. Include exact resource_id in each recommendation",
+                "6. IMPORTANT: Complete the JSON for ALL resources before ending",
+                "",
+                "REQUIRED JSON RESPONSE FORMAT (return valid JSON only):",
+                "{",
+                '  "recommendations": [',
+                "    {",
+                '      "resource_id": "exact-resource-id-from-above",',
+                '      "recommendation_type": "rightsizing|purchasing_option|idle_resource|lifecycle",',
+                '      "impact_description": "Detailed recommendation description and business impact analysis",',
+                '      "rationale": "Technical reasoning for this recommendation",',
+                '      "current_config": {},',
+                '      "recommended_config": {},',
+                '      "current_monthly_cost": 100.00,',
+                '      "estimated_monthly_cost": 75.00,',
+                '      "estimated_monthly_savings": 25.00,',
+                '      "confidence_score": 0.85,',
+                '      "risk_level": "low|medium|high",',
+                '      "implementation_steps": ["step 1", "step 2", "step 3"],',
+                '      "rollback_plan": "how to revert this change if needed"',
+                "    }",
+                "  ]",
+                "}",
+                "",
+                "CRITICAL: Return only valid JSON. Every recommendation MUST include ALL fields above.",
+            ]
+        )
 
         return "\n".join(prompt_parts)
-
-    def update_config(self, new_config: LLMConfig):
-        """Update LLM configuration"""
-        self.config = new_config
-        self.llm = self._create_llm()
-        logger.debug("LLM configuration updated", model=new_config.model)
 
 
 class PromptTemplates:
