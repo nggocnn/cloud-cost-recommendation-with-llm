@@ -198,7 +198,11 @@ class CostRecommendationApp:
         print("\n" + "=" * 80)
 
     def export_report(self, report, output_file: str, format_type: str = "json"):
-        """Export report in specified format"""
+        """Export report in specified format
+        
+        Returns:
+            dict: Information about exported files
+        """
         import json
         import csv
         from pathlib import Path
@@ -209,70 +213,116 @@ class CostRecommendationApp:
                 with open(output_file, "w") as f:
                     json.dump(report.model_dump(), f, indent=2, default=str)
                 logger.info("JSON report exported", file=output_file)
+                return {"format": "json", "files": [output_file]}
 
             elif format_type.lower() == "csv":
-                # Export CSV summary
-                with open(output_file, "w", newline="", encoding="utf-8") as f:
+                # Export multiple CSV files
+                from pathlib import Path
+                
+                base_path = Path(output_file)
+                base_name = base_path.stem
+                base_dir = base_path.parent
+                
+                # Summary CSV
+                summary_file = base_dir / f"{base_name}_summary.csv"
+                with open(summary_file, "w", newline="", encoding="utf-8") as f:
+                    writer = csv.writer(f)
+                    writer.writerow(["Metric", "Value"])
+                    
+                    # Calculate risk distribution
+                    low_risk = sum(1 for r in report.recommendations if r.risk_level.value.lower() == "low")
+                    medium_risk = sum(1 for r in report.recommendations if r.risk_level.value.lower() == "medium")
+                    high_risk = sum(1 for r in report.recommendations if r.risk_level.value.lower() == "high")
+                    
+                    writer.writerows([
+                        ["Total Recommendations", report.total_recommendations],
+                        ["Monthly Savings", f"${report.total_monthly_savings:.2f}"],
+                        ["Annual Savings", f"${report.total_annual_savings:.2f}"],
+                        ["Low Risk Recommendations", low_risk],
+                        ["Medium Risk Recommendations", medium_risk],
+                        ["High Risk Recommendations", high_risk],
+                    ])
+
+                # Recommendations CSV (detailed)
+                recommendations_file = base_dir / f"{base_name}_recommendations.csv"
+                with open(recommendations_file, "w", newline="", encoding="utf-8") as f:
                     writer = csv.writer(f)
 
-                    # Write header
-                    writer.writerow(
-                        [
-                            "Resource ID",
-                            "Service",
-                            "Recommendation Type",
-                            "Risk Level",
-                            "Current Cost",
-                            "Recommended Cost",
-                            "Monthly Savings",
-                            "Annual Savings",
-                            "Rationale",
-                            "Implementation Steps",
-                        ]
-                    )
+                    # Write header with all fields
+                    writer.writerow([
+                        "Resource ID", "Service", "Recommendation Type", "Risk Level",
+                        "Current Monthly Cost", "Estimated Monthly Cost", "Monthly Savings", 
+                        "Annual Savings", "Confidence Score", "Rationale", "Impact Description",
+                        "Evidence", "Implementation Steps", "Prerequisites", "Rollback Plan",
+                        "Business Hours Impact", "Downtime Required", "SLA Impact"
+                    ])
 
-                    # Write recommendations
+                    # Write recommendations with full data
                     for rec in report.recommendations:
                         implementation_steps = (
                             "; ".join(rec.implementation_steps)
-                            if rec.implementation_steps
-                            else ""
+                            if rec.implementation_steps else ""
                         )
-                        writer.writerow(
-                            [
-                                rec.resource_id,
-                                (
-                                    rec.service.value
-                                    if hasattr(rec.service, "value")
-                                    else str(rec.service)
-                                ),
-                                (
-                                    rec.recommendation_type.value
-                                    if hasattr(rec.recommendation_type, "value")
-                                    else str(rec.recommendation_type)
-                                ),
-                                (
-                                    rec.risk_level.value
-                                    if hasattr(rec.risk_level, "value")
-                                    else str(rec.risk_level)
-                                ),
-                                f"${rec.current_monthly_cost:.2f}",
-                                f"${rec.estimated_monthly_cost:.2f}",
-                                f"${rec.estimated_monthly_savings:.2f}",
-                                f"${rec.annual_savings:.2f}",
-                                (
-                                    rec.rationale[:200] + "..."
-                                    if len(rec.rationale) > 200
-                                    else rec.rationale
-                                ),
-                                (
-                                    implementation_steps[:300] + "..."
-                                    if len(implementation_steps) > 300
-                                    else implementation_steps
-                                ),
-                            ]
+                        prerequisites = (
+                            "; ".join(rec.prerequisites)
+                            if rec.prerequisites else ""
                         )
-                logger.info("CSV report exported", file=output_file)
+                        evidence = str(rec.evidence) if rec.evidence else ""
+                        
+                        writer.writerow([
+                            rec.resource_id,
+                            rec.service.value if hasattr(rec.service, "value") else str(rec.service),
+                            rec.recommendation_type.value if hasattr(rec.recommendation_type, "value") else str(rec.recommendation_type),
+                            rec.risk_level.value if hasattr(rec.risk_level, "value") else str(rec.risk_level),
+                            f"${rec.current_monthly_cost:.2f}",
+                            f"${rec.estimated_monthly_cost:.2f}",
+                            f"${rec.estimated_monthly_savings:.2f}",
+                            f"${rec.annual_savings:.2f}",
+                            rec.confidence_score,
+                            rec.rationale,
+                            rec.impact_description,
+                            evidence,
+                            implementation_steps,
+                            prerequisites,
+                            rec.rollback_plan,
+                            rec.business_hours_impact,
+                            rec.downtime_required,
+                            rec.sla_impact or "",
+                        ])
+
+                # Service Breakdown CSV
+                service_breakdown_file = base_dir / f"{base_name}_service_breakdown.csv"
+                with open(service_breakdown_file, "w", newline="", encoding="utf-8") as f:
+                    writer = csv.writer(f)
+                    writer.writerow([
+                        "Service", "Monthly Savings", "Annual Savings", 
+                        "Recommendation Count", "Average Savings per Recommendation"
+                    ])
+                    
+                    for service, savings in report.savings_by_service.items():
+                        service_name = service.value if hasattr(service, "value") else str(service)
+                        service_recs = [
+                            r for r in report.recommendations 
+                            if (r.service.value if hasattr(r.service, "value") else str(r.service)) == service_name
+                        ]
+                        
+                        writer.writerow([
+                            service_name,
+                            f"${savings:.2f}",
+                            f"${savings * 12:.2f}",
+                            len(service_recs),
+                            f"${savings / len(service_recs):.2f}" if service_recs else "$0.00"
+                        ])
+
+                logger.info("Multiple CSV reports exported", 
+                           summary=str(summary_file),
+                           recommendations=str(recommendations_file), 
+                           service_breakdown=str(service_breakdown_file))
+                
+                return {
+                    "format": "csv", 
+                    "files": [str(summary_file), str(recommendations_file), str(service_breakdown_file)]
+                }
 
             elif format_type.lower() == "excel":
                 # Export Excel with multiple sheets
@@ -345,12 +395,23 @@ class CostRecommendationApp:
                                 "Confidence Score": rec.confidence_score,
                                 "Rationale": rec.rationale,
                                 "Impact Description": rec.impact_description,
+                                "Evidence": (
+                                    str(rec.evidence) if rec.evidence else ""
+                                ),
                                 "Implementation Steps": (
                                     "; ".join(rec.implementation_steps)
                                     if rec.implementation_steps
                                     else ""
                                 ),
+                                "Prerequisites": (
+                                    "; ".join(rec.prerequisites)
+                                    if rec.prerequisites
+                                    else ""
+                                ),
                                 "Rollback Plan": rec.rollback_plan,
+                                "Business Hours Impact": rec.business_hours_impact,
+                                "Downtime Required": rec.downtime_required,
+                                "SLA Impact": rec.sla_impact or "",
                             }
                         )
 
@@ -402,6 +463,7 @@ class CostRecommendationApp:
                         )
 
                     logger.info("Excel report exported", file=output_file, sheets=3)
+                    return {"format": "excel", "files": [output_file]}
 
                 except ImportError:
                     logger.error(
@@ -411,19 +473,18 @@ class CostRecommendationApp:
                     csv_file = output_file.replace(".xlsx", ".csv").replace(
                         ".xls", ".csv"
                     )
-                    self.export_report(report, csv_file, "csv")
+                    csv_result = self.export_report(report, csv_file, "csv")
                     print(
-                        f"Excel export not available. Exported CSV instead: {csv_file}"
+                        f"Excel export not available. Exported CSV instead."
                     )
+                    return csv_result
 
             else:
-                raise ValueError(f"Unsupported format: {format_type}")
+                raise ValueError(f"Unsupported export format: {format_type}")
 
         except Exception as e:
-            logger.error(
-                "Export failed", format=format_type, file=output_file, error=str(e)
-            )
-            raise
+            logger.error("Export failed", error=str(e), format=format_type)
+            return {"format": format_type, "files": [], "error": str(e)}
 
     def get_status(self):
         """Get application status"""
@@ -522,8 +583,22 @@ async def main():
 
             # Save detailed report if requested
             if args.output_file:
-                app.export_report(report, args.output_file, args.output_format)
-                print(f"\nDetailed report saved to: {args.output_file}")
+                export_result = app.export_report(report, args.output_file, args.output_format)
+                
+                if export_result.get("error"):
+                    print(f"\nExport failed: {export_result['error']}")
+                elif export_result["format"] == "csv" and len(export_result["files"]) > 1:
+                    print(f"\nDetailed reports saved to:")
+                    for file_path in export_result["files"]:
+                        file_name = file_path.split('/')[-1]
+                        if "_summary.csv" in file_name:
+                            print(f"  Summary: {file_name}")
+                        elif "_recommendations.csv" in file_name:
+                            print(f"  Recommendations: {file_name}")
+                        elif "_service_breakdown.csv" in file_name:
+                            print(f"  Service Breakdown: {file_name}")
+                else:
+                    print(f"\nDetailed report saved to: {export_result['files'][0] if export_result['files'] else args.output_file}")
 
     except Exception as e:
         logger.critical("Application failed", error=str(e))

@@ -316,9 +316,15 @@ class LLMService:
                 '  "recommendations": [',
                 "    {",
                 '      "resource_id": "exact-resource-id-from-above",',
-                '      "recommendation_type": "rightsizing|purchasing_option|idle_resource|lifecycle",',
+                '      "recommendation_type": "rightsizing|purchasing_option|idle_resource|lifecycle|topology|storage_class|cost_analysis|general_optimization",',
                 '      "impact_description": "Detailed recommendation description and business impact analysis",',
                 '      "rationale": "Technical reasoning for this recommendation",',
+                '      "evidence": {',
+                '        "metrics_analysis": "specific data supporting this recommendation",',
+                '        "cost_breakdown": "detailed cost analysis",',
+                '        "performance_impact": "expected performance changes"',
+                '        // Add additional evidence fields as needed (compliance_notes, security_implications, etc.)',
+                '      },',
                 '      "current_config": {},',
                 '      "recommended_config": {},',
                 '      "current_monthly_cost": 100.00,',
@@ -326,11 +332,35 @@ class LLMService:
                 '      "estimated_monthly_savings": 25.00,',
                 '      "confidence_score": 0.85,',
                 '      "risk_level": "low|medium|high",',
-                '      "implementation_steps": ["step 1", "step 2", "step 3"],',
-                '      "rollback_plan": "how to revert this change if needed"',
+                '      "implementation_steps": [',
+                '        // Provide 1-10 implementation steps based on complexity',
+                '        // Simple changes: 2-4 steps, Complex changes: 5-10 steps',
+                '        "Step 1: Initial preparation step",',
+                '        "Step 2: Main implementation action",',
+                '        "Step 3: Verification and monitoring"',
+                '        // Add more steps if the change is complex',
+                '      ],',
+                '      "prerequisites": [',
+                '        // Include 0-5 prerequisites based on requirements',
+                '        // Simple changes may have no prerequisites (empty array [])',
+                '        // Complex changes may require multiple prerequisites',
+                '        "Example: Backup verification required"',
+                '        // Add more prerequisites only if actually needed',
+                '      ],',
+                '      "rollback_plan": "how to revert this change if needed",',
+                '      "business_hours_impact": false,',
+                '      "downtime_required": false,',
+                '      "sla_impact": "Expected SLA impact or null"',
                 "    }",
                 "  ]",
                 "}",
+                "",
+                "ADAPTIVE LIST SIZING GUIDELINES:",
+                "- implementation_steps: Use 1-10 steps based on actual complexity",
+                "- prerequisites: Use 0-5 items, empty array [] if none needed", 
+                "- evidence: Include 3+ relevant analysis fields, add custom fields as needed",
+                "- Determine list sizes based on actual recommendation complexity",
+                "- Quality over quantity - only include meaningful items",
                 "",
                 "CRITICAL: Return only valid JSON. Every recommendation MUST include ALL fields above.",
             ]
@@ -358,7 +388,7 @@ REQUIRED JSON Response format (ALL fields are mandatory):
     "recommendations": [
         {
             "resource_id": "exact resource identifier",
-            "recommendation_type": "rightsizing|purchasing_option|lifecycle|topology|storage_class|idle_resource",
+            "recommendation_type": "rightsizing|purchasing_option|lifecycle|topology|storage_class|idle_resource|cost_analysis|general_optimization",
             "current_config": {
                 "instance_type": "current type",
                 "storage_size": "current size",
@@ -375,13 +405,36 @@ REQUIRED JSON Response format (ALL fields are mandatory):
             "risk_level": "low|medium|high",
             "impact_description": "Detailed explanation of the recommendation and its business impact",
             "rationale": "Technical reasoning behind this recommendation",
+            "evidence": {
+                "metrics_analysis": "specific data supporting this recommendation",
+                "cost_breakdown": "detailed cost analysis",
+                "performance_impact": "expected performance changes"
+                // Add additional fields as needed: compliance_notes, security_implications, etc.
+            },
             "implementation_steps": [
+                // Provide 1-10 steps based on complexity:
+                // - Simple changes (storage class, unused resources): 2-4 steps
+                // - Medium changes (rightsizing, purchasing options): 3-6 steps  
+                // - Complex changes (architecture, topology): 5-10 steps
                 "Step 1: Specific action to take",
                 "Step 2: Next action to take",
                 "Step 3: Final verification step"
+                // Add more steps if the recommendation is complex
+            ],
+            "prerequisites": [
+                // Include 0-5 prerequisites based on actual requirements:
+                // - Simple changes: may have no prerequisites (empty array [])
+                // - Complex changes: may require multiple prerequisites
+                // Only include if genuinely required for successful implementation
+                "Prerequisite 1: Required condition or preparation",
+                "Prerequisite 2: Another required condition"
+                // Remove examples above and use actual prerequisites or empty array
             ],
             "rollback_plan": "Detailed plan to revert changes if needed",
-            "confidence_score": 0.85
+            "confidence_score": 0.85,
+            "business_hours_impact": false,
+            "downtime_required": false,
+            "sla_impact": "Expected impact on SLA, or null if no impact"
         }
     ]
 }
@@ -390,7 +443,25 @@ CRITICAL JSON REQUIREMENTS:
 - Respond ONLY with valid JSON - no extra text before or after
 - ALL numeric values must be actual calculated numbers (e.g., 1151.33, not "1.5 * 767.55")
 - current_config and recommended_config must be non-empty objects, never null
+- evidence must be a non-empty object with relevant analysis data, never null
+- prerequisites can be an empty array if no prerequisites exist
 - Calculate all costs yourself and provide final dollar amounts
 - estimated_monthly_savings = current_monthly_cost - estimated_monthly_cost
+- business_hours_impact and downtime_required must be boolean values (true/false)
+- sla_impact should be a string describing SLA impact or null if no impact
 - All fields are mandatory - include every single field shown above
-- Use exact field names (especially "impact_description", not "impact")"""
+- Use exact field names (especially "impact_description", not "impact")
+
+ADAPTIVE LIST SIZING GUIDELINES:
+- implementation_steps: Vary 1-10 steps based on actual complexity
+  * Simple (delete unused resource): 2-3 steps
+  * Medium (rightsizing, storage class): 3-5 steps
+  * Complex (architecture changes): 5-10 steps
+- prerequisites: Use 0-5 items based on actual requirements
+  * Simple changes: often empty array []
+  * Complex changes: multiple prerequisites
+  * Only include genuine requirements, not generic advice
+- evidence: Include 3+ relevant fields, add domain-specific fields as needed
+  * Always include: metrics_analysis, cost_breakdown, performance_impact
+  * Add as relevant: security_implications, compliance_notes, availability_impact, etc.
+- Quality over quantity: each list item should add genuine value"""

@@ -466,6 +466,7 @@ class ServiceAgent:
                 "current_monthly_cost",
                 "estimated_monthly_cost",
                 "confidence_score",
+                "impact_description",
             ]
             missing_fields = [
                 field for field in required_fields if field not in llm_recommendation
@@ -537,12 +538,17 @@ class ServiceAgent:
                 estimated_monthly_savings=monthly_savings,
                 annual_savings=annual_savings,
                 risk_level=risk_level,
-                impact_description=llm_recommendation["impact_description"],
+                impact_description=llm_recommendation.get("impact_description", ""),
                 rollback_plan=llm_recommendation.get("rollback_plan", ""),
                 rationale=llm_recommendation.get("rationale", ""),
+                evidence=llm_recommendation.get("evidence", {}),
                 implementation_steps=llm_recommendation.get("implementation_steps", []),
+                prerequisites=llm_recommendation.get("prerequisites", []),
                 confidence_score=confidence,
                 agent_id=self.agent_id,
+                business_hours_impact=llm_recommendation.get("business_hours_impact", False),
+                downtime_required=llm_recommendation.get("downtime_required", False),
+                sla_impact=llm_recommendation.get("sla_impact"),
             )
 
             return recommendation
