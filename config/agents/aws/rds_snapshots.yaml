@@ -13,6 +13,5 @@ enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
 service: AWS.RDS_SNAPSHOTS
-service_specific_prompt: Analyze AWS.RDS_SNAPSHOTS resources for cost optimization
-  opportunities.
+service_specific_prompt: Analyze AWS.RDS_SNAPSHOTS resources for cost optimization opportunities.
 temperature: 0.1

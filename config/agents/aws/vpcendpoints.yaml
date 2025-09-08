@@ -13,6 +13,5 @@ enabled: true
 max_tokens: 2000
 min_cost_threshold: 1.0
 service: AWS.VPCEndpoints
-service_specific_prompt: Analyze AWS.VPCEndpoints resources for cost optimization
-  opportunities.
+service_specific_prompt: Analyze AWS.VPCEndpoints resources for cost optimization opportunities.
 temperature: 0.1

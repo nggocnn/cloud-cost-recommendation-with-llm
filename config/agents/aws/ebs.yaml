@@ -24,21 +24,12 @@ max_tokens: 2000
 min_cost_threshold: 1.0
 service: AWS.EBS
 service_specific_prompt: '
-
   Analyze EBS volumes for cost optimization opportunities. Consider:
-
   1. IOPS and throughput utilization
-
   2. Volume type optimization (gp2 vs gp3 vs io1 vs io2)
-
   3. Provisioned vs actual usage
-
   4. Unattached or unused volumes
-
   5. Snapshot management
-
-
   Provide specific recommendations with volume types and cost calculations.
-
-  '
+  ' 
 temperature: 0.1

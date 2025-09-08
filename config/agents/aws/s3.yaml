@@ -23,22 +23,13 @@ max_tokens: 2000
 min_cost_threshold: 1.0
 service: AWS.S3
 service_specific_prompt: '
-
   Analyze S3 buckets for cost optimization opportunities. Consider:
-
   1. Storage class optimization (Standard -> IA -> Glacier -> Deep Archive)
-
   2. Lifecycle policies for automatic transitions
-
   3. Access patterns and retrieval costs
-
   4. Incomplete multipart uploads
-
   5. Duplicate or redundant data
-
-
   Provide specific recommendations with storage classes and lifecycle rules.
-
   '
 temperature: 0.1
 

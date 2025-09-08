@@ -25,22 +25,13 @@ max_tokens: 2000
 min_cost_threshold: 1.0
 service: AWS.EC2
 service_specific_prompt: '
-
   Analyze EC2 instances for cost optimization opportunities. Consider:
-
   1. CPU and memory utilization patterns
-
   2. Instance family and generation efficiency
-
   3. Purchase options (On-Demand vs Reserved vs Spot)
-
   4. Idle or underutilized instances
-
   5. Right-sizing opportunities based on actual usage
-
-
   Provide specific recommendations with exact instance types and cost calculations.
-
   '
 temperature: 0.1
 

@@ -22,21 +22,12 @@ max_tokens: 2000
 min_cost_threshold: 1.0
 service: AWS.Lambda
 service_specific_prompt: '
-
   Analyze Lambda functions for cost optimization opportunities. Consider:
-
   1. Memory allocation vs actual usage
-
   2. Execution duration patterns
-
   3. Invocation frequency and patterns
-
   4. Cold start optimization
-
   5. Cost per invocation analysis
-
-
   Provide specific recommendations with memory settings and architectural improvements.
-
   '
 temperature: 0.1

@@ -25,21 +25,12 @@ max_tokens: 2000
 min_cost_threshold: 1.0
 service: AWS.RDS
 service_specific_prompt: '
-
   Analyze RDS instances for cost optimization opportunities. Consider:
-
   1. CPU, memory, and IOPS utilization patterns
-
   2. Instance class optimization
-
   3. Purchase options (On-Demand vs Reserved)
-
   4. Storage type optimization (GP2 vs GP3 vs Provisioned IOPS)
-
   5. Multi-AZ vs Single-AZ based on requirements
-
-
   Provide specific recommendations with instance classes and cost calculations.
-
   '
 temperature: 0.1
