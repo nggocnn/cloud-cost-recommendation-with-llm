@@ -71,33 +71,50 @@ OPENAI_MODEL=gpt-4
 
 ### Multi-Cloud Service Configuration (`config/*.yaml`)
 
-#### Coordinator Settings (`config/coordinator.yaml`)
+#### Global Coordinator Settings (`config/global/coordinator.yaml`)
 
 ```yaml
 enabled_services:
-  # AWS Services
-  - EC2
-  - EBS
-  - S3
-  - RDS
-  - Lambda
-  - ALB
-  - CloudFront
-  - DynamoDB
+  # AWS Services (17 implemented)
+  - AWS.EC2
+  - AWS.EBS
+  - AWS.S3
+  - AWS.RDS
+  - AWS.Lambda
+  - AWS.ALB
+  - AWS.NLB
+  - AWS.GWLB
+  - AWS.CloudFront
+  - AWS.DynamoDB
+  - AWS.SNS
+  - AWS.SQS
+  - AWS.NAT_Gateway
+  - AWS.Elastic_IP
+  - AWS.VPC_Endpoints
+  - AWS.EFS
+  - AWS.RDS_Snapshots
   
-  # Azure Services  (not work yet)
-  - VirtualMachines
-  - ManagedDisks
-  - StorageAccounts
-  - SQLDatabase
-  - AzureFunctions
+  # Azure Services (10 implemented)
+  - Azure.VirtualMachines
+  - Azure.Storage
+  - Azure.Disk
+  - Azure.SQL
+  - Azure.Functions
+  - Azure.LoadBalancer
+  - Azure.NAT_Gateway
+  - Azure.PublicIP
+  - Azure.CDN
+  - Azure.Cosmos
   
-  # GCP Services (not work yet)
-  - ComputeEngine
-  - PersistentDisks
-  - CloudStorage
-  - CloudSQL
-  - CloudFunctions
+  # GCP Services (8 implemented)
+  - GCP.Compute
+  - GCP.Storage
+  - GCP.Disk
+  - GCP.SQL
+  - GCP.Functions
+  - GCP.LoadBalancer
+  - GCP.CDN
+  - GCP.Firestore
 
 # Recommendation weighting
 savings_weight: 0.4          # 40% weight on cost savings
@@ -111,54 +128,59 @@ similarity_threshold: 0.8
 include_low_impact: false
 ```
 
-#### AWS Service Agent Settings (`config/aws.ec2_agent.yaml`)
+#### AWS Service Agent Configuration (`config/agents/aws/ec2.yaml`)
 
 ```yaml
-agent_id: ec2_agent
+agent_id: aws.ec2_agent
+service: AWS.EC2
+enabled: true
 base_prompt: You are an expert AWS cost optimization specialist focusing on EC2 instances.
+
 capability:
   analysis_window_days: 30
-  optional_metrics:
-  - network_in
-  - network_out
-  required_metrics:
-  - cpu_utilization_p50
-  - cpu_utilization_p95
-  - memory_utilization_p50
-  service: AWS.EC2
   supported_recommendation_types:
-  - rightsizing
-  - purchasing_option
-  - idle_resource
+    - rightsizing
+    - purchasing_option
+    - idle_resource
+  required_metrics:
+    - cpu_utilization_p50
+    - cpu_utilization_p95
+    - memory_utilization_p50
+  optional_metrics:
+    - network_in
+    - network_out
   thresholds:
     cpu_idle_threshold: 5.0
     cpu_low_threshold: 20.0
     memory_low_threshold: 30.0
     uptime_threshold: 0.95
+
 confidence_threshold: 0.7
-enabled: true
-max_tokens: 2000
 min_cost_threshold: 1.0
-service: AWS.EC2
-service_specific_prompt: '
+max_tokens: 2000
+temperature: 0.1
 
+service_specific_prompt: |
   Analyze EC2 instances for cost optimization opportunities. Consider:
-
   1. CPU and memory utilization patterns
-
   2. Instance family and generation efficiency
-
   3. Purchase options (On-Demand vs Reserved vs Spot)
-
   4. Idle or underutilized instances
-
   5. Right-sizing opportunities based on actual usage
-
-
+  
   Provide specific recommendations with exact instance types and cost calculations.
 
-  '
-temperature: 0.1
+# Custom conditional rules for dynamic behavior
+custom_rules:
+  - name: "production_cpu_buffer"
+    description: "Production instances need higher CPU buffer for reliability"
+    conditions:
+      - field: "tag.Environment"
+        operator: "equals"
+        value: "production"
+    threshold_overrides:
+      cpu_low_threshold: 30.0
+    enabled: true
 ```
 
 ## Usage Examples
@@ -219,173 +241,158 @@ python -m llm_cost_recommendation --status
 ### 1. Initialization Phase
 
 ```python
-# Load configuration
+# Load configuration and initialize components
 config_manager = ConfigManager("config")
+llm_service = LLMService(config_manager.llm_config)
 coordinator = CoordinatorAgent(config_manager, llm_service)
 
-# Initialize service agents
-agents = {
-    "EC2": EC2Agent(config_manager.get_agent_config("EC2")),
-    "S3": S3Agent(config_manager.get_agent_config("S3")),
-    # ... more agents
-}
+# Coordinator automatically initializes service agents based on configuration
+# Each agent is configured via YAML files in config/agents/{provider}/{service}.yaml
 ```
 
 ### 2. Data Processing Phase
 
 ```python
 # Ingest data from various sources
-resources = data_service.ingest_inventory_data(inventory_file)
-metrics = data_service.ingest_metrics_data(metrics_file)
-billing = data_service.ingest_billing_data(billing_file)
+data_service = DataIngestionService("data")
+
+resources = data_service.ingest_inventory_data(inventory_file)  # JSON format
+metrics = data_service.ingest_metrics_data(metrics_file)        # CSV format
+billing = data_service.ingest_billing_data(billing_file)        # CSV format
+
+# Data is automatically validated and converted to internal models
 ```
 
-### 3. Analysis Phase
+### 3. Analysis Phase (Batch Mode)
 
 ```python
-# Coordinator orchestrates analysis
-for service in enabled_services:
-    agent = agents[service]
-    service_resources = filter_resources_by_service(resources, service)
-    
-    # Agent analyzes resources using LLM
-    recommendations = await agent.analyze_resources(
-        resources=service_resources,
-        metrics=metrics,
-        billing=billing
-    )
+# Coordinator orchestrates analysis across all service agents
+report = await coordinator.analyze_resources_and_generate_report(
+    resources=resources,
+    metrics_data=metrics_by_resource_id,
+    billing_data=billing_by_resource_id,
+    batch_mode=True  # Efficient parallel processing
+)
+
+# Process:
+# 1. Group resources by service type
+# 2. Route to appropriate service agents or default agent
+# 3. Apply custom rules and threshold overrides
+# 4. Generate LLM-powered recommendations
+# 5. Post-process: deduplicate, filter, rank
 ```
 
-### 4. Aggregation Phase
+### 4. Aggregation & Report Generation
 
 ```python
-# Combine recommendations from all agents
-all_recommendations = []
-for agent_recs in agent_recommendations.values():
-    all_recommendations.extend(agent_recs)
+# Coordinator automatically handles:
+# - Deduplication of similar recommendations
+# - Risk assessment (Low/Medium/High)
+# - Savings calculations and prioritization
+# - Coverage analysis (which services used specific vs default agents)
+# - Implementation timeline categorization (quick wins, medium-term, long-term)
 
-# Remove duplicates and rank by priority
-final_recommendations = deduplicate_and_rank(all_recommendations)
+final_report = RecommendationReport(
+    total_monthly_savings=report.total_monthly_savings,
+    total_annual_savings=report.total_annual_savings,
+    recommendations=processed_recommendations,
+    coverage=coverage_metrics,
+    risk_distribution=risk_counts,
+    savings_by_service=savings_breakdown
+)
 ```
 
 ## Extending the System
 
 ### Adding New Cloud Services
 
+The system uses a single `ServiceAgent` class that adapts behavior based on YAML configuration. No code changes needed.
+
 #### 1. Create Service Agent Configuration
 
-Create `config/{provider}.{service}_agent.yaml`:
+Create `config/agents/{provider}/{service}.yaml`:
 
 ```yaml
-# Example: config/aws.newservice_agent.yaml
+# Example: config/agents/aws/newservice.yaml
 agent_id: aws.newservice_agent
-service: NEWSERVICE
-cloud_provider: AWS
+service: AWS.NEWSERVICE
 enabled: true
+
+base_prompt: "You are an expert AWS NEWSERVICE optimization specialist..."
+service_specific_prompt: |
+  Analyze NEWSERVICE resources for cost optimization opportunities:
+  1. Service-specific optimization patterns
+  2. Cost reduction strategies
+  3. Performance vs cost trade-offs
 
 capability:
   supported_recommendation_types:
     - rightsizing
+    - purchasing_option
     - custom_optimization
-  
   required_metrics:
     - utilization_metric
     - performance_metric
-  
   thresholds:
     utilization_threshold: 80.0
 
-base_prompt: "You are an expert AWS NEWSERVICE optimization specialist..."
-service_specific_prompt: "Analyze NEWSERVICE resources for cost optimization..."
+confidence_threshold: 0.7
+min_cost_threshold: 1.0
+max_tokens: 2000
+temperature: 0.1
 ```
 
 #### 2. Add Service to Models
 
-Update `llm_cost_recommendation/models/__init__.py`:
+Update `llm_cost_recommendation/models/types.py`:
 
 ```python
 class ServiceType(str, Enum):
     # AWS Services
-    EC2 = "EC2"
-    EBS = "EBS"
-    S3 = "S3"
-    RDS = "RDS"
-    LAMBDA = "Lambda"
+    EC2 = "AWS.EC2"
+    EBS = "AWS.EBS"
+    S3 = "AWS.S3"
     # ... existing services
-    NEWSERVICE = "NEWSERVICE"  # Add new service
-    
-    # Azure Services
-    VIRTUAL_MACHINES = "VirtualMachines"
-    # ... existing Azure services
-    
-    # GCP Services  
-    COMPUTE_ENGINE = "ComputeEngine"
-    # ... existing GCP services
-
-class CloudProvider(str, Enum):
-    AWS = "AWS"
-    AZURE = "Azure"
-    GCP = "GCP"
+    NEWSERVICE = "AWS.NEWSERVICE"  # Add new service
 ```
 
 #### 3. Update Coordinator Configuration
 
-Add to `config/coordinator.yaml`:
+Add to `config/global/coordinator.yaml`:
 
 ```yaml
 enabled_services:
   # AWS Services
-  - EC2
-  - S3
+  - AWS.EC2
+  - AWS.S3
   # ... existing services
-  - NEWSERVICE  # Add new service
-  
-  # Azure Services
-  - VirtualMachines
-  # ... existing Azure services
-  
-  # GCP Services
-  - ComputeEngine
-  # ... existing GCP services
+  - AWS.NEWSERVICE  # Add new service
 ```
 
 ### Adding New Cloud Providers
 
-#### 1. Create Provider-Specific Configuration Files
+#### 1. Create Provider-Specific Service Types
 
-Create configuration files with provider prefix:
-
-```bash
-# Create new provider configurations
-touch config/newprovider.compute_agent.yaml
-touch config/newprovider.storage_agent.yaml
-touch config/newprovider.database_agent.yaml
-```
-
-#### 2. Create Provider-Specific Models
+Update `llm_cost_recommendation/models/types.py`:
 
 ```python
-# llm_cost_recommendation/models/newprovider.py
-from enum import Enum
-from .base import Resource
+class ServiceType(str, Enum):
+    # AWS Services
+    EC2 = "AWS.EC2"
+    # ... existing AWS services
+    
+    # Azure Services  
+    VIRTUAL_MACHINES = "Azure.VirtualMachines"
+    # ... existing Azure services
+    
+    # GCP Services
+    COMPUTE_ENGINE = "GCP.Compute"
+    # ... existing GCP services
+    
+    # New Provider Services
+    NEWPROVIDER_COMPUTE = "NewProvider.Compute"
+    NEWPROVIDER_STORAGE = "NewProvider.Storage"
 
-class NewProviderServiceType(str, Enum):
-    COMPUTE = "Compute"
-    STORAGE = "Storage"
-    DATABASE = "Database"
-
-class NewProviderResource(Resource):
-    """New provider-specific resource model"""
-    subscription_id: str
-    resource_group: str
-    location: str
-    provider_specific_field: str
-```
-
-#### 3. Update Core Models
-
-```python
-# llm_cost_recommendation/models/__init__.py
 class CloudProvider(str, Enum):
     AWS = "AWS"
     AZURE = "Azure"
@@ -393,20 +400,104 @@ class CloudProvider(str, Enum):
     NEWPROVIDER = "NewProvider"  # Add new provider
 ```
 
-#### 4. Create Provider-Specific Agent Classes
+#### 2. Create Provider-Specific Configuration Directory
 
-```python
-# llm_cost_recommendation/agents/newprovider.py
-from .base import BaseAgent
-from ..models.newprovider import NewProviderServiceType
+```bash
+# Create new provider configuration structure
+mkdir -p config/agents/newprovider
+touch config/agents/newprovider/compute.yaml
+touch config/agents/newprovider/storage.yaml
+touch config/agents/newprovider/database.yaml
+```
 
-class NewProviderComputeAgent(BaseAgent):
-    """New provider compute optimization agent"""
+#### 3. Configure Provider Services
+
+```yaml
+# config/agents/newprovider/compute.yaml
+agent_id: newprovider.compute_agent
+service: NewProvider.Compute
+enabled: true
+
+base_prompt: "You are an expert NewProvider cost optimization specialist..."
+service_specific_prompt: |
+  Analyze NewProvider compute resources for optimization:
+  1. Instance rightsizing opportunities
+  2. Reserved capacity options
+  3. Regional pricing differences
+
+capability:
+  supported_recommendation_types:
+    - rightsizing
+    - purchasing_option
+  required_metrics:
+    - cpu_utilization_p50
+    - memory_utilization_p50
+  thresholds:
+    cpu_low_threshold: 20.0
+    memory_low_threshold: 30.0
+
+confidence_threshold: 0.7
+min_cost_threshold: 1.0
+max_tokens: 2000
+temperature: 0.1
+```
+
+### Advanced Configuration Features
+
+#### Custom Conditional Rules
+
+The system supports dynamic threshold adjustment based on resource characteristics:
+
+```yaml
+# config/agents/aws/ec2.yaml
+custom_rules:
+  - name: "production_safety_buffer"
+    description: "Production resources need higher thresholds"
+    conditions:
+      - field: "tag.Environment"
+        operator: "equals"
+        value: "production"
+    threshold_overrides:
+      cpu_low_threshold: 30.0
+      memory_low_threshold: 40.0
+    enabled: true
     
-    def __init__(self, config: ServiceAgentConfig, llm_service: LLMService):
-        super().__init__(config, llm_service)
-        self.provider = CloudProvider.NEWPROVIDER
-        self.service_type = NewProviderServiceType.COMPUTE
+  - name: "high_cost_focus"
+    description: "Focus on high-cost resources"
+    conditions:
+      - field: "monthly_cost"
+        operator: "greater_than"
+        value: 100.0
+    actions:
+      force_recommendation_types:
+        - rightsizing
+        - purchasing_option
+    enabled: true
+```
+
+#### Multi-Condition Rules
+
+```yaml
+custom_rules:
+  - name: "critical_production_workload"
+    description: "Critical production workloads need special handling"
+    conditions:
+      - field: "tag.Environment"
+        operator: "equals"
+        value: "production"
+      - field: "tag.Criticality"
+        operator: "equals"
+        value: "high"
+      - field: "monthly_cost"
+        operator: "greater_than"
+        value: 500.0
+    threshold_overrides:
+      cpu_low_threshold: 40.0
+      memory_low_threshold: 50.0
+    risk_level_override: "MEDIUM"  # Never mark as low risk
+    enabled: true
+```
+
 ## Data Flow & Integration
 
 ### Input Data Formats

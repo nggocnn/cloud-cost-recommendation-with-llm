@@ -17,109 +17,115 @@
 
 #### **Implemented Features**
 
-- **Multi-Agent System**: 35+ service agents across AWS, Azure, GCP
-- **Coordinator Agent**: Orchestrates analysis, deduplicates recommendations
+- **Multi-Agent System**: 36 service agents across AWS (17), Azure (10), GCP (8), plus default agent
+- **Coordinator Agent**: Orchestrates analysis, deduplicates recommendations, handles fallback
 - **CLI Interface**: Complete command-line tool with export options
 - **Data Ingestion**: CSV/JSON parsers for billing, inventory, metrics
 - **Export Formats**: JSON (detailed), CSV (summary), Excel (multi-sheet)
-- **Configuration System**: YAML-based agent definitions
+- **Configuration System**: YAML-based agent definitions with custom conditional rules
 - **Sample Data Generation**: Test data for development and demos
 - **Multi-Account Support**: Processes resources across multiple accounts
 - **Logging System**: Structured logging with configurable levels
+- **Custom Rules Engine**: Rule-based condition system for dynamic threshold adjustment
+- **LLM Integration**: OpenAI GPT-4 integration with structured prompts and output parsing
+- **Batch Processing**: Intelligent batching for performance optimization
+- **Risk Assessment**: Risk level classification (Low/Medium/High) with implementation guidance
 
-#### **Planned Features** (Not Yet Implemented)
+#### **Future Planned Features** (Not Yet Implemented)
 
 - **Vision Module**: Architecture diagram analysis
 - **Real Pricing APIs**: Integration with cloud provider pricing APIs
-- **Custom Rules Engine**: User-defined cost optimization rules
 - **Webhook Integrations**: Notifications and external system callbacks
 - **Multi-Provider Billing**: Native support for Azure/GCP billing formats
 
-## 2. Cloud Service Coverage Requirements
+## 2. Cloud Service Coverage
 
 ### 2.1 AWS Services (17 Implemented)
 
-#### **AWS Compute Services**
+Based on the actual implementation, the system includes agents for:
+
+#### AWS Compute Services
 
 - **EC2**: Instance rightsizing, Reserved Instance recommendations, Spot Instance adoption
-  - Data Requirements: Instance type, CPU/memory utilization, network performance
-  - Cost Levers: On-Demand → Reserved → Spot, instance family optimization
-  
 - **Lambda**: Memory optimization, execution time analysis, cost per invocation
-  - Data Requirements: Memory allocation, average execution time, invocation patterns
-  - Cost Levers: Memory allocation optimization, ARM Graviton adoption
 
-#### **AWS Storage Services**
+#### AWS Storage Services  
 
-- **EBS**: Volume rightsizing, storage class optimization, snapshot lifecycle
-  - Data Requirements: Volume type, provisioned IOPS, actual usage patterns
-  - Cost Levers: gp2 → gp3 migration, IOPS optimization, automated snapshots
-  
-- **S3**: Storage class transitions, lifecycle policies, request optimization
-  - Data Requirements: Access patterns, retrieval frequency, object age distribution
-  - Cost Levers: Standard → IA → Glacier transitions, request type optimization
-  
-- **EFS**: Throughput mode optimization, storage class transitions
-  - Data Requirements: Throughput utilization, access patterns
-  - Cost Levers: Provisioned → Burst throughput, IA adoption
+- **EBS**: Volume type optimization, snapshot cleanup, sizing recommendations
+- **S3**: Storage class optimization, lifecycle policies, access pattern analysis
+- **EFS**: Performance mode optimization, throughput provisioning
 
-#### **AWS Database Services**
+#### AWS Database Services
 
-- **RDS**: Instance rightsizing, storage optimization, backup retention
-  - Data Requirements: CPU/memory utilization, storage growth, backup patterns
-  - Cost Levers: On-Demand → Reserved, Multi-AZ optimization, storage type selection
-  
-- **DynamoDB**: Capacity mode optimization, table compression
-  - Data Requirements: Read/write capacity utilization, request patterns
-  - Cost Levers: Provisioned ↔ On-Demand, auto-scaling configuration
+- **RDS**: Instance rightsizing, Multi-AZ optimization, Reserved Instance recommendations
+- **RDS Snapshots**: Cleanup policies, retention optimization
 
-#### **AWS Networking Services**
+#### AWS Networking Services
 
-- **ALB/NLB/GWLB**: Load Balancer Capacity Unit optimization
-  - Data Requirements: LCU/NLCU utilization, traffic patterns
-  - Cost Levers: Right-sized capacity, multi-AZ optimization
-  
-- **NAT Gateway**: Data processing optimization, placement strategies
-  - Data Requirements: Data transfer volumes, traffic patterns
-  - Cost Levers: NAT Gateway → NAT Instance, VPC Endpoint adoption
-  
-- **CloudFront**: Distribution optimization, caching strategies
-  - Data Requirements: Request patterns, cache hit ratios, geographic distribution
-  - Cost Levers: Price class optimization, caching configuration
+- **ALB/NLB/GWLB**: Load balancer optimization, capacity planning
+- **NAT Gateway**: Traffic analysis, instance vs gateway cost comparison
+- **Elastic IP**: Unused IP identification, usage optimization
+- **VPC Endpoints**: Cost vs data transfer savings analysis
+- **CloudFront**: Cache optimization, origin shield recommendations
+
+#### AWS Application Services
+
+- **DynamoDB**: Capacity mode optimization, on-demand vs provisioned
+- **SNS**: Message routing optimization, subscription cleanup
+- **SQS**: Queue optimization, message retention policies
 
 ### 2.2 Azure Services (10 Implemented)
 
-#### **Azure Compute Services**
+Based on the actual implementation, the system includes agents for:
 
-- **Virtual Machines**: Rightsizing, Reserved Instance optimization
-- **Azure Functions**: Memory and execution optimization
+#### Azure Compute Services
 
-#### **Azure Storage Services**
+- **Virtual Machines**: Instance rightsizing, Reserved Instance optimization
+- **Functions**: Consumption vs Premium plan optimization
 
-- **Storage Accounts**: Tier optimization, lifecycle management
-- **Managed Disks**: Performance tier optimization
+#### Azure Storage Services
 
-#### **Azure Database Services**
+- **Storage Accounts**: Access tier optimization, lifecycle management
+- **Disk Storage**: Premium vs Standard optimization, snapshot management
 
-- **Azure SQL**: DTU/vCore optimization, backup retention
-- **Cosmos DB**: Throughput optimization, consistency level impact
+#### Azure Database Services
 
-#### **Azure Networking Services**
+- **SQL Database**: Capacity optimization, service tier recommendations
 
-- **Load Balancer**: SKU optimization, traffic distribution
-- **CDN**: Caching optimization, tier selection
+#### Azure Networking Services
+
+- **Load Balancer**: Load balancing optimization, capacity planning
+- **NAT Gateway**: Traffic analysis and cost optimization
+- **Public IP**: Unused IP identification and cleanup
+- **CDN**: Cache optimization, traffic routing
+
+#### Azure NoSQL Services
+
+- **Cosmos DB**: Throughput optimization, consistency level recommendations
 
 ### 2.3 GCP Services (8 Implemented)
 
-#### **GCP Compute Services**
+Based on the actual implementation, the system includes agents for:
 
-- **Compute Engine**: Machine type optimization, committed use discounts
+#### GCP Compute Services
+
+- **Compute Engine**: Instance rightsizing, Committed Use Discounts
 - **Cloud Functions**: Memory and execution optimization
 
-#### **GCP Storage Services**
+#### GCP Storage Services
 
-- **Cloud Storage**: Storage class transitions, lifecycle policies
-- **Persistent Disks**: Type and performance optimization
+- **Cloud Storage**: Storage class optimization, lifecycle policies
+- **Persistent Disk**: Disk type optimization, snapshot management
+
+#### GCP Database Services
+
+- **Cloud SQL**: Instance optimization, connection management
+- **Firestore**: Capacity optimization, query performance
+
+#### GCP Networking Services
+
+- **Load Balancer**: Traffic optimization, regional distribution
+- **CDN**: Cache optimization, origin configuration
 
 #### **GCP Database Services**
 
@@ -179,39 +185,74 @@ resource_id,timestamp,metric_name,metric_value,metric_unit
 
 ```text
 CoordinatorAgent
-├── ServiceAgentFactory
-├── LLMServiceAgent (Generic)
-└── Provider-Specific Agents
+├── ServiceAgent (Base Implementation)
+├── RuleProcessor (Custom Conditions)
+└── Service-Specific Configurations
     ├── AWS Agents (17)
+    │   ├── EC2, Lambda, S3, EBS, RDS
+    │   ├── ALB, NLB, GWLB, NAT Gateway
+    │   ├── DynamoDB, SNS, SQS
+    │   └── CloudFront, VPC Endpoints, etc.
     ├── Azure Agents (10)
+    │   ├── Virtual Machines, Functions
+    │   ├── Storage, Disks, SQL, Cosmos DB
+    │   └── Load Balancer, NAT Gateway, CDN, etc.
     └── GCP Agents (8)
+        ├── Compute Engine, Cloud Functions
+        ├── Cloud Storage, Persistent Disk
+        └── Cloud SQL, Load Balancer, CDN, etc.
 ```
 
 ### 4.2 Configuration-Driven Architecture
 
 **Prevents Code Explosion**: New services require only YAML configuration, no code changes.
 
-#### **Agent Configuration Schema (YAML)**
+The system uses a single `ServiceAgent` class that adapts its behavior based on YAML configuration files.
+
+#### **Agent Configuration Schema**
 
 ```yaml
 agent_id: "aws.ec2_agent"
-service: "EC2"
-cloud_provider: "AWS"
+service: "AWS.EC2"
 enabled: true
-description: "EC2 instance optimization"
+base_prompt: "You are an expert AWS cost optimization specialist..."
+service_specific_prompt: "Analyze EC2 instances for cost optimization..."
 
-analysis_rules:
-  rightsizing:
-    cpu_threshold_low: 10.0
-    cpu_threshold_high: 80.0
-    memory_threshold_low: 20.0
-    memory_threshold_high: 85.0
-  
-  purchasing_optimization:
-    min_runtime_hours: 720  # 1 month
-    ri_break_even_months: 12
-    spot_suitability_checks:
-      - "fault_tolerant"
+capability:
+  analysis_window_days: 30
+  supported_recommendation_types:
+    - rightsizing
+    - purchasing_option
+    - idle_resource
+  required_metrics:
+    - cpu_utilization_p50
+    - cpu_utilization_p95
+    - memory_utilization_p50
+  optional_metrics:
+    - network_in
+    - network_out
+  thresholds:
+    cpu_idle_threshold: 5.0
+    cpu_low_threshold: 20.0
+    memory_low_threshold: 30.0
+    uptime_threshold: 0.95
+
+confidence_threshold: 0.7
+min_cost_threshold: 1.0
+max_tokens: 2000
+temperature: 0.1
+
+# Custom conditional rules for dynamic behavior
+custom_rules:
+  - name: "production_cpu_buffer"
+    description: "Production instances need higher CPU buffer"
+    conditions:
+      - field: "tag.Environment"
+        operator: "equals"
+        value: "production"
+    threshold_overrides:
+      cpu_low_threshold: 30.0
+    enabled: true
       - "flexible_timing"
 
 cost_optimization_prompts:
