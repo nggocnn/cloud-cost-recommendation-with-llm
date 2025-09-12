@@ -157,7 +157,7 @@ capability:
 
 confidence_threshold: 0.7
 min_cost_threshold: 1.0
-max_tokens: 2000
+max_tokens: 20000
 temperature: 0.1
 
 service_specific_prompt: |
@@ -338,7 +338,7 @@ capability:
 
 confidence_threshold: 0.7
 min_cost_threshold: 1.0
-max_tokens: 2000
+max_tokens: 20000
 temperature: 0.1
 ```
 
@@ -438,7 +438,7 @@ capability:
 
 confidence_threshold: 0.7
 min_cost_threshold: 1.0
-max_tokens: 2000
+max_tokens: 20000
 temperature: 0.1
 ```
 

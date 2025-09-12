@@ -18,6 +18,8 @@ from ..models import (
     GlobalConfig,
 )
 from ..services.llm import LLMService, PromptTemplates
+from ..services.enhanced_prompts import EnhancedPromptTemplates
+from ..services.data_validation import DataQualityValidator, EvidenceValidator
 from ..utils.logging import get_logger
 from ..services.conditions import RuleProcessor
 
@@ -39,6 +41,11 @@ class ServiceAgent:
         self.service = agent_config.service
         self.agent_id = agent_config.agent_id
         self.rule_processor = RuleProcessor()
+        
+        # Enhanced components for evidence-based analysis
+        self.enhanced_prompts = EnhancedPromptTemplates()
+        self.data_validator = DataQualityValidator()
+        self.evidence_validator = EvidenceValidator()
 
         logger.debug("Agent initialized", agent_id=self.agent_id, service=self.service)
 
@@ -48,47 +55,122 @@ class ServiceAgent:
         metrics: Optional[Metrics] = None,
         billing_data: Optional[List[BillingData]] = None,
     ) -> List[Recommendation]:
-        """Analyze a single resource and generate recommendations"""
+        """Analyze a single resource and generate recommendations with enhanced evidence validation"""
         recommendations = []
 
         if not self._validate_resource_data(resource):
             return recommendations
 
         try:
-            # Calculate estimated monthly cost for rule evaluation
+            # STEP 1: Validate data quality before analysis
+            data_quality = self.data_validator.validate_resource_data(
+                resource, metrics, billing_data
+            )
+            
+            logger.info(
+                "Data quality assessment",
+                resource_id=resource.resource_id,
+                quality_score=data_quality["quality_score"],
+                overall_quality=data_quality["overall_quality"],
+                recommendations_possible=data_quality["recommendations_possible"]
+            )
+            
+            # Skip analysis if data quality is too poor
+            if not data_quality["recommendations_possible"]:
+                logger.warning(
+                    "Skipping analysis due to insufficient data",
+                    resource_id=resource.resource_id,
+                    missing_data=data_quality["missing_critical_data"]
+                )
+                return []
+
+            # STEP 2: Calculate estimated monthly cost for rule evaluation
             estimated_cost = None
             if billing_data:
                 estimated_cost = sum(bd.unblended_cost for bd in billing_data)
 
-            # Apply custom rules to get configuration overrides
+            # STEP 3: Apply custom rules to get configuration overrides
             rule_results = self._apply_custom_rules(
                 resource, metrics, billing_data, estimated_cost
             )
 
-            # Merge thresholds with rule overrides
+            # STEP 4: Prepare context data with enhanced validation
             context_data = self._prepare_context_data(resource, metrics, billing_data)
             original_thresholds = context_data.get("thresholds", {})
             merged_thresholds = self._merge_thresholds(
                 original_thresholds, rule_results.get("threshold_overrides", {})
             )
             context_data["thresholds"] = merged_thresholds
+            context_data["data_quality"] = data_quality
 
-            # Generate recommendations using LLM with rule-modified context
-            llm_recommendations = await self._generate_recommendations_from_llm(
-                context_data, rule_results
+            # STEP 5: Check if we should use enhanced evidence-based prompts
+            should_skip, skip_reason = self.enhanced_prompts.should_skip_analysis(context_data)
+            if should_skip:
+                logger.warning(
+                    "Enhanced analysis skipped",
+                    resource_id=resource.resource_id,
+                    reason=skip_reason
+                )
+                return []
+
+            # STEP 6: Generate recommendations using enhanced LLM prompts
+            llm_recommendations = await self._generate_enhanced_recommendations(
+                context_data, rule_results, resource.resource_id, self.service.value
             )
 
-            # Convert to recommendation models
+            # STEP 7: Validate evidence and convert to recommendation models
             for llm_rec in llm_recommendations:
+                # Validate evidence supporting the recommendation
+                evidence_validation = self.evidence_validator.validate_recommendation_evidence(
+                    llm_rec, context_data
+                )
+                
+                # Add warnings instead of rejecting recommendations with poor evidence
+                evidence_warnings = []
+                if evidence_validation["evidence_quality"] in ["poor", "fair"] and evidence_validation["unsupported_claims"]:
+                    evidence_warnings.append(f"Evidence Quality: {evidence_validation['evidence_quality'].title()}")
+                    if evidence_validation["evidence_issues"]:
+                        evidence_warnings.append(f"Issues: {'; '.join(evidence_validation['evidence_issues'])}")
+                    if evidence_validation["unsupported_claims"]:
+                        evidence_warnings.extend([f"Unsupported: {claim}" for claim in evidence_validation["unsupported_claims"]])
+                    
+                    logger.warning(
+                        "Recommendation flagged with evidence warnings",
+                        resource_id=resource.resource_id,
+                        evidence_quality=evidence_validation["evidence_quality"],
+                        evidence_issues=evidence_validation["evidence_issues"],
+                        unsupported_claims=evidence_validation["unsupported_claims"]
+                    )
+                
+                # Add evidence warnings to the recommendation
+                if evidence_warnings:
+                    llm_rec["evidence_warnings"] = evidence_warnings
+                
+                # Adjust confidence based on data quality
+                if "confidence_score" in llm_rec:
+                    original_confidence = llm_rec["confidence_score"]
+                    max_confidence = data_quality["confidence_ceiling"]
+                    llm_rec["confidence_score"] = min(original_confidence, max_confidence)
+                    
+                    if original_confidence > max_confidence:
+                        logger.info(
+                            "Confidence score adjusted down due to data limitations",
+                            resource_id=resource.resource_id,
+                            original=original_confidence,
+                            adjusted=llm_rec["confidence_score"],
+                            reason="data_quality_ceiling"
+                        )
+
                 rec = await self._convert_llm_recommendation_to_model(llm_rec, resource)
                 if rec:
                     recommendations.append(rec)
 
             logger.info(
-                "Resource analysis completed",
+                "Enhanced resource analysis completed",
                 agent_id=self.agent_id,
                 resource_id=resource.resource_id,
                 recommendations_count=len(recommendations),
+                data_quality_score=data_quality["quality_score"],
                 rules_applied=len(
                     [r for r in self.agent_config.custom_rules if r.enabled]
                 ),
@@ -97,13 +179,79 @@ class ServiceAgent:
 
         except Exception as e:
             logger.error(
-                "Failed to analyze resource with LLM",
+                "Failed to analyze resource with enhanced LLM",
                 agent_id=self.agent_id,
                 resource_id=resource.resource_id,
                 error=str(e),
             )
 
         return recommendations
+
+    async def _generate_enhanced_recommendations(
+        self, 
+        context_data: Dict[str, Any], 
+        rule_results: Dict[str, Any],
+        resource_id: str,
+        service: str
+    ) -> List[Dict[str, Any]]:
+        """Generate recommendations using enhanced evidence-based prompts"""
+        
+        # Create enhanced system prompt that enforces evidence requirements
+        system_prompt = self.enhanced_prompts.EVIDENCE_BASED_SYSTEM_PROMPT
+        
+        # Create evidence-focused user prompt
+        user_prompt = self.enhanced_prompts.create_evidence_enhanced_prompt(
+            context_data, resource_id, service
+        )
+        
+        # Add custom rule modifications to the prompt
+        if rule_results.get("custom_prompts"):
+            user_prompt += "\n\nADDITIONAL REQUIREMENTS:\n"
+            for custom_prompt in rule_results["custom_prompts"]:
+                user_prompt += f"- {custom_prompt}\n"
+                
+        if rule_results.get("skip_recommendation_types"):
+            skip_types = [rt.value for rt in rule_results["skip_recommendation_types"]]
+            user_prompt += f"\nIMPORTANT: Do NOT recommend these types: {', '.join(skip_types)}\n"
+            
+        if rule_results.get("force_recommendation_types"):
+            force_types = [rt.value for rt in rule_results["force_recommendation_types"]]
+            user_prompt += f"\nIMPORTANT: Always consider these recommendation types: {', '.join(force_types)}\n"
+
+        # Generate LLM response
+        llm_response = await self.llm_service.generate_recommendation(
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            context_data=context_data
+        )
+
+        try:
+            response_data = json.loads(llm_response.content)
+            
+            # Handle both single recommendation and batch format
+            if "recommendations" in response_data:
+                recommendations = response_data["recommendations"]
+            else:
+                recommendations = [response_data] if response_data else []
+                
+            logger.info(
+                "Enhanced LLM recommendations generated",
+                agent_id=self.agent_id,
+                recommendations_count=len(recommendations),
+                response_time_ms=llm_response.response_time_ms,
+                data_quality=context_data.get("data_quality", {}).get("overall_quality", "unknown")
+            )
+            
+            return recommendations
+            
+        except json.JSONDecodeError as e:
+            logger.error(
+                "Failed to parse enhanced LLM response",
+                agent_id=self.agent_id,
+                error=str(e),
+                response_content=llm_response.content[:500]
+            )
+            return []
 
     async def analyze_multiple_resources(
         self,
@@ -549,6 +697,7 @@ class ServiceAgent:
                 business_hours_impact=llm_recommendation.get("business_hours_impact", False),
                 downtime_required=llm_recommendation.get("downtime_required", False),
                 sla_impact=llm_recommendation.get("sla_impact"),
+                warnings=llm_recommendation.get("evidence_warnings", []),
             )
 
             return recommendation
@@ -996,6 +1145,41 @@ class ServiceAgent:
                             )
 
                             if resource:
+                                # Get the corresponding context data for evidence validation
+                                resource_context = next(
+                                    (
+                                        ctx for i, ctx in enumerate(batch_context)
+                                        if resources[i].resource_id == rec_data["resource_id"]
+                                    ),
+                                    {}
+                                )
+                                
+                                # EVIDENCE VALIDATION for batch processing
+                                evidence_validation = self.evidence_validator.validate_recommendation_evidence(
+                                    rec_data, resource_context
+                                )
+                                
+                                # Add warnings instead of rejecting recommendations with poor evidence
+                                evidence_warnings = []
+                                if evidence_validation["evidence_quality"] in ["poor", "fair"] and evidence_validation["unsupported_claims"]:
+                                    evidence_warnings.append(f"Evidence Quality: {evidence_validation['evidence_quality'].title()}")
+                                    if evidence_validation["evidence_issues"]:
+                                        evidence_warnings.append(f"Issues: {'; '.join(evidence_validation['evidence_issues'])}")
+                                    if evidence_validation["unsupported_claims"]:
+                                        evidence_warnings.extend([f"Unsupported: {claim}" for claim in evidence_validation["unsupported_claims"]])
+                                    
+                                    logger.warning(
+                                        "Batch recommendation flagged with evidence warnings",
+                                        resource_id=resource.resource_id,
+                                        evidence_quality=evidence_validation["evidence_quality"],
+                                        evidence_issues=evidence_validation["evidence_issues"],
+                                        unsupported_claims=evidence_validation["unsupported_claims"]
+                                    )
+                                
+                                # Add evidence warnings to the recommendation
+                                if evidence_warnings:
+                                    rec_data["evidence_warnings"] = evidence_warnings
+
                                 # Apply rule-based filtering to the recommendation
                                 filtered_recs = self._filter_recommendations_by_rules(
                                     [rec_data], resource_rule_results

@@ -291,7 +291,7 @@ service_specific_prompt: |
   5. Right-sizing opportunities based on actual usage
 
 # Agent settings
-max_tokens: 2000
+max_tokens: 20000
 confidence_threshold: 0.7
 min_cost_threshold: 1.0
 ```

@@ -1,0 +1,4 @@
+{
+    "Policy": "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"lambda-2eb6f62a-dc47-4bb6-ac15-7cf3385367f9\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-west-2:729713917879:function:minhpt7642Function\",\"Condition\":{\"StringEquals\":{\"AWS:SourceAccount\":\"729713917879\"},\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:s3:::minhpt7642bucket\"}}}]}",
+    "RevisionId": "9e6c7474-9d00-42bb-9bb2-e11498717f3b"
+}

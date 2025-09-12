@@ -3,7 +3,7 @@ Coordinator agent that orchestrates service agents and consolidates recommendati
 """
 
 import asyncio
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
 from collections import defaultdict
 from datetime import datetime, timezone
 
@@ -113,6 +113,7 @@ class CoordinatorAgent:
 
         # Analyze resources using appropriate service agents
         all_recommendations = []
+        resources_without_recommendations = []
 
         if batch_mode:
             # Batch processing: Analyze services in parallel for efficiency
@@ -139,23 +140,25 @@ class CoordinatorAgent:
                     continue
 
                 # Create parallel analysis task for this service
-                task = self._analyze_service_resources(
+                task = self._analyze_service_resources_with_tracking(
                     agent, service_resources, metrics_data, billing_data
                 )
                 analysis_tasks.append(task)
 
             # Execute all service analyses in parallel
             if analysis_tasks:
-                service_recommendations = await asyncio.gather(
+                service_results = await asyncio.gather(
                     *analysis_tasks, return_exceptions=True
                 )
 
                 # Collect results from all services
-                for result in service_recommendations:
+                for result in service_results:
                     if isinstance(result, Exception):
                         logger.error("Service analysis failed", error=str(result))
                     else:
-                        all_recommendations.extend(result)
+                        service_recommendations, service_no_recommendations = result
+                        all_recommendations.extend(service_recommendations)
+                        resources_without_recommendations.extend(service_no_recommendations)
         else:
             # Individual processing: Analyze each resource one by one for maximum precision
             # Useful for debugging or when dealing with problematic resources
@@ -197,7 +200,19 @@ class CoordinatorAgent:
                     recommendations = await agent.analyze_single_resource(
                         resource, resource_metrics, resource_billing
                     )
-                    all_recommendations.extend(recommendations)
+                    if recommendations:
+                        all_recommendations.extend(recommendations)
+                    else:
+                        # Track resources that didn't get recommendations
+                        reason = await self._determine_no_recommendation_reason(
+                            resource, resource_metrics, resource_billing, agent
+                        )
+                        resources_without_recommendations.append({
+                            "resource_id": resource.resource_id,
+                            "service": resource.service.value,
+                            "reason": reason,
+                            "agent_used": agent.agent_id
+                        })
                 except Exception as e:
                     logger.error(
                         "Failed to analyze individual resource",
@@ -212,7 +227,7 @@ class CoordinatorAgent:
         )
 
         # Generate comprehensive report with metrics and insights
-        report = self._generate_report(processed_recommendations, resources, start_time)
+        report = self._generate_report(processed_recommendations, resources, start_time, resources_without_recommendations)
 
         logger.info(
             "Resource analysis completed successfully",
@@ -286,6 +301,132 @@ class CoordinatorAgent:
                 error=str(e),
             )
             return []
+
+    async def _analyze_service_resources_with_tracking(
+        self,
+        agent: ServiceAgent,
+        resources: List[Resource],
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> Tuple[List[Recommendation], List[Dict[str, Any]]]:
+        """Analyze resources for a specific service and track those without recommendations"""
+        try:
+            recommendations = await agent.analyze_multiple_resources(
+                resources, metrics_data, billing_data
+            )
+
+            # Apply service-specific limits
+            max_recommendations = self.config.max_recommendations_per_service
+            if len(recommendations) > max_recommendations:
+                # Sort by savings and take top recommendations
+                recommendations.sort(
+                    key=lambda r: r.estimated_monthly_savings, reverse=True
+                )
+                recommendations = recommendations[:max_recommendations]
+
+                logger.info(
+                    "Applied recommendation limit",
+                    service=agent.service.value,
+                    original_count=len(recommendations),
+                    limited_count=max_recommendations,
+                )
+
+            # Find resources that didn't get recommendations
+            recommended_resource_ids = {rec.resource_id for rec in recommendations}
+            resources_without_recommendations = []
+            
+            for resource in resources:
+                if resource.resource_id not in recommended_resource_ids:
+                    # Get relevant metrics and billing data for this resource
+                    resource_metrics = (
+                        metrics_data.get(resource.resource_id) if metrics_data else None
+                    )
+                    resource_billing = (
+                        billing_data.get(resource.resource_id) if billing_data else None
+                    )
+                    
+                    reason = await self._determine_no_recommendation_reason(
+                        resource, resource_metrics, resource_billing, agent
+                    )
+                    resources_without_recommendations.append({
+                        "resource_id": resource.resource_id,
+                        "service": resource.service.value,
+                        "reason": reason,
+                        "agent_used": agent.agent_id
+                    })
+
+            return recommendations, resources_without_recommendations
+
+        except Exception as e:
+            logger.error(
+                "Failed to analyze service resources",
+                service=agent.service.value,
+                error=str(e),
+            )
+            return [], []
+
+    async def _determine_no_recommendation_reason(
+        self,
+        resource: Resource,
+        metrics: Optional[Metrics] = None,
+        billing_data: Optional[List[BillingData]] = None,
+        agent: ServiceAgent = None,
+    ) -> str:
+        """Determine why a resource didn't get recommendations"""
+        try:
+            # Check data quality first
+            if hasattr(agent, 'data_validator'):
+                data_quality = agent.data_validator.validate_resource_data(
+                    resource, metrics, billing_data
+                )
+                
+                if not data_quality["recommendations_possible"]:
+                    missing_data = data_quality.get("missing_critical_data", [])
+                    if missing_data:
+                        return f"Insufficient data: missing {', '.join(missing_data)}"
+                    else:
+                        return "Insufficient data quality for analysis"
+            
+            # Check if resource is already optimized
+            if metrics:
+                if hasattr(metrics, 'is_idle') and metrics.is_idle:
+                    return "Resource appears to be idle/unused"
+                
+                # Check utilization patterns
+                cpu_low = (metrics.cpu_utilization_p95 or 0) < 10
+                memory_low = (metrics.memory_utilization_p95 or 0) < 30
+                
+                if cpu_low and memory_low:
+                    return "Resource utilization is very low - may need further investigation"
+                
+                # Check if utilization is optimal
+                cpu_optimal = 30 <= (metrics.cpu_utilization_p90 or 0) <= 80
+                memory_optimal = 40 <= (metrics.memory_utilization_p90 or 0) <= 85
+                
+                if cpu_optimal and memory_optimal:
+                    return "Resource appears to be optimally utilized"
+            
+            # Check cost implications
+            if billing_data:
+                monthly_cost = sum(bd.unblended_cost for bd in billing_data)
+                if monthly_cost < 5.0:  # Very low cost
+                    return f"Low monthly cost (${monthly_cost:.2f}) - optimization may not be cost-effective"
+            
+            # Check resource state
+            state = resource.properties.get('state', '').lower()
+            if state in ['stopped', 'terminated', 'deleted']:
+                return f"Resource is {state} - no active optimization needed"
+            
+            # Default reason for unknown cases
+            return "No optimization opportunities identified with current configuration"
+            
+        except Exception as e:
+            logger.warning(
+                "Failed to determine no-recommendation reason",
+                resource_id=resource.resource_id,
+                error=str(e)
+            )
+            return "Unable to determine reason for no recommendations"
 
     def _post_process_recommendations(
         self, recommendations: List[Recommendation]
@@ -379,6 +520,7 @@ class CoordinatorAgent:
         recommendations: List[Recommendation],
         resources: List[Resource],
         start_time: datetime,
+        resources_without_recommendations: List[Dict[str, Any]] = None,
     ) -> RecommendationReport:
         """Generate comprehensive recommendation report"""
 
@@ -471,6 +613,7 @@ class CoordinatorAgent:
             medium_term=medium_term,
             long_term=long_term,
             coverage=coverage,
+            resources_without_recommendations=resources_without_recommendations or [],
         )
 
     def get_agent_status(self) -> Dict[str, Any]:

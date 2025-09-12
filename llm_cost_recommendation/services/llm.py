@@ -153,6 +153,13 @@ class LLMService:
                 + ("..." if len(response_content) > 200 else ""),
             )
 
+            # Log full response content for debugging
+            logger.info(
+                "FULL LLM RESPONSE",
+                model=self.config.model,
+                full_response=response_content,
+            )
+
             # Remove markdown code blocks if present
             response_content = self._clean_json_response(response_content)
 
@@ -172,7 +179,12 @@ class LLMService:
                     "Invalid JSON response from LLM",
                     model=self.config.model,
                     error=str(e),
-                    response_content=response_content[:500],
+                    response_content_first_500=response_content[:500],
+                )
+                logger.error(
+                    "FULL INVALID JSON RESPONSE",
+                    model=self.config.model,
+                    full_invalid_response=response_content,
                 )
                 # Return valid JSON structure on parse failure
                 response_content = json.dumps(
@@ -191,7 +203,7 @@ class LLMService:
             raise
 
     def _clean_json_response(self, response_content: str) -> str:
-        """Remove markdown code blocks from JSON response"""
+        """Remove markdown code blocks and comments from JSON response"""
         if response_content.startswith("```json"):
             response_content = response_content[7:]
         elif response_content.startswith("```"):
@@ -200,6 +212,11 @@ class LLMService:
         if response_content.endswith("```"):
             response_content = response_content[:-3]
 
+        # Remove JSON comments (// style comments)
+        import re
+        # Remove single-line comments like "// comment"
+        response_content = re.sub(r'\s*//.*?(?=\n|$)', '', response_content)
+        
         return response_content.strip()
 
     def _calculate_batch_tokens(self, batch_size: int) -> int:
@@ -375,6 +392,7 @@ class PromptTemplates:
     BASE_SYSTEM_PROMPT = """You are an expert AWS cost optimization specialist with deep knowledge of cloud infrastructure, pricing models, and best practices. Your goal is to analyze AWS resources and provide actionable cost optimization recommendations.
 
 IMPORTANT: You MUST respond in valid JSON format only. No other text outside the JSON structure.
+DO NOT include any comments (// or /* */) in your JSON response - they are not valid JSON.
 
 Key principles:
 1. Minimize cost while preserving performance and reliability
@@ -409,26 +427,15 @@ REQUIRED JSON Response format (ALL fields are mandatory):
                 "metrics_analysis": "specific data supporting this recommendation",
                 "cost_breakdown": "detailed cost analysis",
                 "performance_impact": "expected performance changes"
-                // Add additional fields as needed: compliance_notes, security_implications, etc.
             },
             "implementation_steps": [
-                // Provide 1-10 steps based on complexity:
-                // - Simple changes (storage class, unused resources): 2-4 steps
-                // - Medium changes (rightsizing, purchasing options): 3-6 steps  
-                // - Complex changes (architecture, topology): 5-10 steps
                 "Step 1: Specific action to take",
-                "Step 2: Next action to take",
+                "Step 2: Next action to take", 
                 "Step 3: Final verification step"
-                // Add more steps if the recommendation is complex
             ],
             "prerequisites": [
-                // Include 0-5 prerequisites based on actual requirements:
-                // - Simple changes: may have no prerequisites (empty array [])
-                // - Complex changes: may require multiple prerequisites
-                // Only include if genuinely required for successful implementation
                 "Prerequisite 1: Required condition or preparation",
                 "Prerequisite 2: Another required condition"
-                // Remove examples above and use actual prerequisites or empty array
             ],
             "rollback_plan": "Detailed plan to revert changes if needed",
             "confidence_score": 0.85,
@@ -441,6 +448,7 @@ REQUIRED JSON Response format (ALL fields are mandatory):
 
 CRITICAL JSON REQUIREMENTS:
 - Respond ONLY with valid JSON - no extra text before or after
+- NO COMMENTS: Do not include // or /* */ comments anywhere in the JSON
 - ALL numeric values must be actual calculated numbers (e.g., 1151.33, not "1.5 * 767.55")
 - current_config and recommended_config must be non-empty objects, never null
 - evidence must be a non-empty object with relevant analysis data, never null
@@ -451,6 +459,17 @@ CRITICAL JSON REQUIREMENTS:
 - sla_impact should be a string describing SLA impact or null if no impact
 - All fields are mandatory - include every single field shown above
 - Use exact field names (especially "impact_description", not "impact")
+
+DETAILED FIELD INSTRUCTIONS:
+- evidence: Can include additional fields like compliance_notes, security_implications, etc. as needed
+- implementation_steps: Provide 1-10 steps based on complexity:
+  * Simple changes (storage class, unused resources): 2-4 steps
+  * Medium changes (rightsizing, purchasing options): 3-6 steps
+  * Complex changes (architecture, topology): 5-10 steps
+- prerequisites: Include 0-5 prerequisites based on actual requirements:
+  * Simple changes: may have no prerequisites (empty array [])
+  * Complex changes: may require multiple prerequisites
+  * Only include if genuinely required for successful implementation
 
 ADAPTIVE LIST SIZING GUIDELINES:
 - implementation_steps: Vary 1-10 steps based on actual complexity

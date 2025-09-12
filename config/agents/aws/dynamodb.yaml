@@ -10,7 +10,7 @@ capability:
   thresholds: {}
 confidence_threshold: 0.7
 enabled: true
-max_tokens: 2000
+max_tokens: 20000
 min_cost_threshold: 1.0
 service: AWS.DynamoDB
 service_specific_prompt: Analyze AWS.DynamoDB resources for cost optimization opportunities.

@@ -1,0 +1,34 @@
+{
+    "FileSystems": [
+        {
+            "OwnerId": "729713917879",
+            "CreationToken": "console-0163866a-6cf8-4390-bcd7-e61c23062fe3",
+            "FileSystemId": "fs-001d28fc899f66e98",
+            "FileSystemArn": "arn:aws:elasticfilesystem:us-west-2:729713917879:file-system/fs-001d28fc899f66e98",
+            "CreationTime": "2022-11-09T09:39:08+07:00",
+            "LifeCycleState": "available",
+            "Name": "anhhd-test",
+            "NumberOfMountTargets": 0,
+            "SizeInBytes": {
+                "Value": 6144,
+                "Timestamp": "2025-09-08T09:42:56+07:00",
+                "ValueInIA": 0,
+                "ValueInStandard": 6144
+            },
+            "PerformanceMode": "generalPurpose",
+            "Encrypted": true,
+            "KmsKeyId": "arn:aws:kms:us-west-2:729713917879:key/0d40e218-a449-47a9-9bc8-06f89aef274f",
+            "ThroughputMode": "bursting",
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "anhhd-test"
+                },
+                {
+                    "Key": "aws:elasticfilesystem:default-backup",
+                    "Value": "enabled"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,124 @@
+{
+    "Reservations": [
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-087f352c165340ea1",
+                    "InstanceId": "i-0fa16698357c707c7",
+                    "InstanceType": "g4dn.xlarge",
+                    "KeyName": "tuanpt4-buuk",
+                    "LaunchTime": "2025-04-10T07:58:00+00:00",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "us-west-2a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-10-0-11-4.us-west-2.compute.internal",
+                    "PrivateIpAddress": "10.0.11.4",
+                    "ProductCodes": [],
+                    "PublicDnsName": "",
+                    "State": {
+                        "Code": 80,
+                        "Name": "stopped"
+                    },
+                    "StateTransitionReason": "User initiated (2025-04-10 09:51:13 GMT)",
+                    "SubnetId": "subnet-0120c0bb521556f7f",
+                    "VpcId": "vpc-02fc3e2d4ef7b285d",
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda",
+                            "Ebs": {
+                                "AttachTime": "2025-04-10T07:58:01+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-0aa0216d21533fa45"
+                            }
+                        }
+                    ],
+                    "ClientToken": "c82c8049-c0d4-47bd-a800-cf1cb55499e8",
+                    "EbsOptimized": true,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Attachment": {
+                                "AttachTime": "2025-04-10T07:58:00+00:00",
+                                "AttachmentId": "eni-attach-01cc92514e959da9b",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached"
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupName": "ragflow-server-nsg",
+                                    "GroupId": "sg-0da0db48c4813de6f"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "06:8d:9b:56:75:4b",
+                            "NetworkInterfaceId": "eni-0c2a8c5de05ad8de6",
+                            "OwnerId": "729713917879",
+                            "PrivateIpAddress": "10.0.11.4",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Primary": true,
+                                    "PrivateIpAddress": "10.0.11.4"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-0120c0bb521556f7f",
+                            "VpcId": "vpc-02fc3e2d4ef7b285d",
+                            "InterfaceType": "interface"
+                        }
+                    ],
+                    "RootDeviceName": "/dev/xvda",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupName": "ragflow-server-nsg",
+                            "GroupId": "sg-0da0db48c4813de6f"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "StateReason": {
+                        "Code": "Client.UserInitiatedShutdown",
+                        "Message": "Client.UserInitiatedShutdown: User initiated shutdown"
+                    },
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "RAGFlow-Ollama"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 2,
+                        "ThreadsPerCore": 2
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "required",
+                        "HttpPutResponseHopLimit": 2,
+                        "HttpEndpoint": "enabled"
+                    }
+                }
+            ],
+            "OwnerId": "729713917879",
+            "ReservationId": "r-0f18fa7fa563be498"
+        }
+    ]
+}

@@ -1,0 +1,124 @@
+[
+  {
+    "resource_id": "i-0fa16698357c707c7",
+    "service": "EC2",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "123456789012",
+    "tags": {
+      "Name": "RAGFlow-Ollama"
+    },
+    "properties": {
+      "instance_type": "g4dn.xlarge",
+      "state": "stopped",
+      "launch_time": "2025-04-10T07:58:00+00:00",
+      "platform": "Linux/UNIX",
+      "vpc_id": "vpc-02fc3e2d4ef7b285d",
+      "subnet_id": "subnet-0120c0bb521556f7f",
+      "security_groups": [
+        "sg-0da0db48c4813de6f"
+      ],
+      "monitoring": "disabled",
+      "ebs_optimized": true
+    },
+    "created_at": "2025-04-10T07:58:00+00:00"
+  },
+  {
+    "resource_id": "vol-0aa0216d21533fa45",
+    "service": "EBS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 30,
+      "state": "in-use",
+      "iops": 3000,
+      "throughput": null,
+      "encrypted": false,
+      "snapshot_id": "snap-0a730b8d0660fdc68"
+    },
+    "created_at": "2025-04-10T07:58:01.246000+00:00"
+  },
+  {
+    "resource_id": "minhpt7642Function",
+    "service": "Lambda",
+    "region": "us-west-2",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "runtime": "python3.12",
+      "memory_size": 128,
+      "timeout": 3,
+      "code_size": 299,
+      "handler": "lambda_function.lambda_handler",
+      "last_modified": "2024-05-04T09:46:17.684+0000",
+      "state": "Active",
+      "architecture": "x86_64"
+    },
+    "created_at": "2024-05-04T09:46:17.684+0000"
+  },
+  {
+    "resource_id": "E38746PWHXCI05",
+    "service": "CloudFront",
+    "region": "global",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "domain_name": "d3vazlc3qvb7xw.cloudfront.net",
+      "status": "Deployed",
+      "price_class": "PriceClass_All",
+      "enabled": true,
+      "comment": ""
+    },
+    "created_at": "2022-07-02T17:50:44.086000+00:00"
+  },
+  {
+    "resource_id": "ECUA1PT2MBQ6I",
+    "service": "CloudFront",
+    "region": "global",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "domain_name": "d2j4sukny7xuin.cloudfront.net",
+      "status": "Deployed",
+      "price_class": "PriceClass_All",
+      "enabled": true,
+      "comment": ""
+    },
+    "created_at": "2022-05-31T02:07:17.901000+00:00"
+  },
+  {
+    "resource_id": "E31MTL160ABLG0",
+    "service": "CloudFront",
+    "region": "global",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "domain_name": "d2jd467vlwvum3.cloudfront.net",
+      "status": "Deployed",
+      "price_class": "PriceClass_All",
+      "enabled": true,
+      "comment": ""
+    },
+    "created_at": "2023-10-09T10:24:41.282000+00:00"
+  },
+  {
+    "resource_id": "eip-finops",
+    "service": "S3",
+    "region": "us-east-1",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "region": "us-east-1",
+      "storage_class": "Standard"
+    },
+    "created_at": "2025-09-12T12:00:35.180608"
+  }
+]

@@ -1,0 +1,4 @@
+resource_id,timestamp,period_days,cpu_utilization_p50,cpu_utilization_p90,cpu_utilization_p95,memory_utilization_p50,memory_utilization_p90,memory_utilization_p95,network_in,network_out,is_idle,iops_write,throughput_write,iops_read,throughput_read,storage_used,requests_get,requests_put
+i-0fa16698357c707c7,2025-09-12T12:00:35.164045,30,8.156821317006203,45.87750000000001,48.42625,,,,52310393.287606835,150293.9200854701,False,,,,,,,
+vol-0aa0216d21533fa45,2025-09-12T12:00:35.165469,30,,,,,,,,,False,677.467320261438,11099624.5751634,1049.285294117647,17191490.25882353,,,
+eip-finops,2025-09-12T12:00:35.181354,30,,,,,,,,,False,,,,,2306867.2,100.0,10.0

@@ -1,0 +1,23 @@
+{
+    "Label": "VolumeReadOps",
+    "Datapoints": [
+        {
+            "Timestamp": "2025-04-10T08:00:00+00:00",
+            "Average": 312.31666666666666,
+            "Sum": 18739.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2025-04-10T07:00:00+00:00",
+            "Average": 2835.5,
+            "Sum": 5671.0,
+            "Unit": "Count"
+        },
+        {
+            "Timestamp": "2025-04-10T09:00:00+00:00",
+            "Average": 0.0392156862745098,
+            "Sum": 2.0,
+            "Unit": "Count"
+        }
+    ]
+}

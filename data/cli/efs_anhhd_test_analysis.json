@@ -1,0 +1,153 @@
+{
+  "efs_detailed_analysis": {
+    "file_system_id": "fs-001d28fc899f66e98",
+    "name": "anhhd-test",
+    "basic_information": {
+      "owner_id": "729713917879",
+      "creation_token": "console-0163866a-6cf8-4390-bcd7-e61c23062fe3",
+      "file_system_arn": "arn:aws:elasticfilesystem:us-west-2:729713917879:file-system/fs-001d28fc899f66e98",
+      "creation_time": "2022-11-09T09:39:08+07:00",
+      "region": "us-west-2",
+      "lifecycle_state": "available",
+      "age": "Nearly 3 years old (created November 2022)"
+    },
+    "storage_information": {
+      "current_size": {
+        "total_bytes": 6144,
+        "total_readable": "6 KB",
+        "standard_storage": 6144,
+        "ia_storage": 0,
+        "last_measured": "2025-09-08T09:42:56+07:00"
+      },
+      "storage_analysis": {
+        "usage_level": "Minimal - only 6 KB used",
+        "storage_distribution": "100% Standard storage, 0% IA storage",
+        "efficiency": "Very low utilization for a 3-year-old file system"
+      }
+    },
+    "performance_configuration": {
+      "performance_mode": "generalPurpose",
+      "throughput_mode": "bursting",
+      "mount_targets": 0,
+      "performance_characteristics": {
+        "max_io_per_second": "7,000 IOPS (General Purpose mode)",
+        "baseline_throughput": "100 MiB/s per TiB stored",
+        "burst_throughput": "Up to 100 MiB/s",
+        "current_baseline": "~0.0006 MiB/s (based on 6 KB storage)",
+        "burst_credits": "Available (very low usage)"
+      }
+    },
+    "security_configuration": {
+      "encryption": {
+        "enabled": true,
+        "encryption_at_rest": "AES-256",
+        "kms_key_id": "arn:aws:kms:us-west-2:729713917879:key/0d40e218-a449-47a9-9bc8-06f89aef274f",
+        "encryption_in_transit": "Available but depends on mount configuration"
+      },
+      "access_control": {
+        "access_points": 0,
+        "mount_targets": 0,
+        "network_access": "None currently configured"
+      }
+    },
+    "backup_and_lifecycle": {
+      "backup_policy": {
+        "default_backup": "enabled",
+        "status": "Automated backups are enabled",
+        "tag_present": "aws:elasticfilesystem:default-backup = enabled"
+      },
+      "lifecycle_management": {
+        "status": "Unknown (access denied)",
+        "ia_transition": "Not configured or inaccessible",
+        "recommendation": "Configure IA transition for cost optimization"
+      }
+    },
+    "connectivity_status": {
+      "mount_targets": 0,
+      "availability": "No mount targets configured",
+      "access_points": 0,
+      "current_usage": "File system appears unused",
+      "accessibility": "Not accessible from any EC2 instances"
+    },
+    "metrics_analysis": {
+      "io_activity": {
+        "total_io_bytes": "No data (no activity detected)",
+        "client_connections": "No data (no connections detected)",
+        "analysis": "File system shows no recent activity"
+      },
+      "performance_metrics": {
+        "throughput_utilization": "0% (no activity)",
+        "iops_utilization": "0% (no activity)",
+        "connection_count": "0 active connections"
+      }
+    },
+    "cost_analysis": {
+      "storage_cost": {
+        "current_monthly": "~$0.002 (6 KB × $0.30/GB)",
+        "annual_cost": "~$0.024",
+        "cost_efficiency": "Very low cost but also very low utilization"
+      },
+      "backup_cost": {
+        "backup_storage": "Minimal (only 6 KB to backup)",
+        "estimated_monthly": "<$0.01",
+        "note": "Backup cost negligible due to small size"
+      },
+      "total_estimated_cost": "~$0.01-0.02/month"
+    },
+    "operational_assessment": {
+      "utilization_status": "Unused/Abandoned",
+      "operational_state": "Available but not in use",
+      "mount_status": "No mount targets configured",
+      "access_status": "Inaccessible from compute resources",
+      "data_presence": "Minimal data (6 KB)",
+      "business_value": "Questionable - appears to be test/development resource"
+    },
+    "recommendations": {
+      "immediate_actions": [
+        "Verify if file system is still needed",
+        "Check if this is leftover from testing 3 years ago",
+        "Consider deletion if no longer required"
+      ],
+      "cost_optimization": [
+        "Delete if unused to eliminate recurring costs",
+        "If keeping, configure IA lifecycle policy",
+        "Review backup policy necessity for test data"
+      ],
+      "security_improvements": [
+        "If keeping, configure proper mount targets",
+        "Set up access points for controlled access",
+        "Enable encryption in transit for production use"
+      ],
+      "monitoring": [
+        "Set up CloudWatch alarms for unexpected usage",
+        "Monitor for any mount target creation",
+        "Track storage growth over time"
+      ]
+    },
+    "cleanup_consideration": {
+      "deletion_candidate": "YES",
+      "reasons": [
+        "3 years old with minimal usage (6 KB)",
+        "No mount targets configured",
+        "No access points defined",
+        "No recent activity detected",
+        "Named 'test' suggesting development/testing purpose"
+      ],
+      "before_deletion": [
+        "Verify no applications depend on this EFS",
+        "Check if data needs to be preserved",
+        "Confirm with original creator (anhhd) if possible",
+        "Take final backup if needed"
+      ]
+    },
+    "permissions_note": {
+      "access_limitations": "Some EFS operations returned AccessDeniedException",
+      "missing_permissions": [
+        "elasticfilesystem:DescribeMountTargets",
+        "elasticfilesystem:DescribeBackupPolicy", 
+        "elasticfilesystem:DescribeLifecycleConfiguration"
+      ],
+      "impact": "Full analysis limited by IAM permissions"
+    }
+  }
+}

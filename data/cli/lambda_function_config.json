@@ -1,0 +1,20 @@
+{
+    "FunctionName": "minhpt7642Function",
+    "FunctionArn": "arn:aws:lambda:us-west-2:729713917879:function:minhpt7642Function",
+    "Runtime": "python3.12",
+    "Role": "arn:aws:iam::729713917879:role/lambda-exe",
+    "Handler": "lambda_function.lambda_handler",
+    "CodeSize": 299,
+    "Description": "",
+    "Timeout": 3,
+    "MemorySize": 128,
+    "LastModified": "2024-05-04T09:46:17.684+0000",
+    "CodeSha256": "HAPq9EReJVEC5gLavtc/gyd5vZtd9eiUGF932t0jBxY=",
+    "Version": "$LATEST",
+    "TracingConfig": {
+        "Mode": "PassThrough"
+    },
+    "RevisionId": "e00b6dff-4087-4b9f-a40d-fbab513bbc06",
+    "State": "Active",
+    "LastUpdateStatus": "Successful"
+}

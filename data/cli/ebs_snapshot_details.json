@@ -1,0 +1,16 @@
+{
+    "Snapshots": [
+        {
+            "Description": "al2023-ami-2023.7.20250331.0-kernel-6.1-x86_64.xfs.gpt",
+            "Encrypted": false,
+            "OwnerId": "137112412989",
+            "Progress": "100%",
+            "SnapshotId": "snap-0a730b8d0660fdc68",
+            "StartTime": "2025-03-29T05:16:00.129000+00:00",
+            "State": "completed",
+            "VolumeId": "vol-0370949120a1b964d",
+            "VolumeSize": 8,
+            "OwnerAlias": "amazon"
+        }
+    ]
+}

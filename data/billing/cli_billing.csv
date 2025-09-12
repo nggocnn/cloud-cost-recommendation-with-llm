@@ -1,0 +1,4 @@
+bill/BillingPeriodStartDate,bill/BillingPeriodEndDate,lineItem/UsageAccountId,product/ProductName,lineItem/ResourceId,product/region,lineItem/UsageType,lineItem/UsageAmount,lineItem/UsageUnit,lineItem/UnblendedCost,lineItem/NetAmortizedCost,resourceTags/Name
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Compute Cloud,i-0fa16698357c707c7,us-west-2,BoxUsage:g4dn.xlarge,720,Hrs,50.0,47.5,RAGFlow-Ollama
+2024-01-01,2024-01-31,123456789012,Amazon Elastic Block Store,vol-0aa0216d21533fa45,us-west-2,VolumeUsage.gp3,30,GB-Mo,2.4,2.28,
+2024-01-01,2024-01-31,123456789012,AWS Lambda,minhpt7642Function,us-west-2,Request,10000,GB-Mo,5.0,4.75,
