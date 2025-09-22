@@ -1,0 +1,366 @@
+[
+  {
+    "resource_id": "vol-0d404c2b972e09878",
+    "service": "EBS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Project": "SGSOCR",
+      "Creator": "TuND",
+      "ProjectID": "SGSOCR",
+      "ApplicationName": "Web server",
+      "Purpose": "SGSOCR",
+      "OwnerService": "DiepNN8",
+      "Name": "SGSOCR-SaaS-Web"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 100,
+      "state": "in-use",
+      "iops": 300,
+      "throughput": null,
+      "encrypted": false,
+      "snapshot_id": "snap-0a201bd11f854e945"
+    },
+    "created_at": "2023-11-03T06:47:23.958000+00:00"
+  },
+  {
+    "resource_id": "vol-0857ce367bcc848b0",
+    "service": "EBS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "ProjectID": "QAI.akaOCR2022",
+      "Creator": "ThuTH1",
+      "OwnerService": "DeNT",
+      "Project": "KYC-SSNB",
+      "Name": "COE-akaOCR-DB-PostgreSQL",
+      "ApplicationName": "akaOCR",
+      "Purpose": "PostgreSQL Server"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 50,
+      "state": "in-use",
+      "iops": 150,
+      "throughput": null,
+      "encrypted": false,
+      "snapshot_id": "snap-0f7f11506860488c9"
+    },
+    "created_at": "2020-03-16T04:50:49.618000+00:00"
+  },
+  {
+    "resource_id": "vol-07335efa599b89ce7",
+    "service": "EBS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "OwnerService": "AnhDDD",
+      "Name": "Akainspection-Scale-sis-test",
+      "Purpose": "Server akaInspection Web",
+      "Creator": "NghiaBV3",
+      "ApplicationName": "akaInspection Web",
+      "Project": "ABDEC",
+      "ProjectID": "Seino"
+    },
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 200,
+      "state": "in-use",
+      "iops": 3000,
+      "throughput": null,
+      "encrypted": false,
+      "snapshot_id": "snap-008ce6488e4485d5c"
+    },
+    "created_at": "2025-06-12T05:50:52.362000+00:00"
+  },
+  {
+    "resource_id": "minhpt7642Function",
+    "service": "Lambda",
+    "region": "us-west-2",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "runtime": "python3.12",
+      "memory_size": 128,
+      "timeout": 3,
+      "code_size": 299,
+      "handler": "lambda_function.lambda_handler",
+      "last_modified": "2024-05-04T09:46:17.684+0000",
+      "state": "Active",
+      "architecture": "x86_64"
+    },
+    "created_at": "2024-05-04T09:46:17.684+0000"
+  },
+  {
+    "resource_id": "i-0bf93f00183d3e7f0",
+    "service": "EC2",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "DailyStop": "False",
+      "Name": "akaOCR-DB-PostgreSQL",
+      "Project": "KYC-SSNB",
+      "ProjectID": "QAI.akaOCR2022",
+      "ApplicationName": "akaOCR",
+      "OwnerService": "DeNT",
+      "Creator": "ThuTH1",
+      "Purpose": "PostgreSQL Server"
+    },
+    "properties": {
+      "instance_type": "t2.medium",
+      "state": "running",
+      "launch_time": "2020-03-16T04:50:48+00:00",
+      "platform": "Linux/UNIX",
+      "vpc_id": "vpc-4c7d212b",
+      "subnet_id": "subnet-776a6810",
+      "security_groups": [
+        "sg-0a0d3d2f437dc13c8",
+        "sg-0db6288b4e7e85cc4"
+      ],
+      "monitoring": "disabled",
+      "ebs_optimized": false
+    },
+    "created_at": "2020-03-16T04:50:48+00:00"
+  },
+  {
+    "resource_id": "i-04d06bd78b75cfe3b",
+    "service": "EC2",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "ProjectID": "SGSOCR",
+      "Project": "SGSOCR",
+      "Creator": "TuND",
+      "OwnerService": "DiepNN8",
+      "ApplicationName": "Web server",
+      "Name": "SGSOCR-Bastion",
+      "Purpose": "SGSOCR",
+      "DailyStop": "False"
+    },
+    "properties": {
+      "instance_type": "t2.small",
+      "state": "running",
+      "launch_time": "2025-06-24T10:13:37+00:00",
+      "platform": "Linux/UNIX",
+      "vpc_id": "vpc-0eb7bb69a3761708d",
+      "subnet_id": "subnet-0970d4140e32aab04",
+      "security_groups": [
+        "sg-006eb408d89d22c78",
+        "sg-0ba846c2be2e46d76"
+      ],
+      "monitoring": "disabled",
+      "ebs_optimized": false
+    },
+    "created_at": "2025-06-24T10:13:37+00:00"
+  },
+  {
+    "resource_id": "i-07350153600c3b3ba",
+    "service": "EC2",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1c",
+    "account_id": "123456789012",
+    "tags": {
+      "Creator": "NghiaBV3",
+      "Name": "Akainspection-Scale-sis-test",
+      "Purpose": "Server akaInspection Web",
+      "Project": "ABDEC",
+      "OwnerService": "AnhDDD",
+      "ProjectID": "Seino",
+      "ApplicationName": "akaInspection Web"
+    },
+    "properties": {
+      "instance_type": "g4dn.xlarge",
+      "state": "running",
+      "launch_time": "2025-09-16T01:42:28+00:00",
+      "platform": "Linux/UNIX",
+      "vpc_id": "vpc-4c7d212b",
+      "subnet_id": "subnet-90b940c9",
+      "security_groups": [
+        "sg-091918d7563fbd428"
+      ],
+      "monitoring": "disabled",
+      "ebs_optimized": false
+    },
+    "created_at": "2025-09-16T01:42:28+00:00"
+  },
+  {
+    "resource_id": "i-0fa16698357c707c7",
+    "service": "EC2",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "123456789012",
+    "tags": {
+      "Name": "RAGFlow-Ollama"
+    },
+    "properties": {
+      "instance_type": "g4dn.xlarge",
+      "state": "stopped",
+      "launch_time": "2025-04-10T07:58:00+00:00",
+      "platform": "Linux/UNIX",
+      "vpc_id": "vpc-02fc3e2d4ef7b285d",
+      "subnet_id": "subnet-0120c0bb521556f7f",
+      "security_groups": [
+        "sg-0da0db48c4813de6f"
+      ],
+      "monitoring": "disabled",
+      "ebs_optimized": true
+    },
+    "created_at": "2025-04-10T07:58:00+00:00"
+  },
+  {
+    "resource_id": "i-05ea7a5068995a703",
+    "service": "EC2",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Purpose": "backend server main",
+      "ProjectID": "CUS360CRA",
+      "Project": "Cus360",
+      "ApplicationName": "Cus360-Crawler",
+      "Creator": "phutv12",
+      "OwnerService": "khoaqd1",
+      "DailyStop": "False",
+      "Name": "cus360-backend-t3.2xlarge"
+    },
+    "properties": {
+      "instance_type": "t3.2xlarge",
+      "state": "running",
+      "launch_time": "2023-03-08T06:50:27+00:00",
+      "platform": "Linux/UNIX",
+      "vpc_id": "vpc-4c7d212b",
+      "subnet_id": "subnet-776a6810",
+      "security_groups": [
+        "sg-0d7ff6ad3f1569ab2"
+      ],
+      "monitoring": "disabled",
+      "ebs_optimized": true
+    },
+    "created_at": "2023-03-08T06:50:27+00:00"
+  },
+  {
+    "resource_id": "vol-0aa0216d21533fa45",
+    "service": "EBS",
+    "region": "us-west-2",
+    "availability_zone": "us-west-2a",
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "volume_type": "gp3",
+      "size_gb": 30,
+      "state": "in-use",
+      "iops": 3000,
+      "throughput": null,
+      "encrypted": false,
+      "snapshot_id": "snap-0a730b8d0660fdc68"
+    },
+    "created_at": "2025-04-10T07:58:01.246000+00:00"
+  },
+  {
+    "resource_id": "vol-03c3299cb298fb458",
+    "service": "EBS",
+    "region": "ap-southeast-1",
+    "availability_zone": "ap-southeast-1b",
+    "account_id": "123456789012",
+    "tags": {
+      "Name": "volume-cus360-backend",
+      "ProjectID": "CUS360CRA",
+      "Project": "Cus360-Crawler",
+      "ApplicationName": "Cus360-Crawler",
+      "Creator": "phutv12",
+      "Purpose": "backend volumn",
+      "OwnerService": "khoaqd1"
+    },
+    "properties": {
+      "volume_type": "gp2",
+      "size_gb": 100,
+      "state": "in-use",
+      "iops": 300,
+      "throughput": null,
+      "encrypted": false,
+      "snapshot_id": "snap-0fdf9f91af2cd3f38"
+    },
+    "created_at": "2022-05-25T04:23:25.770000+00:00"
+  },
+  {
+    "resource_id": "eip-finops",
+    "service": "S3",
+    "region": "ap-southeast-1",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "region": "ap-southeast-1",
+      "storage_class": "Standard"
+    },
+    "created_at": "2025-09-18T17:26:08.919515"
+  },
+  {
+    "resource_id": "eip-finops",
+    "service": "S3",
+    "region": "us-east-1",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "region": "us-east-1",
+      "storage_class": "Standard"
+    },
+    "created_at": "2025-09-18T17:26:08.942456"
+  },
+  {
+    "resource_id": "E38746PWHXCI05",
+    "service": "CloudFront",
+    "region": "global",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "domain_name": "d3vazlc3qvb7xw.cloudfront.net",
+      "status": "Deployed",
+      "price_class": "PriceClass_All",
+      "enabled": true,
+      "comment": ""
+    },
+    "created_at": "2022-07-02T17:50:44.086000+00:00"
+  },
+  {
+    "resource_id": "ECUA1PT2MBQ6I",
+    "service": "CloudFront",
+    "region": "global",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "domain_name": "d2j4sukny7xuin.cloudfront.net",
+      "status": "Deployed",
+      "price_class": "PriceClass_All",
+      "enabled": true,
+      "comment": ""
+    },
+    "created_at": "2022-05-31T02:07:17.901000+00:00"
+  },
+  {
+    "resource_id": "E31MTL160ABLG0",
+    "service": "CloudFront",
+    "region": "global",
+    "availability_zone": null,
+    "account_id": "123456789012",
+    "tags": {},
+    "properties": {
+      "domain_name": "d2jd467vlwvum3.cloudfront.net",
+      "status": "Deployed",
+      "price_class": "PriceClass_All",
+      "enabled": true,
+      "comment": ""
+    },
+    "created_at": "2023-10-09T10:24:41.282000+00:00"
+  }
+]

@@ -3,8 +3,14 @@ Metrics and billing data models.
 """
 
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 from pydantic import BaseModel, Field
+
+
+class TimeSeriesPoint(BaseModel):
+    """Single time-series data point"""
+    timestamp: str
+    value: float
 
 
 class Metrics(BaseModel):
@@ -19,6 +25,15 @@ class Metrics(BaseModel):
     cpu_utilization_p50: Optional[float] = None
     cpu_utilization_p90: Optional[float] = None
     cpu_utilization_p95: Optional[float] = None
+    cpu_utilization_min: Optional[float] = None
+    cpu_utilization_max: Optional[float] = None
+    cpu_utilization_stddev: Optional[float] = None
+    cpu_utilization_trend: Optional[str] = None  # "increasing", "decreasing", "stable"
+    cpu_utilization_volatility: Optional[str] = None  # "low", "moderate", "high"
+    cpu_utilization_peak_hours: List[int] = Field(default_factory=list)
+    cpu_utilization_patterns: Dict[str, Any] = Field(default_factory=dict)
+    cpu_timeseries_data: List[Dict[str, Any]] = Field(default_factory=list)
+    
     memory_utilization_p50: Optional[float] = None
     memory_utilization_p90: Optional[float] = None
     memory_utilization_p95: Optional[float] = None

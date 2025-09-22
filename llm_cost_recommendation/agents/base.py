@@ -17,7 +17,9 @@ from ..models import (
     ServiceAgentConfig,
     GlobalConfig,
 )
-from ..services.llm import LLMService, PromptTemplates
+from ..services.llm import LLMService
+from ..services.prompts import PromptTemplates
+from ..services.data_validation import DataQualityValidator, EvidenceValidator
 from ..utils.logging import get_logger
 from ..services.conditions import RuleProcessor
 
@@ -39,6 +41,9 @@ class ServiceAgent:
         self.service = agent_config.service
         self.agent_id = agent_config.agent_id
         self.rule_processor = RuleProcessor()
+        self.prompts = PromptTemplates()
+        self.data_validator = DataQualityValidator()
+        self.evidence_validator = EvidenceValidator()
 
         logger.debug("Agent initialized", agent_id=self.agent_id, service=self.service)
 
@@ -55,6 +60,28 @@ class ServiceAgent:
             return recommendations
 
         try:
+            # Validate data quality before analysis
+            data_quality = self.data_validator.validate_resource_data(
+                resource, metrics, billing_data
+            )
+            
+            logger.info(
+                "Data quality assessment",
+                resource_id=resource.resource_id,
+                quality_score=data_quality["quality_score"],
+                overall_quality=data_quality["overall_quality"],
+                recommendations_possible=data_quality["recommendations_possible"]
+            )
+            
+            # Skip analysis if data quality is too poor
+            if not data_quality["recommendations_possible"]:
+                logger.warning(
+                    "Skipping analysis due to insufficient data",
+                    resource_id=resource.resource_id,
+                    missing_data=data_quality["missing_critical_data"]
+                )
+                return []
+
             # Calculate estimated monthly cost for rule evaluation
             estimated_cost = None
             if billing_data:
@@ -65,21 +92,73 @@ class ServiceAgent:
                 resource, metrics, billing_data, estimated_cost
             )
 
-            # Merge thresholds with rule overrides
+            # Prepare context data
             context_data = self._prepare_context_data(resource, metrics, billing_data)
             original_thresholds = context_data.get("thresholds", {})
             merged_thresholds = self._merge_thresholds(
                 original_thresholds, rule_results.get("threshold_overrides", {})
             )
             context_data["thresholds"] = merged_thresholds
+            context_data["data_quality"] = data_quality
 
-            # Generate recommendations using LLM with rule-modified context
-            llm_recommendations = await self._generate_recommendations_from_llm(
-                context_data, rule_results
+            # Check if we should skip analysis based on data quality
+            should_skip, skip_reason = self.prompts.should_skip_analysis(context_data)
+            if should_skip:
+                logger.warning(
+                    "Analysis skipped",
+                    resource_id=resource.resource_id,
+                    reason=skip_reason
+                )
+                return []
+
+            # Generate recommendations using LLM prompts
+            llm_recommendations = await self._generate_recommendations(
+                context_data, rule_results, resource.resource_id, self.service.value
             )
 
-            # Convert to recommendation models
+            # Validate evidence and convert to recommendation models
             for llm_rec in llm_recommendations:
+                # Validate evidence supporting the recommendation
+                evidence_validation = self.evidence_validator.validate_recommendation_evidence(
+                    llm_rec, context_data
+                )
+                
+                # Add warnings instead of rejecting recommendations with poor evidence
+                evidence_warnings = []
+                if evidence_validation["evidence_quality"] in ["poor", "fair"] and evidence_validation["unsupported_claims"]:
+                    evidence_warnings.append(f"Evidence Quality: {evidence_validation['evidence_quality'].title()}")
+                    if evidence_validation["evidence_issues"]:
+                        evidence_warnings.append(f"Issues: {'; '.join(evidence_validation['evidence_issues'])}")
+                    if evidence_validation["unsupported_claims"]:
+                        evidence_warnings.extend([f"Unsupported: {claim}" for claim in evidence_validation["unsupported_claims"]])
+                    
+                    logger.warning(
+                        "Recommendation flagged with evidence warnings",
+                        resource_id=resource.resource_id,
+                        evidence_quality=evidence_validation["evidence_quality"],
+                        evidence_issues=evidence_validation["evidence_issues"],
+                        unsupported_claims=evidence_validation["unsupported_claims"]
+                    )
+                
+                # Add evidence warnings to the recommendation
+                if evidence_warnings:
+                    llm_rec["evidence_warnings"] = evidence_warnings
+                
+                # Adjust confidence based on data quality
+                if "confidence_score" in llm_rec:
+                    original_confidence = llm_rec["confidence_score"]
+                    max_confidence = data_quality["confidence_ceiling"]
+                    llm_rec["confidence_score"] = min(original_confidence, max_confidence)
+                    
+                    if original_confidence > max_confidence:
+                        logger.info(
+                            "Confidence score adjusted down due to data limitations",
+                            resource_id=resource.resource_id,
+                            original=original_confidence,
+                            adjusted=llm_rec["confidence_score"],
+                            reason="data_quality_ceiling"
+                        )
+
                 rec = await self._convert_llm_recommendation_to_model(llm_rec, resource)
                 if rec:
                     recommendations.append(rec)
@@ -89,6 +168,7 @@ class ServiceAgent:
                 agent_id=self.agent_id,
                 resource_id=resource.resource_id,
                 recommendations_count=len(recommendations),
+                data_quality_score=data_quality["quality_score"],
                 rules_applied=len(
                     [r for r in self.agent_config.custom_rules if r.enabled]
                 ),
@@ -104,6 +184,72 @@ class ServiceAgent:
             )
 
         return recommendations
+
+    async def _generate_recommendations(
+        self, 
+        context_data: Dict[str, Any], 
+        rule_results: Dict[str, Any],
+        resource_id: str,
+        service: str
+    ) -> List[Dict[str, Any]]:
+        """Generate recommendations using evidence-based prompts"""
+        
+        # Create system prompt that enforces evidence requirements
+        system_prompt = self.prompts.COMPLETE_SYSTEM_PROMPT
+        
+        # Create evidence-focused user prompt
+        user_prompt = self.prompts.create_user_prompt(
+            context_data, resource_id, service
+        )
+        
+        # Add custom rule modifications to the prompt
+        if rule_results.get("custom_prompts"):
+            user_prompt += "\n\nADDITIONAL REQUIREMENTS:\n"
+            for custom_prompt in rule_results["custom_prompts"]:
+                user_prompt += f"- {custom_prompt}\n"
+                
+        if rule_results.get("skip_recommendation_types"):
+            skip_types = [rt.value for rt in rule_results["skip_recommendation_types"]]
+            user_prompt += f"\nIMPORTANT: Do NOT recommend these types: {', '.join(skip_types)}\n"
+            
+        if rule_results.get("force_recommendation_types"):
+            force_types = [rt.value for rt in rule_results["force_recommendation_types"]]
+            user_prompt += f"\nIMPORTANT: Always consider these recommendation types: {', '.join(force_types)}\n"
+
+        # Generate LLM response
+        llm_response = await self.llm_service.generate_recommendation(
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            context_data=context_data
+        )
+
+        try:
+            response_data = json.loads(llm_response.content)
+            
+            # Handle both single recommendation and batch format
+            if "recommendations" in response_data:
+                recommendations = response_data["recommendations"]
+            else:
+                recommendations = [response_data] if response_data else []
+                
+            logger.info(
+                "LLM recommendations generated",
+                agent_id=self.agent_id,
+                recommendations_count=len(recommendations),
+                response_time_ms=llm_response.response_time_ms,
+                data_quality=context_data.get("data_quality", {}).get("overall_quality", "unknown")
+            )
+            
+            return recommendations
+            
+        except json.JSONDecodeError as e:
+            logger.error(
+                "Failed to parse LLM response",
+                agent_id=self.agent_id,
+                error=str(e),
+                response_content=llm_response.content[:500]
+            )
+            return []
 
     async def analyze_multiple_resources(
         self,
@@ -187,6 +333,14 @@ class ServiceAgent:
                 "cpu_utilization_p50": metrics.cpu_utilization_p50,
                 "cpu_utilization_p90": metrics.cpu_utilization_p90,
                 "cpu_utilization_p95": metrics.cpu_utilization_p95,
+                "cpu_utilization_min": metrics.cpu_utilization_min,
+                "cpu_utilization_max": metrics.cpu_utilization_max,
+                "cpu_utilization_stddev": metrics.cpu_utilization_stddev,
+                "cpu_utilization_trend": metrics.cpu_utilization_trend,
+                "cpu_utilization_volatility": metrics.cpu_utilization_volatility,
+                "cpu_utilization_peak_hours": metrics.cpu_utilization_peak_hours,
+                "cpu_utilization_patterns": metrics.cpu_utilization_patterns,
+                "cpu_timeseries_data": metrics.cpu_timeseries_data,
                 "memory_utilization_p50": metrics.memory_utilization_p50,
                 "memory_utilization_p90": metrics.memory_utilization_p90,
                 "memory_utilization_p95": metrics.memory_utilization_p95,
@@ -220,50 +374,6 @@ class ServiceAgent:
         )
 
         return context
-
-    def _create_system_prompt(self) -> str:
-        """Create system prompt for the agent"""
-        return f"{PromptTemplates.BASE_SYSTEM_PROMPT}\n\n{self.agent_config.base_prompt}\n\n{self.agent_config.service_specific_prompt}"
-
-    def _create_user_prompt(self, context_data: Dict[str, Any]) -> str:
-        """Create user prompt with context data"""
-        prompt_parts = [
-            f"Analyze the following {self.service.value} resource for cost optimization opportunities:",
-            "",
-            "Resource Information:",
-            json.dumps(context_data.get("resource", {}), indent=2),
-            "",
-        ]
-
-        if "metrics" in context_data:
-            prompt_parts.extend(
-                [
-                    "Performance Metrics:",
-                    json.dumps(context_data["metrics"], indent=2),
-                    "",
-                ]
-            )
-
-        if "billing" in context_data:
-            prompt_parts.extend(
-                [
-                    "Billing Information:",
-                    json.dumps(context_data["billing"], indent=2),
-                    "",
-                ]
-            )
-
-        prompt_parts.extend(
-            [
-                "Configuration:",
-                f"- Analysis window: {context_data.get('analysis_window_days', 30)} days",
-                f"- Service thresholds: {json.dumps(context_data.get('thresholds', {}), indent=2)}",
-                "",
-                "Please provide cost optimization recommendations in the specified JSON format.",
-            ]
-        )
-
-        return "\n".join(prompt_parts)
 
     def _apply_custom_rules(
         self,
@@ -308,90 +418,6 @@ class ServiceAgent:
         )
 
         return merged
-
-    async def _generate_recommendations_from_llm(
-        self,
-        context_data: Dict[str, Any],
-        rule_results: Optional[Dict[str, Any]] = None,
-    ) -> List[Dict[str, Any]]:
-        """Generate recommendations using LLM"""
-        try:
-            # Modify system prompt with custom prompts if available
-            system_prompt = self._create_system_prompt()
-            if rule_results and rule_results.get("custom_prompts"):
-                custom_prompt_section = "\n\nADDITIONAL CUSTOM RULES:\n" + "\n".join(
-                    rule_results["custom_prompts"]
-                )
-                system_prompt += custom_prompt_section
-
-            # Add rule-based restrictions to user prompt
-            user_prompt = self._create_user_prompt(context_data)
-            if rule_results:
-                rule_instructions = []
-
-                if rule_results.get("skip_recommendation_types"):
-                    skip_types = [
-                        rt.value for rt in rule_results["skip_recommendation_types"]
-                    ]
-                    rule_instructions.append(
-                        f"IMPORTANT: Do NOT recommend these types: {', '.join(skip_types)}"
-                    )
-
-                if rule_results.get("force_recommendation_types"):
-                    force_types = [
-                        rt.value for rt in rule_results["force_recommendation_types"]
-                    ]
-                    rule_instructions.append(
-                        f"IMPORTANT: Always consider these recommendation types: {', '.join(force_types)}"
-                    )
-
-                if rule_instructions:
-                    user_prompt += "\n\nCUSTOM RULE RESTRICTIONS:\n" + "\n".join(
-                        rule_instructions
-                    )
-
-            response = await self.llm_service.generate_recommendation(
-                system_prompt=system_prompt,
-                user_prompt=user_prompt,
-                context_data=context_data,
-            )
-
-            # Parse JSON response
-            try:
-                response_data = json.loads(response.content)
-                recommendations = response_data.get("recommendations", [])
-
-                # Apply rule-based filtering
-                if rule_results:
-                    recommendations = self._filter_recommendations_by_rules(
-                        recommendations, rule_results
-                    )
-
-                logger.info(
-                    "LLM recommendations generated",
-                    agent_id=self.agent_id,
-                    recommendations_count=len(recommendations),
-                    response_time_ms=response.response_time_ms,
-                )
-
-                return recommendations
-
-            except json.JSONDecodeError as e:
-                logger.error(
-                    "Failed to parse LLM response as JSON",
-                    agent_id=self.agent_id,
-                    response_content=response.content[:500],
-                    error=str(e),
-                )
-                return []
-
-        except Exception as e:
-            logger.error(
-                "Failed to generate recommendations from LLM",
-                agent_id=self.agent_id,
-                error=str(e),
-            )
-            return []
 
     def _filter_recommendations_by_rules(
         self, recommendations: List[Dict[str, Any]], rule_results: Dict[str, Any]
@@ -467,6 +493,8 @@ class ServiceAgent:
                 "estimated_monthly_cost",
                 "confidence_score",
                 "impact_description",
+                "current_config",
+                "recommended_config",
             ]
             missing_fields = [
                 field for field in required_fields if field not in llm_recommendation
@@ -549,6 +577,7 @@ class ServiceAgent:
                 business_hours_impact=llm_recommendation.get("business_hours_impact", False),
                 downtime_required=llm_recommendation.get("downtime_required", False),
                 sla_impact=llm_recommendation.get("sla_impact"),
+                warnings=llm_recommendation.get("evidence_warnings", []),
             )
 
             return recommendation
@@ -996,6 +1025,41 @@ class ServiceAgent:
                             )
 
                             if resource:
+                                # Get the corresponding context data for evidence validation
+                                resource_context = next(
+                                    (
+                                        ctx for i, ctx in enumerate(batch_context)
+                                        if resources[i].resource_id == rec_data["resource_id"]
+                                    ),
+                                    {}
+                                )
+                                
+                                # EVIDENCE VALIDATION for batch processing
+                                evidence_validation = self.evidence_validator.validate_recommendation_evidence(
+                                    rec_data, resource_context
+                                )
+                                
+                                # Add warnings instead of rejecting recommendations with poor evidence
+                                evidence_warnings = []
+                                if evidence_validation["evidence_quality"] in ["poor", "fair"] and evidence_validation["unsupported_claims"]:
+                                    evidence_warnings.append(f"Evidence Quality: {evidence_validation['evidence_quality'].title()}")
+                                    if evidence_validation["evidence_issues"]:
+                                        evidence_warnings.append(f"Issues: {'; '.join(evidence_validation['evidence_issues'])}")
+                                    if evidence_validation["unsupported_claims"]:
+                                        evidence_warnings.extend([f"Unsupported: {claim}" for claim in evidence_validation["unsupported_claims"]])
+                                    
+                                    logger.warning(
+                                        "Batch recommendation flagged with evidence warnings",
+                                        resource_id=resource.resource_id,
+                                        evidence_quality=evidence_validation["evidence_quality"],
+                                        evidence_issues=evidence_validation["evidence_issues"],
+                                        unsupported_claims=evidence_validation["unsupported_claims"]
+                                    )
+                                
+                                # Add evidence warnings to the recommendation
+                                if evidence_warnings:
+                                    rec_data["evidence_warnings"] = evidence_warnings
+
                                 # Apply rule-based filtering to the recommendation
                                 filtered_recs = self._filter_recommendations_by_rules(
                                     [rec_data], resource_rule_results
@@ -1062,7 +1126,7 @@ class ServiceAgent:
         self, batch_size: int, batch_rule_results: List[Dict[str, Any]]
     ) -> str:
         """Create system prompt optimized for batch analysis with custom rules"""
-        base_prompt = self._create_system_prompt()
+        base_prompt = self.prompts.COMPLETE_SYSTEM_PROMPT
 
         # Collect all custom prompts from rule results
         all_custom_prompts = []

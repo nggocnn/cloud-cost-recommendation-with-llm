@@ -153,6 +153,13 @@ class LLMService:
                 + ("..." if len(response_content) > 200 else ""),
             )
 
+            # Log full response content for debugging
+            logger.debug(
+                "Full LLM Response Content",
+                model=self.config.model,
+                full_response=response_content,
+            )
+
             # Remove markdown code blocks if present
             response_content = self._clean_json_response(response_content)
 
@@ -172,7 +179,12 @@ class LLMService:
                     "Invalid JSON response from LLM",
                     model=self.config.model,
                     error=str(e),
-                    response_content=response_content[:500],
+                    response_content_first_500=response_content[:500],
+                )
+                logger.error(
+                    "FULL INVALID JSON RESPONSE",
+                    model=self.config.model,
+                    full_invalid_response=response_content,
                 )
                 # Return valid JSON structure on parse failure
                 response_content = json.dumps(
@@ -191,7 +203,7 @@ class LLMService:
             raise
 
     def _clean_json_response(self, response_content: str) -> str:
-        """Remove markdown code blocks from JSON response"""
+        """Remove markdown code blocks and comments from JSON response"""
         if response_content.startswith("```json"):
             response_content = response_content[7:]
         elif response_content.startswith("```"):
@@ -200,6 +212,11 @@ class LLMService:
         if response_content.endswith("```"):
             response_content = response_content[:-3]
 
+        # Remove JSON comments (// style comments)
+        import re
+        # Remove single-line comments like "// comment"
+        response_content = re.sub(r'\s*//.*?(?=\n|$)', '', response_content)
+        
         return response_content.strip()
 
     def _calculate_batch_tokens(self, batch_size: int) -> int:
@@ -367,101 +384,3 @@ class LLMService:
         )
 
         return "\n".join(prompt_parts)
-
-
-class PromptTemplates:
-    """Collection of prompt templates"""
-
-    BASE_SYSTEM_PROMPT = """You are an expert AWS cost optimization specialist with deep knowledge of cloud infrastructure, pricing models, and best practices. Your goal is to analyze AWS resources and provide actionable cost optimization recommendations.
-
-IMPORTANT: You MUST respond in valid JSON format only. No other text outside the JSON structure.
-
-Key principles:
-1. Minimize cost while preserving performance and reliability
-2. Consider business impact and risk levels
-3. Provide specific, actionable recommendations
-4. Include exact cost calculations and savings estimates
-5. Consider implementation complexity and timeline
-
-REQUIRED JSON Response format (ALL fields are mandatory):
-{
-    "recommendations": [
-        {
-            "resource_id": "exact resource identifier",
-            "recommendation_type": "rightsizing|purchasing_option|lifecycle|topology|storage_class|idle_resource|cost_analysis|general_optimization",
-            "current_config": {
-                "instance_type": "current type",
-                "storage_size": "current size",
-                "other_relevant_settings": "current values"
-            },
-            "recommended_config": {
-                "instance_type": "recommended type", 
-                "storage_size": "recommended size",
-                "other_relevant_settings": "recommended values"
-            },
-            "current_monthly_cost": 123.45,
-            "estimated_monthly_cost": 98.76,
-            "estimated_monthly_savings": 24.69,
-            "risk_level": "low|medium|high",
-            "impact_description": "Detailed explanation of the recommendation and its business impact",
-            "rationale": "Technical reasoning behind this recommendation",
-            "evidence": {
-                "metrics_analysis": "specific data supporting this recommendation",
-                "cost_breakdown": "detailed cost analysis",
-                "performance_impact": "expected performance changes"
-                // Add additional fields as needed: compliance_notes, security_implications, etc.
-            },
-            "implementation_steps": [
-                // Provide 1-10 steps based on complexity:
-                // - Simple changes (storage class, unused resources): 2-4 steps
-                // - Medium changes (rightsizing, purchasing options): 3-6 steps  
-                // - Complex changes (architecture, topology): 5-10 steps
-                "Step 1: Specific action to take",
-                "Step 2: Next action to take",
-                "Step 3: Final verification step"
-                // Add more steps if the recommendation is complex
-            ],
-            "prerequisites": [
-                // Include 0-5 prerequisites based on actual requirements:
-                // - Simple changes: may have no prerequisites (empty array [])
-                // - Complex changes: may require multiple prerequisites
-                // Only include if genuinely required for successful implementation
-                "Prerequisite 1: Required condition or preparation",
-                "Prerequisite 2: Another required condition"
-                // Remove examples above and use actual prerequisites or empty array
-            ],
-            "rollback_plan": "Detailed plan to revert changes if needed",
-            "confidence_score": 0.85,
-            "business_hours_impact": false,
-            "downtime_required": false,
-            "sla_impact": "Expected impact on SLA, or null if no impact"
-        }
-    ]
-}
-
-CRITICAL JSON REQUIREMENTS:
-- Respond ONLY with valid JSON - no extra text before or after
-- ALL numeric values must be actual calculated numbers (e.g., 1151.33, not "1.5 * 767.55")
-- current_config and recommended_config must be non-empty objects, never null
-- evidence must be a non-empty object with relevant analysis data, never null
-- prerequisites can be an empty array if no prerequisites exist
-- Calculate all costs yourself and provide final dollar amounts
-- estimated_monthly_savings = current_monthly_cost - estimated_monthly_cost
-- business_hours_impact and downtime_required must be boolean values (true/false)
-- sla_impact should be a string describing SLA impact or null if no impact
-- All fields are mandatory - include every single field shown above
-- Use exact field names (especially "impact_description", not "impact")
-
-ADAPTIVE LIST SIZING GUIDELINES:
-- implementation_steps: Vary 1-10 steps based on actual complexity
-  * Simple (delete unused resource): 2-3 steps
-  * Medium (rightsizing, storage class): 3-5 steps
-  * Complex (architecture changes): 5-10 steps
-- prerequisites: Use 0-5 items based on actual requirements
-  * Simple changes: often empty array []
-  * Complex changes: multiple prerequisites
-  * Only include genuine requirements, not generic advice
-- evidence: Include 3+ relevant fields, add domain-specific fields as needed
-  * Always include: metrics_analysis, cost_breakdown, performance_impact
-  * Add as relevant: security_implications, compliance_notes, availability_impact, etc.
-- Quality over quantity: each list item should add genuine value"""

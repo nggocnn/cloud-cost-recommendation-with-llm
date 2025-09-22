@@ -26,6 +26,40 @@ class DataIngestionService:
         (self.data_dir / "inventory").mkdir(exist_ok=True)
         (self.data_dir / "metrics").mkdir(exist_ok=True)
 
+    def _parse_json_field(self, field_value):
+        """Parse JSON field from CSV"""
+        import json
+        if not field_value or pd.isna(field_value) or field_value == '':
+            return {}
+        try:
+            if isinstance(field_value, str):
+                return json.loads(field_value)
+            return field_value
+        except (json.JSONDecodeError, TypeError):
+            return {}
+
+    def _parse_list_field(self, field_value):
+        """Parse list field from CSV (comma-separated or JSON)"""
+        import json
+        if not field_value or pd.isna(field_value) or field_value == '':
+            return []
+        try:
+            if isinstance(field_value, str):
+                # Try JSON first
+                if field_value.startswith('[') and field_value.endswith(']'):
+                    return json.loads(field_value)
+                # Otherwise, comma-separated
+                return [int(x.strip()) for x in field_value.split(',') if x.strip().isdigit()]
+            return field_value if isinstance(field_value, list) else []
+        except (json.JSONDecodeError, ValueError, TypeError):
+            return []
+
+    def _safe_string_field(self, field_value):
+        """Safely handle string fields that might be NaN"""
+        if pd.isna(field_value) or field_value == '':
+            return None
+        return str(field_value)
+
     def ingest_billing_data(self, csv_file_path: str) -> List[BillingData]:
         """Ingest billing data from CSV file"""
         logger.info("Ingesting billing data", file_path=csv_file_path)
@@ -206,6 +240,14 @@ class DataIngestionService:
                         cpu_utilization_p50=row.get("cpu_utilization_p50"),
                         cpu_utilization_p90=row.get("cpu_utilization_p90"),
                         cpu_utilization_p95=row.get("cpu_utilization_p95"),
+                        cpu_utilization_min=row.get("cpu_utilization_min"),
+                        cpu_utilization_max=row.get("cpu_utilization_max"),
+                        cpu_utilization_stddev=row.get("cpu_utilization_stddev"),
+                        cpu_utilization_trend=self._safe_string_field(row.get("cpu_utilization_trend")),
+                        cpu_utilization_volatility=self._safe_string_field(row.get("cpu_utilization_volatility")),
+                        cpu_utilization_peak_hours=self._parse_list_field(row.get("cpu_utilization_peak_hours", "")),
+                        cpu_utilization_patterns=self._parse_json_field(row.get("cpu_utilization_patterns", "{}")),
+                        cpu_timeseries_data=self._parse_json_field(row.get("cpu_timeseries_data", "[]")),
                         memory_utilization_p50=row.get("memory_utilization_p50"),
                         memory_utilization_p90=row.get("memory_utilization_p90"),
                         memory_utilization_p95=row.get("memory_utilization_p95"),
