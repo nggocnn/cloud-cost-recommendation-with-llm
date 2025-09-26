@@ -5,18 +5,20 @@ A multi-agent system for cloud cost optimization using Large Language Models (LL
 ## Features
 
 - **Multi-Agent Architecture**: Coordinator agent orchestrates 36 service-specific agents (AWS: 17, Azure: 10, GCP: 8, Default: 1)
-- **LLM-Powered Analysis**: Uses OpenAI GPT-4 for intelligent cost optimization recommendations
+- **LLM-Powered Analysis**: Uses OpenAI GPT-4 for intelligent cost optimization recommendations.
 - **Configuration-Driven**: Single ServiceAgent class adapts behavior via YAML configs - add new services without code changes
 - **Custom Rules Engine**: Dynamic threshold adjustment based on resource tags, costs, and metrics
 - **Multi-Cloud Support**: AWS, Azure, and GCP with extensible architecture for additional providers
+- **Multiple Interfaces**: CLI for batch processing and FastAPI server for real-time analysis
 - **Multiple Export Formats**: JSON (detailed), CSV (summary), and Excel (multi-sheet) output formats
 - **Comprehensive Analysis**: Analyzes rightsizing, purchasing options, storage classes, lifecycle policies, and idle resources
 - **Risk Assessment**: Provides Low/Medium/High risk classifications with implementation guidance
-- **Cost Calculations**: Exact cost calculations with monthly and annual savings estimates
-- **Data Ingestion**: Supports CSV billing data, JSON inventory, and CSV metrics with validation
-- **Sample Data Generation**: Built-in sample data for testing and demonstration
-- **Intelligent Fallback**: Default agent handles unsupported services to ensure coverage
-- **Batch Processing**: Parallel processing for efficiency with individual analysis fallback
+- **Cost Calculations**: Monthly and annual savings estimates with confidence scoring.
+- **Data Ingestion**: Supports CSV billing data, JSON inventory, and CSV metrics with validation.
+- **Sample Data Generation**: Built-in sample data for testing and demonstration.
+- **Intelligent Fallback**: Default agent handles unsupported services to ensure coverage.
+- **Batch Processing**: Parallel processing for efficiency with individual analysis fallback.
+- **Concurrent Processing**: Async processing for efficiency with individual analysis fallback.
 
 ## Architecture
 
@@ -87,22 +89,41 @@ A multi-agent system for cloud cost optimization using Large Language Models (LL
 ### Test with Sample Data
 
 ```bash
-python -m llm_cost_recommendation --sample-data
+python -m llm_cost_recommendation analyze --sample-data
 ```
 
 This will:
 
 - Generate sample cloud billing, inventory, and metrics data
 - Run the complete analysis pipeline  
-- Display a comprehensive cost optimization report
+- Display a comprehensive cost optimization report in JSON format
+
+### Start API Server
+
+```bash
+# Production server
+python -m llm_cost_recommendation serve --host 0.0.0.0 --port 8000 --workers 4
+
+# Development server with auto-reload
+python -m llm_cost_recommendation serve --host 127.0.0.1 --port 8000 --reload
+```
+
+The API server provides:
+
+- REST endpoints for real-time cost analysis
+- Interactive API documentation at `http://localhost:8000/docs`
+- Health monitoring at `http://localhost:8000/health`
+- System status at `http://localhost:8000/status`
+- Async processing for concurrent analysis requests
+- Request/response logging and performance metrics
 
 ### Analyze Real Data
 
 ```bash
-python -m llm_cost_recommendation \
-  --billing-file data/billing/sample_billing.csv \
-  --inventory-file data/inventory/sample_inventory.json \
-  --metrics-file data/metrics/sample_metrics.csv \
+python -m llm_cost_recommendation analyze \
+  --billing-file data/billing/cli_billing.csv \
+  --inventory-file data/inventory/cli_inventory.json \
+  --metrics-file data/metrics/cli_metrics.csv \
   --output-file report.json \
   --output-format excel
 ```
@@ -111,23 +132,63 @@ python -m llm_cost_recommendation \
 
 The system supports multiple output formats:
 
-- **JSON** (default): Full detailed report with all recommendation metadata
-- **CSV**: Summary table with key metrics for spreadsheet analysis
-- **Excel**: Multi-sheet workbook with recommendations, summary, and raw data
+- **JSON** (default): Full detailed report with all recommendation metadata.
+- **CSV**: Summary table with key metrics for spreadsheet analysis.
+- **Excel**: Multi-sheet workbook with recommendations, summary, and raw data.
 
 ```bash
 # Generate Excel report with multiple sheets
-python -m llm_cost_recommendation --sample-data --output-format excel --output-file report.xlsx
+python -m llm_cost_recommendation analyze --sample-data --output-format excel --output-file report.xlsx
 
-# Generate CSV summary table
-python -m llm_cost_recommendation --sample-data --output-format csv --output-file summary.csv
+# Generate CSV summary table  
+python -m llm_cost_recommendation analyze --sample-data --output-format csv --output-file summary.csv
+
+# Process individual resources (slower but more precise)
+python -m llm_cost_recommendation analyze --sample-data --individual-processing
 ```
 
 ### Check System Status
 
 ```bash
-python -m llm_cost_recommendation --status
+python -m llm_cost_recommendation analyze --status
 ```
+
+## API Endpoints
+
+When running the API server, the following endpoints are available:
+
+### Analysis Endpoint
+
+```bash
+POST /analyze
+Content-Type: application/json
+
+{
+  "resources": [...],
+  "metrics": [...], 
+  "billing": [...]
+}
+```
+
+### Health Check
+
+```bash
+GET /health
+```
+
+Returns system health status and configuration.
+
+### System Status
+
+```bash
+GET /status
+```
+
+Returns detailed system status, agent configuration, and service availability.
+
+### API Documentation
+
+Visit `http://localhost:8000/docs` for interactive Swagger/OpenAPI documentation with request/response examples.
 
 ## Data Formats
 
@@ -140,7 +201,7 @@ Required columns based on AWS Cost and Usage Report:
 - `lineItem/ResourceId`, `product/region`
 - `lineItem/UsageType`, `lineItem/UsageAmount`, `lineItem/UsageUnit`
 - `lineItem/UnblendedCost`, `lineItem/NetAmortizedCost`
-- `resourceTags/*` (optional)
+- `resourceTags/*` (optional for resource tagging)
 
 ### Inventory Data (JSON)
 
@@ -170,9 +231,9 @@ Performance metrics by resource:
 
 - `resource_id`, `timestamp`, `period_days`
 - `cpu_utilization_p50`, `cpu_utilization_p90`, `cpu_utilization_p95`
-- `memory_utilization_p50`, `memory_utilization_p90`, `memory_utilization_p95`
-- `iops_read`, `iops_write`, `throughput_read`, `throughput_write`
+- `memory_utilization_p50`, `memory_utilization_p90`, `memory_utilization_p95`  
 - `network_in`, `network_out`, `is_idle`
+- Additional metrics: `iops_read`, `iops_write`, `throughput_read`, `throughput_write` (for storage)
 
 ## Configuration
 
@@ -180,23 +241,39 @@ Performance metrics by resource:
 
 Each cloud service has its own configuration file in `config/` with cloud provider prefixes:
 
-**AWS Services:**
+**AWS Services (17 agents):**
 
-- `aws.ec2_agent.yaml` - EC2 instances
-- `aws.ebs_agent.yaml` - EBS volumes  
-- `aws.s3_agent.yaml` - S3 buckets
-- `aws.rds_agent.yaml` - RDS databases
-- `aws.lambda_agent.yaml` - Lambda functions
+- `aws/ec2.yaml` - EC2 instances
+- `aws/ebs.yaml` - EBS volumes  
+- `aws/s3.yaml` - S3 buckets
+- `aws/rds.yaml` - RDS databases
+- `aws/lambda.yaml` - Lambda functions
+- `aws/alb.yaml`, `aws/nlb.yaml`, `aws/gwlb.yaml` - Load balancers
+- `aws/cloudfront.yaml` - CDN
+- `aws/dynamodb.yaml` - NoSQL database
+- `aws/elasticip.yaml` - Elastic IPs
+- `aws/natgateway.yaml` - NAT Gateways
+- `aws/vpcendpoints.yaml` - VPC Endpoints
+- `aws/efs.yaml` - Elastic File System
+- `aws/sns.yaml`, `aws/sqs.yaml` - Messaging services
+- `aws/rds_snapshots.yaml` - Database snapshots
 
-**Azure Services:** (not test yet)
+**Azure Services (10 agents):** (Configuration ready, not extensively tested)
 
-- `azure.vm_agent.yaml` - Virtual Machines
-- `azure.disk_agent.yaml` - Managed Disks
-- `azure.storage_agent.yaml` - Storage Accounts
-- `azure.sql_agent.yaml` - SQL Databases
-- `azure.functions_agent.yaml` - Azure Functions
+- `azure/vm.yaml` - Virtual Machines
+- `azure/disk.yaml` - Managed Disks
+- `azure/storage.yaml` - Storage Accounts
+- `azure/sql.yaml` - SQL Databases  
+- `azure/functions.yaml` - Azure Functions
+- Plus 5 more networking and database services
 
-**GCP Services:** (not test yet)
+**GCP Services (8 agents):** (Configuration ready, not extensively tested)
+
+- `gcp/compute.yaml` - Compute Engine
+- `gcp/disk.yaml` - Persistent Disks
+- `gcp/storage.yaml` - Cloud Storage
+- `gcp/sql.yaml` - Cloud SQL
+- Plus 4 more services
 
 ### Agent Configurations
 
@@ -459,40 +536,54 @@ llm-cost-recommendation/
 ├── llm_cost_recommendation/      # Main package
 │   ├── agents/                  # Agent implementations
 │   │   ├── base.py             # ServiceAgent class (single implementation)
-│   │   └── coordinator.py      # Coordinator agent
+│   │   └── coordinator.py      # Coordinator agent  
 │   ├── models/                  # Data models (Pydantic)
-│   │   ├── types.py            # Enums and core types
+│   │   ├── types.py            # Enums and service types
 │   │   ├── resources.py        # Resource models
 │   │   ├── recommendations.py  # Recommendation models
-│   │   └── agents.py           # Agent configuration models
+│   │   ├── api_models.py       # API request/response models
+│   │   ├── agents.py           # Agent configuration models
+│   │   ├── conditions.py       # Custom conditions models  
+│   │   └── metrics.py          # Performance metrics models
 │   ├── services/                # Core services
 │   │   ├── llm.py              # LLM integration (OpenAI)
 │   │   ├── config.py           # Configuration management
-│   │   ├── ingestion.py        # Data ingestion and parsing
-│   │   └── conditions.py       # Custom rules processing
+│   │   ├── ingestion.py        # Data ingestion and validation
+│   │   ├── conditions.py       # Custom rules processing
+│   │   ├── data_validation.py  # Data validation utilities
+│   │   └── prompts.py          # LLM prompt management
 │   ├── utils/                   # Utilities
 │   │   └── logging.py          # Structured logging
+│   ├── api.py                  # FastAPI application
 │   ├── cli.py                  # Command line interface
-│   ├── console.py              # Console output formatting
-│   └── __main__.py             # Entry point
+│   ├── console.py              # Console entry point
+│   └── __main__.py             # Package entry point
 ├── config/                      # Agent configurations (YAML)
 │   ├── agents/                 # Service agent configurations
 │   │   ├── aws/               # AWS service agents (17)
-│   │   ├── azure/             # Azure service agents (10)
+│   │   ├── azure/             # Azure service agents (10)  
 │   │   ├── gcp/               # GCP service agents (8)
 │   │   └── default/           # Default fallback agent
 │   └── global/                # Global configuration
 │       └── coordinator.yaml   # Coordinator settings
-├── data/                       # Sample and input data
+├── data/                       # Sample and CLI data
 │   ├── billing/               # Billing data files (CSV)
 │   ├── inventory/             # Resource inventory files (JSON)
-│   └── metrics/               # Performance metrics files (CSV)
+│   ├── metrics/               # Performance metrics files (CSV)
+│   └── cli/                   # Real AWS CLI data samples
+│       ├── ec2/               # EC2 monitoring data
+│       ├── ebs/               # EBS volume data
+│       ├── s3/                # S3 bucket data
+│       └── ...                # Other service data
 ├── docs/                       # Documentation
 │   ├── ARCHITECTURE.md        # System architecture
-│   ├── REQUIREMENT.md         # Technical requirements
+│   ├── REQUIREMENT.md         # Technical requirements  
 │   ├── BASIC_DESIGN.md        # Implementation details
 │   └── CUSTOM_CONDITIONS.md   # Custom rules documentation
-└── scripts/                    # Utility scripts
+├── test_*.py                   # Test files and examples
+├── pyproject.toml              # Modern Python packaging
+├── requirements.txt            # Dependencies
+└── setup.py                   # Legacy setup
 ```
 
 ### Key Implementation Features
@@ -507,10 +598,11 @@ llm-cost-recommendation/
 
 ### Testing
 
-Run with sample data:
+The project includes comprehensive test scripts for various scenarios:
 
 ```bash
-python -m llm_cost_recommendation --sample-data
+# Basic functionality test with sample data
+python -m llm_cost_recommendation analyze --sample-data
 ```
 
 ### Installing as Package
@@ -520,7 +612,10 @@ python -m llm_cost_recommendation --sample-data
 pip install -e .
 
 # Run from anywhere
-llm-cost-recommendation --sample-data
+llm-cost-recommendation analyze --sample-data
+
+# Or use the module directly without installation
+python -m llm_cost_recommendation analyze --sample-data
 ```
 
 ### Logging

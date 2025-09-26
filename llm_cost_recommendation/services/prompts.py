@@ -148,6 +148,11 @@ CRITICAL JSON REQUIREMENTS:
 - confidence_score must be a number between 0.0 and 1.0
 - If data is insufficient, set confidence_score to low values (0.1-0.3)
 - Include warning field if evidence quality is questionable
+- Use confidence_score to reflect data quality and recommendation reliability:
+  * 0.8-1.0: Strong evidence from comprehensive metrics and billing data
+  * 0.6-0.8: Good evidence with some data limitations
+  * 0.4-0.6: Moderate evidence, recommendation based on limited data
+  * 0.1-0.4: Poor evidence, high uncertainty in recommendation
 
 DETAILED FIELD INSTRUCTIONS:
 - evidence: Can include additional fields like compliance_notes, security_implications, etc. as needed
@@ -319,10 +324,3 @@ Respond in JSON format with coordinated recommendations."""
             return True, "Insufficient data for cost optimization analysis - no billing or performance data"
             
         return False, "Sufficient data available for analysis"
-
-
-# Legacy compatibility - can be removed after migration
-def create_user_prompt(resource_data: Dict[str, Any], resource_type: str, service_type: str) -> str:
-    """Legacy function for backward compatibility."""
-    templates = PromptTemplates()
-    return templates.create_user_prompt(resource_data, resource_type, service_type)

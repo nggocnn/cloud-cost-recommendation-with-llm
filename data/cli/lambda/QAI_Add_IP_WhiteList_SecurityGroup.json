@@ -1,0 +1,39 @@
+{
+    "Configuration": {
+        "FunctionName": "QAI_Add_IP_WhiteList_SecurityGroup",
+        "FunctionArn": "arn:aws:lambda:ap-southeast-1:540302794831:function:QAI_Add_IP_WhiteList_SecurityGroup",
+        "Runtime": "python3.11",
+        "Role": "arn:aws:iam::540302794831:role/service-role/QAI_Add_IP_WhiteList_SecurityGroup-role-8bh8rh8u",
+        "Handler": "lambda_function.lambda_handler",
+        "CodeSize": 1115,
+        "Description": "Function for adding QNH global IPs to security group",
+        "Timeout": 600,
+        "MemorySize": 128,
+        "LastModified": "2024-07-10T08:19:10.000+0000",
+        "CodeSha256": "X+NTbgWHtn4r5aAOoDzNHONV/me4hf1HeBIzmQNocbA=",
+        "Version": "$LATEST",
+        "Environment": {
+            "Variables": {
+                "aws_region": "us-west-2",
+                "security_group_id": "sg-0de978e674bde13cc"
+            }
+        },
+        "TracingConfig": {
+            "Mode": "PassThrough"
+        },
+        "RevisionId": "d611d428-52c8-4ac6-a9d9-d63095efd393",
+        "State": "Active",
+        "LastUpdateStatus": "Successful"
+    },
+    "Code": {
+        "RepositoryType": "S3",
+        "Location": "https://awslambda-ap-se-1-tasks.s3.ap-southeast-1.amazonaws.com/snapshots/540302794831/QAI_Add_IP_WhiteList_SecurityGroup-c135961d-d822-4987-bf20-9ee7005464d3?versionId=49eOmsuwNAlfRov7hkpM4mJNOCpZJ9V1&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAkaDmFwLXNvdXRoZWFzdC0xIkcwRQIhAIgNPo1f5vvhzzWe6A0RaJSl2iYHgCMOoFisqWA%2FozL5AiAWBku8liPGjiWBWyQyylXZL9UlJq%2F3C5XgFbfeuyzQ4yqSAgiC%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAQaDDI5NTMzODcwMzU4MyIMoaa8r68%2B20An%2BDtBKuYBzo7EJhlqVnnlHKMebEDGVrZwo2OjrgJ25msMxAlye%2Bd%2FI5cFUIT0PbK5OXqUPzX5ZXIEADIohnYrHHhm%2FiqbzT1ZVNyJljyMw9td8qXaQKkIKm78xdGW9U3VpQRUJcNXg7t%2FEfTjBPjEM4agXrURZ4oJasPw63AL4JrqB%2BCnhsQJ3yoTx7IPkh8Wd3W2KyXt%2B8UcEcSMFHrN0u77VnJ73gjOdTb2b0LfqdZp6DsngQ3wNdB6kFUasFez98OlNNVfpWyaAaA2UeR32dS0h1%2BArQFbyHktliFdAvjqQLpIMPisREVOg%2BMw4%2FWixgY6jwFCvHS38znkStdwzXeI%2FeonYzCBjIegDUZSU41JZXuaaROT9QYKTBn0IroSA8cgqV7kairiH9zKgoUyJB2wM%2BKrX8oUWSxtRXUbgUJuTAUo53q4U7YJoAsBdSX%2BoUQuutE93O8sOX4WRHTP2ij0FUvraay3w5wO4Q3BOTgCfOYTWGtaSnT3aDTCekAnMVvktA%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250916T033443Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAUJQ4O7LPWFGQY54O%2F20250916%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Signature=db5c0e83501c83eecfeff2314189811fb029a450d034ed105ddd5746828b33ab"
+    },
+    "Tags": {
+        "Project": "QA_Monitoring",
+        "OwnerService": "CuongVT1",
+        "ProjectID": "QAI_Monitoring",
+        "Purpose": "Update security group with IP white list",
+        "Creator": "ChienNH2"
+    }
+}

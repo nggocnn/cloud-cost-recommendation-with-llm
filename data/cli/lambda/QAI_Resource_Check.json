@@ -1,0 +1,39 @@
+{
+    "Configuration": {
+        "FunctionName": "QAI_Resource_Check",
+        "FunctionArn": "arn:aws:lambda:ap-southeast-1:540302794831:function:QAI_Resource_Check",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::540302794831:role/service-role/QAI_Resource_Check-role-gi0ur1zk",
+        "Handler": "check.main",
+        "CodeSize": 9536,
+        "Description": "Function for checking AWS resources daily",
+        "Timeout": 900,
+        "MemorySize": 128,
+        "LastModified": "2025-08-12T04:15:17.000+0000",
+        "CodeSha256": "U+bKpflLo9ULEQLQrLjXagKO32zEh0isjH7C/fwD5zw=",
+        "Version": "$LATEST",
+        "Environment": {
+            "Variables": {
+                "web_hook_teams_url": "https://fptsoftware362.webhook.office.com/webhookb2/419068fb-b06f-48f2-9f57-64594da2961a@f01e930a-b52e-42b1-b70f-a8882b5d043b/IncomingWebhook/4d899d0ea9914d838a0cdb20d34e1818/9aff65a4-675a-4bf2-a6da-c645cfec6817/V2Z-_RXik1vEhXsnSzvMDiNBsTQyM6AAIPLLPYXSCeP7s1",
+                "ms_teams_notification_url": "https://prod-80.southeastasia.logic.azure.com:443/workflows/43e9117a51b04200bfc0252d35d6a7c9/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=2uDVhhiijhYFv6caGGk6mPk7BSZayDCFBsYkP0nKLx0"
+            }
+        },
+        "TracingConfig": {
+            "Mode": "PassThrough"
+        },
+        "RevisionId": "ee1c8ca5-321e-474a-8ffb-dd5e2eaf098d",
+        "State": "Active",
+        "LastUpdateStatus": "Successful"
+    },
+    "Code": {
+        "RepositoryType": "S3",
+        "Location": "https://awslambda-ap-se-1-tasks.s3.ap-southeast-1.amazonaws.com/snapshots/540302794831/QAI_Resource_Check-21ce9686-e14d-4d17-be00-05422c0c48b2?versionId=MrlQKg3aiWQC5EKwLncJIN9oQpHix1Cy&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAgaDmFwLXNvdXRoZWFzdC0xIkYwRAIgEacT%2F1ROiveVEsax%2FrnQ4vqwqZSphYdVEZkl8VMHWCsCIF6Mnlkll1OLP3mGyhMF5q4Rriy3L9BklqZmPyG0q2UWKpICCIH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQBBoMMjk1MzM4NzAzNTgzIgwRQG0Q7lfCmTqDh4Uq5gGfewUz1P%2FYw5vTlKigG3AfDdxLEpfBwTpbT4DRWKAgpgBjsKTU1pYj8Y6ajjOmVkTijgwUC9sf8WDPJi4epbAWSMkBKaxFfDKc5FNaY7i3MD4KdQxMzkQ6PN%2Bb9X4nz8DvWlT3rUYAqC8M6tE3CFuJFIs9rjWnw1T55gK6qrtk%2Bsqbt7iAzUtQHeAVbMfWMZnmmmmeG3DcAaQuK3onIguS6QDwYTtWSPbtHOw%2BiYhHBXV%2FdFMi%2BpiVRNg3%2B5Cayd1E5mFiTeesIKSlLkQOx7fENO1PW8EAVtHOL0xVh%2FpV%2FvU7v%2BlLGjCWxaLGBjqQAWDZXhwDjjID7j%2F2iu%2Bwn%2Fpq3BHZoAjW5%2FNDG3qFc5DTMO7BJ0c5uv%2BgEQPoL5Um0AwXMFgEUihHjOae94q5%2FSNvHVSAj1MAoK5srcjlSxA83LTB%2BKkSrHp%2BymOyK5e8zzbXf5c2yl351Vv7EfiyCf84AYO6KSLYr9e3eiaArNyIfH2zQMO4aOUf0zsSxbfhSQ%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250916T033442Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAUJQ4O7LP7RXHYRJL%2F20250916%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Signature=2c04437c347fe67b1a701f1f433a2695a4a7d5fec20bce9a3cf433fbe5daa60b"
+    },
+    "Tags": {
+        "Project": "QAI_Monitoring",
+        "ApplicationName": "QAI_Monitoring",
+        "OwnerService": "CuongVT1",
+        "ProjectID": "QAI_Monitoring",
+        "Creator": "ChienNH2"
+    }
+}

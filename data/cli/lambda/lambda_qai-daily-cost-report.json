@@ -1,0 +1,59 @@
+{
+    "Configuration": {
+        "FunctionName": "qai-daily-cost-report",
+        "FunctionArn": "arn:aws:lambda:ap-southeast-1:540302794831:function:qai-daily-cost-report",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::540302794831:role/QAILambdaCostManagementRole",
+        "Handler": "lambda_function.lambda_handler",
+        "CodeSize": 7261,
+        "Description": "Function for daily clous cost report",
+        "Timeout": 900,
+        "MemorySize": 128,
+        "LastModified": "2025-07-29T03:11:34.000+0000",
+        "CodeSha256": "UVCL74CtlIuDDbZpIFlVYSRDMfgReqhdb4tlBmdFWOk=",
+        "Version": "$LATEST",
+        "Environment": {
+            "Variables": {
+                "AWS_API_CALL_DELAY": "30",
+                "AZURE_TENANT_ID": "f01e930a-b52e-42b1-b70f-a8882b5d043b",
+                "SENDER": "chiennh2@qai.solutions",
+                "BUCKET": "qai-cloud-managements",
+                "NOTIFICATION_TOPIC_ARN": "arn:aws:sns:ap-southeast-1:540302794831:qai-monitor",
+                "RECIPIENTS": "chiennh2@fpt.com,diemlm@fpt.com,trietlm@fpt.com,tienpm3@fpt.com,thuph5@fpt.com,diepnn8@fpt.com,thuth1@fpt.com,dent@fpt.com,khangnvt1@fpt.com,chienvh1@fpt.com,cuongnm36@fpt.com,cuongvt1@fpt.com,hainp7@fpt.com,hanbn@fpt.com,hientt30@fpt.com,hungcq3@fpt.com,lamdn2@fpt.com,lannp@fpt.com,nhungnt16@fpt.com,trangpt9@fpt.com,tytd@fpt.com,phuongvx1@fpt.com,toannm20@fpt.com,ducnm57@fpt.com,phutv12@fpt.com,toandm9@fpt.com",
+                "AWS_API_RETRY": "10",
+                "RECIPIENTS_TEMP": "chiennh2@fpt.com",
+                "AZURE_API_RETRY": "10",
+                "AZURE_API_CALL_DELAY": "60",
+                "SEND_EMAIL": "enable",
+                "AZURE_SUBSCRIPTION_ID": "58c9f85a-63aa-449c-946d-458e695f7103",
+                "PREFIX": "cost_reports/",
+                "N_DAY": "2",
+                "AUTH_METHOD": "service-principal"
+            }
+        },
+        "TracingConfig": {
+            "Mode": "PassThrough"
+        },
+        "RevisionId": "f8c51ebf-5d38-4cf7-91cb-50cb0f5026d0",
+        "Layers": [
+            {
+                "Arn": "arn:aws:lambda:ap-southeast-1:540302794831:layer:qai-monitor:3",
+                "CodeSize": 62363174
+            }
+        ],
+        "State": "Active",
+        "LastUpdateStatus": "Successful"
+    },
+    "Code": {
+        "RepositoryType": "S3",
+        "Location": "https://awslambda-ap-se-1-tasks.s3.ap-southeast-1.amazonaws.com/snapshots/540302794831/qai-daily-cost-report-56b750d7-0d1a-4680-a736-d5652afc35b1?versionId=bXys.qvreDZyngCrYOXniixoN9pLhNAO&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEKn%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDmFwLXNvdXRoZWFzdC0xIkcwRQIgUde3NwC%2FzIgSyU5MQdajJjTuOREoxRnS%2FadG%2BwyMj1ICIQDgUpoW9k40pgknHfksVRpflCQjp7xkNrqMcpMs2bKmpyqJAggiEAQaDDI5NTMzODcwMzU4MyIMb9uxHk3sPd3N4HroKuYBPvKFEsaypGamhHUp4wxBOFUdSENUgoDph6CeZyrJd0E42mqHJf5V%2FL5tozkptR%2B0CyjXM5tdWozE6cgVH%2FD%2F0qBEejqMLfNqUO1rcbpEh8c7P0k9A5sastf93UnsnNNH7e5prMTZC2aQGdH0k%2BYQofqZ5MGwCAwCr9PLgxS%2FsEEVKXQuMdHVcZulAp00poi8l2ldneKSafYN8NnogHMzH4JGEfN3nI1HayFeHLA25dR4OfaO3MZlOo6zCam0pJlWMu1Eeigy6s3w7zpOcAd4LKRfcfJW8hYOsuh%2FQCn5Al22Z8v5fN4w%2BOWNxgY6jwFfJEUCX4NehyxcvJljh87zSB0i3wsnVjh9Lp4TcVT5zDgCDNG5ZanssaBIimDmCFK6nsyBDLHb9dqnUcqdH5SaRkyngZ%2Bunv6uUUjDXMXBgVziqB1LXnkfYpUQK1LBXSDzaGRvt0hZh6HteYTuoGgYOVw7zeI%2FFjli0lmsEH3xAd6EnC%2FwbmdJzaXBocyxPg%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250912T085005Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAUJQ4O7LPSQGUZPAT%2F20250912%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Signature=7fc8f48c50dd16f16973c8cca3a7e5228b9e4365f7e7a46ae891bbbff66da4c7"
+    },
+    "Tags": {
+        "Project": "QAI_Monitor",
+        "ApplicationName": "QAI_Monitor",
+        "OwnerService": "ChienNH2",
+        "ProjectID": "QAI_Monitor",
+        "Purpose": "Daily Report Cost Via Email",
+        "Creator": "ChienNH2"
+    }
+}

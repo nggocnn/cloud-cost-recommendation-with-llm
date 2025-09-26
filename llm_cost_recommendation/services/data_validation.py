@@ -422,6 +422,35 @@ class EvidenceValidator:
             validation["unsupported_claims"].append(
                 f"Confidence score {confidence_score} not justified by evidence quality"
             )
+        
+        # Add specific warnings for low confidence scores
+        if confidence_score < 0.5:
+            validation["evidence_warnings"] = validation.get("evidence_warnings", [])
+            validation["evidence_warnings"].append(
+                f"LOW CONFIDENCE ({confidence_score:.0%}): This recommendation may be unreliable. "
+                "Additional performance monitoring and data collection recommended before implementation."
+            )
+        elif confidence_score < 0.7:
+            validation["evidence_warnings"] = validation.get("evidence_warnings", [])
+            validation["evidence_warnings"].append(
+                f"MODERATE CONFIDENCE ({confidence_score:.0%}): Consider validating this recommendation "
+                "with additional monitoring or testing in a non-production environment first."
+            )
+            
+        # Add data quality context warnings
+        if data_availability_score < 0.6:
+            validation["evidence_warnings"] = validation.get("evidence_warnings", [])
+            missing_data = []
+            if not available_data.get("metrics"):
+                missing_data.append("performance metrics")
+            if not available_data.get("billing_data"):
+                missing_data.append("billing data")
+            
+            if missing_data:
+                validation["evidence_warnings"].append(
+                    f"DATA LIMITATION: Missing {' and '.join(missing_data)}. "
+                    "Recommendation based on limited information may not reflect actual optimization potential."
+                )
                 
     def _calculate_evidence_score(self, validation: Dict, available_data: Dict) -> float:
         """Calculate evidence quality score"""

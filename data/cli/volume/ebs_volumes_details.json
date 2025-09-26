@@ -1,0 +1,160 @@
+{
+    "Volumes": [
+        {
+            "Attachments": [
+                {
+                    "AttachTime": "2023-11-03T06:47:23+00:00",
+                    "Device": "/dev/sda1",
+                    "InstanceId": "i-04d06bd78b75cfe3b",
+                    "State": "attached",
+                    "VolumeId": "vol-0d404c2b972e09878",
+                    "DeleteOnTermination": true
+                }
+            ],
+            "AvailabilityZone": "ap-southeast-1c",
+            "CreateTime": "2023-11-03T06:47:23.958000+00:00",
+            "Encrypted": false,
+            "Size": 100,
+            "SnapshotId": "snap-0a201bd11f854e945",
+            "State": "in-use",
+            "VolumeId": "vol-0d404c2b972e09878",
+            "Iops": 300,
+            "Tags": [
+                {
+                    "Key": "Project",
+                    "Value": "SGSOCR"
+                },
+                {
+                    "Key": "Creator",
+                    "Value": "TuND"
+                },
+                {
+                    "Key": "ProjectID",
+                    "Value": "SGSOCR"
+                },
+                {
+                    "Key": "ApplicationName",
+                    "Value": "Web server"
+                },
+                {
+                    "Key": "Purpose",
+                    "Value": "SGSOCR"
+                },
+                {
+                    "Key": "OwnerService",
+                    "Value": "DiepNN8"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "SGSOCR-SaaS-Web"
+                }
+            ],
+            "VolumeType": "gp2",
+            "MultiAttachEnabled": false
+        },
+        {
+            "Attachments": [
+                {
+                    "AttachTime": "2020-03-16T04:50:49+00:00",
+                    "Device": "/dev/sda1",
+                    "InstanceId": "i-0bf93f00183d3e7f0",
+                    "State": "attached",
+                    "VolumeId": "vol-0857ce367bcc848b0",
+                    "DeleteOnTermination": true
+                }
+            ],
+            "AvailabilityZone": "ap-southeast-1b",
+            "CreateTime": "2020-03-16T04:50:49.618000+00:00",
+            "Encrypted": false,
+            "Size": 50,
+            "SnapshotId": "snap-0f7f11506860488c9",
+            "State": "in-use",
+            "VolumeId": "vol-0857ce367bcc848b0",
+            "Iops": 150,
+            "Tags": [
+                {
+                    "Key": "ProjectID",
+                    "Value": "QAI.akaOCR2022"
+                },
+                {
+                    "Key": "Creator",
+                    "Value": "ThuTH1"
+                },
+                {
+                    "Key": "OwnerService",
+                    "Value": "DeNT"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "KYC-SSNB"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "COE-akaOCR-DB-PostgreSQL"
+                },
+                {
+                    "Key": "ApplicationName",
+                    "Value": "akaOCR"
+                },
+                {
+                    "Key": "Purpose",
+                    "Value": "PostgreSQL Server"
+                }
+            ],
+            "VolumeType": "gp2",
+            "MultiAttachEnabled": false
+        },
+        {
+            "Attachments": [
+                {
+                    "AttachTime": "2025-06-12T05:50:52+00:00",
+                    "Device": "/dev/sda1",
+                    "InstanceId": "i-07350153600c3b3ba",
+                    "State": "attached",
+                    "VolumeId": "vol-07335efa599b89ce7",
+                    "DeleteOnTermination": true
+                }
+            ],
+            "AvailabilityZone": "ap-southeast-1c",
+            "CreateTime": "2025-06-12T05:50:52.362000+00:00",
+            "Encrypted": false,
+            "Size": 200,
+            "SnapshotId": "snap-008ce6488e4485d5c",
+            "State": "in-use",
+            "VolumeId": "vol-07335efa599b89ce7",
+            "Iops": 3000,
+            "Tags": [
+                {
+                    "Key": "OwnerService",
+                    "Value": "AnhDDD"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "Akainspection-Scale-sis-test"
+                },
+                {
+                    "Key": "Purpose",
+                    "Value": "Server akaInspection Web"
+                },
+                {
+                    "Key": "Creator",
+                    "Value": "NghiaBV3"
+                },
+                {
+                    "Key": "ApplicationName",
+                    "Value": "akaInspection Web"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ABDEC"
+                },
+                {
+                    "Key": "ProjectID",
+                    "Value": "Seino"
+                }
+            ],
+            "VolumeType": "gp3",
+            "MultiAttachEnabled": false
+        }
+    ]
+}

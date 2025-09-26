@@ -1,0 +1,46 @@
+{
+    "Addresses": [
+        {
+            "InstanceId": "i-05ea7a5068995a703",
+            "PublicIp": "52.220.235.125",
+            "AllocationId": "eipalloc-0578435365601c73b",
+            "AssociationId": "eipassoc-0b4fb7605a392552a",
+            "Domain": "vpc",
+            "NetworkInterfaceId": "eni-0ea8a8ba7b01f20b2",
+            "NetworkInterfaceOwnerId": "540302794831",
+            "PrivateIpAddress": "172.31.31.12",
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "cus360-new-ip"
+                },
+                {
+                    "Key": "ProjectID",
+                    "Value": "CUS360CRA"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "Cus360-Crawler"
+                },
+                {
+                    "Key": "Purpose",
+                    "Value": "cus360 backend elastic ip"
+                },
+                {
+                    "Key": "OwnerService",
+                    "Value": "khoaqd1"
+                },
+                {
+                    "Key": "ApplicationName",
+                    "Value": "Cus360-Crawler"
+                },
+                {
+                    "Key": "Creator",
+                    "Value": "phutv12"
+                }
+            ],
+            "PublicIpv4Pool": "amazon",
+            "NetworkBorderGroup": "ap-southeast-1"
+        }
+    ]
+}

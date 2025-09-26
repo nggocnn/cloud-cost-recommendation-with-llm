@@ -1,0 +1,456 @@
+{
+  "id": "report_20250926_084534",
+  "generated_at": "2025-09-26 08:45:57.213726+00:00",
+  "total_monthly_savings": 152.5,
+  "total_annual_savings": 1830.0,
+  "total_recommendations": 7,
+  "recommendations": [
+    {
+      "id": "aws.ec2_agent_i-0fa16698357c707c7_2025-09-26T08:45:41.894890",
+      "resource_id": "i-0fa16698357c707c7",
+      "service": "AWS.EC2",
+      "recommendation_type": "idle_resource",
+      "current_config": {
+        "instance_type": "g4dn.xlarge",
+        "storage_size": "N/A",
+        "other_relevant_settings": {
+          "state": "stopped",
+          "platform": "Linux/UNIX",
+          "vpc_id": "vpc-02fc3e2d4ef7b285d",
+          "subnet_id": "subnet-0120c0bb521556f7f",
+          "security_groups": [
+            "sg-0da0db48c4813de6f"
+          ],
+          "monitoring": "disabled",
+          "ebs_optimized": true
+        }
+      },
+      "recommended_config": {
+        "instance_type": "N/A",
+        "storage_size": "N/A",
+        "other_relevant_settings": "N/A"
+      },
+      "current_monthly_cost": 50.0,
+      "estimated_monthly_cost": 0.0,
+      "estimated_monthly_savings": 50.0,
+      "annual_savings": 600.0,
+      "risk_level": "medium",
+      "impact_description": "The EC2 instance is currently in a stopped state, indicating that it is not incurring any operational costs. However, if it is not needed, it may be beneficial to terminate the instance to avoid any future costs associated with storage or other resources.",
+      "rollback_plan": "If the instance is terminated and later needed, a new instance can be launched, but any data not backed up will be lost.",
+      "rationale": "Since the instance is stopped, it is not utilizing any compute resources, and thus, there are no current costs associated with it. If the instance is not required for future use, terminating it would prevent any unnecessary costs.",
+      "evidence": {
+        "metrics_analysis": "No performance metrics available",
+        "cost_breakdown": "Total monthly cost is $50.00, incurred from BoxUsage:g4dn.xlarge for 720 hours.",
+        "performance_impact": "No performance impact as the instance is currently stopped."
+      },
+      "implementation_steps": [
+        "Step 1: Evaluate the necessity of the instance for future workloads.",
+        "Step 2: If the instance is not needed, proceed to terminate the instance to avoid future costs.",
+        "Step 3: If the instance may be needed later, consider creating an AMI for backup before termination."
+      ],
+      "prerequisites": [],
+      "confidence_score": 0.3,
+      "created_at": "2025-09-26 08:45:41.894998",
+      "agent_id": "aws.ec2_agent",
+      "business_hours_impact": false,
+      "downtime_required": false,
+      "sla_impact": null,
+      "warnings": [
+        "Evidence Quality: Fair",
+        "Issues: Cost claim doesn't indicate if data is estimated vs actual",
+        "Unsupported: Performance claim: 'No performance impact as the instance is currently stopped.' - but no performance data available",
+        "LOW CONFIDENCE: This recommendation has 30% confidence, below the typical threshold of 70%. Consider gathering additional performance data before implementing."
+      ]
+    },
+    {
+      "id": "aws.ec2_agent_i-04d06bd78b75cfe3b_2025-09-26T08:45:41.870997",
+      "resource_id": "i-04d06bd78b75cfe3b",
+      "service": "AWS.EC2",
+      "recommendation_type": "rightsizing",
+      "current_config": {
+        "instance_type": "t2.small",
+        "storage_size": "N/A",
+        "other_relevant_settings": {
+          "state": "running",
+          "platform": "Linux/UNIX",
+          "monitoring": "disabled",
+          "ebs_optimized": false
+        }
+      },
+      "recommended_config": {
+        "instance_type": "t2.micro",
+        "storage_size": "N/A",
+        "other_relevant_settings": {
+          "monitoring": "enabled"
+        }
+      },
+      "current_monthly_cost": 50.0,
+      "estimated_monthly_cost": 30.0,
+      "estimated_monthly_savings": 20.0,
+      "annual_savings": 240.0,
+      "risk_level": "medium",
+      "impact_description": "Rightsizing the instance from t2.small to t2.micro could reduce costs significantly while still providing sufficient resources for basic web server functionality. However, without performance metrics, there is a risk that the t2.micro instance may not meet the application's performance needs.",
+      "rollback_plan": "If performance issues arise, revert to the t2.small instance by stopping the t2.micro instance and changing the instance type back to t2.small.",
+      "rationale": "The t2.micro instance offers a lower cost option while still being capable of handling light workloads. Given the current usage patterns and the absence of performance metrics, this change is suggested to optimize costs.",
+      "evidence": {
+        "metrics_analysis": "No performance metrics available",
+        "cost_breakdown": "Current cost is $50.00 for t2.small; estimated cost for t2.micro is $30.00 based on standard pricing.",
+        "performance_impact": "Expected performance may decrease; however, without metrics, the exact impact is uncertain."
+      },
+      "implementation_steps": [
+        "Step 1: Stop the current t2.small instance.",
+        "Step 2: Change the instance type to t2.micro.",
+        "Step 3: Start the new t2.micro instance.",
+        "Step 4: Enable CloudWatch detailed monitoring for future performance analysis."
+      ],
+      "prerequisites": [
+        "Ensure that the application can operate within the limits of a t2.micro instance."
+      ],
+      "confidence_score": 0.6,
+      "created_at": "2025-09-26 08:45:41.871076",
+      "agent_id": "aws.ec2_agent",
+      "business_hours_impact": false,
+      "downtime_required": true,
+      "sla_impact": "Potential impact on SLA if the application requires more resources than the t2.micro can provide.",
+      "warnings": [
+        "LOW CONFIDENCE: This recommendation has 60% confidence, below the typical threshold of 70%. Consider gathering additional performance data before implementing."
+      ]
+    },
+    {
+      "id": "aws.ec2_agent_i-05ea7a5068995a703_2025-09-26T08:45:41.945480",
+      "resource_id": "i-05ea7a5068995a703",
+      "service": "AWS.EC2",
+      "recommendation_type": "rightsizing",
+      "current_config": {
+        "instance_type": "t3.2xlarge",
+        "storage_size": "N/A",
+        "other_relevant_settings": {
+          "state": "running",
+          "platform": "Linux/UNIX",
+          "ebs_optimized": true
+        }
+      },
+      "recommended_config": {
+        "instance_type": "t3.xlarge",
+        "storage_size": "N/A",
+        "other_relevant_settings": {}
+      },
+      "current_monthly_cost": 50.0,
+      "estimated_monthly_cost": 37.5,
+      "estimated_monthly_savings": 12.5,
+      "annual_savings": 150.0,
+      "risk_level": "medium",
+      "impact_description": "Rightsizing the instance from t3.2xlarge to t3.xlarge can reduce costs while maintaining adequate performance for the current workload. This change is expected to save approximately 25% on monthly costs.",
+      "rollback_plan": "If performance issues arise after rightsizing, revert to the original instance type by stopping the t3.xlarge instance and changing it back to t3.2xlarge.",
+      "rationale": "The current CPU utilization is stable and averages around 21.36%, which is below the threshold for rightsizing. Moving to a smaller instance type can help optimize costs without significantly impacting performance.",
+      "evidence": {
+        "metrics_analysis": "The CPU utilization has a 50th percentile of 21.36% and a maximum of 46.13%, indicating that the instance is not consistently utilizing its full capacity.",
+        "cost_breakdown": "Current cost is $50.00 for t3.2xlarge. Estimated cost for t3.xlarge is $37.50 based on usage patterns.",
+        "performance_impact": "Expected performance will remain adequate as the CPU utilization is well below the maximum capacity of the current instance."
+      },
+      "implementation_steps": [
+        "Step 1: Review the application performance requirements to ensure compatibility with t3.xlarge.",
+        "Step 2: Create a backup of the current instance.",
+        "Step 3: Stop the current instance.",
+        "Step 4: Change the instance type to t3.xlarge.",
+        "Step 5: Start the instance and monitor performance."
+      ],
+      "prerequisites": [],
+      "confidence_score": 0.8,
+      "created_at": "2025-09-26 08:45:41.945517",
+      "agent_id": "aws.ec2_agent",
+      "business_hours_impact": false,
+      "downtime_required": true,
+      "sla_impact": null,
+      "warnings": []
+    },
+    {
+      "id": "aws.ec2_agent_i-0bf93f00183d3e7f0_2025-09-26T08:45:44.639386",
+      "resource_id": "i-0bf93f00183d3e7f0",
+      "service": "AWS.EC2",
+      "recommendation_type": "rightsizing",
+      "current_config": {
+        "instance_type": "t2.medium",
+        "storage_size": "not applicable",
+        "other_relevant_settings": {
+          "state": "running",
+          "platform": "Linux/UNIX",
+          "vpc_id": "vpc-4c7d212b",
+          "subnet_id": "subnet-776a6810",
+          "security_groups": [
+            "sg-0a0d3d2f437dc13c8",
+            "sg-0db6288b4e7e85cc4"
+          ],
+          "monitoring": "disabled",
+          "ebs_optimized": false
+        }
+      },
+      "recommended_config": {
+        "instance_type": "t2.small",
+        "storage_size": "not applicable",
+        "other_relevant_settings": {
+          "monitoring": "enabled",
+          "ebs_optimized": false
+        }
+      },
+      "current_monthly_cost": 50.0,
+      "estimated_monthly_cost": 40.0,
+      "estimated_monthly_savings": 10.0,
+      "annual_savings": 120.0,
+      "risk_level": "medium",
+      "impact_description": "Rightsizing the instance from t2.medium to t2.small could reduce costs while maintaining sufficient capacity for workloads, assuming utilization is low. However, without performance metrics, there is a risk of under-provisioning.",
+      "rollback_plan": "If performance issues arise, revert the instance type back to t2.medium through the AWS Management Console.",
+      "rationale": "The current instance type may be larger than necessary based on the billing data indicating consistent usage. Rightsizing to a smaller instance type can lead to cost savings, but performance metrics are needed to confirm this.",
+      "evidence": {
+        "metrics_analysis": "No performance metrics available.",
+        "cost_breakdown": "Current cost is $50.00 for t2.medium usage. Estimated cost for t2.small is $40.00 based on standard pricing.",
+        "performance_impact": "Expected performance impact is unknown due to lack of metrics; potential risk of under-provisioning exists."
+      },
+      "implementation_steps": [
+        "Step 1: Review application performance requirements.",
+        "Step 2: Change instance type from t2.medium to t2.small in the AWS Management Console.",
+        "Step 3: Enable CloudWatch detailed monitoring to collect performance metrics post-change.",
+        "Step 4: Monitor application performance for a period to ensure it meets requirements."
+      ],
+      "prerequisites": [
+        "Prerequisite 1: Ensure application can handle potential changes in performance."
+      ],
+      "confidence_score": 0.6,
+      "created_at": "2025-09-26 08:45:44.639514",
+      "agent_id": "aws.ec2_agent",
+      "business_hours_impact": false,
+      "downtime_required": false,
+      "sla_impact": null,
+      "warnings": [
+        "LOW CONFIDENCE: This recommendation has 60% confidence, below the typical threshold of 70%. Consider gathering additional performance data before implementing."
+      ]
+    },
+    {
+      "id": "aws.cloudfront_agent_E38746PWHXCI05_2025-09-26T08:45:48.811534",
+      "resource_id": "E38746PWHXCI05",
+      "service": "AWS.CloudFront",
+      "recommendation_type": "cost_analysis",
+      "current_config": {
+        "price_class": "PriceClass_All"
+      },
+      "recommended_config": {
+        "price_class": "PriceClass_200"
+      },
+      "current_monthly_cost": 100.0,
+      "estimated_monthly_cost": 80.0,
+      "estimated_monthly_savings": 20.0,
+      "annual_savings": 240.0,
+      "risk_level": "medium",
+      "impact_description": "Consider evaluating the usage of CloudFront to determine if a lower price class could be more cost-effective, as the current configuration uses PriceClass_All which may not be necessary.",
+      "rollback_plan": "If performance issues arise, revert to the original price class in the CloudFront settings.",
+      "rationale": "Using a lower price class can reduce costs if the traffic patterns do not require the full range of edge locations.",
+      "evidence": {
+        "metrics_analysis": "No performance metrics available",
+        "cost_breakdown": "No actual cost data available",
+        "performance_impact": "No performance metrics available"
+      },
+      "implementation_steps": [
+        "Step 1: Review current traffic patterns and usage.",
+        "Step 2: Evaluate the potential impact of switching to a lower price class.",
+        "Step 3: Implement the change in the CloudFront settings.",
+        "Step 4: Monitor the performance and costs post-implementation."
+      ],
+      "prerequisites": [],
+      "confidence_score": 0.2,
+      "created_at": "2025-09-26 08:45:48.811668",
+      "agent_id": "aws.cloudfront_agent",
+      "business_hours_impact": false,
+      "downtime_required": false,
+      "sla_impact": null,
+      "warnings": [
+        "Evidence Quality: Poor",
+        "Issues: Fabricated cost estimates without actual billing data",
+        "Unsupported: Cost contradiction: Evidence claims 'No actual cost data available' but specific dollar amounts provided in recommendation",
+        "Unsupported: Performance claim: 'No performance metrics available' - but no performance data available",
+        "LOW CONFIDENCE: This recommendation has 20% confidence, below the typical threshold of 70%. Consider gathering additional performance data before implementing."
+      ]
+    },
+    {
+      "id": "aws.cloudfront_agent_ECUA1PT2MBQ6I_2025-09-26T08:45:48.811832",
+      "resource_id": "ECUA1PT2MBQ6I",
+      "service": "AWS.CloudFront",
+      "recommendation_type": "cost_analysis",
+      "current_config": {
+        "price_class": "PriceClass_All"
+      },
+      "recommended_config": {
+        "price_class": "PriceClass_200"
+      },
+      "current_monthly_cost": 100.0,
+      "estimated_monthly_cost": 80.0,
+      "estimated_monthly_savings": 20.0,
+      "annual_savings": 240.0,
+      "risk_level": "medium",
+      "impact_description": "Evaluate the necessity of using PriceClass_All for this CloudFront distribution, as it may lead to higher costs without significant benefits.",
+      "rollback_plan": "Revert to PriceClass_All if performance is negatively impacted after the change.",
+      "rationale": "If the distribution does not require access to all edge locations, switching to a lower price class could yield savings.",
+      "evidence": {
+        "metrics_analysis": "No performance metrics available",
+        "cost_breakdown": "No actual cost data available",
+        "performance_impact": "No performance metrics available"
+      },
+      "implementation_steps": [
+        "Step 1: Analyze current usage and traffic patterns.",
+        "Step 2: Determine if a lower price class is sufficient.",
+        "Step 3: Change the price class in the CloudFront settings.",
+        "Step 4: Monitor the impact on performance and costs."
+      ],
+      "prerequisites": [],
+      "confidence_score": 0.2,
+      "created_at": "2025-09-26 08:45:48.811947",
+      "agent_id": "aws.cloudfront_agent",
+      "business_hours_impact": false,
+      "downtime_required": false,
+      "sla_impact": null,
+      "warnings": [
+        "Evidence Quality: Poor",
+        "Issues: Fabricated cost estimates without actual billing data",
+        "Unsupported: Cost contradiction: Evidence claims 'No actual cost data available' but specific dollar amounts provided in recommendation",
+        "Unsupported: Performance claim: 'No performance metrics available' - but no performance data available",
+        "LOW CONFIDENCE: This recommendation has 20% confidence, below the typical threshold of 70%. Consider gathering additional performance data before implementing."
+      ]
+    },
+    {
+      "id": "aws.cloudfront_agent_E31MTL160ABLG0_2025-09-26T08:45:48.812068",
+      "resource_id": "E31MTL160ABLG0",
+      "service": "AWS.CloudFront",
+      "recommendation_type": "cost_analysis",
+      "current_config": {
+        "price_class": "PriceClass_All"
+      },
+      "recommended_config": {
+        "price_class": "PriceClass_200"
+      },
+      "current_monthly_cost": 100.0,
+      "estimated_monthly_cost": 80.0,
+      "estimated_monthly_savings": 20.0,
+      "annual_savings": 240.0,
+      "risk_level": "medium",
+      "impact_description": "Consider switching from PriceClass_All to a more economical price class based on actual usage needs.",
+      "rollback_plan": "If issues arise, revert to the previous price class in the CloudFront settings.",
+      "rationale": "Reducing the price class can lead to significant cost savings if the distribution does not require the full range of edge locations.",
+      "evidence": {
+        "metrics_analysis": "No performance metrics available",
+        "cost_breakdown": "No actual cost data available",
+        "performance_impact": "No performance metrics available"
+      },
+      "implementation_steps": [
+        "Step 1: Review the distribution's traffic and usage.",
+        "Step 2: Assess the feasibility of switching to a lower price class.",
+        "Step 3: Update the price class in the CloudFront settings.",
+        "Step 4: Track performance and cost changes after the update."
+      ],
+      "prerequisites": [],
+      "confidence_score": 0.2,
+      "created_at": "2025-09-26 08:45:48.812160",
+      "agent_id": "aws.cloudfront_agent",
+      "business_hours_impact": false,
+      "downtime_required": false,
+      "sla_impact": null,
+      "warnings": [
+        "Evidence Quality: Poor",
+        "Issues: Fabricated cost estimates without actual billing data",
+        "Unsupported: Cost contradiction: Evidence claims 'No actual cost data available' but specific dollar amounts provided in recommendation",
+        "Unsupported: Performance claim: 'No performance metrics available' - but no performance data available",
+        "LOW CONFIDENCE: This recommendation has 20% confidence, below the typical threshold of 70%. Consider gathering additional performance data before implementing."
+      ]
+    }
+  ],
+  "low_risk_count": 0,
+  "medium_risk_count": 7,
+  "high_risk_count": 0,
+  "savings_by_service": {
+    "AWS.EC2": 92.5,
+    "AWS.CloudFront": 60.0
+  },
+  "quick_wins": [],
+  "medium_term": [
+    "aws.ec2_agent_i-0fa16698357c707c7_2025-09-26T08:45:41.894890",
+    "aws.ec2_agent_i-04d06bd78b75cfe3b_2025-09-26T08:45:41.870997",
+    "aws.ec2_agent_i-05ea7a5068995a703_2025-09-26T08:45:41.945480",
+    "aws.ec2_agent_i-0bf93f00183d3e7f0_2025-09-26T08:45:44.639386",
+    "aws.cloudfront_agent_E38746PWHXCI05_2025-09-26T08:45:48.811534",
+    "aws.cloudfront_agent_ECUA1PT2MBQ6I_2025-09-26T08:45:48.811832",
+    "aws.cloudfront_agent_E31MTL160ABLG0_2025-09-26T08:45:48.812068"
+  ],
+  "long_term": [],
+  "coverage": {
+    "total_resources": 16,
+    "resources_with_specific_agents": 16,
+    "services_with_specific_agents": 5,
+    "resources_with_specific_agents_list": [
+      "vol-0d404c2b972e09878",
+      "vol-0857ce367bcc848b0",
+      "vol-07335efa599b89ce7",
+      "minhpt7642Function",
+      "i-0bf93f00183d3e7f0",
+      "i-04d06bd78b75cfe3b",
+      "i-07350153600c3b3ba",
+      "i-0fa16698357c707c7",
+      "i-05ea7a5068995a703",
+      "vol-0aa0216d21533fa45",
+      "vol-03c3299cb298fb458",
+      "eip-finops",
+      "eip-finops",
+      "E38746PWHXCI05",
+      "ECUA1PT2MBQ6I",
+      "E31MTL160ABLG0"
+    ],
+    "services_with_specific_agents_list": [
+      "AWS.EBS",
+      "AWS.EC2",
+      "AWS.Lambda",
+      "AWS.CloudFront",
+      "AWS.S3"
+    ],
+    "resources_falling_back_to_default": 0,
+    "services_falling_back_to_default": 0,
+    "resources_falling_back_to_default_list": [],
+    "services_falling_back_to_default_list": [],
+    "analysis_time_seconds": 22.711319
+  },
+  "data_quality_issues": [],
+  "resources_without_recommendations": [
+    {
+      "resource_id": "vol-0857ce367bcc848b0",
+      "service": "AWS.EBS",
+      "reason": "No optimization opportunities identified with current configuration",
+      "agent_used": "aws.ebs_agent"
+    },
+    {
+      "resource_id": "vol-0aa0216d21533fa45",
+      "service": "AWS.EBS",
+      "reason": "Low monthly cost ($2.40) - optimization may not be cost-effective",
+      "agent_used": "aws.ebs_agent"
+    },
+    {
+      "resource_id": "minhpt7642Function",
+      "service": "AWS.Lambda",
+      "reason": "No optimization opportunities identified with current configuration",
+      "agent_used": "aws.lambda_agent"
+    },
+    {
+      "resource_id": "i-07350153600c3b3ba",
+      "service": "AWS.EC2",
+      "reason": "No optimization opportunities identified with current configuration",
+      "agent_used": "aws.ec2_agent"
+    },
+    {
+      "resource_id": "eip-finops",
+      "service": "AWS.S3",
+      "reason": "Insufficient data: missing Billing/cost data, Performance metrics",
+      "agent_used": "aws.s3_agent"
+    },
+    {
+      "resource_id": "eip-finops",
+      "service": "AWS.S3",
+      "reason": "Insufficient data: missing Billing/cost data, Performance metrics",
+      "agent_used": "aws.s3_agent"
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+    "DistributionList": {
+        "Items": [
+            {
+                "Id": "E38746PWHXCI05",
+                "ARN": "arn:aws:cloudfront::729713917879:distribution/E38746PWHXCI05",
+                "Status": "Deployed",
+                "LastModifiedTime": "2022-07-02T17:50:44.086000+00:00",
+                "DomainName": "d3vazlc3qvb7xw.cloudfront.net",
+                "Aliases": {
+                    "Quantity": 2,
+                    "Items": [
+                        "www.akawork.io",
+                        "akawork.io"
+                    ]
+                },
+                "Origins": {
+                    "Quantity": 1,
+                    "Items": [
+                        {
+                            "Id": "akawork.io.s3.ap-southeast-1.amazonaws.com",
+                            "DomainName": "akawork.io.s3.ap-southeast-1.amazonaws.com",
+                            "OriginPath": "",
+                            "CustomHeaders": {
+                                "Quantity": 1,
+                                "Items": [
+                                    {
+                                        "HeaderName": "Access-Control-Allow-Origin",
+                                        "HeaderValue": "*"
+                                    }
+                                ]
+                            },
+                            "S3OriginConfig": {
+                                "OriginAccessIdentity": ""
+                            },
+                            "ConnectionAttempts": 3,
+                            "ConnectionTimeout": 10
+                        }
+                    ]
+                },
+                "OriginGroups": {
+                    "Quantity": 0
+                },
+                "DefaultCacheBehavior": {
+                    "TargetOriginId": "akawork.io.s3.ap-southeast-1.amazonaws.com",
+                    "ForwardedValues": {
+                        "QueryString": false,
+                        "Cookies": {
+                            "Forward": "none"
+                        },
+                        "Headers": {
+                            "Quantity": 0
+                        },
+                        "QueryStringCacheKeys": {
+                            "Quantity": 0
+                        }
+                    },
+                    "TrustedSigners": {
+                        "Enabled": false,
+                        "Quantity": 0
+                    },
+                    "ViewerProtocolPolicy": "redirect-to-https",
+                    "MinTTL": 0,
+                    "AllowedMethods": {
+                        "Quantity": 2,
+                        "Items": [
+                            "HEAD",
+                            "GET"
+                        ],
+                        "CachedMethods": {
+                            "Quantity": 2,
+                            "Items": [
+                                "HEAD",
+                                "GET"
+                            ]
+                        }
+                    },
+                    "SmoothStreaming": false,
+                    "DefaultTTL": 0,
+                    "MaxTTL": 0,
+                    "Compress": true,
+                    "LambdaFunctionAssociations": {
+                        "Quantity": 0
+                    },
+                    "FieldLevelEncryptionId": ""
+                },
+                "CacheBehaviors": {
+                    "Quantity": 0
+                },
+                "CustomErrorResponses": {
+                    "Quantity": 2,
+                    "Items": [
+                        {
+                            "ErrorCode": 400,
+                            "ResponsePagePath": "/index.html",
+                            "ResponseCode": "400",
+                            "ErrorCachingMinTTL": 10
+                        },
+                        {
+                            "ErrorCode": 403,
+                            "ResponsePagePath": "/index.html",
+                            "ResponseCode": "403",
+                            "ErrorCachingMinTTL": 10
+                        }
+                    ]
+                },
+                "Comment": "",
+                "PriceClass": "PriceClass_All",
+                "Enabled": true,
+                "ViewerCertificate": {
+                    "ACMCertificateArn": "arn:aws:acm:us-east-1:729713917879:certificate/8a69b791-87a9-4314-a674-da6a7d1938a2",
+                    "SSLSupportMethod": "sni-only",
+                    "MinimumProtocolVersion": "TLSv1.2_2021",
+                    "Certificate": "arn:aws:acm:us-east-1:729713917879:certificate/8a69b791-87a9-4314-a674-da6a7d1938a2",
+                    "CertificateSource": "acm"
+                },
+                "Restrictions": {
+                    "GeoRestriction": {
+                        "RestrictionType": "none",
+                        "Quantity": 0
+                    }
+                },
+                "WebACLId": "",
+                "HttpVersion": "HTTP2",
+                "IsIPV6Enabled": true,
+                "AliasICPRecordals": [
+                    {
+                        "CNAME": "www.akawork.io",
+                        "ICPRecordalStatus": "APPROVED"
+                    },
+                    {
+                        "CNAME": "akawork.io",
+                        "ICPRecordalStatus": "APPROVED"
+                    }
+                ]
+            },
+            {
+                "Id": "ECUA1PT2MBQ6I",
+                "ARN": "arn:aws:cloudfront::729713917879:distribution/ECUA1PT2MBQ6I",
+                "Status": "Deployed",
+                "LastModifiedTime": "2022-05-31T02:07:17.901000+00:00",
+                "DomainName": "d2j4sukny7xuin.cloudfront.net",
+                "Aliases": {
+                    "Quantity": 0
+                },
+                "Origins": {
+                    "Quantity": 1,
+                    "Items": [
+                        {
+                            "Id": "akawork-vsm-dev.s3.us-east-2.amazonaws.com",
+                            "DomainName": "akawork-vsm-dev.s3.us-east-2.amazonaws.com",
+                            "OriginPath": "",
+                            "CustomHeaders": {
+                                "Quantity": 0
+                            },
+                            "S3OriginConfig": {
+                                "OriginAccessIdentity": ""
+                            },
+                            "ConnectionAttempts": 3,
+                            "ConnectionTimeout": 10
+                        }
+                    ]
+                },
+                "OriginGroups": {
+                    "Quantity": 0
+                },
+                "DefaultCacheBehavior": {
+                    "TargetOriginId": "akawork-vsm-dev.s3.us-east-2.amazonaws.com",
+                    "ForwardedValues": {
+                        "QueryString": false,
+                        "Cookies": {
+                            "Forward": "none"
+                        },
+                        "Headers": {
+                            "Quantity": 0
+                        },
+                        "QueryStringCacheKeys": {
+                            "Quantity": 0
+                        }
+                    },
+                    "TrustedSigners": {
+                        "Enabled": false,
+                        "Quantity": 0
+                    },
+                    "ViewerProtocolPolicy": "allow-all",
+                    "MinTTL": 0,
+                    "AllowedMethods": {
+                        "Quantity": 2,
+                        "Items": [
+                            "HEAD",
+                            "GET"
+                        ],
+                        "CachedMethods": {
+                            "Quantity": 2,
+                            "Items": [
+                                "HEAD",
+                                "GET"
+                            ]
+                        }
+                    },
+                    "SmoothStreaming": false,
+                    "DefaultTTL": 0,
+                    "MaxTTL": 0,
+                    "Compress": true,
+                    "LambdaFunctionAssociations": {
+                        "Quantity": 0
+                    },
+                    "FieldLevelEncryptionId": ""
+                },
+                "CacheBehaviors": {
+                    "Quantity": 0
+                },
+                "CustomErrorResponses": {
+                    "Quantity": 0
+                },
+                "Comment": "",
+                "PriceClass": "PriceClass_All",
+                "Enabled": true,
+                "ViewerCertificate": {
+                    "CloudFrontDefaultCertificate": true,
+                    "SSLSupportMethod": "vip",
+                    "MinimumProtocolVersion": "TLSv1",
+                    "CertificateSource": "cloudfront"
+                },
+                "Restrictions": {
+                    "GeoRestriction": {
+                        "RestrictionType": "none",
+                        "Quantity": 0
+                    }
+                },
+                "WebACLId": "",
+                "HttpVersion": "HTTP2",
+                "IsIPV6Enabled": true
+            },
+            {
+                "Id": "E31MTL160ABLG0",
+                "ARN": "arn:aws:cloudfront::729713917879:distribution/E31MTL160ABLG0",
+                "Status": "Deployed",
+                "LastModifiedTime": "2023-10-09T10:24:41.282000+00:00",
+                "DomainName": "d2jd467vlwvum3.cloudfront.net",
+                "Aliases": {
+                    "Quantity": 1,
+                    "Items": [
+                        "akawork.net"
+                    ]
+                },
+                "Origins": {
+                    "Quantity": 1,
+                    "Items": [
+                        {
+                            "Id": "akawork.net.s3.us-east-1.amazonaws.com",
+                            "DomainName": "akawork.net.s3.us-east-1.amazonaws.com",
+                            "OriginPath": "",
+                            "CustomHeaders": {
+                                "Quantity": 0
+                            },
+                            "S3OriginConfig": {
+                                "OriginAccessIdentity": ""
+                            },
+                            "ConnectionAttempts": 3,
+                            "ConnectionTimeout": 10
+                        }
+                    ]
+                },
+                "OriginGroups": {
+                    "Quantity": 0
+                },
+                "DefaultCacheBehavior": {
+                    "TargetOriginId": "akawork.net.s3.us-east-1.amazonaws.com",
+                    "ForwardedValues": {
+                        "QueryString": false,
+                        "Cookies": {
+                            "Forward": "none"
+                        },
+                        "Headers": {
+                            "Quantity": 0
+                        },
+                        "QueryStringCacheKeys": {
+                            "Quantity": 0
+                        }
+                    },
+                    "TrustedSigners": {
+                        "Enabled": false,
+                        "Quantity": 0
+                    },
+                    "ViewerProtocolPolicy": "redirect-to-https",
+                    "MinTTL": 0,
+                    "AllowedMethods": {
+                        "Quantity": 2,
+                        "Items": [
+                            "HEAD",
+                            "GET"
+                        ],
+                        "CachedMethods": {
+                            "Quantity": 2,
+                            "Items": [
+                                "HEAD",
+                                "GET"
+                            ]
+                        }
+                    },
+                    "SmoothStreaming": false,
+                    "DefaultTTL": 0,
+                    "MaxTTL": 0,
+                    "Compress": true,
+                    "LambdaFunctionAssociations": {
+                        "Quantity": 0
+                    },
+                    "FieldLevelEncryptionId": ""
+                },
+                "CacheBehaviors": {
+                    "Quantity": 0
+                },
+                "CustomErrorResponses": {
+                    "Quantity": 2,
+                    "Items": [
+                        {
+                            "ErrorCode": 400,
+                            "ResponsePagePath": "/index.html",
+                            "ResponseCode": "400",
+                            "ErrorCachingMinTTL": 10
+                        },
+                        {
+                            "ErrorCode": 403,
+                            "ResponsePagePath": "/index.html",
+                            "ResponseCode": "403",
+                            "ErrorCachingMinTTL": 10
+                        }
+                    ]
+                },
+                "Comment": "",
+                "PriceClass": "PriceClass_All",
+                "Enabled": true,
+                "ViewerCertificate": {
+                    "ACMCertificateArn": "arn:aws:acm:us-east-1:729713917879:certificate/9a9583d7-2aae-4f68-bc78-44c277962121",
+                    "SSLSupportMethod": "sni-only",
+                    "MinimumProtocolVersion": "TLSv1.2_2021",
+                    "Certificate": "arn:aws:acm:us-east-1:729713917879:certificate/9a9583d7-2aae-4f68-bc78-44c277962121",
+                    "CertificateSource": "acm"
+                },
+                "Restrictions": {
+                    "GeoRestriction": {
+                        "RestrictionType": "none",
+                        "Quantity": 0
+                    }
+                },
+                "WebACLId": "",
+                "HttpVersion": "HTTP2",
+                "IsIPV6Enabled": true,
+                "AliasICPRecordals": [
+                    {
+                        "CNAME": "akawork.net",
+                        "ICPRecordalStatus": "APPROVED"
+                    }
+                ]
+            }
+        ]
+    }
+}

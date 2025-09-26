@@ -350,7 +350,7 @@ class ServiceAgent:
                 "throughput_write": metrics.throughput_write,
                 "network_in": metrics.network_in,
                 "network_out": metrics.network_out,
-                "other_metrics": metrics.metrics,
+                "other_metrics": metrics.metrics if hasattr(metrics, 'metrics') and metrics.metrics else {},
             }
 
         if billing_data:
@@ -543,16 +543,22 @@ class ServiceAgent:
                 )
                 return None
 
-            # Apply confidence threshold
+            # Check confidence and add warnings for low-confidence recommendations
             confidence = float(llm_recommendation.get("confidence_score", 0.5))
+            confidence_warnings = []
+            
             if confidence < self.agent_config.confidence_threshold:
-                logger.debug(
-                    "Recommendation below confidence threshold",
+                logger.info(
+                    "Low confidence recommendation included with warning",
                     resource_id=resource.resource_id,
                     confidence=confidence,
                     threshold=self.agent_config.confidence_threshold,
                 )
-                return None
+                confidence_warnings.append(
+                    f"LOW CONFIDENCE: This recommendation has {confidence:.0%} confidence, "
+                    f"below the typical threshold of {self.agent_config.confidence_threshold:.0%}. "
+                    "Consider gathering additional performance data before implementing."
+                )
 
             recommendation = Recommendation(
                 id=rec_id,
@@ -577,7 +583,7 @@ class ServiceAgent:
                 business_hours_impact=llm_recommendation.get("business_hours_impact", False),
                 downtime_required=llm_recommendation.get("downtime_required", False),
                 sla_impact=llm_recommendation.get("sla_impact"),
-                warnings=llm_recommendation.get("evidence_warnings", []),
+                warnings=llm_recommendation.get("evidence_warnings", []) + confidence_warnings,
             )
 
             return recommendation
@@ -759,6 +765,8 @@ class ServiceAgent:
             return "simple"
 
         metrics = metrics_data[resource.resource_id]
+        if metrics is None:
+            return "simple"
         metric_count = len([v for v in metrics.metrics.values() if v is not None])
         complexity_tiers = self.global_config.complexity_tiers
 

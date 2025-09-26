@@ -1,0 +1,39 @@
+1/ Raw-req --> req
+Dựa vào user requirement từ file #file:raw-req.md hay tạo cho tôi System Requirement Definition theo instructions trong file #file:[dlg-ai]req-agent.md
+
+If the response hit the length limit. 
+  - Split the response into multiple files.
+  - Ensure each file will not exceed the length limit.
+  - Ensure each file is coherent and can stand alone.
+  - Make sure that the Generating process has not been interrupted by any error.
+
+2/ Req --> BD
+Từ những System requirement definition từ file #file:idle-resource-system-requirement-definition.md hãy tạo cho tôi file Basic design theo instructions trong file #file:[dlg-ai]bd-agent.md
+
+If the response hit the length limit. 
+  - Split the response into multiple files.
+  - Ensure each file will not exceed the length limit.
+  - Ensure each file is coherent and can stand alone.
+  - Make sure that the Generating process has not been interrupted by any error.
+3/ BD --> DD
+Từ Input là các file Basic Design trong folder #file:ver3.0 
+và cũng có thể tham khảo file requirement #file:ai-contest-system-requirement-definition-v2.md 
+bạn hay generate cho tôi file Detail Design dựa vào instructions #file:[dlg-ai]dd-agent.md 
+
+- If the response hit the length limit. 
+  - Split the response into multiple files.
+  - Ensure each file will not exceed the length limit.
+  - Ensure each file is coherent and can stand alone.
+  - Make sure that the Generating process has not been interrupted by any error.
+
+4/ BD -> TESTCASE (FT, Scenario Test)
+Từ Input là các file Basic Design trong folder #file:ver3.0 
+và cũng có thể tham khảo file requirement #file:ai-contest-system-requirement-definition-v2.md 
+bạn hay generate cho tôi file Test Design dựa vào instructions #file:[dlg-ai]test-agent.md 
+Nếu file dài quá, có thể tách ra generate ra từng file.
+
+- If the response hit the length limit. 
+  - Split the response into multiple files.
+  - Ensure each file will not exceed the length limit.
+  - Ensure each file is coherent and can stand alone.
+  - Make sure that the Generating process has not been interrupted by any error.

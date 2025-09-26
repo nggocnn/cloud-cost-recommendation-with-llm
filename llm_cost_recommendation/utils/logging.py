@@ -26,13 +26,14 @@ def should_use_human_readable() -> bool:
     return sys.stdout.isatty()
 
 
-def configure_logging(level: str = "INFO", format_type: str = "auto") -> None:
+def configure_logging(level: str = "INFO", format_type: str = "auto", component: str = None) -> None:
     """
     Configure structured logging with enhanced readability
 
     Args:
         level: Log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
         format_type: Output format ("auto", "json", "human")
+        component: Component name for logging context (e.g., "api", "cli", "agent")
     """
     # Set format type from environment or parameter
     if format_type == "auto":
@@ -40,20 +41,29 @@ def configure_logging(level: str = "INFO", format_type: str = "auto") -> None:
     else:
         use_human = format_type == "human"
 
+    # Base processors that are always included
+    base_processors = [
+        structlog.processors.TimeStamper(fmt="ISO" if not use_human else "%H:%M:%S"),
+        structlog.processors.add_log_level,
+    ]
+    
+    # Add component context if provided
+    if component:
+        def add_component(logger, method_name, event_dict):
+            event_dict["component"] = component
+            return event_dict
+        base_processors.append(add_component)
+    
     # Configure processors based on output format
     if use_human:
         # Human-readable format for interactive use
-        processors = [
-            structlog.processors.TimeStamper(fmt="%H:%M:%S"),
-            structlog.processors.add_log_level,
+        processors = base_processors + [
             structlog.processors.StackInfoRenderer(),
             structlog.dev.ConsoleRenderer(colors=True),
         ]
     else:
         # JSON format for logging systems
-        processors = [
-            structlog.processors.TimeStamper(fmt="ISO"),
-            structlog.processors.add_log_level,
+        processors = base_processors + [
             structlog.processors.StackInfoRenderer(),
             structlog.processors.JSONRenderer(),
         ]

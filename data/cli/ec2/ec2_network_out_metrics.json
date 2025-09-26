@@ -1,0 +1,23 @@
+{
+    "Label": "NetworkOut",
+    "Datapoints": [
+        {
+            "Timestamp": "2025-04-10T08:00:00+00:00",
+            "Average": 378894.18333333335,
+            "Maximum": 9769454.0,
+            "Unit": "Bytes"
+        },
+        {
+            "Timestamp": "2025-04-10T07:00:00+00:00",
+            "Average": 71601.0,
+            "Maximum": 71601.0,
+            "Unit": "Bytes"
+        },
+        {
+            "Timestamp": "2025-04-10T09:00:00+00:00",
+            "Average": 386.5769230769231,
+            "Maximum": 4112.0,
+            "Unit": "Bytes"
+        }
+    ]
+}

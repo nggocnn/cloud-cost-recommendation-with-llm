@@ -1,0 +1,3725 @@
+{
+    "Label": "NetworkReceiveThroughput",
+    "Datapoints": [
+        {
+            "Timestamp": "2025-08-18T02:00:00+00:00",
+            "Average": 969.993973302768,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T09:00:00+00:00",
+            "Average": 984.3221588280126,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T11:00:00+00:00",
+            "Average": 970.442620135891,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T21:00:00+00:00",
+            "Average": 962.8569271519827,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T04:00:00+00:00",
+            "Average": 961.4944481624433,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T14:00:00+00:00",
+            "Average": 961.5464138043518,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T00:00:00+00:00",
+            "Average": 978.56467136646,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T07:00:00+00:00",
+            "Average": 980.6454712477882,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T14:00:00+00:00",
+            "Average": 968.4563817283217,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T21:00:00+00:00",
+            "Average": 959.275605326359,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T04:00:00+00:00",
+            "Average": 965.2478502345258,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T04:00:00+00:00",
+            "Average": 966.2792934394306,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T11:00:00+00:00",
+            "Average": 964.4086689660372,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T18:00:00+00:00",
+            "Average": 964.8933355523247,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T01:00:00+00:00",
+            "Average": 967.4108752937597,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T23:00:00+00:00",
+            "Average": 967.4790775771974,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T06:00:00+00:00",
+            "Average": 963.234413176801,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T13:00:00+00:00",
+            "Average": 964.2572168727795,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T09:00:00+00:00",
+            "Average": 958.1447075166577,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T16:00:00+00:00",
+            "Average": 966.9194007201662,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T16:00:00+00:00",
+            "Average": 1015.8299371067073,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T23:00:00+00:00",
+            "Average": 977.5179388337176,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T06:00:00+00:00",
+            "Average": 953.195471863731,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T13:00:00+00:00",
+            "Average": 962.9685796922851,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T20:00:00+00:00",
+            "Average": 952.2883493508963,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T03:00:00+00:00",
+            "Average": 962.4626507546942,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T23:00:00+00:00",
+            "Average": 981.3860086093323,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T06:00:00+00:00",
+            "Average": 1010.8690200819399,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T22:00:00+00:00",
+            "Average": 967.8760203028905,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T05:00:00+00:00",
+            "Average": 955.8241269087666,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T12:00:00+00:00",
+            "Average": 971.664955709456,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T15:00:00+00:00",
+            "Average": 974.0315634472623,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T16:00:00+00:00",
+            "Average": 971.4385870396051,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T19:00:00+00:00",
+            "Average": 967.9508759004952,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T02:00:00+00:00",
+            "Average": 964.010189018283,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T09:00:00+00:00",
+            "Average": 972.6440748060359,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T12:00:00+00:00",
+            "Average": 977.7262004711204,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T01:00:00+00:00",
+            "Average": 974.212756123376,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T08:00:00+00:00",
+            "Average": 964.3966137254977,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T15:00:00+00:00",
+            "Average": 964.5688293922918,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T22:00:00+00:00",
+            "Average": 968.4057782497875,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T05:00:00+00:00",
+            "Average": 967.0568932531377,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T14:00:00+00:00",
+            "Average": 970.465716325751,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T00:00:00+00:00",
+            "Average": 969.6506877671374,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T07:00:00+00:00",
+            "Average": 970.4739452929385,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T10:00:00+00:00",
+            "Average": 971.1528485055858,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T17:00:00+00:00",
+            "Average": 966.2540960384334,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T06:00:00+00:00",
+            "Average": 967.6225364486401,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T13:00:00+00:00",
+            "Average": 959.7763460753683,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T20:00:00+00:00",
+            "Average": 959.2047989876406,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T14:00:00+00:00",
+            "Average": 985.8395647347669,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T07:00:00+00:00",
+            "Average": 980.7870767714624,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T10:00:00+00:00",
+            "Average": 969.5981465821246,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T17:00:00+00:00",
+            "Average": 971.0377262756102,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T00:00:00+00:00",
+            "Average": 963.2358197545715,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T11:00:00+00:00",
+            "Average": 972.3237851579868,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T18:00:00+00:00",
+            "Average": 977.7989741973586,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T01:00:00+00:00",
+            "Average": 964.0409834042059,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T08:00:00+00:00",
+            "Average": 994.864599375733,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T04:00:00+00:00",
+            "Average": 968.1969485767896,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T15:00:00+00:00",
+            "Average": 966.3034488902023,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T22:00:00+00:00",
+            "Average": 960.8340829643686,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T05:00:00+00:00",
+            "Average": 969.6503540850928,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T01:00:00+00:00",
+            "Average": 962.2757299287886,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T08:00:00+00:00",
+            "Average": 974.3285015790649,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T19:00:00+00:00",
+            "Average": 961.40936981988,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T02:00:00+00:00",
+            "Average": 972.5535884752691,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T09:00:00+00:00",
+            "Average": 965.5930801787142,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T12:00:00+00:00",
+            "Average": 961.6674008627084,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T03:00:00+00:00",
+            "Average": 966.1964290886065,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T07:00:00+00:00",
+            "Average": 970.6375398642809,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T03:00:00+00:00",
+            "Average": 965.3106921425514,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T10:00:00+00:00",
+            "Average": 962.0802334373108,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T17:00:00+00:00",
+            "Average": 949.106976011859,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T00:00:00+00:00",
+            "Average": 966.4865837049502,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T15:00:00+00:00",
+            "Average": 965.0155205776614,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T01:00:00+00:00",
+            "Average": 959.6858838807998,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T08:00:00+00:00",
+            "Average": 993.6681978532409,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T11:00:00+00:00",
+            "Average": 962.6174991229684,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T18:00:00+00:00",
+            "Average": 960.6320304965649,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T22:00:00+00:00",
+            "Average": 968.9560735238372,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T05:00:00+00:00",
+            "Average": 960.3189470741788,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T12:00:00+00:00",
+            "Average": 968.2986617468446,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T08:00:00+00:00",
+            "Average": 982.1792416844986,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T15:00:00+00:00",
+            "Average": 1019.1282625679786,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T02:00:00+00:00",
+            "Average": 1015.0477161983996,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T19:00:00+00:00",
+            "Average": 977.835159024744,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T05:00:00+00:00",
+            "Average": 966.2129009109834,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T12:00:00+00:00",
+            "Average": 963.73782510036,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T03:00:00+00:00",
+            "Average": 958.0773345239097,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T10:00:00+00:00",
+            "Average": 960.3697049700272,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T13:00:00+00:00",
+            "Average": 983.743238850477,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T20:00:00+00:00",
+            "Average": 964.3515322008298,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T10:00:00+00:00",
+            "Average": 968.4115144735312,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T00:00:00+00:00",
+            "Average": 971.1726323017756,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T03:00:00+00:00",
+            "Average": 969.5621444361724,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T13:00:00+00:00",
+            "Average": 969.6704923032551,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T22:00:00+00:00",
+            "Average": 965.3773011796667,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T12:00:00+00:00",
+            "Average": 958.3899762130608,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T13:00:00+00:00",
+            "Average": 976.3926203482421,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T23:00:00+00:00",
+            "Average": 959.4662584807659,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T03:00:00+00:00",
+            "Average": 965.5283725266003,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T08:00:00+00:00",
+            "Average": 964.338937499992,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T22:00:00+00:00",
+            "Average": 968.9383701486545,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T01:00:00+00:00",
+            "Average": 964.5126936531021,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T03:00:00+00:00",
+            "Average": 963.3148509558893,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T17:00:00+00:00",
+            "Average": 955.2921458881324,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T02:00:00+00:00",
+            "Average": 966.2092072517172,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T12:00:00+00:00",
+            "Average": 974.471933255377,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T05:00:00+00:00",
+            "Average": 959.0902303983567,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T15:00:00+00:00",
+            "Average": 960.6426504664032,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T14:00:00+00:00",
+            "Average": 970.8671447629523,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T00:00:00+00:00",
+            "Average": 972.1157333813452,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T15:00:00+00:00",
+            "Average": 1021.7975936662225,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T01:00:00+00:00",
+            "Average": 972.8131146005419,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T18:00:00+00:00",
+            "Average": 961.0836971703551,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T08:00:00+00:00",
+            "Average": 977.6415047255238,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T19:00:00+00:00",
+            "Average": 971.669914733277,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T05:00:00+00:00",
+            "Average": 971.5219136629005,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T14:00:00+00:00",
+            "Average": 959.8505731279441,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T04:00:00+00:00",
+            "Average": 960.6162432715294,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T00:00:00+00:00",
+            "Average": 1029.1336078965928,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T11:00:00+00:00",
+            "Average": 969.6804125223074,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T07:00:00+00:00",
+            "Average": 982.6587993015019,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T21:00:00+00:00",
+            "Average": 962.7179403848028,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T20:00:00+00:00",
+            "Average": 961.9195686861543,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T06:00:00+00:00",
+            "Average": 960.2260581881036,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T16:00:00+00:00",
+            "Average": 964.411111266236,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T11:00:00+00:00",
+            "Average": 958.6737756496707,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T10:00:00+00:00",
+            "Average": 959.1316944911815,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T20:00:00+00:00",
+            "Average": 969.332088112823,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T07:00:00+00:00",
+            "Average": 976.5618725278026,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T21:00:00+00:00",
+            "Average": 966.776032378892,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T06:00:00+00:00",
+            "Average": 960.4141950226635,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T02:00:00+00:00",
+            "Average": 977.8530395953688,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T16:00:00+00:00",
+            "Average": 962.4061849427895,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T23:00:00+00:00",
+            "Average": 955.7792605564537,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T13:00:00+00:00",
+            "Average": 969.5507559417281,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T09:00:00+00:00",
+            "Average": 975.4864009205553,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T04:00:00+00:00",
+            "Average": 973.9519436720725,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T23:00:00+00:00",
+            "Average": 958.7708644430509,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T09:00:00+00:00",
+            "Average": 975.7913619792666,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T14:00:00+00:00",
+            "Average": 964.5670065013874,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T18:00:00+00:00",
+            "Average": 967.9615396619266,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T08:00:00+00:00",
+            "Average": 981.2068778648746,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T17:00:00+00:00",
+            "Average": 955.8114144817788,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T03:00:00+00:00",
+            "Average": 986.1550880503455,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T12:00:00+00:00",
+            "Average": 961.6341851772227,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T11:00:00+00:00",
+            "Average": 962.3887059254155,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T02:00:00+00:00",
+            "Average": 957.7719168314998,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T07:00:00+00:00",
+            "Average": 965.9394269512107,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T21:00:00+00:00",
+            "Average": 976.3860286295875,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T21:00:00+00:00",
+            "Average": 973.92138073195,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T07:00:00+00:00",
+            "Average": 980.1478401212042,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T16:00:00+00:00",
+            "Average": 957.6897994665197,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T06:00:00+00:00",
+            "Average": 967.5335023617789,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T11:00:00+00:00",
+            "Average": 965.1687991328145,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T01:00:00+00:00",
+            "Average": 957.6997674001955,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T02:00:00+00:00",
+            "Average": 980.9416631295222,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T10:00:00+00:00",
+            "Average": 957.4988817132722,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T20:00:00+00:00",
+            "Average": 969.9891699377712,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T05:00:00+00:00",
+            "Average": 978.2896586930794,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T19:00:00+00:00",
+            "Average": 974.9415816549663,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T14:00:00+00:00",
+            "Average": 965.9466831171072,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T09:00:00+00:00",
+            "Average": 970.3426375713756,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T23:00:00+00:00",
+            "Average": 975.1446994978043,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T08:00:00+00:00",
+            "Average": 984.3584205490791,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T04:00:00+00:00",
+            "Average": 971.0363713786774,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T07:00:00+00:00",
+            "Average": 987.4223810140672,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T18:00:00+00:00",
+            "Average": 965.3009753330656,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T17:00:00+00:00",
+            "Average": 963.6316425795291,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T16:00:00+00:00",
+            "Average": 959.6042578058953,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T02:00:00+00:00",
+            "Average": 966.0087647321692,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T12:00:00+00:00",
+            "Average": 963.0181136223005,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T06:00:00+00:00",
+            "Average": 973.7167927862865,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T16:00:00+00:00",
+            "Average": 966.1590502610694,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T11:00:00+00:00",
+            "Average": 965.7628893457617,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T01:00:00+00:00",
+            "Average": 971.9116035773221,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T21:00:00+00:00",
+            "Average": 963.8957013680158,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T06:00:00+00:00",
+            "Average": 966.6618988464268,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T20:00:00+00:00",
+            "Average": 964.5526031978678,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T10:00:00+00:00",
+            "Average": 977.680435914765,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T09:00:00+00:00",
+            "Average": 955.5820738285191,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T19:00:00+00:00",
+            "Average": 968.8421622750787,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T05:00:00+00:00",
+            "Average": 968.8043299706387,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T18:00:00+00:00",
+            "Average": 963.8377054868286,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T04:00:00+00:00",
+            "Average": 964.7176695407177,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T02:00:00+00:00",
+            "Average": 963.3611767033716,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T19:00:00+00:00",
+            "Average": 969.9883494425684,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T01:00:00+00:00",
+            "Average": 964.6083782862784,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T08:00:00+00:00",
+            "Average": 984.7431208905274,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T04:00:00+00:00",
+            "Average": 978.2789281778635,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T13:00:00+00:00",
+            "Average": 962.2355801052897,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T20:00:00+00:00",
+            "Average": 962.329567284405,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T19:00:00+00:00",
+            "Average": 985.3847070100102,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T16:00:00+00:00",
+            "Average": 976.391288534187,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T22:00:00+00:00",
+            "Average": 1016.967257971894,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T07:00:00+00:00",
+            "Average": 978.7311252363836,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T10:00:00+00:00",
+            "Average": 964.6826102396618,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T03:00:00+00:00",
+            "Average": 973.6645674707086,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T19:00:00+00:00",
+            "Average": 972.5914493048266,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T07:00:00+00:00",
+            "Average": 975.5164128519367,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T14:00:00+00:00",
+            "Average": 955.6948018246342,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T13:00:00+00:00",
+            "Average": 972.0637156271246,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T20:00:00+00:00",
+            "Average": 967.1714075537262,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T01:00:00+00:00",
+            "Average": 962.7297783685424,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T08:00:00+00:00",
+            "Average": 973.319732704122,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T07:00:00+00:00",
+            "Average": 982.6781213314695,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T14:00:00+00:00",
+            "Average": 960.3604448383788,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T18:00:00+00:00",
+            "Average": 964.4113590646414,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T09:00:00+00:00",
+            "Average": 960.5489077375215,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T16:00:00+00:00",
+            "Average": 969.1460113458161,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T11:00:00+00:00",
+            "Average": 966.8349536817603,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T03:00:00+00:00",
+            "Average": 1014.8794433531007,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T10:00:00+00:00",
+            "Average": 974.0527138613147,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T08:00:00+00:00",
+            "Average": 965.0455535087609,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T05:00:00+00:00",
+            "Average": 964.24816385806,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T12:00:00+00:00",
+            "Average": 971.3940311369632,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T06:00:00+00:00",
+            "Average": 963.512313435576,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T02:00:00+00:00",
+            "Average": 965.0694772662204,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T21:00:00+00:00",
+            "Average": 956.5872048924597,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T23:00:00+00:00",
+            "Average": 959.1413459805809,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T17:00:00+00:00",
+            "Average": 969.7271197248016,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T00:00:00+00:00",
+            "Average": 972.8697480160445,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T05:00:00+00:00",
+            "Average": 970.0202589555661,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T06:00:00+00:00",
+            "Average": 960.9799416886209,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T23:00:00+00:00",
+            "Average": 960.6336496330812,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T21:00:00+00:00",
+            "Average": 980.6153957064226,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T04:00:00+00:00",
+            "Average": 957.7890764411048,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T15:00:00+00:00",
+            "Average": 967.1239212344808,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T22:00:00+00:00",
+            "Average": 962.7883747302433,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T17:00:00+00:00",
+            "Average": 960.3095939136562,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T00:00:00+00:00",
+            "Average": 957.6797457903092,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T15:00:00+00:00",
+            "Average": 957.1969458309153,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T22:00:00+00:00",
+            "Average": 965.9346553266345,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T05:00:00+00:00",
+            "Average": 970.3799025175668,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T12:00:00+00:00",
+            "Average": 973.2370403241138,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T08:00:00+00:00",
+            "Average": 969.141580099735,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T09:00:00+00:00",
+            "Average": 964.8688928569011,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T16:00:00+00:00",
+            "Average": 972.7630903610109,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T23:00:00+00:00",
+            "Average": 970.8898240943225,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T19:00:00+00:00",
+            "Average": 964.3125583091263,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T02:00:00+00:00",
+            "Average": 962.8507889201788,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T03:00:00+00:00",
+            "Average": 966.5278159824372,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T06:00:00+00:00",
+            "Average": 965.9477876164606,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T06:00:00+00:00",
+            "Average": 971.4449158192889,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T23:00:00+00:00",
+            "Average": 957.9361972290104,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T07:00:00+00:00",
+            "Average": 961.4166189834599,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T03:00:00+00:00",
+            "Average": 956.8206909529247,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T10:00:00+00:00",
+            "Average": 967.2795065072047,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T17:00:00+00:00",
+            "Average": 975.2811300906536,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T00:00:00+00:00",
+            "Average": 951.0982249321876,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T21:00:00+00:00",
+            "Average": 970.2167466951622,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T04:00:00+00:00",
+            "Average": 968.7957612918867,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T11:00:00+00:00",
+            "Average": 956.9313362066273,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T18:00:00+00:00",
+            "Average": 960.3924016170743,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T12:00:00+00:00",
+            "Average": 966.8445767892674,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T05:00:00+00:00",
+            "Average": 960.8375590294415,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T15:00:00+00:00",
+            "Average": 1022.7588377142848,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T22:00:00+00:00",
+            "Average": 963.346294501586,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T18:00:00+00:00",
+            "Average": 966.3508038185415,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T06:00:00+00:00",
+            "Average": 954.878275210564,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T23:00:00+00:00",
+            "Average": 966.8978922347936,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T09:00:00+00:00",
+            "Average": 965.0715760126957,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T02:00:00+00:00",
+            "Average": 961.3615870663372,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T05:00:00+00:00",
+            "Average": 960.7702289466408,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T12:00:00+00:00",
+            "Average": 958.8744140086368,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T17:00:00+00:00",
+            "Average": 960.8144609170201,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T20:00:00+00:00",
+            "Average": 959.5112054855908,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T13:00:00+00:00",
+            "Average": 963.9721447085416,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T09:00:00+00:00",
+            "Average": 973.7205612230152,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T16:00:00+00:00",
+            "Average": 968.853314464904,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T21:00:00+00:00",
+            "Average": 970.3972595716757,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T17:00:00+00:00",
+            "Average": 970.4250567864115,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T00:00:00+00:00",
+            "Average": 964.9147003725062,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T10:00:00+00:00",
+            "Average": 966.6185953888829,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T03:00:00+00:00",
+            "Average": 966.9510785786244,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T11:00:00+00:00",
+            "Average": 965.7169538587702,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T18:00:00+00:00",
+            "Average": 968.3434759625541,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T21:00:00+00:00",
+            "Average": 955.065161863755,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T04:00:00+00:00",
+            "Average": 953.0235350100975,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T17:00:00+00:00",
+            "Average": 969.4200560291382,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T10:00:00+00:00",
+            "Average": 971.9288838040047,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T06:00:00+00:00",
+            "Average": 954.665005238712,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T12:00:00+00:00",
+            "Average": 972.783397905295,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T11:00:00+00:00",
+            "Average": 963.8981182204654,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T05:00:00+00:00",
+            "Average": 959.8485739205113,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T06:00:00+00:00",
+            "Average": 969.1036648771602,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T00:00:00+00:00",
+            "Average": 967.5659894749294,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T05:00:00+00:00",
+            "Average": 967.6570072494937,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T23:00:00+00:00",
+            "Average": 960.6298158985727,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T01:00:00+00:00",
+            "Average": 966.4486012950705,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T10:00:00+00:00",
+            "Average": 962.8801786592235,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T04:00:00+00:00",
+            "Average": 958.8126274408363,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T09:00:00+00:00",
+            "Average": 961.0058185712946,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T03:00:00+00:00",
+            "Average": 971.6206454237836,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T23:00:00+00:00",
+            "Average": 959.3798003050404,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T05:00:00+00:00",
+            "Average": 965.9936608691563,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T04:00:00+00:00",
+            "Average": 960.0375951877749,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T22:00:00+00:00",
+            "Average": 978.3909560673235,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T23:00:00+00:00",
+            "Average": 969.3457571245964,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T17:00:00+00:00",
+            "Average": 972.3947811638977,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T22:00:00+00:00",
+            "Average": 970.3372918219397,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T16:00:00+00:00",
+            "Average": 968.3654306620813,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T11:00:00+00:00",
+            "Average": 960.0405818165951,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T01:00:00+00:00",
+            "Average": 980.0269660759333,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T03:00:00+00:00",
+            "Average": 964.8811451735014,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T02:00:00+00:00",
+            "Average": 963.1996620927699,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T00:00:00+00:00",
+            "Average": 960.033687723734,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T20:00:00+00:00",
+            "Average": 967.0295667758202,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T22:00:00+00:00",
+            "Average": 968.6061841638347,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T21:00:00+00:00",
+            "Average": 959.7744828175975,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T19:00:00+00:00",
+            "Average": 969.933339100591,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T16:00:00+00:00",
+            "Average": 966.1661583047904,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T14:00:00+00:00",
+            "Average": 953.2054746069215,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T15:00:00+00:00",
+            "Average": 1017.5330110404751,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T13:00:00+00:00",
+            "Average": 969.9244681940312,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T20:00:00+00:00",
+            "Average": 970.5318857237122,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T18:00:00+00:00",
+            "Average": 962.9879821466923,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T17:00:00+00:00",
+            "Average": 963.7996619011582,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T19:00:00+00:00",
+            "Average": 1121.7635503502447,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T13:00:00+00:00",
+            "Average": 971.2995956794488,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T15:00:00+00:00",
+            "Average": 964.4369357503698,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T14:00:00+00:00",
+            "Average": 970.5454545470673,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T12:00:00+00:00",
+            "Average": 1016.5577759205008,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T09:00:00+00:00",
+            "Average": 977.3855848370707,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T07:00:00+00:00",
+            "Average": 973.403525040427,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T08:00:00+00:00",
+            "Average": 977.5454503108315,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T06:00:00+00:00",
+            "Average": 973.9136170155975,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T06:00:00+00:00",
+            "Average": 961.3101457282634,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T21:00:00+00:00",
+            "Average": 959.4542395400109,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T01:00:00+00:00",
+            "Average": 974.5153698844646,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T16:00:00+00:00",
+            "Average": 967.7818056075945,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T15:00:00+00:00",
+            "Average": 1015.847853925102,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T20:00:00+00:00",
+            "Average": 969.5582475898339,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T19:00:00+00:00",
+            "Average": 973.6605647240816,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T10:00:00+00:00",
+            "Average": 963.1590314449331,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T09:00:00+00:00",
+            "Average": 958.6720793852102,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T14:00:00+00:00",
+            "Average": 971.0064442504598,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T14:00:00+00:00",
+            "Average": 959.2439751642534,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T23:00:00+00:00",
+            "Average": 972.2584038358727,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T09:00:00+00:00",
+            "Average": 958.5551287678144,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T18:00:00+00:00",
+            "Average": 973.8225938285561,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T17:00:00+00:00",
+            "Average": 964.9694150673262,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T08:00:00+00:00",
+            "Average": 965.3264738911649,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T13:00:00+00:00",
+            "Average": 969.1890636549734,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T03:00:00+00:00",
+            "Average": 974.3404076871213,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T12:00:00+00:00",
+            "Average": 962.2009526786644,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T22:00:00+00:00",
+            "Average": 957.8657217964388,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T02:00:00+00:00",
+            "Average": 964.6999909575377,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T07:00:00+00:00",
+            "Average": 968.9778796885402,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T07:00:00+00:00",
+            "Average": 978.1686364684042,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T20:00:00+00:00",
+            "Average": 962.7112800062282,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T16:00:00+00:00",
+            "Average": 971.1776374949017,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T02:00:00+00:00",
+            "Average": 967.445136850194,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T15:00:00+00:00",
+            "Average": 1024.4549529272672,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T01:00:00+00:00",
+            "Average": 962.1354637450538,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T10:00:00+00:00",
+            "Average": 966.3544571991201,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T20:00:00+00:00",
+            "Average": 973.5946414223545,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T19:00:00+00:00",
+            "Average": 978.0507143778322,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T09:00:00+00:00",
+            "Average": 975.2002954864292,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T15:00:00+00:00",
+            "Average": 965.2732055050302,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T00:00:00+00:00",
+            "Average": 953.6054522698544,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T13:00:00+00:00",
+            "Average": 973.1417871105067,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T19:00:00+00:00",
+            "Average": 979.0643538007735,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T08:00:00+00:00",
+            "Average": 979.9920290104188,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T18:00:00+00:00",
+            "Average": 969.4118432241977,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T03:00:00+00:00",
+            "Average": 965.9189637497705,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T13:00:00+00:00",
+            "Average": 962.4711772415011,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T02:00:00+00:00",
+            "Average": 966.4737772290923,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T08:00:00+00:00",
+            "Average": 966.2215396328754,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T12:00:00+00:00",
+            "Average": 960.8498364536227,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T21:00:00+00:00",
+            "Average": 959.7270934811309,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T10:00:00+00:00",
+            "Average": 963.784304389645,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T17:00:00+00:00",
+            "Average": 975.8323944271256,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T13:00:00+00:00",
+            "Average": 980.3456642252272,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T20:00:00+00:00",
+            "Average": 977.9744594240448,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T03:00:00+00:00",
+            "Average": 956.8716487279526,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T15:00:00+00:00",
+            "Average": 966.1768353604158,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T22:00:00+00:00",
+            "Average": 963.6536576681979,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T01:00:00+00:00",
+            "Average": 981.204436740231,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T08:00:00+00:00",
+            "Average": 984.1447603145051,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T19:00:00+00:00",
+            "Average": 973.3233368948942,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T02:00:00+00:00",
+            "Average": 961.1400147524007,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T05:00:00+00:00",
+            "Average": 964.3767852686724,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T12:00:00+00:00",
+            "Average": 958.261618603021,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T22:00:00+00:00",
+            "Average": 965.293043958381,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T15:00:00+00:00",
+            "Average": 1065.124384662106,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T22:00:00+00:00",
+            "Average": 963.4753700991849,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T05:00:00+00:00",
+            "Average": 962.5640948359003,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T12:00:00+00:00",
+            "Average": 967.5456045510109,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T00:00:00+00:00",
+            "Average": 968.9325775234531,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T03:00:00+00:00",
+            "Average": 971.0971751309332,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T10:00:00+00:00",
+            "Average": 974.1562954089939,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T17:00:00+00:00",
+            "Average": 970.9799910473132,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T20:00:00+00:00",
+            "Average": 975.6405263739301,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T12:00:00+00:00",
+            "Average": 969.8089838618504,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T18:00:00+00:00",
+            "Average": 962.319811681491,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T01:00:00+00:00",
+            "Average": 961.5437356497606,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T04:00:00+00:00",
+            "Average": 961.3395874763613,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T11:00:00+00:00",
+            "Average": 969.1455184517852,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T21:00:00+00:00",
+            "Average": 976.3533767785822,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T07:00:00+00:00",
+            "Average": 985.1455151534572,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T14:00:00+00:00",
+            "Average": 972.5954870733804,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T10:00:00+00:00",
+            "Average": 966.1667388015879,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T17:00:00+00:00",
+            "Average": 963.4524938784356,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T00:00:00+00:00",
+            "Average": 958.4070634520905,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T11:00:00+00:00",
+            "Average": 964.6875862602077,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T14:00:00+00:00",
+            "Average": 974.5127347868159,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T21:00:00+00:00",
+            "Average": 980.3973814487787,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T04:00:00+00:00",
+            "Average": 966.9657166453968,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T20:00:00+00:00",
+            "Average": 964.2120793289215,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T03:00:00+00:00",
+            "Average": 968.9368207277251,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T23:00:00+00:00",
+            "Average": 962.0487512958734,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T06:00:00+00:00",
+            "Average": 968.6561631308297,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T13:00:00+00:00",
+            "Average": 972.3314153601517,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T19:00:00+00:00",
+            "Average": 965.6160258396657,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T02:00:00+00:00",
+            "Average": 968.8416875608133,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T09:00:00+00:00",
+            "Average": 955.6003325179886,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T16:00:00+00:00",
+            "Average": 969.6245849278774,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T17:00:00+00:00",
+            "Average": 966.672138141764,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T00:00:00+00:00",
+            "Average": 957.8680913316341,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T07:00:00+00:00",
+            "Average": 988.9824882031864,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T14:00:00+00:00",
+            "Average": 972.993330432852,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T18:00:00+00:00",
+            "Average": 955.8312892717684,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T01:00:00+00:00",
+            "Average": 972.0351465261517,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T04:00:00+00:00",
+            "Average": 960.2667911250959,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T11:00:00+00:00",
+            "Average": 965.2095590476041,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T21:00:00+00:00",
+            "Average": 965.4552772005069,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T08:00:00+00:00",
+            "Average": 976.7204268146509,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T15:00:00+00:00",
+            "Average": 961.6801083642607,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T18:00:00+00:00",
+            "Average": 954.8610513874416,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T01:00:00+00:00",
+            "Average": 975.5648470935043,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T09:00:00+00:00",
+            "Average": 953.875662102712,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T16:00:00+00:00",
+            "Average": 962.4118622575749,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T12:00:00+00:00",
+            "Average": 974.4926529872222,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T19:00:00+00:00",
+            "Average": 970.7932611930371,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T02:00:00+00:00",
+            "Average": 970.359261735973,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T23:00:00+00:00",
+            "Average": 970.679875730296,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T06:00:00+00:00",
+            "Average": 971.4298278666233,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T13:00:00+00:00",
+            "Average": 967.6349254406547,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T20:00:00+00:00",
+            "Average": 963.3464334527514,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T16:00:00+00:00",
+            "Average": 970.1450980018627,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T23:00:00+00:00",
+            "Average": 965.7084708272467,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T21:00:00+00:00",
+            "Average": 968.4770314335218,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T07:00:00+00:00",
+            "Average": 972.4764458028059,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T14:00:00+00:00",
+            "Average": 963.7670913045945,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T00:00:00+00:00",
+            "Average": 959.6727179640337,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T14:00:00+00:00",
+            "Average": 958.3032371966481,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T21:00:00+00:00",
+            "Average": 973.9653893755764,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T04:00:00+00:00",
+            "Average": 963.73945039075,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T11:00:00+00:00",
+            "Average": 961.449263133771,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T18:00:00+00:00",
+            "Average": 959.9269618880732,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T11:00:00+00:00",
+            "Average": 967.5021178752908,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T18:00:00+00:00",
+            "Average": 969.4123516537358,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T01:00:00+00:00",
+            "Average": 963.3596889857488,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T08:00:00+00:00",
+            "Average": 967.892959932148,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T15:00:00+00:00",
+            "Average": 973.9270058672049,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T23:00:00+00:00",
+            "Average": 970.8711974173523,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T02:00:00+00:00",
+            "Average": 956.1666845873522,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T09:00:00+00:00",
+            "Average": 981.0461680288574,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T16:00:00+00:00",
+            "Average": 1018.5281097698261,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T19:00:00+00:00",
+            "Average": 976.1381888093126,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T06:00:00+00:00",
+            "Average": 969.0154033554844,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T13:00:00+00:00",
+            "Average": 969.0717622316719,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T04:00:00+00:00",
+            "Average": 969.7450277852189,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T19:00:00+00:00",
+            "Average": 969.5998556994293,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T09:00:00+00:00",
+            "Average": 970.1581467071172,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T18:00:00+00:00",
+            "Average": 951.6831732870845,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T21:00:00+00:00",
+            "Average": 967.8899314238736,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T14:00:00+00:00",
+            "Average": 964.2961657070082,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T04:00:00+00:00",
+            "Average": 962.526010950387,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T07:00:00+00:00",
+            "Average": 967.8107240228396,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T17:00:00+00:00",
+            "Average": 966.9446252939314,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T06:00:00+00:00",
+            "Average": 955.7481040274755,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T16:00:00+00:00",
+            "Average": 968.4687727573497,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T02:00:00+00:00",
+            "Average": 963.7748471582047,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T21:00:00+00:00",
+            "Average": 971.2865480371972,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T20:00:00+00:00",
+            "Average": 967.3067890706744,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T06:00:00+00:00",
+            "Average": 959.9685451711208,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T21:00:00+00:00",
+            "Average": 961.4993170872099,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T11:00:00+00:00",
+            "Average": 974.2302096448295,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T07:00:00+00:00",
+            "Average": 982.5043873467911,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T16:00:00+00:00",
+            "Average": 973.3202523618985,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T06:00:00+00:00",
+            "Average": 960.36052843875,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T20:00:00+00:00",
+            "Average": 976.7719925930157,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T23:00:00+00:00",
+            "Average": 968.0451961701951,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T09:00:00+00:00",
+            "Average": 975.7925739305807,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T19:00:00+00:00",
+            "Average": 971.2851990155475,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T18:00:00+00:00",
+            "Average": 969.6884419002761,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T20:00:00+00:00",
+            "Average": 965.966792392844,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T10:00:00+00:00",
+            "Average": 960.6474879765093,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T03:00:00+00:00",
+            "Average": 958.5736217454493,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T17:00:00+00:00",
+            "Average": 970.5554463525167,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T02:00:00+00:00",
+            "Average": 962.8159164377493,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T12:00:00+00:00",
+            "Average": 973.540974270913,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T13:00:00+00:00",
+            "Average": 975.1596072317244,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T09:00:00+00:00",
+            "Average": 962.2275739057083,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T23:00:00+00:00",
+            "Average": 970.7486899484853,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T08:00:00+00:00",
+            "Average": 964.1800194684424,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T18:00:00+00:00",
+            "Average": 954.5553697942579,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T13:00:00+00:00",
+            "Average": 971.226478003493,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T03:00:00+00:00",
+            "Average": 965.1917601800109,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T12:00:00+00:00",
+            "Average": 964.7867677697861,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T22:00:00+00:00",
+            "Average": 956.0787336663889,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T19:00:00+00:00",
+            "Average": 979.5644573561989,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T05:00:00+00:00",
+            "Average": 974.4326317512935,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T14:00:00+00:00",
+            "Average": 964.9678889472681,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T04:00:00+00:00",
+            "Average": 958.4854740219125,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T00:00:00+00:00",
+            "Average": 970.8923081401405,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T01:00:00+00:00",
+            "Average": 967.3466410606895,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T11:00:00+00:00",
+            "Average": 967.5302513425944,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T00:00:00+00:00",
+            "Average": 972.4858182129877,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T23:00:00+00:00",
+            "Average": 964.279814605383,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T13:00:00+00:00",
+            "Average": 976.0586882281281,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T22:00:00+00:00",
+            "Average": 963.6201480525186,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T09:00:00+00:00",
+            "Average": 966.8340335840765,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T18:00:00+00:00",
+            "Average": 965.1722931912453,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T03:00:00+00:00",
+            "Average": 965.4545575429036,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T17:00:00+00:00",
+            "Average": 967.9439657401235,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T08:00:00+00:00",
+            "Average": 964.2364389389609,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T02:00:00+00:00",
+            "Average": 959.169884451087,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T22:00:00+00:00",
+            "Average": 966.1738059683032,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T12:00:00+00:00",
+            "Average": 965.6895716503532,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T02:00:00+00:00",
+            "Average": 966.6535891733023,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T16:00:00+00:00",
+            "Average": 965.8949496974844,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T15:00:00+00:00",
+            "Average": 957.291432212168,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T11:00:00+00:00",
+            "Average": 968.4093966879468,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T01:00:00+00:00",
+            "Average": 968.7310219424321,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T10:00:00+00:00",
+            "Average": 963.5194868159766,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T19:00:00+00:00",
+            "Average": 973.2284990075553,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T15:00:00+00:00",
+            "Average": 962.7507498658815,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T05:00:00+00:00",
+            "Average": 965.9030175552141,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T20:00:00+00:00",
+            "Average": 1017.6684226307747,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T14:00:00+00:00",
+            "Average": 964.9983953677666,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T04:00:00+00:00",
+            "Average": 967.067847249103,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T14:00:00+00:00",
+            "Average": 968.7525365299595,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T13:00:00+00:00",
+            "Average": 966.0908609776864,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T00:00:00+00:00",
+            "Average": 959.8118166114075,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T23:00:00+00:00",
+            "Average": 970.6215675506605,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T22:00:00+00:00",
+            "Average": 970.6909021045171,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T08:00:00+00:00",
+            "Average": 994.2709954214129,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T03:00:00+00:00",
+            "Average": 966.4830638933479,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T13:00:00+00:00",
+            "Average": 966.9632024526632,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T22:00:00+00:00",
+            "Average": 958.0924794830961,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T12:00:00+00:00",
+            "Average": 962.619885271251,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T11:00:00+00:00",
+            "Average": 965.2246000035218,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T07:00:00+00:00",
+            "Average": 975.8972821413258,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T17:00:00+00:00",
+            "Average": 974.5370345044109,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T02:00:00+00:00",
+            "Average": 950.8987260820716,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T16:00:00+00:00",
+            "Average": 971.4374114553485,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T15:00:00+00:00",
+            "Average": 1030.950363141139,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T01:00:00+00:00",
+            "Average": 982.1782237260452,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T00:00:00+00:00",
+            "Average": 961.49834022918,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T10:00:00+00:00",
+            "Average": 965.2700324566722,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T15:00:00+00:00",
+            "Average": 971.079837959892,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T05:00:00+00:00",
+            "Average": 974.3869201361861,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T09:00:00+00:00",
+            "Average": 970.2923563129708,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T11:00:00+00:00",
+            "Average": 963.1561653072838,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T18:00:00+00:00",
+            "Average": 957.0959005839162,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T05:00:00+00:00",
+            "Average": 964.8237349425846,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T12:00:00+00:00",
+            "Average": 957.3575175284598,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T06:00:00+00:00",
+            "Average": 977.9527060424974,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T05:00:00+00:00",
+            "Average": 972.9025477639661,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T12:00:00+00:00",
+            "Average": 960.3196777319886,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T23:00:00+00:00",
+            "Average": 955.6877674942657,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T23:00:00+00:00",
+            "Average": 969.3468091574315,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T06:00:00+00:00",
+            "Average": 957.3978083073056,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T17:00:00+00:00",
+            "Average": 964.6691117188665,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T00:00:00+00:00",
+            "Average": 969.4002356336092,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T03:00:00+00:00",
+            "Average": 972.702027902985,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T10:00:00+00:00",
+            "Average": 973.2148747763875,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T21:00:00+00:00",
+            "Average": 968.7900405940644,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T04:00:00+00:00",
+            "Average": 960.2079609311946,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T06:00:00+00:00",
+            "Average": 962.3001381618868,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T21:00:00+00:00",
+            "Average": 962.922929226779,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T15:00:00+00:00",
+            "Average": 1018.7179082288145,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T22:00:00+00:00",
+            "Average": 969.3410756318935,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T18:00:00+00:00",
+            "Average": 1022.9574950790859,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T17:00:00+00:00",
+            "Average": 968.640614281432,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T00:00:00+00:00",
+            "Average": 967.212108031346,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T23:00:00+00:00",
+            "Average": 965.3166258396353,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T21:00:00+00:00",
+            "Average": 970.7370885122476,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T04:00:00+00:00",
+            "Average": 963.435195116867,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T19:00:00+00:00",
+            "Average": 972.6664316305032,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T02:00:00+00:00",
+            "Average": 960.8007157529706,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T15:00:00+00:00",
+            "Average": 960.0920239431097,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T13:00:00+00:00",
+            "Average": 970.4236563355211,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T20:00:00+00:00",
+            "Average": 958.5855990532717,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T22:00:00+00:00",
+            "Average": 958.3663580308511,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T09:00:00+00:00",
+            "Average": 955.8303560515494,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T16:00:00+00:00",
+            "Average": 959.9903740507161,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T07:00:00+00:00",
+            "Average": 969.4804950030853,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T14:00:00+00:00",
+            "Average": 963.6731365817108,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T13:00:00+00:00",
+            "Average": 962.2127932309237,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T20:00:00+00:00",
+            "Average": 966.7191394673538,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T11:00:00+00:00",
+            "Average": 960.5329259939252,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T18:00:00+00:00",
+            "Average": 965.5866165484088,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T14:00:00+00:00",
+            "Average": 967.5188691301828,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T16:00:00+00:00",
+            "Average": 975.9101233307107,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T07:00:00+00:00",
+            "Average": 980.2761220065291,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T05:00:00+00:00",
+            "Average": 959.3158144386722,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T08:00:00+00:00",
+            "Average": 1032.4654926816934,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T10:00:00+00:00",
+            "Average": 968.6638247340718,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T03:00:00+00:00",
+            "Average": 961.5186850395668,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T05:00:00+00:00",
+            "Average": 965.2504878273053,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T01:00:00+00:00",
+            "Average": 965.7861800689442,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T08:00:00+00:00",
+            "Average": 978.7790786684382,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T22:00:00+00:00",
+            "Average": 976.745874788898,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T15:00:00+00:00",
+            "Average": 964.8203509349847,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T19:00:00+00:00",
+            "Average": 967.1673242816311,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T02:00:00+00:00",
+            "Average": 964.0197029412399,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T09:00:00+00:00",
+            "Average": 966.9431234968594,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T16:00:00+00:00",
+            "Average": 974.699790743744,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T13:00:00+00:00",
+            "Average": 976.7468059818693,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T20:00:00+00:00",
+            "Average": 955.9351475887041,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T13:00:00+00:00",
+            "Average": 964.003429484446,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T17:00:00+00:00",
+            "Average": 956.7791606010998,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T00:00:00+00:00",
+            "Average": 973.3168959648896,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T10:00:00+00:00",
+            "Average": 970.7656821932757,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T07:00:00+00:00",
+            "Average": 978.3816412528729,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T11:00:00+00:00",
+            "Average": 972.8845882485972,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T18:00:00+00:00",
+            "Average": 968.0584145755281,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T14:00:00+00:00",
+            "Average": 966.5160813949916,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T04:00:00+00:00",
+            "Average": 960.0295187060203,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T01:00:00+00:00",
+            "Average": 974.5711566749109,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T21:00:00+00:00",
+            "Average": 965.0145989225887,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T19:00:00+00:00",
+            "Average": 970.5341950482881,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T15:00:00+00:00",
+            "Average": 1015.2450270227047,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T22:00:00+00:00",
+            "Average": 961.6667623005343,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T01:00:00+00:00",
+            "Average": 969.7115353220914,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T08:00:00+00:00",
+            "Average": 959.0233245059952,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T16:00:00+00:00",
+            "Average": 967.5468466277777,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T02:00:00+00:00",
+            "Average": 956.6355670166532,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T19:00:00+00:00",
+            "Average": 971.0452567277714,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T09:00:00+00:00",
+            "Average": 976.9550179769088,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T10:00:00+00:00",
+            "Average": 983.6812164800642,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T20:00:00+00:00",
+            "Average": 963.875007503995,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T03:00:00+00:00",
+            "Average": 961.8936448930677,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T07:00:00+00:00",
+            "Average": 966.5279242149435,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T14:00:00+00:00",
+            "Average": 955.7550852932764,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T00:00:00+00:00",
+            "Average": 979.4232044119636,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T20:00:00+00:00",
+            "Average": 968.6791348759361,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T17:00:00+00:00",
+            "Average": 954.2193001281362,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T08:00:00+00:00",
+            "Average": 989.5436843083531,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T11:00:00+00:00",
+            "Average": 961.9200934406504,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T01:00:00+00:00",
+            "Average": 959.9043807515758,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T04:00:00+00:00",
+            "Average": 970.8930965030294,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T14:00:00+00:00",
+            "Average": 968.295487419524,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T07:00:00+00:00",
+            "Average": 985.7556478838655,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T07:00:00+00:00",
+            "Average": 982.7887077096321,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T03:00:00+00:00",
+            "Average": 962.0630223338435,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T20:00:00+00:00",
+            "Average": 963.781774846105,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T02:00:00+00:00",
+            "Average": 965.8496231192955,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T19:00:00+00:00",
+            "Average": 965.0616532066625,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T15:00:00+00:00",
+            "Average": 971.3185864750914,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T21:00:00+00:00",
+            "Average": 975.7293992715001,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T14:00:00+00:00",
+            "Average": 975.2107203779177,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T20:00:00+00:00",
+            "Average": 967.2828823438565,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T09:00:00+00:00",
+            "Average": 964.1840443434027,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T15:00:00+00:00",
+            "Average": 1020.8102089675755,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T08:00:00+00:00",
+            "Average": 976.3314743570894,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T00:00:00+00:00",
+            "Average": 960.8154414615475,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T20:00:00+00:00",
+            "Average": 975.5024511788197,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T13:00:00+00:00",
+            "Average": 974.5513189081961,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T19:00:00+00:00",
+            "Average": 965.1802873420595,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T12:00:00+00:00",
+            "Average": 967.5177082774118,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T08:00:00+00:00",
+            "Average": 980.5221380794385,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T07:00:00+00:00",
+            "Average": 984.6878083937179,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T14:00:00+00:00",
+            "Average": 948.5535967011173,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T13:00:00+00:00",
+            "Average": 964.4780095673128,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T02:00:00+00:00",
+            "Average": 955.6166067197339,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T08:00:00+00:00",
+            "Average": 967.0774444079723,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T01:00:00+00:00",
+            "Average": 975.0975083966661,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T13:00:00+00:00",
+            "Average": 960.6591626690171,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T17:00:00+00:00",
+            "Average": 966.1734659173308,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T10:00:00+00:00",
+            "Average": 970.662004716822,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T12:00:00+00:00",
+            "Average": 968.6943065961788,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T07:00:00+00:00",
+            "Average": 972.8946352259064,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T05:00:00+00:00",
+            "Average": 959.2543581868711,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T04:00:00+00:00",
+            "Average": 968.6846179400941,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-27T06:00:00+00:00",
+            "Average": 962.4703602187424,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T23:00:00+00:00",
+            "Average": 956.4241934656488,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T01:00:00+00:00",
+            "Average": 974.5547409455584,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T22:00:00+00:00",
+            "Average": 972.572246271748,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-16T06:00:00+00:00",
+            "Average": 960.1788603408311,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T10:00:00+00:00",
+            "Average": 971.7273228273187,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-08T03:00:00+00:00",
+            "Average": 964.3892498580803,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-24T05:00:00+00:00",
+            "Average": 975.0361761595238,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T22:00:00+00:00",
+            "Average": 973.8063233668182,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T23:00:00+00:00",
+            "Average": 968.3279710486906,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-19T00:00:00+00:00",
+            "Average": 968.7962308806739,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T21:00:00+00:00",
+            "Average": 974.1072594047799,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T18:00:00+00:00",
+            "Average": 963.8415310767309,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-05T16:00:00+00:00",
+            "Average": 974.716647368077,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-13T15:00:00+00:00",
+            "Average": 965.8230534108154,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T11:00:00+00:00",
+            "Average": 962.6389485989254,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T16:00:00+00:00",
+            "Average": 971.6581407514487,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T07:00:00+00:00",
+            "Average": 973.1236488261658,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-26T06:00:00+00:00",
+            "Average": 957.6843680795905,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T15:00:00+00:00",
+            "Average": 964.953850193205,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T11:00:00+00:00",
+            "Average": 969.1089844353498,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-21T01:00:00+00:00",
+            "Average": 979.9243641812604,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T10:00:00+00:00",
+            "Average": 970.0272901377026,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-29T00:00:00+00:00",
+            "Average": 959.2043585859452,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T05:00:00+00:00",
+            "Average": 973.6008840540094,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T19:00:00+00:00",
+            "Average": 1193.6160001645235,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T04:00:00+00:00",
+            "Average": 968.3104795972718,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-31T04:00:00+00:00",
+            "Average": 963.0901148023479,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T09:00:00+00:00",
+            "Average": 971.4215510441488,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-18T00:00:00+00:00",
+            "Average": 978.1639135800575,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T08:00:00+00:00",
+            "Average": 976.1874410148878,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T23:00:00+00:00",
+            "Average": 968.3037328354546,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T04:00:00+00:00",
+            "Average": 969.1529375336211,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T03:00:00+00:00",
+            "Average": 957.2561659221493,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T18:00:00+00:00",
+            "Average": 964.4551159554043,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T17:00:00+00:00",
+            "Average": 968.7241729715862,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-03T22:00:00+00:00",
+            "Average": 967.0263616017781,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T12:00:00+00:00",
+            "Average": 960.1778218444691,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-11T21:00:00+00:00",
+            "Average": 963.7798253537302,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T21:00:00+00:00",
+            "Average": 961.9800561674933,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-07T06:00:00+00:00",
+            "Average": 970.0854935859354,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T17:00:00+00:00",
+            "Average": 960.3120095488409,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T16:00:00+00:00",
+            "Average": 972.5246249499354,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-15T05:00:00+00:00",
+            "Average": 959.9948211073341,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-02T01:00:00+00:00",
+            "Average": 965.5789854466052,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T11:00:00+00:00",
+            "Average": 968.5625684354521,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-10T00:00:00+00:00",
+            "Average": 964.858446160928,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T10:00:00+00:00",
+            "Average": 970.6960036203714,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T19:00:00+00:00",
+            "Average": 972.4818463433625,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-23T05:00:00+00:00",
+            "Average": 976.0662822027114,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T18:00:00+00:00",
+            "Average": 973.0051641529085,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-30T14:00:00+00:00",
+            "Average": 963.0738392344751,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-06T23:00:00+00:00",
+            "Average": 970.2095311211978,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-17T10:00:00+00:00",
+            "Average": 964.1662568455683,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-14T22:00:00+00:00",
+            "Average": 964.2491534587368,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-25T09:00:00+00:00",
+            "Average": 969.0460001568622,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-01T18:00:00+00:00",
+            "Average": 958.0200555284457,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-09T17:00:00+00:00",
+            "Average": 956.1713254262688,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-20T04:00:00+00:00",
+            "Average": 973.9489600359785,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-28T03:00:00+00:00",
+            "Average": 973.6227353800484,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-04T12:00:00+00:00",
+            "Average": 969.035241261536,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-09-12T11:00:00+00:00",
+            "Average": 973.6422067273337,
+            "Unit": "Bytes/Second"
+        },
+        {
+            "Timestamp": "2025-08-22T22:00:00+00:00",
+            "Average": 973.2637303605615,
+            "Unit": "Bytes/Second"
+        }
+    ]
+}

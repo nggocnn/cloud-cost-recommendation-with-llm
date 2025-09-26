@@ -1,0 +1,165 @@
+{
+    "Reservations": [
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-04d9e855d716f9c99",
+                    "InstanceId": "i-05ea7a5068995a703",
+                    "InstanceType": "t3.2xlarge",
+                    "KeyName": "cus360",
+                    "LaunchTime": "2023-03-08T06:50:27+00:00",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "ap-southeast-1b",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-172-31-31-12.ap-southeast-1.compute.internal",
+                    "PrivateIpAddress": "172.31.31.12",
+                    "ProductCodes": [],
+                    "PublicDnsName": "ec2-52-220-235-125.ap-southeast-1.compute.amazonaws.com",
+                    "PublicIpAddress": "52.220.235.125",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "StateTransitionReason": "",
+                    "SubnetId": "subnet-776a6810",
+                    "VpcId": "vpc-4c7d212b",
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1",
+                            "Ebs": {
+                                "AttachTime": "2022-05-25T04:27:48+00:00",
+                                "DeleteOnTermination": false,
+                                "Status": "attached",
+                                "VolumeId": "vol-03c3299cb298fb458"
+                            }
+                        }
+                    ],
+                    "ClientToken": "",
+                    "EbsOptimized": true,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "IamInstanceProfile": {
+                        "Arn": "arn:aws:iam::540302794831:instance-profile/AmazonSSMRoleForInstancesQuickSetup",
+                        "Id": "AIPAX3TEOMBHVLWPKYMEW"
+                    },
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "540302794831",
+                                "PublicDnsName": "ec2-52-220-235-125.ap-southeast-1.compute.amazonaws.com",
+                                "PublicIp": "52.220.235.125"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2022-05-25T03:17:40+00:00",
+                                "AttachmentId": "eni-attach-09fd39ec563664c31",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached"
+                            },
+                            "Description": "",
+                            "Groups": [
+                                {
+                                    "GroupName": "launch-wizard-10",
+                                    "GroupId": "sg-0d7ff6ad3f1569ab2"
+                                }
+                            ],
+                            "Ipv6Addresses": [],
+                            "MacAddress": "02:f1:a6:6a:c8:dc",
+                            "NetworkInterfaceId": "eni-0ea8a8ba7b01f20b2",
+                            "OwnerId": "540302794831",
+                            "PrivateDnsName": "ip-172-31-31-12.ap-southeast-1.compute.internal",
+                            "PrivateIpAddress": "172.31.31.12",
+                            "PrivateIpAddresses": [
+                                {
+                                    "Association": {
+                                        "IpOwnerId": "540302794831",
+                                        "PublicDnsName": "ec2-52-220-235-125.ap-southeast-1.compute.amazonaws.com",
+                                        "PublicIp": "52.220.235.125"
+                                    },
+                                    "Primary": true,
+                                    "PrivateDnsName": "ip-172-31-31-12.ap-southeast-1.compute.internal",
+                                    "PrivateIpAddress": "172.31.31.12"
+                                }
+                            ],
+                            "SourceDestCheck": true,
+                            "Status": "in-use",
+                            "SubnetId": "subnet-776a6810",
+                            "VpcId": "vpc-4c7d212b",
+                            "InterfaceType": "interface"
+                        }
+                    ],
+                    "RootDeviceName": "/dev/sda1",
+                    "RootDeviceType": "ebs",
+                    "SecurityGroups": [
+                        {
+                            "GroupName": "launch-wizard-10",
+                            "GroupId": "sg-0d7ff6ad3f1569ab2"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Tags": [
+                        {
+                            "Key": "Purpose",
+                            "Value": "backend server main"
+                        },
+                        {
+                            "Key": "ProjectID",
+                            "Value": "CUS360CRA"
+                        },
+                        {
+                            "Key": "Project",
+                            "Value": "Cus360"
+                        },
+                        {
+                            "Key": "ApplicationName",
+                            "Value": "Cus360-Crawler"
+                        },
+                        {
+                            "Key": "Creator",
+                            "Value": "phutv12"
+                        },
+                        {
+                            "Key": "OwnerService",
+                            "Value": "khoaqd1"
+                        },
+                        {
+                            "Key": "DailyStop",
+                            "Value": "False"
+                        },
+                        {
+                            "Key": "Name",
+                            "Value": "cus360-backend-t3.2xlarge"
+                        }
+                    ],
+                    "VirtualizationType": "hvm",
+                    "CpuOptions": {
+                        "CoreCount": 4,
+                        "ThreadsPerCore": 2
+                    },
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    },
+                    "HibernationOptions": {
+                        "Configured": false
+                    },
+                    "MetadataOptions": {
+                        "State": "applied",
+                        "HttpTokens": "optional",
+                        "HttpPutResponseHopLimit": 1,
+                        "HttpEndpoint": "enabled"
+                    }
+                }
+            ],
+            "OwnerId": "540302794831",
+            "ReservationId": "r-073e1ce4c14b7a410"
+        }
+    ]
+}

@@ -1,5 +1,6 @@
 """
-Data ingestion service for AWS cost and usage data.
+Enhanced data ingestion service for cloud cost and usage data.
+Supports both file-based ingestion (CSV/JSON) and direct JSON API input.
 """
 
 import pandas as pd
@@ -320,6 +321,198 @@ class DataIngestionService:
         }
 
         return service_mapping.get(service_name.upper())
+
+    def ingest_billing_data_json(self, billing_records: List[BillingData]) -> List[BillingData]:
+        """Ingest billing data from JSON API request (direct data objects)"""
+        logger.info("Processing billing data from API", record_count=len(billing_records))
+        
+        try:
+            processed_records = []
+            
+            for i, record in enumerate(billing_records):
+                try:
+                    # Validate the record (Pydantic model validation already done)
+                    if not record.service:
+                        logger.warning("Billing record missing service", record_index=i)
+                        continue
+                        
+                    processed_records.append(record)
+                    
+                except Exception as e:
+                    logger.warning(
+                        "Failed to process billing record",
+                        record_index=i,
+                        error=str(e)
+                    )
+                    continue
+            
+            logger.info(
+                "Billing data processing completed",
+                total_input=len(billing_records),
+                successfully_processed=len(processed_records)
+            )
+            return processed_records
+            
+        except Exception as e:
+            logger.error("Failed to process billing data from API", error=str(e))
+            raise ValueError(f"Billing data processing failed: {str(e)}")
+
+    def ingest_inventory_data_json(self, resource_records: List[Resource]) -> List[Resource]:
+        """Ingest resource inventory from JSON API request (direct data objects)"""
+        logger.info("Processing inventory data from API", record_count=len(resource_records))
+        
+        try:
+            processed_resources = []
+            
+            for i, record in enumerate(resource_records):
+                try:
+                    # Validate required fields (Pydantic validation already done)
+                    if not record.resource_id or not record.service:
+                        logger.warning("Resource missing required fields", record_index=i)
+                        continue
+                    
+                    processed_resources.append(record)
+                    
+                except Exception as e:
+                    logger.warning(
+                        "Failed to process resource record",
+                        record_index=i,
+                        error=str(e)
+                    )
+                    continue
+            
+            if not processed_resources:
+                raise ValueError("No valid resources found in the input data")
+            
+            logger.info(
+                "Inventory data processing completed",
+                total_input=len(resource_records),
+                successfully_processed=len(processed_resources)
+            )
+            return processed_resources
+            
+        except Exception as e:
+            logger.error("Failed to process inventory data from API", error=str(e))
+            raise ValueError(f"Inventory data processing failed: {str(e)}")
+
+    def ingest_metrics_data_json(self, metrics_records: List[Metrics]) -> List[Metrics]:
+        """Ingest metrics data from JSON API request (direct data objects)"""
+        logger.info("Processing metrics data from API", record_count=len(metrics_records))
+        
+        try:
+            processed_metrics = []
+            
+            for i, record in enumerate(metrics_records):
+                try:
+                    # Validate required fields (Pydantic validation already done)
+                    if not record.resource_id:
+                        logger.warning("Metrics record missing resource_id", record_index=i)
+                        continue
+                    
+                    processed_metrics.append(record)
+                    
+                except Exception as e:
+                    logger.warning(
+                        "Failed to process metrics record",
+                        record_index=i,
+                        error=str(e)
+                    )
+                    continue
+            
+            logger.info(
+                "Metrics data processing completed",
+                total_input=len(metrics_records),
+                successfully_processed=len(processed_metrics)
+            )
+            return processed_metrics
+            
+        except Exception as e:
+            logger.error("Failed to process metrics data from API", error=str(e))
+            raise ValueError(f"Metrics data processing failed: {str(e)}")
+
+    def validate_request_data(
+        self, 
+        resources: List[Resource], 
+        billing: List[BillingData] = None, 
+        metrics: List[Metrics] = None
+    ) -> Dict[str, Any]:
+        """Validate and analyze the incoming request data"""
+        
+        validation_result = {
+            "valid": True,
+            "warnings": [],
+            "errors": [],
+            "stats": {
+                "resources": len(resources),
+                "billing_records": len(billing or []),
+                "metrics_records": len(metrics or []),
+            }
+        }
+        
+        try:
+            # Check for required resources
+            if not resources:
+                validation_result["errors"].append("At least one resource is required")
+                validation_result["valid"] = False
+                return validation_result
+            
+            # Collect resource IDs for validation
+            resource_ids = set(r.resource_id for r in resources)
+            
+            # Validate billing data alignment
+            if billing:
+                billing_resource_ids = set(
+                    b.resource_id for b in billing 
+                    if b.resource_id is not None
+                )
+                unmatched_billing = billing_resource_ids - resource_ids
+                if unmatched_billing:
+                    validation_result["warnings"].append(
+                        f"Billing data found for {len(unmatched_billing)} resources "
+                        f"not in inventory: {list(unmatched_billing)[:5]}{'...' if len(unmatched_billing) > 5 else ''}"
+                    )
+            
+            # Validate metrics data alignment  
+            if metrics:
+                metrics_resource_ids = set(m.resource_id for m in metrics)
+                unmatched_metrics = metrics_resource_ids - resource_ids
+                if unmatched_metrics:
+                    validation_result["warnings"].append(
+                        f"Metrics data found for {len(unmatched_metrics)} resources "
+                        f"not in inventory: {list(unmatched_metrics)[:5]}{'...' if len(unmatched_metrics) > 5 else ''}"
+                    )
+                
+                # Check for resources without metrics
+                missing_metrics = resource_ids - metrics_resource_ids
+                if missing_metrics:
+                    validation_result["warnings"].append(
+                        f"{len(missing_metrics)} resources have no metrics data, "
+                        f"which may limit recommendation accuracy"
+                    )
+            
+            # Check service type distribution
+            service_counts = {}
+            for resource in resources:
+                service_name = resource.service.value if hasattr(resource.service, 'value') else str(resource.service)
+                service_counts[service_name] = service_counts.get(service_name, 0) + 1
+            
+            validation_result["stats"]["service_distribution"] = service_counts
+            
+            # Check for potential data quality issues
+            resources_without_tags = sum(1 for r in resources if not r.tags)
+            if resources_without_tags > 0:
+                validation_result["warnings"].append(
+                    f"{resources_without_tags} resources have no tags, "
+                    f"which may limit cost allocation insights"
+                )
+            
+            return validation_result
+            
+        except Exception as e:
+            logger.error("Validation failed", error=str(e))
+            validation_result["errors"].append(f"Validation error: {str(e)}")
+            validation_result["valid"] = False
+            return validation_result
 
     def create_sample_data(self, num_resources: int = 200):
         """Create realistic AWS data files for comprehensive testing"""

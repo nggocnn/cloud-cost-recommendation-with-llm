@@ -1,0 +1,56 @@
+{
+    "Volumes": [
+        {
+            "Attachments": [
+                {
+                    "AttachTime": "2022-05-25T04:27:48+00:00",
+                    "Device": "/dev/sda1",
+                    "InstanceId": "i-05ea7a5068995a703",
+                    "State": "attached",
+                    "VolumeId": "vol-03c3299cb298fb458",
+                    "DeleteOnTermination": false
+                }
+            ],
+            "AvailabilityZone": "ap-southeast-1b",
+            "CreateTime": "2022-05-25T04:23:25.770000+00:00",
+            "Encrypted": false,
+            "Size": 100,
+            "SnapshotId": "snap-0fdf9f91af2cd3f38",
+            "State": "in-use",
+            "VolumeId": "vol-03c3299cb298fb458",
+            "Iops": 300,
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "volume-cus360-backend"
+                },
+                {
+                    "Key": "ProjectID",
+                    "Value": "CUS360CRA"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "Cus360-Crawler"
+                },
+                {
+                    "Key": "ApplicationName",
+                    "Value": "Cus360-Crawler"
+                },
+                {
+                    "Key": "Creator",
+                    "Value": "phutv12"
+                },
+                {
+                    "Key": "Purpose",
+                    "Value": "backend volumn"
+                },
+                {
+                    "Key": "OwnerService",
+                    "Value": "khoaqd1"
+                }
+            ],
+            "VolumeType": "gp2",
+            "MultiAttachEnabled": false
+        }
+    ]
+}

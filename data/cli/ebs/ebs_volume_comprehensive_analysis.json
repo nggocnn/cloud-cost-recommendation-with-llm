@@ -1,0 +1,129 @@
+{
+  "ebs_volume_detailed_analysis": {
+    "volume_id": "vol-0aa0216d21533fa45",
+    "basic_information": {
+      "volume_type": "gp3",
+      "size_gb": 30,
+      "availability_zone": "us-west-2a",
+      "creation_time": "2025-04-10T07:58:01.246000+00:00",
+      "state": "in-use",
+      "encrypted": false,
+      "iops": 3000,
+      "multi_attach_enabled": false
+    },
+    "attachment_details": {
+      "attached_to_instance": "i-0fa16698357c707c7",
+      "instance_name": "RAGFlow-Ollama",
+      "device_name": "/dev/xvda",
+      "attachment_time": "2025-04-10T07:58:01+00:00",
+      "attachment_state": "attached",
+      "delete_on_termination": true,
+      "role": "Root volume"
+    },
+    "source_snapshot": {
+      "snapshot_id": "snap-0a730b8d0660fdc68",
+      "description": "al2023-ami-2023.7.20250331.0-kernel-6.1-x86_64.xfs.gpt",
+      "original_volume_size": "8 GB",
+      "expanded_to": "30 GB",
+      "owner": "amazon (137112412989)",
+      "creation_date": "2025-03-29T05:16:00.129000+00:00",
+      "operating_system": "Amazon Linux 2023"
+    },
+    "performance_characteristics": {
+      "volume_type_details": {
+        "type": "gp3 (General Purpose SSD)",
+        "baseline_iops": 3000,
+        "baseline_throughput": "125 MB/s",
+        "max_iops": "16,000 (for volumes >= 1 TiB)",
+        "max_throughput": "1,000 MB/s",
+        "cost_optimization": "More cost-effective than gp2 with better performance"
+      },
+      "actual_performance_metrics": {
+        "monitoring_period": "2025-04-10 (operational day)",
+        "read_operations": {
+          "07:00_hour": {
+            "total_reads": 5671,
+            "average_per_minute": 2835.5,
+            "note": "High read activity during startup"
+          },
+          "08:00_hour": {
+            "total_reads": 18739,
+            "average_per_minute": 312.32,
+            "note": "Peak read operations during active usage"
+          },
+          "09:00_hour": {
+            "total_reads": 2,
+            "average_per_minute": 0.04,
+            "note": "Minimal activity before shutdown"
+          }
+        },
+        "write_operations": {
+          "07:00_hour": {
+            "total_writes": 589,
+            "average_per_minute": 294.5,
+            "note": "Initial write activity during startup"
+          },
+          "08:00_hour": {
+            "total_writes": 101020,
+            "average_per_minute": 1683.67,
+            "note": "Very high write activity - likely application data processing"
+          },
+          "09:00_hour": {
+            "total_writes": 2766,
+            "average_per_minute": 54.24,
+            "note": "Cleanup writes before shutdown"
+          }
+        }
+      }
+    },
+    "capacity_analysis": {
+      "configured_size": "30 GB",
+      "expansion_from_original": "8 GB → 30 GB (3.75x increase)",
+      "usage_pattern": "Root volume for AI/ML workload (RAGFlow-Ollama)",
+      "sizing_assessment": "Appropriate for development/testing workloads"
+    },
+    "security_and_compliance": {
+      "encryption_status": "Not encrypted",
+      "recommendation": "Consider enabling encryption for production workloads",
+      "data_protection": "Relies on snapshot backup strategy",
+      "access_control": "Controlled through EC2 instance permissions"
+    },
+    "cost_analysis": {
+      "volume_type": "gp3",
+      "pricing_model": "Pay for provisioned storage + IOPS",
+      "monthly_cost_estimate": {
+        "storage": "30 GB × $0.08/GB = $2.40/month",
+        "iops": "3000 IOPS included (no additional charge)",
+        "total_estimated": "~$2.40/month"
+      },
+      "optimization_opportunities": [
+        "Volume appears to be right-sized for the workload",
+        "gp3 is already the most cost-effective option for this size",
+        "Consider implementing automated snapshots for backup"
+      ]
+    },
+    "operational_insights": {
+      "workload_pattern": "Burst-intensive with high write operations during active periods",
+      "performance_utilization": "Well within gp3 performance limits",
+      "availability": "Single-AZ deployment (us-west-2a)",
+      "backup_strategy": "Relies on AMI snapshot, consider regular volume snapshots"
+    },
+    "recommendations": {
+      "immediate": [
+        "Enable encryption for future volumes",
+        "Set up automated snapshot schedule",
+        "Monitor volume performance during peak usage"
+      ],
+      "optimization": [
+        "Current configuration appears optimal for the workload",
+        "Consider lifecycle policies for snapshot management",
+        "Monitor actual usage vs. provisioned capacity"
+      ],
+      "scaling": [
+        "Volume can be resized online if needed",
+        "IOPS can be increased up to 16,000 if required",
+        "Consider multi-AZ deployment for production workloads"
+      ]
+    }
+  }
+}

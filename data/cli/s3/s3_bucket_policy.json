@@ -1,0 +1,3 @@
+{
+    "Policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"EnableAWSDataExportsToOldBucket\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":[\"bcm-data-exports.amazonaws.com\",\"billingreports.amazonaws.com\"]},\"Action\":[\"s3:PutObject\",\"s3:GetBucketAcl\",\"s3:GetBucketPolicy\"],\"Resource\":[\"arn:aws:s3:::eip-finops\",\"arn:aws:s3:::eip-finops/*\"],\"Condition\":{\"StringLike\":{\"aws:SourceArn\":[\"arn:aws:cur:us-east-1:729713917879:definition/*\",\"arn:aws:bcm-data-exports:us-east-1:729713917879:export/*\"],\"aws:SourceAccount\":\"729713917879\"}}}]}"
+}

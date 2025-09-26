@@ -1,0 +1,103 @@
+{
+    "DBInstances": [
+        {
+            "DBInstanceIdentifier": "akaocr360-1",
+            "DBInstanceClass": "db.t3.small",
+            "Engine": "postgres",
+            "DBInstanceStatus": "available",
+            "MasterUsername": "postgres",
+            "DBName": "akaocr360db",
+            "Endpoint": {
+                "Address": "akaocr360-1.cqiogi4txqlf.ap-southeast-1.rds.amazonaws.com",
+                "Port": 5432,
+                "HostedZoneId": "Z2G0U3KFCY8NZ5"
+            },
+            "AllocatedStorage": 100,
+            "InstanceCreateTime": "2024-06-26T03:44:56.292000+00:00",
+            "PreferredBackupWindow": "15:42-16:12",
+            "BackupRetentionPeriod": 0,
+            "DBSecurityGroups": [],
+            "VpcSecurityGroups": [
+                {
+                    "VpcSecurityGroupId": "sg-0027368026797bd1f",
+                    "Status": "active"
+                }
+            ],
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "default.postgres16",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "AvailabilityZone": "ap-southeast-1b",
+            "DBSubnetGroup": {
+                "DBSubnetGroupName": "default-vpc-0b6116b2e053ea61d",
+                "DBSubnetGroupDescription": "Created from the RDS Management Console",
+                "VpcId": "vpc-0b6116b2e053ea61d",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetIdentifier": "subnet-0a4c3fa605cc90efb",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1b"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-0b2f64d6b2583a63e",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1a"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-04683ae995cbcf968",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1a"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-09fd9cd7694cc3034",
+                        "SubnetAvailabilityZone": {
+                            "Name": "ap-southeast-1b"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ]
+            },
+            "PreferredMaintenanceWindow": "sat:19:11-sat:19:41",
+            "PendingModifiedValues": {},
+            "MultiAZ": false,
+            "EngineVersion": "16.3",
+            "AutoMinorVersionUpgrade": false,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "LicenseModel": "postgresql-license",
+            "Iops": 3000,
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:postgres-16",
+                    "Status": "in-sync"
+                }
+            ],
+            "PubliclyAccessible": true,
+            "StorageType": "gp3",
+            "DbInstancePort": 0,
+            "StorageEncrypted": false,
+            "DbiResourceId": "db-J3B2PB3QOA33V42WZG374GGDZM",
+            "CACertificateIdentifier": "rds-ca-rsa2048-g1",
+            "DomainMemberships": [],
+            "CopyTagsToSnapshot": true,
+            "MonitoringInterval": 0,
+            "DBInstanceArn": "arn:aws:rds:ap-southeast-1:540302794831:db:akaocr360-1",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "PerformanceInsightsEnabled": false,
+            "DeletionProtection": false,
+            "AssociatedRoles": []
+        }
+    ]
+}

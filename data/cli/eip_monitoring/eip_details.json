@@ -1,0 +1,126 @@
+{
+    "Addresses": [
+        {
+            "InstanceId": "i-0d56263113315b3b4",
+            "PublicIp": "13.215.36.68",
+            "AllocationId": "eipalloc-02f8fe05966952080",
+            "AssociationId": "eipassoc-0a0e6e794fea5c970",
+            "Domain": "vpc",
+            "NetworkInterfaceId": "eni-00efb2143f4c7f976",
+            "NetworkInterfaceOwnerId": "540302794831",
+            "PrivateIpAddress": "10.0.0.106",
+            "Tags": [
+                {
+                    "Key": "ProjectID",
+                    "Value": "AIO.OCR.Remitcard"
+                },
+                {
+                    "Key": "OwnerService",
+                    "Value": "DiemLM"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "KYC-SSNB-EIP"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "KYC-SSNB"
+                },
+                {
+                    "Key": "Creator",
+                    "Value": "ChienNH2"
+                },
+                {
+                    "Key": "Purpose",
+                    "Value": "Deploy web"
+                },
+                {
+                    "Key": "ApplicationName",
+                    "Value": "KYC-SSNB"
+                }
+            ],
+            "PublicIpv4Pool": "amazon",
+            "NetworkBorderGroup": "ap-southeast-1"
+        },
+        {
+            "InstanceId": "i-018014ba6cb413b35",
+            "PublicIp": "13.251.148.194",
+            "AllocationId": "eipalloc-00747783d4cb7176e",
+            "AssociationId": "eipassoc-0a4d3e28bb45497b7",
+            "Domain": "vpc",
+            "NetworkInterfaceId": "eni-04aa6e6cdeb9e7f6d",
+            "NetworkInterfaceOwnerId": "540302794831",
+            "PrivateIpAddress": "172.31.45.173",
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "livingkb-JALDX-uat-eip"
+                },
+                {
+                    "Key": "OwnerService",
+                    "Value": "DiemLM"
+                },
+                {
+                    "Key": "Creator",
+                    "Value": "tienpm3"
+                },
+                {
+                    "Key": "ProjectId",
+                    "Value": "QAIMulti2024"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "Living-KB"
+                },
+                {
+                    "Key": "ApplicationName",
+                    "Value": "Living-KB"
+                }
+            ],
+            "PublicIpv4Pool": "amazon",
+            "NetworkBorderGroup": "ap-southeast-1"
+        },
+        {
+            "InstanceId": "i-07350153600c3b3ba",
+            "PublicIp": "13.251.234.212",
+            "AllocationId": "eipalloc-0bd5ac71e155befd1",
+            "AssociationId": "eipassoc-0fda9a3671c206f7a",
+            "Domain": "vpc",
+            "NetworkInterfaceId": "eni-05cae00992a3d6c74",
+            "NetworkInterfaceOwnerId": "540302794831",
+            "PrivateIpAddress": "172.31.1.164",
+            "Tags": [
+                {
+                    "Key": "OwnerService",
+                    "Value": "AnhDDD"
+                },
+                {
+                    "Key": "ApplicationName",
+                    "Value": "akaInspection AI"
+                },
+                {
+                    "Key": "Creator",
+                    "Value": "NghiaBV3"
+                },
+                {
+                    "Key": "Project",
+                    "Value": "ABDEC"
+                },
+                {
+                    "Key": "ProjectID",
+                    "Value": "Seino"
+                },
+                {
+                    "Key": "Purpose",
+                    "Value": "Public akaInspection AI"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "akaInspection AI"
+                }
+            ],
+            "PublicIpv4Pool": "amazon",
+            "NetworkBorderGroup": "ap-southeast-1"
+        }
+    ]
+}

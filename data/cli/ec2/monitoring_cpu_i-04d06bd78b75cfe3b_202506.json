@@ -1,0 +1,3605 @@
+{
+    "Label": "CPUUtilization",
+    "Datapoints": [
+        {
+            "Timestamp": "2025-07-14T09:00:00+00:00",
+            "Average": 3.4022226124416166,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T00:00:00+00:00",
+            "Average": 1.2062841641669855,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T07:00:00+00:00",
+            "Average": 3.598159895142037,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T14:00:00+00:00",
+            "Average": 3.6792800179005054,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T21:00:00+00:00",
+            "Average": 2.962721556571788,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T04:00:00+00:00",
+            "Average": 2.840296576188379,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T11:00:00+00:00",
+            "Average": 3.264396413173093,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T18:00:00+00:00",
+            "Average": 3.281911462780307,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T01:00:00+00:00",
+            "Average": 3.3430916432446964,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T10:00:00+00:00",
+            "Average": 1.1997410799410284,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T17:00:00+00:00",
+            "Average": 3.231989392503264,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T00:00:00+00:00",
+            "Average": 2.9372364920721896,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T07:00:00+00:00",
+            "Average": 4.876903631610219,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T14:00:00+00:00",
+            "Average": 3.25143270794014,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T21:00:00+00:00",
+            "Average": 3.3341887150948986,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T04:00:00+00:00",
+            "Average": 3.4590196248196277,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T07:00:00+00:00",
+            "Average": 5.361294573356454,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T22:00:00+00:00",
+            "Average": 1.2187548423284456,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T05:00:00+00:00",
+            "Average": 1.164590987781501,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T12:00:00+00:00",
+            "Average": 3.4882306885877674,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T19:00:00+00:00",
+            "Average": 3.04784132287237,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T02:00:00+00:00",
+            "Average": 2.8387812624920694,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T09:00:00+00:00",
+            "Average": 3.119657990323805,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T16:00:00+00:00",
+            "Average": 3.3195786107242005,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T23:00:00+00:00",
+            "Average": 3.4369607471998975,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T21:00:00+00:00",
+            "Average": 1.2180147079416268,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T04:00:00+00:00",
+            "Average": 1.1505479917251757,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T11:00:00+00:00",
+            "Average": 3.5404794535510318,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T18:00:00+00:00",
+            "Average": 2.996405715201837,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T01:00:00+00:00",
+            "Average": 2.8534544741025574,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T08:00:00+00:00",
+            "Average": 3.1538970898011915,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T15:00:00+00:00",
+            "Average": 3.320950704491634,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T22:00:00+00:00",
+            "Average": 3.4500266576425047,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T12:00:00+00:00",
+            "Average": 3.415384621278082,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T08:00:00+00:00",
+            "Average": 3.4221578490923075,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T02:00:00+00:00",
+            "Average": 1.1800580557521807,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T09:00:00+00:00",
+            "Average": 1.2000111265613687,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T16:00:00+00:00",
+            "Average": 3.2241669718914214,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T23:00:00+00:00",
+            "Average": 2.905232708018522,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T06:00:00+00:00",
+            "Average": 3.168029038779387,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T13:00:00+00:00",
+            "Average": 3.251110129020111,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T20:00:00+00:00",
+            "Average": 3.363665143723916,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T03:00:00+00:00",
+            "Average": 3.397123031266342,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T10:00:00+00:00",
+            "Average": 3.408909267647674,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T05:00:00+00:00",
+            "Average": 3.34416891217898,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T04:00:00+00:00",
+            "Average": 1.3058125713932829,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T11:00:00+00:00",
+            "Average": 1.5433533245699802,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T18:00:00+00:00",
+            "Average": 3.2247583579163934,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T01:00:00+00:00",
+            "Average": 2.9084760802235876,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T08:00:00+00:00",
+            "Average": 3.091092124404396,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T15:00:00+00:00",
+            "Average": 3.271675569908296,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T22:00:00+00:00",
+            "Average": 3.350555971199741,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T05:00:00+00:00",
+            "Average": 3.41001258804669,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T11:00:00+00:00",
+            "Average": 3.13695356659713,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T18:00:00+00:00",
+            "Average": 3.29639315135533,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T01:00:00+00:00",
+            "Average": 3.2884001220631958,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T10:00:00+00:00",
+            "Average": 3.4527560781257853,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T02:00:00+00:00",
+            "Average": 1.2171505724905471,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T09:00:00+00:00",
+            "Average": 1.155862114638975,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T16:00:00+00:00",
+            "Average": 3.585555254483532,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T23:00:00+00:00",
+            "Average": 2.913924657621002,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T06:00:00+00:00",
+            "Average": 2.8953166335929668,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T13:00:00+00:00",
+            "Average": 3.7639852020280804,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T20:00:00+00:00",
+            "Average": 3.301390799705991,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T03:00:00+00:00",
+            "Average": 3.3353584248268153,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T01:00:00+00:00",
+            "Average": 1.2054945818289862,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T08:00:00+00:00",
+            "Average": 1.202308924576699,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T15:00:00+00:00",
+            "Average": 3.6119164601596556,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T22:00:00+00:00",
+            "Average": 2.9191299235727914,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T05:00:00+00:00",
+            "Average": 2.8482300888862357,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T12:00:00+00:00",
+            "Average": 3.2383559274941573,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T19:00:00+00:00",
+            "Average": 3.256432858784955,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T02:00:00+00:00",
+            "Average": 3.3510951088076313,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T08:00:00+00:00",
+            "Average": 3.285487788994525,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T03:00:00+00:00",
+            "Average": 1.5557949379851201,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T11:00:00+00:00",
+            "Average": 3.636291601419889,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T23:00:00+00:00",
+            "Average": 1.2076856678800518,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T06:00:00+00:00",
+            "Average": 1.2674703795662359,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T13:00:00+00:00",
+            "Average": 3.9220757181975165,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T20:00:00+00:00",
+            "Average": 2.929640083275568,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T03:00:00+00:00",
+            "Average": 2.8142862206626478,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T10:00:00+00:00",
+            "Average": 3.1261336635926376,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T17:00:00+00:00",
+            "Average": 3.2961988702577356,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T00:00:00+00:00",
+            "Average": 3.3069466074010925,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T06:00:00+00:00",
+            "Average": 3.7636990724446306,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T15:00:00+00:00",
+            "Average": 3.3106659070481252,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T10:00:00+00:00",
+            "Average": 3.3233858065591813,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T08:00:00+00:00",
+            "Average": 1.194276567143454,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T22:00:00+00:00",
+            "Average": 2.9008132204741766,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T12:00:00+00:00",
+            "Average": 3.139965846064676,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T02:00:00+00:00",
+            "Average": 3.247457592021732,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T23:00:00+00:00",
+            "Average": 1.2205287098082123,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T13:00:00+00:00",
+            "Average": 3.247765547189339,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T03:00:00+00:00",
+            "Average": 3.1083311534936717,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T17:00:00+00:00",
+            "Average": 3.3730653437376628,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T22:00:00+00:00",
+            "Average": 3.3371021904429257,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T19:00:00+00:00",
+            "Average": 1.2029432467434626,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T09:00:00+00:00",
+            "Average": 4.638496667298921,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T23:00:00+00:00",
+            "Average": 2.8478368565606096,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T13:00:00+00:00",
+            "Average": 3.275558370335344,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T06:00:00+00:00",
+            "Average": 1.3590048161516437,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T20:00:00+00:00",
+            "Average": 3.2369621398235635,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T10:00:00+00:00",
+            "Average": 3.465290131541775,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T21:00:00+00:00",
+            "Average": 1.2542913429621338,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T00:00:00+00:00",
+            "Average": 3.303261587239096,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T11:00:00+00:00",
+            "Average": 3.593352964132821,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T01:00:00+00:00",
+            "Average": 2.861925994762593,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T09:00:00+00:00",
+            "Average": 3.4202862348293057,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T12:00:00+00:00",
+            "Average": 1.1989163167212702,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T02:00:00+00:00",
+            "Average": 2.8832968637929772,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T16:00:00+00:00",
+            "Average": 3.274827469514477,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T06:00:00+00:00",
+            "Average": 3.480280300658026,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T03:00:00+00:00",
+            "Average": 1.172665964251371,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T17:00:00+00:00",
+            "Average": 2.912859167483544,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T07:00:00+00:00",
+            "Average": 5.059516644144636,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T21:00:00+00:00",
+            "Average": 3.4169654665618823,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T00:00:00+00:00",
+            "Average": 1.1997071301925577,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T14:00:00+00:00",
+            "Average": 3.481882333937717,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T04:00:00+00:00",
+            "Average": 2.826387817153331,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T16:00:00+00:00",
+            "Average": 3.4233369261385764,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T07:00:00+00:00",
+            "Average": 5.074288833402335,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T10:00:00+00:00",
+            "Average": 1.1810051956920697,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T00:00:00+00:00",
+            "Average": 2.905144067508155,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T14:00:00+00:00",
+            "Average": 3.318307052892239,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T04:00:00+00:00",
+            "Average": 3.578575471264305,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T01:00:00+00:00",
+            "Average": 1.1935892686240477,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T15:00:00+00:00",
+            "Average": 3.026298722633929,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T05:00:00+00:00",
+            "Average": 3.124699498791648,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T19:00:00+00:00",
+            "Average": 3.43028067659655,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T12:00:00+00:00",
+            "Average": 1.2204904734133435,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T02:00:00+00:00",
+            "Average": 2.9138751501483395,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T16:00:00+00:00",
+            "Average": 3.306192889853383,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T06:00:00+00:00",
+            "Average": 3.37564521902644,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T03:00:00+00:00",
+            "Average": 1.1868960874309133,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T17:00:00+00:00",
+            "Average": 3.023668793152889,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T07:00:00+00:00",
+            "Average": 5.071921099998969,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T21:00:00+00:00",
+            "Average": 3.4655421905386183,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T23:00:00+00:00",
+            "Average": 1.267870340807563,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T13:00:00+00:00",
+            "Average": 3.647869467264761,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T03:00:00+00:00",
+            "Average": 2.8330541917418004,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T17:00:00+00:00",
+            "Average": 3.292794018756982,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T10:00:00+00:00",
+            "Average": 1.1455456305945182,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T00:00:00+00:00",
+            "Average": 3.1434064374186677,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T14:00:00+00:00",
+            "Average": 3.165002246229191,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T04:00:00+00:00",
+            "Average": 3.5021242460511703,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T01:00:00+00:00",
+            "Average": 1.204974694970683,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T15:00:00+00:00",
+            "Average": 3.1861324961819415,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T05:00:00+00:00",
+            "Average": 3.0769231835484776,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T19:00:00+00:00",
+            "Average": 3.3894492288346587,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T02:00:00+00:00",
+            "Average": 1.7585051751737026,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T05:00:00+00:00",
+            "Average": 3.261173373637647,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T16:00:00+00:00",
+            "Average": 3.5030584027549745,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T06:00:00+00:00",
+            "Average": 2.8994003854241868,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T20:00:00+00:00",
+            "Average": 3.3029819889308834,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T07:00:00+00:00",
+            "Average": 3.6558255412202856,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T21:00:00+00:00",
+            "Average": 2.9093520847890075,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T11:00:00+00:00",
+            "Average": 3.2444327902285317,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T01:00:00+00:00",
+            "Average": 3.431101114769632,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T04:00:00+00:00",
+            "Average": 1.224978212200501,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T18:00:00+00:00",
+            "Average": 3.3429948343867832,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T08:00:00+00:00",
+            "Average": 2.852922980593102,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T07:00:00+00:00",
+            "Average": 5.069444200592214,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T12:00:00+00:00",
+            "Average": 3.3180585913849643,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T00:00:00+00:00",
+            "Average": 0.6133054437582826,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T14:00:00+00:00",
+            "Average": 1.201190579827678,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T04:00:00+00:00",
+            "Average": 3.1071007406835016,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T03:00:00+00:00",
+            "Average": 3.417896908793814,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T18:00:00+00:00",
+            "Average": 3.243847199540093,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T08:00:00+00:00",
+            "Average": 3.497816063086409,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T05:00:00+00:00",
+            "Average": 1.184699719695756,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T19:00:00+00:00",
+            "Average": 2.885559152352868,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T09:00:00+00:00",
+            "Average": 3.2615436619575235,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T23:00:00+00:00",
+            "Average": 3.313285691135803,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T14:00:00+00:00",
+            "Average": 3.387950223651006,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T17:00:00+00:00",
+            "Average": 3.4055048958372356,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T00:00:00+00:00",
+            "Average": 2.9659683706104767,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T21:00:00+00:00",
+            "Average": 3.5167275975214505,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T18:00:00+00:00",
+            "Average": 3.4437675733921673,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T02:00:00+00:00",
+            "Average": 0.5500337617297859,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T23:00:00+00:00",
+            "Average": 3.232771587897285,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T06:00:00+00:00",
+            "Average": 2.972482452227075,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T03:00:00+00:00",
+            "Average": 3.2644810387645475,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T10:00:00+00:00",
+            "Average": 3.335558864835211,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T00:00:00+00:00",
+            "Average": 3.3485985581487143,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T05:00:00+00:00",
+            "Average": 1.7953723283929408,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T12:00:00+00:00",
+            "Average": 2.8196366531097157,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T09:00:00+00:00",
+            "Average": 3.274744768586087,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T16:00:00+00:00",
+            "Average": 3.4242019789169613,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T01:00:00+00:00",
+            "Average": 1.2083102508699155,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T08:00:00+00:00",
+            "Average": 3.489118955371493,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T05:00:00+00:00",
+            "Average": 3.219680272011007,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T12:00:00+00:00",
+            "Average": 3.49041270187893,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T14:00:00+00:00",
+            "Average": 1.1856931516260696,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T07:00:00+00:00",
+            "Average": 3.6685162445555184,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T11:00:00+00:00",
+            "Average": 2.8468753957395365,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T18:00:00+00:00",
+            "Average": 3.5047047110079874,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T05:00:00+00:00",
+            "Average": 3.713745872370615,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T20:00:00+00:00",
+            "Average": 1.2163286020735289,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T06:00:00+00:00",
+            "Average": 1.332305107719787,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T01:00:00+00:00",
+            "Average": 3.3080457916577957,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T03:00:00+00:00",
+            "Average": 2.867897895236301,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T10:00:00+00:00",
+            "Average": 2.8807877384241327,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T07:00:00+00:00",
+            "Average": 5.05093636016623,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T09:00:00+00:00",
+            "Average": 3.4719755948026774,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T16:00:00+00:00",
+            "Average": 2.926992018269254,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T13:00:00+00:00",
+            "Average": 3.2947079243115933,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T20:00:00+00:00",
+            "Average": 3.483299786219241,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T14:00:00+00:00",
+            "Average": 3.3577474382016677,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T15:00:00+00:00",
+            "Average": 1.1983016360261756,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T22:00:00+00:00",
+            "Average": 3.245534018967357,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T19:00:00+00:00",
+            "Average": 3.329862450213887,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T02:00:00+00:00",
+            "Average": 3.2794373852213443,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T11:00:00+00:00",
+            "Average": 1.1362881067129935,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T18:00:00+00:00",
+            "Average": 3.5997708946304794,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T15:00:00+00:00",
+            "Average": 3.213625187326135,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T22:00:00+00:00",
+            "Average": 3.3400002234801653,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T17:00:00+00:00",
+            "Average": 1.401982301624643,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T00:00:00+00:00",
+            "Average": 1.175409617141866,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T19:00:00+00:00",
+            "Average": 3.3985115238433914,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T21:00:00+00:00",
+            "Average": 2.903245528987503,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T04:00:00+00:00",
+            "Average": 3.2235739169352815,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T21:00:00+00:00",
+            "Average": 2.890032071784435,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T04:00:00+00:00",
+            "Average": 3.10581945557223,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T14:00:00+00:00",
+            "Average": 3.389433087023855,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T06:00:00+00:00",
+            "Average": 1.9174488184185934,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T03:00:00+00:00",
+            "Average": 2.8444214754787214,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T10:00:00+00:00",
+            "Average": 2.7809665157299364,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T07:00:00+00:00",
+            "Average": 5.086434687458523,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T09:00:00+00:00",
+            "Average": 21.54622316945406,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T16:00:00+00:00",
+            "Average": 2.9702976351212036,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T13:00:00+00:00",
+            "Average": 3.2538552791710207,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T20:00:00+00:00",
+            "Average": 3.4263966116589843,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T05:00:00+00:00",
+            "Average": 1.5664641246175603,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T12:00:00+00:00",
+            "Average": 3.19995536217832,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T09:00:00+00:00",
+            "Average": 3.5068653988877942,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T16:00:00+00:00",
+            "Average": 3.3730851179721792,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T11:00:00+00:00",
+            "Average": 1.2082013882858447,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T18:00:00+00:00",
+            "Average": 1.196960976401947,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T15:00:00+00:00",
+            "Average": 3.11631262244763,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T22:00:00+00:00",
+            "Average": 3.3304409039794365,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T01:00:00+00:00",
+            "Average": 3.3413177565668755,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T17:00:00+00:00",
+            "Average": 1.2100923653961122,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T00:00:00+00:00",
+            "Average": 1.5314714921869335,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T07:00:00+00:00",
+            "Average": 4.699056839990788,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T14:00:00+00:00",
+            "Average": 3.0541906806895023,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T11:00:00+00:00",
+            "Average": 3.334980418080083,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T04:00:00+00:00",
+            "Average": 3.3260929637310563,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T16:00:00+00:00",
+            "Average": 1.2241645205969174,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T13:00:00+00:00",
+            "Average": 2.9005817044904303,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T20:00:00+00:00",
+            "Average": 2.8987878424233346,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T17:00:00+00:00",
+            "Average": 3.4408353076985025,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T02:00:00+00:00",
+            "Average": 2.8852199368871485,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T19:00:00+00:00",
+            "Average": 3.662521390429335,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T23:00:00+00:00",
+            "Average": 3.275384134008948,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T06:00:00+00:00",
+            "Average": 3.291783670200074,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T15:00:00+00:00",
+            "Average": 1.5442132781154025,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T22:00:00+00:00",
+            "Average": 3.012914472927354,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T19:00:00+00:00",
+            "Average": 3.35359108340968,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T02:00:00+00:00",
+            "Average": 3.28404779737622,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T21:00:00+00:00",
+            "Average": 1.2046080996752933,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T04:00:00+00:00",
+            "Average": 1.2112617163299417,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T01:00:00+00:00",
+            "Average": 3.0890232870603556,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T08:00:00+00:00",
+            "Average": 3.2643627983762076,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T15:00:00+00:00",
+            "Average": 3.479930483932561,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T10:00:00+00:00",
+            "Average": 1.2005934852819715,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T03:00:00+00:00",
+            "Average": 0.549333950824322,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T09:00:00+00:00",
+            "Average": 2.8234981116710807,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T13:00:00+00:00",
+            "Average": 3.313634861312091,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T10:00:00+00:00",
+            "Average": 1.23840979427169,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T14:00:00+00:00",
+            "Average": 2.932911958760339,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T08:00:00+00:00",
+            "Average": 3.40388470927674,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T15:00:00+00:00",
+            "Average": 3.5032031368689407,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T19:00:00+00:00",
+            "Average": 3.350303821793986,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T20:00:00+00:00",
+            "Average": 2.8942667500437307,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T00:00:00+00:00",
+            "Average": 3.5238689345313903,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T21:00:00+00:00",
+            "Average": 1.1559911466906811,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T15:00:00+00:00",
+            "Average": 3.3100152674001664,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T16:00:00+00:00",
+            "Average": 3.0320197661490482,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T20:00:00+00:00",
+            "Average": 3.45083601703343,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T17:00:00+00:00",
+            "Average": 1.2627180750204416,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T21:00:00+00:00",
+            "Average": 2.9453771572370697,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T15:00:00+00:00",
+            "Average": 3.387435382372201,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T22:00:00+00:00",
+            "Average": 3.498033721795245,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T02:00:00+00:00",
+            "Average": 3.2473699016854454,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T03:00:00+00:00",
+            "Average": 2.8720561228780643,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T21:00:00+00:00",
+            "Average": 3.483463737034498,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T07:00:00+00:00",
+            "Average": 5.226909715167261,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T04:00:00+00:00",
+            "Average": 1.1715256290896623,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T08:00:00+00:00",
+            "Average": 3.2541493876083267,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T18:00:00+00:00",
+            "Average": 3.1782940546106486,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T19:00:00+00:00",
+            "Average": 3.2755802159303227,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T20:00:00+00:00",
+            "Average": 1.230340227405443,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T23:00:00+00:00",
+            "Average": 3.292755248933636,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T00:00:00+00:00",
+            "Average": 2.863667266023208,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T22:00:00+00:00",
+            "Average": 3.3892079019096295,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T01:00:00+00:00",
+            "Average": 1.2281519341555793,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T05:00:00+00:00",
+            "Average": 3.2586000741154737,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T06:00:00+00:00",
+            "Average": 3.0055534862360154,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T04:00:00+00:00",
+            "Average": 3.329138500402405,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T10:00:00+00:00",
+            "Average": 3.3012844677144972,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T07:00:00+00:00",
+            "Average": 3.6464712420116636,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T01:00:00+00:00",
+            "Average": 3.167541273602206,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T02:00:00+00:00",
+            "Average": 5.545101995480371,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T03:00:00+00:00",
+            "Average": 1.230659096106179,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T06:00:00+00:00",
+            "Average": 3.751703185688917,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T07:00:00+00:00",
+            "Average": 4.636295922435315,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T08:00:00+00:00",
+            "Average": 7.572426225402227,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T12:00:00+00:00",
+            "Average": 3.2575039871495233,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T13:00:00+00:00",
+            "Average": 2.9077753906367456,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T11:00:00+00:00",
+            "Average": 3.5960272567752507,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T14:00:00+00:00",
+            "Average": 1.127598398035546,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T17:00:00+00:00",
+            "Average": 3.471409207151176,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T13:00:00+00:00",
+            "Average": 2.871342497907414,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T14:00:00+00:00",
+            "Average": 1.196580503813731,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T17:00:00+00:00",
+            "Average": 3.440708991211934,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T18:00:00+00:00",
+            "Average": 3.205042207647905,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T04:00:00+00:00",
+            "Average": 3.226922268197834,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T19:00:00+00:00",
+            "Average": 3.396096586496712,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T20:00:00+00:00",
+            "Average": 1.2418785272087718,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T23:00:00+00:00",
+            "Average": 3.3391272944434314,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T00:00:00+00:00",
+            "Average": 3.109337899369233,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T01:00:00+00:00",
+            "Average": 1.1774706529227859,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T05:00:00+00:00",
+            "Average": 3.233898775629271,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T20:00:00+00:00",
+            "Average": 2.907525200468214,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T00:00:00+00:00",
+            "Average": 3.326656075617348,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T21:00:00+00:00",
+            "Average": 1.1549373282710553,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T01:00:00+00:00",
+            "Average": 3.1111082387699507,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T02:00:00+00:00",
+            "Average": 2.9916751599945894,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T06:00:00+00:00",
+            "Average": 3.3308046843914902,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T11:00:00+00:00",
+            "Average": 3.3639379320573046,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T03:00:00+00:00",
+            "Average": 1.7290795897341409,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T07:00:00+00:00",
+            "Average": 4.631242799745668,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T08:00:00+00:00",
+            "Average": 1.2025847199208402,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T12:00:00+00:00",
+            "Average": 3.2436491543767496,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T23:00:00+00:00",
+            "Average": 2.9080367809673096,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T03:00:00+00:00",
+            "Average": 3.2532713772824127,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T00:00:00+00:00",
+            "Average": 1.2139623422223906,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T04:00:00+00:00",
+            "Average": 3.0883586820163815,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T18:00:00+00:00",
+            "Average": 3.456956527548612,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T05:00:00+00:00",
+            "Average": 3.5069746200995144,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T09:00:00+00:00",
+            "Average": 3.3024447227751272,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T06:00:00+00:00",
+            "Average": 1.7643244422488322,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T10:00:00+00:00",
+            "Average": 2.8781509003795662,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T14:00:00+00:00",
+            "Average": 3.358392581360858,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T11:00:00+00:00",
+            "Average": 1.1736138408113306,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T06:00:00+00:00",
+            "Average": 2.9787292743188316,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T10:00:00+00:00",
+            "Average": 3.3193136376546453,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T07:00:00+00:00",
+            "Average": 3.770181780882082,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T11:00:00+00:00",
+            "Average": 3.2391844206205773,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T01:00:00+00:00",
+            "Average": 3.4245845490920677,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T12:00:00+00:00",
+            "Average": 3.663095919460915,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T16:00:00+00:00",
+            "Average": 3.3261018608404926,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T13:00:00+00:00",
+            "Average": 1.5778613334455265,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T17:00:00+00:00",
+            "Average": 2.901120992932936,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T18:00:00+00:00",
+            "Average": 1.2311200018857236,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T22:00:00+00:00",
+            "Average": 3.416123231583763,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T11:00:00+00:00",
+            "Average": 1.4188504071282517,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T18:00:00+00:00",
+            "Average": 1.199844856587614,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T01:00:00+00:00",
+            "Average": 3.507525122320518,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T08:00:00+00:00",
+            "Average": 2.86357781678153,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T15:00:00+00:00",
+            "Average": 2.8904592953337755,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T22:00:00+00:00",
+            "Average": 3.187939400697496,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T05:00:00+00:00",
+            "Average": 3.2452721728874123,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T12:00:00+00:00",
+            "Average": 3.3877900238059993,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T22:00:00+00:00",
+            "Average": 3.4994337936057516,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T13:00:00+00:00",
+            "Average": 1.2227555244835544,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T09:00:00+00:00",
+            "Average": 1.201948994057314,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T16:00:00+00:00",
+            "Average": 1.231142476509323,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T23:00:00+00:00",
+            "Average": 1.2111135244426534,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T06:00:00+00:00",
+            "Average": 2.861644856261455,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T13:00:00+00:00",
+            "Average": 2.8804527542834206,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T20:00:00+00:00",
+            "Average": 3.1371457113146266,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T03:00:00+00:00",
+            "Average": 3.5139905118687245,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T10:00:00+00:00",
+            "Average": 3.331110723845322,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T17:00:00+00:00",
+            "Average": 3.498639648398865,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T20:00:00+00:00",
+            "Average": 3.5093029919019045,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T23:00:00+00:00",
+            "Average": 3.603357258795317,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T10:00:00+00:00",
+            "Average": 1.225841222115999,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T17:00:00+00:00",
+            "Average": 1.1344494459020789,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T00:00:00+00:00",
+            "Average": 3.4918000281165225,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T07:00:00+00:00",
+            "Average": 4.671098821317371,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T14:00:00+00:00",
+            "Average": 2.8911453494025436,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T21:00:00+00:00",
+            "Average": 3.1508252816787143,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T04:00:00+00:00",
+            "Average": 3.2683342015746115,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T11:00:00+00:00",
+            "Average": 3.3210666630271173,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T20:00:00+00:00",
+            "Average": 1.2036690659856306,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T03:00:00+00:00",
+            "Average": 2.9658685611287665,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T10:00:00+00:00",
+            "Average": 2.863689994488952,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T17:00:00+00:00",
+            "Average": 2.943665217812906,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T00:00:00+00:00",
+            "Average": 3.2765283619562857,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T07:00:00+00:00",
+            "Average": 5.060835771175041,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T14:00:00+00:00",
+            "Average": 3.418555417597679,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T21:00:00+00:00",
+            "Average": 3.407728406691194,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T08:00:00+00:00",
+            "Average": 1.29724170400731,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T15:00:00+00:00",
+            "Average": 1.1888712529455685,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T22:00:00+00:00",
+            "Average": 1.2151639327095083,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T05:00:00+00:00",
+            "Average": 2.8041448672065927,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T12:00:00+00:00",
+            "Average": 2.892547604539834,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T19:00:00+00:00",
+            "Average": 3.164427751692536,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T02:00:00+00:00",
+            "Average": 3.2925114928005574,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T09:00:00+00:00",
+            "Average": 3.3136052015773525,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T16:00:00+00:00",
+            "Average": 3.359200276131993,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T23:00:00+00:00",
+            "Average": 3.479768668368124,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T15:00:00+00:00",
+            "Average": 1.2028554361955437,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T22:00:00+00:00",
+            "Average": 1.1836516894920541,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T05:00:00+00:00",
+            "Average": 59.190928513275274,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T12:00:00+00:00",
+            "Average": 2.902783332686984,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T19:00:00+00:00",
+            "Average": 3.001368289772554,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T02:00:00+00:00",
+            "Average": 3.267164719440876,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T09:00:00+00:00",
+            "Average": 3.3483275867410844,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T16:00:00+00:00",
+            "Average": 3.4626206276942804,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T18:00:00+00:00",
+            "Average": 3.4060915485647674,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T10:00:00+00:00",
+            "Average": 1.2112322429621316,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T17:00:00+00:00",
+            "Average": 1.4694738096381503,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T00:00:00+00:00",
+            "Average": 1.2028128539184804,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T21:00:00+00:00",
+            "Average": 3.3833315099427215,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T13:00:00+00:00",
+            "Average": 1.2215119741544824,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T20:00:00+00:00",
+            "Average": 1.1603691446176125,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T03:00:00+00:00",
+            "Average": 3.454326122747216,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T10:00:00+00:00",
+            "Average": 2.8587008955169817,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T17:00:00+00:00",
+            "Average": 2.887777438271373,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T00:00:00+00:00",
+            "Average": 3.20093146696455,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T07:00:00+00:00",
+            "Average": 5.244484395026385,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T14:00:00+00:00",
+            "Average": 3.5603010208802592,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T19:00:00+00:00",
+            "Average": 3.4246485453581905,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T14:00:00+00:00",
+            "Average": 1.2022011385903184,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T21:00:00+00:00",
+            "Average": 1.1961500149258166,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T04:00:00+00:00",
+            "Average": 10.410046797906622,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T11:00:00+00:00",
+            "Average": 2.874044712803621,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T18:00:00+00:00",
+            "Average": 2.9524819543014944,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T01:00:00+00:00",
+            "Average": 3.2626947318793382,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T08:00:00+00:00",
+            "Average": 3.302199302621447,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T15:00:00+00:00",
+            "Average": 3.4232923272559943,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T07:00:00+00:00",
+            "Average": 4.636108588032096,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T14:00:00+00:00",
+            "Average": 2.864465569303809,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T21:00:00+00:00",
+            "Average": 3.149330196151158,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T04:00:00+00:00",
+            "Average": 3.273912399617639,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T11:00:00+00:00",
+            "Average": 3.288032924004651,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T18:00:00+00:00",
+            "Average": 3.429361661120753,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T12:00:00+00:00",
+            "Average": 1.2228027024769548,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T19:00:00+00:00",
+            "Average": 1.1633803440854253,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T02:00:00+00:00",
+            "Average": 3.4897163891645357,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T09:00:00+00:00",
+            "Average": 2.888472052158783,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T16:00:00+00:00",
+            "Average": 2.885933133697721,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T23:00:00+00:00",
+            "Average": 3.180587225399984,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T06:00:00+00:00",
+            "Average": 3.3166453815208228,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T13:00:00+00:00",
+            "Average": 3.3746435470737657,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T12:00:00+00:00",
+            "Average": 1.2185191601270409,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T19:00:00+00:00",
+            "Average": 3.429421850785369,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T02:00:00+00:00",
+            "Average": 1.2143730831779456,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T16:00:00+00:00",
+            "Average": 2.9005401868341183,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T06:00:00+00:00",
+            "Average": 3.3345981123993726,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T17:00:00+00:00",
+            "Average": 1.1841411714730963,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T07:00:00+00:00",
+            "Average": 4.718381329398315,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T21:00:00+00:00",
+            "Average": 3.288882774822369,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T11:00:00+00:00",
+            "Average": 3.36931542541343,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T21:00:00+00:00",
+            "Average": 3.371835989334851,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T14:00:00+00:00",
+            "Average": 1.220368035737529,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T04:00:00+00:00",
+            "Average": 3.5698171824915277,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T18:00:00+00:00",
+            "Average": 2.877815038421819,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T02:00:00+00:00",
+            "Average": 3.3591627037504894,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T17:00:00+00:00",
+            "Average": 3.34278300027046,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T00:00:00+00:00",
+            "Average": 1.188535354424825,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T14:00:00+00:00",
+            "Average": 2.926146736934739,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T04:00:00+00:00",
+            "Average": 3.2548403198190825,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T18:00:00+00:00",
+            "Average": 3.4522160805425357,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T15:00:00+00:00",
+            "Average": 1.1283264975390863,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T05:00:00+00:00",
+            "Average": 2.8906021169811345,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T19:00:00+00:00",
+            "Average": 3.2294974748403167,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T09:00:00+00:00",
+            "Average": 3.273027230217947,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T11:00:00+00:00",
+            "Average": 2.7777981887114813,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T01:00:00+00:00",
+            "Average": 3.265856650016129,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T00:00:00+00:00",
+            "Average": 3.3369278000688865,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T18:00:00+00:00",
+            "Average": 1.1890522939446995,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T08:00:00+00:00",
+            "Average": 2.82417858132891,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T22:00:00+00:00",
+            "Average": 3.186908609916976,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T12:00:00+00:00",
+            "Average": 3.2992146684058454,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T09:00:00+00:00",
+            "Average": 1.2561066319837293,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T23:00:00+00:00",
+            "Average": 2.9931447854637385,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T13:00:00+00:00",
+            "Average": 3.161796668602314,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T03:00:00+00:00",
+            "Average": 3.29996377553742,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T08:00:00+00:00",
+            "Average": 3.34224451951988,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T05:00:00+00:00",
+            "Average": 1.6052740123481708,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T19:00:00+00:00",
+            "Average": 1.1973347936612493,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T09:00:00+00:00",
+            "Average": 2.8644730529583966,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T23:00:00+00:00",
+            "Average": 3.311943338637264,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T13:00:00+00:00",
+            "Average": 3.2673065005986586,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T22:00:00+00:00",
+            "Average": 3.4424406401708714,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T16:00:00+00:00",
+            "Average": 1.561491035099815,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T06:00:00+00:00",
+            "Average": 67.17145849527836,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T20:00:00+00:00",
+            "Average": 2.9713905183179032,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T10:00:00+00:00",
+            "Average": 3.2964232411969143,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T07:00:00+00:00",
+            "Average": 3.7157351167912642,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T21:00:00+00:00",
+            "Average": 3.4917845096420193,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T16:00:00+00:00",
+            "Average": 1.210609251686943,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T15:00:00+00:00",
+            "Average": 3.317039187187146,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T06:00:00+00:00",
+            "Average": 3.536394955338557,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T20:00:00+00:00",
+            "Average": 2.8894251618992417,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T10:00:00+00:00",
+            "Average": 3.2496211506429913,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T07:00:00+00:00",
+            "Average": 4.145380632961645,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T21:00:00+00:00",
+            "Average": 1.1941986538988238,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T11:00:00+00:00",
+            "Average": 2.899362970255856,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T01:00:00+00:00",
+            "Average": 3.290512871441112,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T15:00:00+00:00",
+            "Average": 3.4688702648347887,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T18:00:00+00:00",
+            "Average": 1.2051074745102415,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T08:00:00+00:00",
+            "Average": 3.5856232385194224,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T22:00:00+00:00",
+            "Average": 2.924840877214348,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T12:00:00+00:00",
+            "Average": 3.655506302676503,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T17:00:00+00:00",
+            "Average": 3.4039431462981544,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T22:00:00+00:00",
+            "Average": 3.3483254324717913,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T14:00:00+00:00",
+            "Average": 1.2490099627012887,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T04:00:00+00:00",
+            "Average": 13.850640374446348,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T18:00:00+00:00",
+            "Average": 2.895860382774388,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T08:00:00+00:00",
+            "Average": 3.2483265472537415,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T19:00:00+00:00",
+            "Average": 1.1847601551258427,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T09:00:00+00:00",
+            "Average": 2.877561762935494,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T23:00:00+00:00",
+            "Average": 3.4483092667884545,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T13:00:00+00:00",
+            "Average": 3.377487650857151,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T00:00:00+00:00",
+            "Average": 3.3753458420818423,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T05:00:00+00:00",
+            "Average": 3.271388053810919,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T20:00:00+00:00",
+            "Average": 3.418163510672442,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T22:00:00+00:00",
+            "Average": 1.1664399054596801,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T12:00:00+00:00",
+            "Average": 2.8781638866076578,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T02:00:00+00:00",
+            "Average": 3.1661094681065607,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T16:00:00+00:00",
+            "Average": 3.3135170355811856,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T13:00:00+00:00",
+            "Average": 1.2088324437406863,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T03:00:00+00:00",
+            "Average": 2.7925770983741915,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T17:00:00+00:00",
+            "Average": 3.1369381773144456,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T07:00:00+00:00",
+            "Average": 5.044141267351324,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T09:00:00+00:00",
+            "Average": 1.2244071019528806,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T23:00:00+00:00",
+            "Average": 3.4911187097357796,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T13:00:00+00:00",
+            "Average": 2.730800491115482,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T03:00:00+00:00",
+            "Average": 3.2728972533950484,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T20:00:00+00:00",
+            "Average": 1.1611222402476467,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T10:00:00+00:00",
+            "Average": 3.0927755644402257,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T00:00:00+00:00",
+            "Average": 3.121129799866085,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T11:00:00+00:00",
+            "Average": 1.216499987174895,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T14:00:00+00:00",
+            "Average": 3.310240979515627,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T01:00:00+00:00",
+            "Average": 3.402820977709063,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T15:00:00+00:00",
+            "Average": 2.9502754040844206,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T10:00:00+00:00",
+            "Average": 3.193682929591992,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T03:00:00+00:00",
+            "Average": 1.1999686464497175,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T07:00:00+00:00",
+            "Average": 4.988987948498052,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T14:00:00+00:00",
+            "Average": 3.2928122881853104,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T09:00:00+00:00",
+            "Average": 1.2079895423375382,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T16:00:00+00:00",
+            "Average": 1.2001346143561906,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T13:00:00+00:00",
+            "Average": 3.046141484509673,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T20:00:00+00:00",
+            "Average": 3.314964365838104,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T15:00:00+00:00",
+            "Average": 1.227896722091397,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T22:00:00+00:00",
+            "Average": 1.144226268546028,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T19:00:00+00:00",
+            "Average": 2.913295203663914,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T02:00:00+00:00",
+            "Average": 3.077475271710829,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T13:00:00+00:00",
+            "Average": 3.442534922417191,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T18:00:00+00:00",
+            "Average": 1.2100649705331628,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T15:00:00+00:00",
+            "Average": 2.8915833174066043,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T22:00:00+00:00",
+            "Average": 2.880780176449967,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T16:00:00+00:00",
+            "Average": 3.5044623033242357,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T19:00:00+00:00",
+            "Average": 3.49801970226163,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T21:00:00+00:00",
+            "Average": 3.302276113158691,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T04:00:00+00:00",
+            "Average": 2.8663880953629954,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T01:00:00+00:00",
+            "Average": 3.257598975435706,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T08:00:00+00:00",
+            "Average": 3.329974282284018,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T13:00:00+00:00",
+            "Average": 1.194672278814948,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T20:00:00+00:00",
+            "Average": 3.0603091665348092,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T17:00:00+00:00",
+            "Average": 3.3100186803024596,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T00:00:00+00:00",
+            "Average": 3.308065631732315,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T19:00:00+00:00",
+            "Average": 1.222996429129554,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T02:00:00+00:00",
+            "Average": 1.1917140421211092,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T23:00:00+00:00",
+            "Average": 2.933052818217702,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T06:00:00+00:00",
+            "Average": 3.3011197290147454,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T01:00:00+00:00",
+            "Average": 0.6488306765402899,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T08:00:00+00:00",
+            "Average": 1.21879633856363,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T05:00:00+00:00",
+            "Average": 2.825548128583004,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T12:00:00+00:00",
+            "Average": 3.1071544223075684,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T03:00:00+00:00",
+            "Average": 3.386603585418661,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T09:00:00+00:00",
+            "Average": 3.5997433668438297,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T04:00:00+00:00",
+            "Average": 1.2437880365698215,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T01:00:00+00:00",
+            "Average": 3.378455542803478,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T08:00:00+00:00",
+            "Average": 3.0405582690888067,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T06:00:00+00:00",
+            "Average": 3.7642129385298713,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T05:00:00+00:00",
+            "Average": 3.2579692103027846,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T07:00:00+00:00",
+            "Average": 5.399264023598315,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T14:00:00+00:00",
+            "Average": 2.886557256351686,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T11:00:00+00:00",
+            "Average": 3.3062878495653396,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T18:00:00+00:00",
+            "Average": 3.5013752306384487,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T11:00:00+00:00",
+            "Average": 3.258889046023207,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T18:00:00+00:00",
+            "Average": 3.4163502304149174,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T13:00:00+00:00",
+            "Average": 1.1279578340427472,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T20:00:00+00:00",
+            "Average": 3.5468325935486233,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T17:00:00+00:00",
+            "Average": 3.2402822288363367,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T00:00:00+00:00",
+            "Average": 3.2812339140089564,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T19:00:00+00:00",
+            "Average": 1.2024372818235285,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T03:00:00+00:00",
+            "Average": 3.362210204469823,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T02:00:00+00:00",
+            "Average": 1.1717307347099397,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T23:00:00+00:00",
+            "Average": 2.873395191058477,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T06:00:00+00:00",
+            "Average": 3.3008492532765943,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T22:00:00+00:00",
+            "Average": 1.2081524709086722,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T19:00:00+00:00",
+            "Average": 2.9178338390245275,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T02:00:00+00:00",
+            "Average": 3.1338238623919183,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T23:00:00+00:00",
+            "Average": 3.529598342249178,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T04:00:00+00:00",
+            "Average": 11.691911293042974,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T12:00:00+00:00",
+            "Average": 3.3377956998589866,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T01:00:00+00:00",
+            "Average": 3.176986506131345,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T08:00:00+00:00",
+            "Average": 2.8627626493906306,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T05:00:00+00:00",
+            "Average": 3.299988293214197,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T12:00:00+00:00",
+            "Average": 3.284599947179483,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T07:00:00+00:00",
+            "Average": 31.443752870285895,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T14:00:00+00:00",
+            "Average": 2.98845819825586,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T00:00:00+00:00",
+            "Average": 3.262184798704028,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T21:00:00+00:00",
+            "Average": 3.315123395515445,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T04:00:00+00:00",
+            "Average": 3.671988799722449,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T06:00:00+00:00",
+            "Average": 2.2072943795171844,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T23:00:00+00:00",
+            "Average": 1.4381307631263855,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T03:00:00+00:00",
+            "Average": 3.1136818311892895,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T10:00:00+00:00",
+            "Average": 3.280282049871859,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T17:00:00+00:00",
+            "Average": 3.443458624567906,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T05:00:00+00:00",
+            "Average": 1.2840783519052694,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T12:00:00+00:00",
+            "Average": 1.1371946132393878,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T09:00:00+00:00",
+            "Average": 2.841461784930817,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T16:00:00+00:00",
+            "Average": 3.1955640954329962,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T23:00:00+00:00",
+            "Average": 3.4352502321828617,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T08:00:00+00:00",
+            "Average": 1.5387580393272653,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T05:00:00+00:00",
+            "Average": 3.1383038810318538,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T12:00:00+00:00",
+            "Average": 2.896842527313707,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T02:00:00+00:00",
+            "Average": 3.327476190853354,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T09:00:00+00:00",
+            "Average": 3.3257973841968416,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T11:00:00+00:00",
+            "Average": 3.187422062993679,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T18:00:00+00:00",
+            "Average": 2.9094553963785037,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T15:00:00+00:00",
+            "Average": 3.35141015901152,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T22:00:00+00:00",
+            "Average": 3.4577794380913134,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T17:00:00+00:00",
+            "Average": 1.2065196928267454,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T22:00:00+00:00",
+            "Average": 3.39385402730246,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T19:00:00+00:00",
+            "Average": 1.1620771550437738,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T23:00:00+00:00",
+            "Average": 3.105573368743976,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T00:00:00+00:00",
+            "Average": 2.9535184681871565,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T04:00:00+00:00",
+            "Average": 3.290282056614306,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T01:00:00+00:00",
+            "Average": 1.2070018986239657,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T05:00:00+00:00",
+            "Average": 2.8332654151402963,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T06:00:00+00:00",
+            "Average": 1.3331809810046855,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T23:00:00+00:00",
+            "Average": 3.333651243914709,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T10:00:00+00:00",
+            "Average": 3.263063053733494,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T11:00:00+00:00",
+            "Average": 2.879127369299541,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T05:00:00+00:00",
+            "Average": 3.309983253238462,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T02:00:00+00:00",
+            "Average": 1.1682322399390856,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T06:00:00+00:00",
+            "Average": 3.1847364802029454,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T07:00:00+00:00",
+            "Average": 3.4685546471172604,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T08:00:00+00:00",
+            "Average": 1.4279953818939854,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T11:00:00+00:00",
+            "Average": 3.315295482912116,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T12:00:00+00:00",
+            "Average": 2.7855832548211237,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T13:00:00+00:00",
+            "Average": 1.2393424775723,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T06:00:00+00:00",
+            "Average": 3.545950628492131,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T17:00:00+00:00",
+            "Average": 3.2670645339812863,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T18:00:00+00:00",
+            "Average": 2.902641792646586,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T05:00:00+00:00",
+            "Average": 1.2060088796490118,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T08:00:00+00:00",
+            "Average": 3.27511899192927,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T09:00:00+00:00",
+            "Average": 3.1202879493430506,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T10:00:00+00:00",
+            "Average": 26.441458604389517,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T14:00:00+00:00",
+            "Average": 3.2740300093566,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T11:00:00+00:00",
+            "Average": 1.235617954616031,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T15:00:00+00:00",
+            "Average": 2.8485847903365875,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T16:00:00+00:00",
+            "Average": 1.1912654674233158,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T13:00:00+00:00",
+            "Average": 3.3544276236972594,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T20:00:00+00:00",
+            "Average": 3.2833338233917475,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T21:00:00+00:00",
+            "Average": 2.93875629252035,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-19T12:00:00+00:00",
+            "Average": 1.2366568234375974,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-10T15:00:00+00:00",
+            "Average": 3.3304341138107483,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-02T16:00:00+00:00",
+            "Average": 3.1073278875229886,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-24T17:00:00+00:00",
+            "Average": 3.3973281854467787,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-16T18:00:00+00:00",
+            "Average": 1.2089577394661035,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-07T21:00:00+00:00",
+            "Average": 3.331311881700226,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-14T20:00:00+00:00",
+            "Average": 3.46918108675301,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-29T22:00:00+00:00",
+            "Average": 2.883501007081986,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T23:00:00+00:00",
+            "Average": 1.183278749651272,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-05T03:00:00+00:00",
+            "Average": 3.2651288058657446,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-27T04:00:00+00:00",
+            "Average": 2.8475111733900005,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T23:00:00+00:00",
+            "Average": 1.1842147965127727,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T02:00:00+00:00",
+            "Average": 3.401931234509352,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T03:00:00+00:00",
+            "Average": 3.163327994846217,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T04:00:00+00:00",
+            "Average": 2.8411080001624796,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T13:00:00+00:00",
+            "Average": 3.4291627458377216,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T05:00:00+00:00",
+            "Average": 1.2198386423691645,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T08:00:00+00:00",
+            "Average": 3.2905107898538772,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T09:00:00+00:00",
+            "Average": 2.866407040102469,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T10:00:00+00:00",
+            "Average": 3.510591598130014,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-12T19:00:00+00:00",
+            "Average": 3.4246067279774937,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T14:00:00+00:00",
+            "Average": 3.278760636222311,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T15:00:00+00:00",
+            "Average": 3.1335166200720446,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-21T06:00:00+00:00",
+            "Average": 1.2921322540157205,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-04T10:00:00+00:00",
+            "Average": 3.287529151722198,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-26T11:00:00+00:00",
+            "Average": 2.810525035408292,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-15T20:00:00+00:00",
+            "Average": 3.4610281935410367,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-18T12:00:00+00:00",
+            "Average": 1.6127983004444801,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T15:00:00+00:00",
+            "Average": 3.3271095826385535,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T16:00:00+00:00",
+            "Average": 2.9716366376843353,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T17:00:00+00:00",
+            "Average": 3.515266173259448,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T02:00:00+00:00",
+            "Average": 3.326993793003086,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T21:00:00+00:00",
+            "Average": 3.327789466962309,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T22:00:00+00:00",
+            "Average": 2.928673926210949,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T12:00:00+00:00",
+            "Average": 3.375264794701263,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T09:00:00+00:00",
+            "Average": 1.1612175346084328,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T13:00:00+00:00",
+            "Average": 3.1530536948742727,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T14:00:00+00:00",
+            "Average": 3.224677863249577,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-08T18:00:00+00:00",
+            "Average": 3.3894437810508746,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T15:00:00+00:00",
+            "Average": 1.210659598519769,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-30T19:00:00+00:00",
+            "Average": 2.8724792843164306,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-22T20:00:00+00:00",
+            "Average": 1.219819738374497,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T09:00:00+00:00",
+            "Average": 3.325567508757279,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T00:00:00+00:00",
+            "Average": 3.2725052631288523,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T01:00:00+00:00",
+            "Average": 2.893416407259687,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-20T16:00:00+00:00",
+            "Average": 1.1367556472182854,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-11T19:00:00+00:00",
+            "Average": 3.4800350391442794,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-03T20:00:00+00:00",
+            "Average": 3.165485860684157,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-25T21:00:00+00:00",
+            "Average": 3.2158558431681112,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-09T01:00:00+00:00",
+            "Average": 3.283193491104471,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-17T22:00:00+00:00",
+            "Average": 1.2168918249958065,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-01T02:00:00+00:00",
+            "Average": 2.825867017427501,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-23T03:00:00+00:00",
+            "Average": 4.514360797602367,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-13T16:00:00+00:00",
+            "Average": 3.369430794434602,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-07-06T07:00:00+00:00",
+            "Average": 5.051486450618307,
+            "Unit": "Percent"
+        },
+        {
+            "Timestamp": "2025-06-28T08:00:00+00:00",
+            "Average": 2.898007565623791,
+            "Unit": "Percent"
+        }
+    ]
+}

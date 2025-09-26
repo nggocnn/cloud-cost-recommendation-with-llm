@@ -1,0 +1,34 @@
+{
+    "Configuration": {
+        "FunctionName": "QAI_Auto_Stop_Non_Tags_EC2",
+        "FunctionArn": "arn:aws:lambda:ap-southeast-1:540302794831:function:QAI_Auto_Stop_Non_Tags_EC2",
+        "Runtime": "python3.9",
+        "Role": "arn:aws:iam::540302794831:role/service-role/QAI_Auto_Stop_Non_Tags_EC2-role-nwpcz8rp",
+        "Handler": "lambda_function.lambda_handler",
+        "CodeSize": 2022,
+        "Description": "Function for stopping EC2 instances that have wrong tags",
+        "Timeout": 900,
+        "MemorySize": 128,
+        "LastModified": "2024-05-22T02:01:57.000+0000",
+        "CodeSha256": "IMRnHFBt5H4DUOe3ABSAtqjJswfv2WztORVvF7XHFtw=",
+        "Version": "$LATEST",
+        "TracingConfig": {
+            "Mode": "PassThrough"
+        },
+        "RevisionId": "a166ba32-fb3a-40e6-93b3-fb3fa490ba19",
+        "State": "Active",
+        "LastUpdateStatus": "Successful"
+    },
+    "Code": {
+        "RepositoryType": "S3",
+        "Location": "https://awslambda-ap-se-1-tasks.s3.ap-southeast-1.amazonaws.com/snapshots/540302794831/QAI_Auto_Stop_Non_Tags_EC2-bd7d645d-e318-4646-82ac-c4106e8415b1?versionId=K8oQMMYwoPyV5WUCh3cnCId68H4Aao8A&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAkaDmFwLXNvdXRoZWFzdC0xIkYwRAIgGHUmSTZ%2FX0GP%2BX1ej9NaPeuQvG%2B7KpO0YmYG7ChtAK0CIGYa0JvUKsfZxfIEprqk%2BurbWwNjk8XZd24PpkHPhKvUKpICCIL%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQBBoMMjk1MzM4NzAzNTgzIgyNL%2BSb%2FU8HokK%2B2q0q5gHBlAMwWnzqwkB%2BWSIek3BMiSs8h1HEfYfVS%2B1S6ieEqyt6kbrHcy0uPLJvJiJVDNkF52voyvs0XErQp80Y4t1OHT%2Bn86vbuOmqU5SREuudvzBIlMWvC%2BFR92VVqw3JQ%2FGVVadWQUCLm%2BCtedmQb4wmXVS7MPTTHfNXyWj61meTH1iLwVSqFGkhv1QP1SQ8%2F1pwnk5Bh8dPyshZP5FMZMBMH2tZZ%2FxSZsYUzeRc8Rx7IOiUUjuCYkA6F8zH4d0lSe%2BZAIogLvwHNB%2FTxwUNWiFD9gt8C3UIRGVQMFUvjxkui54wASzHajCc36LGBjqQAaMcl80eQEHkbDExyvTL1m58a7V2Fqi4UEJK2ID5GZ5zCT3PGN6LRCvDQO0u7rC90qAzEOnUfljYkNCU0CKOQZpttBsKztfx22BYyRd%2By78dGOjX0zNoKtSh3Y89lfF%2FlFiJFODbq4HXgrQazOWwTjnrpKONDcBa5XpgI2%2BzbPU%2B%2FiATkKCRerVAt3BjoP5Pzg%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250916T033444Z&X-Amz-SignedHeaders=host&X-Amz-Expires=599&X-Amz-Credential=ASIAUJQ4O7LPRUHI3TW2%2F20250916%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Signature=5a5306cd71d885457462d5f747a643ff7715e31ea7fcace114d9e39099eab3ec"
+    },
+    "Tags": {
+        "Project": "QAI_Monitoring",
+        "ApplicationName": "QA_Monitoring",
+        "OwnerService": "CuongVT1",
+        "ProjectID": "QAI_Monitoring",
+        "Purpose": "Auto stop non tags ec2 instances",
+        "Creator": "ChienNH2"
+    }
+}

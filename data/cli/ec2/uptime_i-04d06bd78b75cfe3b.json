@@ -1,0 +1,30 @@
+{
+    "InstanceStatuses": [
+        {
+            "AvailabilityZone": "ap-southeast-1c",
+            "InstanceId": "i-04d06bd78b75cfe3b",
+            "InstanceState": {
+                "Code": 16,
+                "Name": "running"
+            },
+            "InstanceStatus": {
+                "Details": [
+                    {
+                        "Name": "reachability",
+                        "Status": "passed"
+                    }
+                ],
+                "Status": "ok"
+            },
+            "SystemStatus": {
+                "Details": [
+                    {
+                        "Name": "reachability",
+                        "Status": "passed"
+                    }
+                ],
+                "Status": "ok"
+            }
+        }
+    ]
+}

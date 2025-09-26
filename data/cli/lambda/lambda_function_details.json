@@ -1,0 +1,26 @@
+{
+    "Configuration": {
+        "FunctionName": "minhpt7642Function",
+        "FunctionArn": "arn:aws:lambda:us-west-2:729713917879:function:minhpt7642Function",
+        "Runtime": "python3.12",
+        "Role": "arn:aws:iam::729713917879:role/lambda-exe",
+        "Handler": "lambda_function.lambda_handler",
+        "CodeSize": 299,
+        "Description": "",
+        "Timeout": 3,
+        "MemorySize": 128,
+        "LastModified": "2024-05-04T09:46:17.684+0000",
+        "CodeSha256": "HAPq9EReJVEC5gLavtc/gyd5vZtd9eiUGF932t0jBxY=",
+        "Version": "$LATEST",
+        "TracingConfig": {
+            "Mode": "PassThrough"
+        },
+        "RevisionId": "e00b6dff-4087-4b9f-a40d-fbab513bbc06",
+        "State": "Active",
+        "LastUpdateStatus": "Successful"
+    },
+    "Code": {
+        "RepositoryType": "S3",
+        "Location": "https://awslambda-us-west-2-tasks.s3.us-west-2.amazonaws.com/snapshots/729713917879/minhpt7642Function-74250651-d659-4bd5-a73e-6e44c9012c89?versionId=h1hi_KDUrCFak1ninIRlhWmFWb6bH01V&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEEoaCXVzLXdlc3QtMiJIMEYCIQD0rCCK9mxe0mEMOd6bnC6vHY4ESqXSRMLJVUASnrS2OQIhAK2yfKwi3bsrPgQWJWpeb%2BH%2FRH8n0FEFFYazuNnYOBJLKpICCLP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQBRoMNTAyMjk3MDc2MTYzIgw36ieHFrvyM8stJKYq5gE6Y5Q5rhNFcA0mBKKVTl%2Fm5oAcqZnh3vDdb64lKWSUFxSHsWFrsfw3%2F6%2B7HoApAeZnQkUu%2BrRMd%2Bq0gbbviTCVtTmxElkn3v6GatqFcgzi%2FOi2ZnFK42MB7d8UBEfzN8dabkkeXt%2FNMHNLzNI5adNjKWPVlio%2FL2Z5O88gNxsF6F%2BckXB1pYn7d065pUPsJCtQJuKy3dLeAo8Ee5jtoE%2Bg3HK0sL1PVoTr955JAJly1qXlu2%2BeMUngLR3ndAz9LhDXtdSM5QmAomE3rQhAPOOp3XemzK1E%2BJjykpfCkCORT1mPojnxyTDW6fjFBjqOAT98vn89IBAUO4c2pzcJIPoEwyotrCVxok6EtP7PG9SEJoXeltMI2ELJGsb4ive3aFHSW5FYhit9unWsya4V3347dysTSCuY8Ojt8cR8%2F5q2SiCxUJHhxSpZnBhJXa0RqYap9n3brAgQFfvWWixAQiVfk5%2BZKdiFMQflXqchS8ccHF0J0OPGAEbFTaU0NV8%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250908T032414Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAXJ4Z5EHBVXHTVMAV%2F20250908%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=42bb235e0eeaa607e1aed9fb90c6aba9a1cabfc98650015e439a966371c6b721"
+    }
+}

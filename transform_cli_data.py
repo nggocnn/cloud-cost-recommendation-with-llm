@@ -306,7 +306,6 @@ class AWSCLIDataTransformer:
 
     def _process_ec2_instance_metrics(self, data: Dict, filename: str, metric_type: str):
         """Process EC2 instance-specific metrics files"""
-        # Extract instance ID from filename like: ec2_i-05ea7a5068995a703_cpu_utilization.json
         instance_id = None
         if "_i-" in filename:
             parts = filename.split("_")

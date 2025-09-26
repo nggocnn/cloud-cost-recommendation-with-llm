@@ -1,0 +1,285 @@
+{
+    "Label": "Duration",
+    "Datapoints": [
+        {
+            "Timestamp": "2025-07-23T00:00:00+00:00",
+            "Average": 266959.78,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-23T00:00:00+00:00",
+            "Average": 81725.57,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-30T00:00:00+00:00",
+            "Average": 17820.11,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-30T00:00:00+00:00",
+            "Average": 20925.46,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-03T00:00:00+00:00",
+            "Average": 207208.21,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-09T00:00:00+00:00",
+            "Average": 20144.74,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-10T00:00:00+00:00",
+            "Average": 20332.01,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-16T00:00:00+00:00",
+            "Average": 19270.9,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-26T00:00:00+00:00",
+            "Average": 81479.77,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-02T00:00:00+00:00",
+            "Average": 203938.71,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-19T00:00:00+00:00",
+            "Average": 19683.74,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-06T00:00:00+00:00",
+            "Average": 20850.83,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-26T00:00:00+00:00",
+            "Average": 205951.19,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-19T00:00:00+00:00",
+            "Average": 20910.54,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-17T00:00:00+00:00",
+            "Average": 20141.78,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-24T00:00:00+00:00",
+            "Average": 19431.48,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-24T00:00:00+00:00",
+            "Average": 20615.71,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-03T00:00:00+00:00",
+            "Average": 19611.6,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-10T00:00:00+00:00",
+            "Average": 19311.02,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-02T00:00:00+00:00",
+            "Average": 20766.0,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-20T00:00:00+00:00",
+            "Average": 81816.62,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-20T00:00:00+00:00",
+            "Average": 82096.95,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-09T00:00:00+00:00",
+            "Average": 206723.04,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-27T00:00:00+00:00",
+            "Average": 331528.7,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-27T00:00:00+00:00",
+            "Average": 20885.76,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-06T00:00:00+00:00",
+            "Average": 20452.67,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-13T00:00:00+00:00",
+            "Average": 144480.08,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-11T00:00:00+00:00",
+            "Average": 19603.63,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-05T00:00:00+00:00",
+            "Average": 22432.15,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-18T00:00:00+00:00",
+            "Average": 7735.4678571428585,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-18T00:00:00+00:00",
+            "Average": 20802.18,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-28T00:00:00+00:00",
+            "Average": 389955.71,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-28T00:00:00+00:00",
+            "Average": 20844.03,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-04T00:00:00+00:00",
+            "Average": 20568.73,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-08T00:00:00+00:00",
+            "Average": 21451.87,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-14T00:00:00+00:00",
+            "Average": 19881.42,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-21T00:00:00+00:00",
+            "Average": 143380.12,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-21T00:00:00+00:00",
+            "Average": 20637.96,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-31T00:00:00+00:00",
+            "Average": 19603.3,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-31T00:00:00+00:00",
+            "Average": 207449.24,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-01T00:00:00+00:00",
+            "Average": 20336.46,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-07T00:00:00+00:00",
+            "Average": 20683.08,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-05T00:00:00+00:00",
+            "Average": 81409.47,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-11T00:00:00+00:00",
+            "Average": 20172.67,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-12T00:00:00+00:00",
+            "Average": 19411.4,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-22T00:00:00+00:00",
+            "Average": 80816.36,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-22T00:00:00+00:00",
+            "Average": 20207.42,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-29T00:00:00+00:00",
+            "Average": 8667.95,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-29T00:00:00+00:00",
+            "Average": 20368.15,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-04T00:00:00+00:00",
+            "Average": 20166.71,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-08T00:00:00+00:00",
+            "Average": 205076.12,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-15T00:00:00+00:00",
+            "Average": 205228.86,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-07-25T00:00:00+00:00",
+            "Average": 19085.06,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-25T00:00:00+00:00",
+            "Average": 21068.76,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-08-01T00:00:00+00:00",
+            "Average": 19591.82,
+            "Unit": "Milliseconds"
+        },
+        {
+            "Timestamp": "2025-09-07T00:00:00+00:00",
+            "Average": 21698.69,
+            "Unit": "Milliseconds"
+        }
+    ]
+}

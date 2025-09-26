@@ -1,0 +1,29 @@
+{
+    "DBSnapshots": [
+        {
+            "DBSnapshotIdentifier": "cus360-test-final-snapshot",
+            "DBInstanceIdentifier": "cus360-test",
+            "SnapshotCreateTime": "2022-07-04T08:29:53.079000+00:00",
+            "Engine": "mysql",
+            "AllocatedStorage": 20,
+            "Status": "available",
+            "Port": 3306,
+            "AvailabilityZone": "ap-southeast-1c",
+            "VpcId": "vpc-4c7d212b",
+            "InstanceCreateTime": "2022-05-17T02:48:13.874000+00:00",
+            "MasterUsername": "admin",
+            "EngineVersion": "8.0.28",
+            "LicenseModel": "general-public-license",
+            "SnapshotType": "manual",
+            "OptionGroupName": "default:mysql-8-0",
+            "PercentProgress": 100,
+            "StorageType": "gp2",
+            "Encrypted": true,
+            "KmsKeyId": "arn:aws:kms:ap-southeast-1:540302794831:key/2183a9f4-eca3-4dae-9694-c48bde491829",
+            "DBSnapshotArn": "arn:aws:rds:ap-southeast-1:540302794831:snapshot:cus360-test-final-snapshot",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "ProcessorFeatures": [],
+            "DbiResourceId": "db-O26JISGXTP7SKXZIGDHLVAFMSE"
+        }
+    ]
+}

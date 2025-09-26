@@ -4,7 +4,7 @@ Metrics and billing data models.
 
 from datetime import datetime
 from typing import Dict, List, Optional, Any
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class TimeSeriesPoint(BaseModel):
@@ -60,11 +60,19 @@ class BillingData(BaseModel):
     resource_id: Optional[str] = None
     region: str
     usage_type: str
-    usage_amount: float
+    usage_amount: float = Field(ge=0, description="Usage amount must be non-negative")
     usage_unit: str
-    unblended_cost: float
-    amortized_cost: float
-    credit: float = 0.0
+    unblended_cost: float = Field(ge=0, description="Cost must be non-negative")
+    amortized_cost: float = Field(ge=0, description="Amortized cost must be non-negative")
+    credit: float = Field(default=0.0, description="Applied credits")
     bill_period_start: datetime
     bill_period_end: datetime
     tags: Dict[str, str] = Field(default_factory=dict)
+
+    @field_validator('bill_period_end')
+    @classmethod
+    def end_after_start(cls, v, values):
+        if hasattr(values, 'data') and 'bill_period_start' in values.data:
+            if v <= values.data['bill_period_start']:
+                raise ValueError('bill_period_end must be after bill_period_start')
+        return v

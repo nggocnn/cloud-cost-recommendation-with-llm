@@ -1,0 +1,23 @@
+{
+    "Label": "NetworkIn",
+    "Datapoints": [
+        {
+            "Timestamp": "2025-04-10T08:00:00+00:00",
+            "Average": 119160421.51666667,
+            "Maximum": 3065743750.0,
+            "Unit": "Bytes"
+        },
+        {
+            "Timestamp": "2025-04-10T07:00:00+00:00",
+            "Average": 37770262.0,
+            "Maximum": 37770262.0,
+            "Unit": "Bytes"
+        },
+        {
+            "Timestamp": "2025-04-10T09:00:00+00:00",
+            "Average": 496.34615384615387,
+            "Maximum": 7778.0,
+            "Unit": "Bytes"
+        }
+    ]
+}

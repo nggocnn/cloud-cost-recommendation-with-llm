@@ -1,0 +1,30 @@
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:ap-southeast-1:540302794831:loadbalancer/net/QAIDemoHub-OCR-AI-v2-1/0d2818ac8e4deb54",
+            "DNSName": "QAIDemoHub-OCR-AI-v2-1-0d2818ac8e4deb54.elb.ap-southeast-1.amazonaws.com",
+            "CanonicalHostedZoneId": "ZKVM4W9LS7TM",
+            "CreatedTime": "2025-03-05T04:36:16.840000+00:00",
+            "LoadBalancerName": "QAIDemoHub-OCR-AI-v2-1",
+            "Scheme": "internal",
+            "VpcId": "vpc-08170d19bb6f977a1",
+            "State": {
+                "Code": "active"
+            },
+            "Type": "network",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "ap-southeast-1b",
+                    "SubnetId": "subnet-0e3aba7fdaddd23f2",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "ap-southeast-1a",
+                    "SubnetId": "subnet-011bd3971436eb2a4",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "IpAddressType": "ipv4"
+        }
+    ]
+}

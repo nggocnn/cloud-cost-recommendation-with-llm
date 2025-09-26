@@ -1,0 +1,16 @@
+{
+    "Owner": {
+        "DisplayName": "Fsoftaws46",
+        "ID": "08ba0a53eaf94c4feb06631f731a4152f7809d9cf86787c1c20b0670be02f260"
+    },
+    "Grants": [
+        {
+            "Grantee": {
+                "DisplayName": "Fsoftaws46",
+                "ID": "08ba0a53eaf94c4feb06631f731a4152f7809d9cf86787c1c20b0670be02f260",
+                "Type": "CanonicalUser"
+            },
+            "Permission": "FULL_CONTROL"
+        }
+    ]
+}

@@ -503,48 +503,68 @@ class CostRecommendationApp:
 async def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(
-        description="AWS Cost Optimization using LLM",
+        description="LLM Cost Optimization - CLI and API Server",
         prog="python -m llm_cost_recommendation",
     )
-    parser.add_argument("--billing-file", help="Path to billing CSV file")
-    parser.add_argument("--inventory-file", help="Path to inventory JSON file")
-    parser.add_argument("--metrics-file", help="Path to metrics CSV file")
-    parser.add_argument(
+    
+    # Create subparsers for different modes
+    subparsers = parser.add_subparsers(dest="mode", help="Operation mode")
+    
+    # CLI analysis mode (default)
+    cli_parser = subparsers.add_parser("analyze", help="Run cost analysis (default mode)")
+    cli_parser.add_argument("--billing-file", help="Path to billing CSV file")
+    cli_parser.add_argument("--inventory-file", help="Path to inventory JSON file")
+    cli_parser.add_argument("--metrics-file", help="Path to metrics CSV file")
+    cli_parser.add_argument(
         "--sample-data", action="store_true", help="Use sample data for testing"
     )
-    parser.add_argument(
+    cli_parser.add_argument(
         "--individual-processing",
         action="store_true",
         help="Process resources individually instead of batch processing (slower but more precise)",
     )
-    parser.add_argument(
-        "--config-dir", default="config", help="Configuration directory"
-    )
-    parser.add_argument("--data-dir", default="data", help="Data directory")
-    parser.add_argument("--output-file", help="Output file for detailed report")
-    parser.add_argument(
+    cli_parser.add_argument("--output-file", help="Output file for detailed report")
+    cli_parser.add_argument(
         "--output-format",
         choices=["json", "csv", "excel"],
         default="json",
         help="Output format for detailed report (json=full details, csv=summary table, excel=multiple sheets)",
     )
-    parser.add_argument("--status", action="store_true", help="Show application status")
-
-    # Logging options
-    parser.add_argument(
-        "--verbose", "-v", action="store_true", help="Enable verbose (DEBUG) logging"
-    )
-    parser.add_argument(
-        "--quiet", "-q", action="store_true", help="Reduce output (WARNING+ only)"
-    )
-    parser.add_argument(
-        "--log-format",
-        choices=["auto", "json", "human"],
-        default="auto",
-        help="Log output format (auto=detect based on terminal)",
-    )
+    cli_parser.add_argument("--status", action="store_true", help="Show application status")
+    
+    # API server mode
+    server_parser = subparsers.add_parser("serve", help="Start API server")
+    server_parser.add_argument("--host", default="0.0.0.0", help="Server host")
+    server_parser.add_argument("--port", type=int, default=8000, help="Server port")
+    server_parser.add_argument("--workers", type=int, default=1, help="Number of workers")
+    server_parser.add_argument("--reload", action="store_true", help="Enable auto-reload (development)")
+    
+    # Common arguments
+    for subparser in [cli_parser, server_parser]:
+        subparser.add_argument(
+            "--config-dir", default="config", help="Configuration directory"
+        )
+        subparser.add_argument("--data-dir", default="data", help="Data directory")
+        
+        # Logging options
+        subparser.add_argument(
+            "--verbose", "-v", action="store_true", help="Enable verbose (DEBUG) logging"
+        )
+        subparser.add_argument(
+            "--quiet", "-q", action="store_true", help="Reduce output (WARNING+ only)"
+        )
+        subparser.add_argument(
+            "--log-format",
+            choices=["auto", "json", "human"],
+            default="auto",
+            help="Log output format (auto=detect based on terminal)",
+        )
 
     args = parser.parse_args()
+    
+    # Default to analyze mode if no subcommand specified
+    if args.mode is None:
+        args.mode = "analyze"
 
     # Configure logging based on arguments
     if args.quiet:
@@ -554,52 +574,82 @@ async def main():
     else:
         log_level = "INFO"
 
-    configure_logging(level=log_level, format_type=args.log_format)
+    configure_logging(level=log_level, format_type=args.log_format, component="cli")
 
     try:
-        # Initialize application
-        app = CostRecommendationApp(args.config_dir, args.data_dir)
+        if args.mode == "serve":
+            # Start API server
+            from .api import run_server
+            
+            logger.info(
+                "Starting API server mode",
+                host=args.host,
+                port=args.port,
+                workers=args.workers,
+                config_dir=args.config_dir,
+                data_dir=args.data_dir,
+            )
+            
+            run_server(
+                host=args.host,
+                port=args.port,
+                workers=args.workers,
+                log_level=log_level,
+                config_dir=args.config_dir,
+                data_dir=args.data_dir,
+                reload=args.reload,
+                log_format=args.log_format,
+            )
+            
+        elif args.mode == "analyze":
+            # Run CLI analysis
+            app = CostRecommendationApp(args.config_dir, args.data_dir)
 
-        if args.status:
-            # Show status
-            status = app.get_status()
-            import json
+            if args.status:
+                # Show status
+                status = app.get_status()
+                import json
 
-            print(json.dumps(status, indent=2))
-            return
+                print(json.dumps(status, indent=2))
+                return
 
-        # Run analysis
-        report = await app.run_analysis(
-            billing_file=args.billing_file,
-            inventory_file=args.inventory_file,
-            metrics_file=args.metrics_file,
-            use_sample_data=args.sample_data,
-            individual_processing=args.individual_processing,
-        )
+            # Run analysis
+            report = await app.run_analysis(
+                billing_file=args.billing_file,
+                inventory_file=args.inventory_file,
+                metrics_file=args.metrics_file,
+                use_sample_data=args.sample_data,
+                individual_processing=args.individual_processing,
+            )
 
-        if report:
-            # Print summary
-            app.print_report_summary(report)
+            if report:
+                # Print summary
+                app.print_report_summary(report)
 
-            # Save detailed report if requested
-            if args.output_file:
-                export_result = app.export_report(report, args.output_file, args.output_format)
-                
-                if export_result.get("error"):
-                    print(f"\nExport failed: {export_result['error']}")
-                elif export_result["format"] == "csv" and len(export_result["files"]) > 1:
-                    print(f"\nDetailed reports saved to:")
-                    for file_path in export_result["files"]:
-                        file_name = file_path.split('/')[-1]
-                        if "_summary.csv" in file_name:
-                            print(f"  Summary: {file_name}")
-                        elif "_recommendations.csv" in file_name:
-                            print(f"  Recommendations: {file_name}")
-                        elif "_service_breakdown.csv" in file_name:
-                            print(f"  Service Breakdown: {file_name}")
-                else:
-                    print(f"\nDetailed report saved to: {export_result['files'][0] if export_result['files'] else args.output_file}")
+                # Save detailed report if requested
+                if args.output_file:
+                    export_result = app.export_report(report, args.output_file, args.output_format)
+                    
+                    if export_result.get("error"):
+                        print(f"\nExport failed: {export_result['error']}")
+                    elif export_result["format"] == "csv" and len(export_result["files"]) > 1:
+                        print(f"\nDetailed reports saved to:")
+                        for file_path in export_result["files"]:
+                            file_name = file_path.split('/')[-1]
+                            if "_summary.csv" in file_name:
+                                print(f"  Summary: {file_name}")
+                            elif "_recommendations.csv" in file_name:
+                                print(f"  Recommendations: {file_name}")
+                            elif "_service_breakdown.csv" in file_name:
+                                print(f"  Service Breakdown: {file_name}")
+                    else:
+                        print(f"\nDetailed report saved to: {export_result['files'][0] if export_result['files'] else args.output_file}")
+        else:
+            parser.print_help()
 
+    except KeyboardInterrupt:
+        logger.info("Operation cancelled by user")
+        sys.exit(0)
     except Exception as e:
         logger.critical("Application failed", error=str(e))
         sys.exit(1)
