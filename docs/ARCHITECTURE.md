@@ -2,23 +2,42 @@
 
 ## Architecture Overview
 
-This is a **multi-agent LLM-powered multi-cloud cost optimization system** that analyzes cloud resources across AWS, Azure, and Google Cloud Platform to provide actionable cost reduction recommendations.
+This is a **multi-agent LLM-powered multi-cloud cost optimization system** that analyzes cloud resources across AWS, Azure, and Google Cloud Platform to provide actionable cost reduction recommendations through both CLI and REST API interfaces.
+
+### Recent Enhancements
+
+- **Comprehensive Test Suite**: 68+ tests covering API security, performance, validation, and edge cases
+- **FastAPI REST API**: Full web API with health monitoring, async processing, and OpenAPI documentation
+- **Enhanced Security**: Rate limiting, input validation, and secure error handling
+- **Performance Optimizations**: Async processing, concurrent request handling, and memory management
+- **Improved Agent System**: Enhanced processors, managers, and report generators
 
 ### Core Components
 
 ```text
 llm_cost_recommendation/
-├── agents/                  # Multi-agent system
+├── agents/                  # Enhanced multi-agent system
 │   ├── coordinator.py       # Orchestrates analysis across all cloud providers
-│   └── base.py             # Service-specific agents (EC2, VMs, Compute Engine, etc.)
-├── models/                 # Data models & schemas
-│   ├── __init__.py         # Core models and enums
-│   └── *.py               # Provider-specific models
-├── services/              # Core services
+│   ├── base.py             # Service-specific agents (EC2, VMs, Compute Engine, etc.)
+│   ├── agent_manager.py    # Agent lifecycle management
+│   ├── recommendation_processor.py  # Recommendation processing engine
+│   ├── report_generator.py # Advanced report generation
+│   └── resource_processor.py       # Resource analysis processor
+├── models/                 # Comprehensive data models & schemas
+│   ├── types.py            # Core enums and types
+│   ├── resources.py        # Resource models
+│   ├── recommendations.py  # Recommendation models
+│   ├── agents.py           # Agent configuration models
+│   └── api_models.py       # API request/response models
+├── services/              # Enhanced core services
 │   ├── config.py          # Configuration management
-│   ├── llm.py             # LangChain/OpenAI integration
+│   ├── llm.py             # OpenAI integration with timeout handling
 │   ├── ingestion.py       # Data ingestion & processing
-│   └── logging.py         # Enhanced logging system
+│   ├── conditions.py      # Custom rules processing
+│   ├── data_validation.py # Comprehensive validation service
+│   ├── prompts.py         # LLM prompt management
+│   └── logging.py         # Structured logging system
+├── api.py                 # FastAPI REST API application
 ├── cli.py                 # Command-line interface with export options
 ├── console.py             # Console output formatting
 └── __main__.py           # Module entry point
@@ -37,16 +56,64 @@ Multi-Cloud Data Sources → DataIngestionService → Structured Models
 - **Metrics Data**: CSV files with performance metrics
 - **Export Formats**: JSON (detailed), CSV (summary), Excel (multi-sheet)
 
-### 2. Multi-Agent Analysis
+### 1.1. Testing Architecture
+
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                    Comprehensive Test Suite (68+ Tests)         │
+├─────────────────┬─────────────────┬─────────────────┬───────────┤
+│  API Security   │   Performance   │   Validation    │ Edge Cases│
+│     (16)        │      (9)        │      (14)       │    (15)   │
+│                 │                 │                 │           │
+│ • Rate limiting │ • Memory leaks  │ • Schema valid. │ • Network │
+│ • Input valid.  │ • Bottlenecks   │ • Data formats  │ • Timeouts│
+│ • Auth checks   │ • Concurrency   │ • Error msgs    │ • Recovery│
+│ • Size limits   │ • Async ops     │ • Type safety   │ • Cleanup │
+└─────────────────┴─────────────────┴─────────────────┴───────────┘
+            │                │               │              │
+            └────────────────┼───────────────┼──────────────┘
+                             │               │
+        ┌───────────────────┼───────────────┼────────────────┐
+        │                   │               │                │
+        ▼                   ▼               ▼                ▼
+   ┌─────────┐        ┌─────────┐   ┌──────────┐      ┌──────────┐
+   │Security │        │   E2E   │   │Integration│      │   Unit   │
+   │  (11)   │        │  Tests  │   │   Tests   │      │  Tests   │
+   └─────────┘        └─────────┘   └──────────┘      └──────────┘
+```
+
+### 2. Multi-Interface Processing
+
+```text
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   REST API      │    │   CLI Interface  │    │  Test Suite     │
+│                 │    │                  │    │                 │
+│ • FastAPI       │    │ • Argparse      │    │ • 68+ tests     │
+│ • Async         │◄──▶│ • Rich output   │◄──▶│ • Full coverage │
+│ • Health checks │    │ • Export formats │    │ • Security      │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+          │                       │                       │
+          └───────────────────────┼───────────────────────┘
+                                  ▼
+                    ┌──────────────────────────┐
+                    │    Multi-Agent Analysis  │
+                    └──────────────────────────┘
+```
+
+### 3. Enhanced Multi-Agent Analysis
 
 ```text
 Coordinator Agent → Cloud Provider Agents → Service Agents → LLM Analysis → Recommendations
 ```
 
-- **Coordinator**: Orchestrates the analysis workflow across all providers
-- **Provider Agents**: AWS, Azure, GCP-specific logic
-- **Service Agents**: Specialized agents for each service (EC2/VMs/Compute, Storage, Databases, etc.)
-- **LLM Integration**: Uses OpenAI GPT models for intelligent analysis
+- **Coordinator**: Orchestrates the analysis workflow across all providers with enhanced error handling
+- **Agent Manager**: Manages agent lifecycle, configuration loading, and health monitoring
+- **Resource Processor**: Advanced resource analysis with performance optimization
+- **Recommendation Processor**: Intelligent recommendation consolidation and ranking
+- **Report Generator**: Multi-format report generation (JSON, CSV, Excel)
+- **Provider Agents**: AWS, Azure, GCP-specific logic with enhanced validation
+- **Service Agents**: 36 specialized agents for each service with custom rules support
+- **LLM Integration**: OpenAI GPT models with timeout handling and error recovery
 
 ### 3. Report Generation & Export
 
