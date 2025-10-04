@@ -64,21 +64,21 @@ class ServiceAgent:
             data_quality = self.data_validator.validate_resource_data(
                 resource, metrics, billing_data
             )
-            
+
             logger.info(
                 "Data quality assessment",
                 resource_id=resource.resource_id,
                 quality_score=data_quality["quality_score"],
                 overall_quality=data_quality["overall_quality"],
-                recommendations_possible=data_quality["recommendations_possible"]
+                recommendations_possible=data_quality["recommendations_possible"],
             )
-            
-            # Skip analysis if data quality is too poor
+
+            # For very poor data quality, skip analysis
             if not data_quality["recommendations_possible"]:
                 logger.warning(
-                    "Skipping analysis due to insufficient data",
+                    "Skipping analysis due to insufficient data quality",
                     resource_id=resource.resource_id,
-                    missing_data=data_quality["missing_critical_data"]
+                    missing_data=data_quality["missing_critical_data"],
                 )
                 return []
 
@@ -107,7 +107,7 @@ class ServiceAgent:
                 logger.warning(
                     "Analysis skipped",
                     resource_id=resource.resource_id,
-                    reason=skip_reason
+                    reason=skip_reason,
                 )
                 return []
 
@@ -119,49 +119,73 @@ class ServiceAgent:
             # Validate evidence and convert to recommendation models
             for llm_rec in llm_recommendations:
                 # Validate evidence supporting the recommendation
-                evidence_validation = self.evidence_validator.validate_recommendation_evidence(
-                    llm_rec, context_data
+                evidence_validation = (
+                    self.evidence_validator.validate_recommendation_evidence(
+                        llm_rec, context_data
+                    )
                 )
-                
+
                 # Add warnings instead of rejecting recommendations with poor evidence
                 evidence_warnings = []
-                if evidence_validation["evidence_quality"] in ["poor", "fair"] and evidence_validation["unsupported_claims"]:
-                    evidence_warnings.append(f"Evidence Quality: {evidence_validation['evidence_quality'].title()}")
+                if (
+                    evidence_validation["evidence_quality"] in ["poor", "fair"]
+                    and evidence_validation["unsupported_claims"]
+                ):
+                    evidence_warnings.append(
+                        f"Evidence Quality: {evidence_validation['evidence_quality'].title()}"
+                    )
                     if evidence_validation["evidence_issues"]:
-                        evidence_warnings.append(f"Issues: {'; '.join(evidence_validation['evidence_issues'])}")
+                        evidence_warnings.append(
+                            f"Issues: {'; '.join(evidence_validation['evidence_issues'])}"
+                        )
                     if evidence_validation["unsupported_claims"]:
-                        evidence_warnings.extend([f"Unsupported: {claim}" for claim in evidence_validation["unsupported_claims"]])
-                    
+                        evidence_warnings.extend(
+                            [
+                                f"Unsupported: {claim}"
+                                for claim in evidence_validation["unsupported_claims"]
+                            ]
+                        )
+
                     logger.warning(
                         "Recommendation flagged with evidence warnings",
                         resource_id=resource.resource_id,
                         evidence_quality=evidence_validation["evidence_quality"],
                         evidence_issues=evidence_validation["evidence_issues"],
-                        unsupported_claims=evidence_validation["unsupported_claims"]
+                        unsupported_claims=evidence_validation["unsupported_claims"],
                     )
-                
+
                 # Add evidence warnings to the recommendation
                 if evidence_warnings:
                     llm_rec["evidence_warnings"] = evidence_warnings
-                
+
                 # Adjust confidence based on data quality
                 if "confidence_score" in llm_rec:
                     original_confidence = llm_rec["confidence_score"]
                     max_confidence = data_quality["confidence_ceiling"]
-                    llm_rec["confidence_score"] = min(original_confidence, max_confidence)
-                    
+                    llm_rec["confidence_score"] = min(
+                        original_confidence, max_confidence
+                    )
+
                     if original_confidence > max_confidence:
                         logger.info(
                             "Confidence score adjusted down due to data limitations",
                             resource_id=resource.resource_id,
                             original=original_confidence,
                             adjusted=llm_rec["confidence_score"],
-                            reason="data_quality_ceiling"
+                            reason="data_quality_ceiling",
                         )
 
                 rec = await self._convert_llm_recommendation_to_model(llm_rec, resource)
-                if rec:
-                    recommendations.append(rec)
+                if rec is not None:
+                    recommendations.append(
+                        rec
+                    )  # Always add - now includes errors/warnings
+                else:
+                    logger.error(
+                        "Recommendation conversion returned None - this should not happen",
+                        agent_id=self.agent_id,
+                        resource_id=resource.resource_id,
+                    )
 
             logger.info(
                 "Resource analysis completed",
@@ -186,68 +210,74 @@ class ServiceAgent:
         return recommendations
 
     async def _generate_recommendations(
-        self, 
-        context_data: Dict[str, Any], 
+        self,
+        context_data: Dict[str, Any],
         rule_results: Dict[str, Any],
         resource_id: str,
-        service: str
+        service: str,
     ) -> List[Dict[str, Any]]:
         """Generate recommendations using evidence-based prompts"""
-        
+
         # Create system prompt that enforces evidence requirements
         system_prompt = self.prompts.COMPLETE_SYSTEM_PROMPT
-        
+
         # Create evidence-focused user prompt
         user_prompt = self.prompts.create_user_prompt(
             context_data, resource_id, service
         )
-        
+
         # Add custom rule modifications to the prompt
         if rule_results.get("custom_prompts"):
             user_prompt += "\n\nADDITIONAL REQUIREMENTS:\n"
             for custom_prompt in rule_results["custom_prompts"]:
                 user_prompt += f"- {custom_prompt}\n"
-                
+
         if rule_results.get("skip_recommendation_types"):
             skip_types = [rt.value for rt in rule_results["skip_recommendation_types"]]
-            user_prompt += f"\nIMPORTANT: Do NOT recommend these types: {', '.join(skip_types)}\n"
-            
+            user_prompt += (
+                f"\nIMPORTANT: Do NOT recommend these types: {', '.join(skip_types)}\n"
+            )
+
         if rule_results.get("force_recommendation_types"):
-            force_types = [rt.value for rt in rule_results["force_recommendation_types"]]
+            force_types = [
+                rt.value for rt in rule_results["force_recommendation_types"]
+            ]
             user_prompt += f"\nIMPORTANT: Always consider these recommendation types: {', '.join(force_types)}\n"
 
         # Generate LLM response
         llm_response = await self.llm_service.generate_recommendation(
             system_prompt=system_prompt,
             user_prompt=user_prompt,
-            context_data=context_data
+            context_data=context_data,
         )
 
         try:
             response_data = json.loads(llm_response.content)
-            
+
             # Handle both single recommendation and batch format
             if "recommendations" in response_data:
                 recommendations = response_data["recommendations"]
             else:
                 recommendations = [response_data] if response_data else []
-                
+
             logger.info(
                 "LLM recommendations generated",
                 agent_id=self.agent_id,
                 recommendations_count=len(recommendations),
                 response_time_ms=llm_response.response_time_ms,
-                data_quality=context_data.get("data_quality", {}).get("overall_quality", "unknown")
+                data_quality=context_data.get("data_quality", {}).get(
+                    "overall_quality", "unknown"
+                ),
             )
-            
+
             return recommendations
-            
+
         except json.JSONDecodeError as e:
             logger.error(
                 "Failed to parse LLM response",
                 agent_id=self.agent_id,
                 error=str(e),
-                response_content=llm_response.content[:500]
+                response_content=llm_response.content[:500],
             )
             return []
 
@@ -350,7 +380,11 @@ class ServiceAgent:
                 "throughput_write": metrics.throughput_write,
                 "network_in": metrics.network_in,
                 "network_out": metrics.network_out,
-                "other_metrics": metrics.metrics,
+                "other_metrics": (
+                    metrics.metrics
+                    if hasattr(metrics, "metrics") and metrics.metrics
+                    else {}
+                ),
             }
 
         if billing_data:
@@ -501,8 +535,8 @@ class ServiceAgent:
             ]
 
             if missing_fields:
-                logger.warning(
-                    "LLM response missing critical fields",
+                logger.error(
+                    "LLM response missing critical fields - cannot create recommendation",
                     agent_id=self.agent_id,
                     resource_id=resource.resource_id,
                     missing_fields=missing_fields,
@@ -533,18 +567,27 @@ class ServiceAgent:
             monthly_savings = current_cost - estimated_cost
             annual_savings = monthly_savings * 12
 
-            # Apply minimum cost threshold
+            # Collect warnings for issues that would previously cause rejection
+            conversion_warnings = []
+
+            # Apply minimum cost threshold - add warning instead of rejecting
             if monthly_savings < self.agent_config.min_cost_threshold:
                 logger.debug(
-                    "Recommendation below minimum cost threshold",
+                    "Recommendation below minimum cost threshold - adding warning",
                     resource_id=resource.resource_id,
                     monthly_savings=monthly_savings,
                     threshold=self.agent_config.min_cost_threshold,
                 )
-                return None
+                conversion_warnings.append(
+                    f"LOW IMPACT: Estimated monthly savings of ${monthly_savings:.2f} is below "
+                    f"the minimum threshold of ${self.agent_config.min_cost_threshold:.2f}. "
+                    "This recommendation may not provide significant cost benefits."
+                )
 
             # Apply confidence threshold
             confidence = float(llm_recommendation.get("confidence_score", 0.5))
+            confidence_warnings = []
+
             if confidence < self.agent_config.confidence_threshold:
                 logger.debug(
                     "Recommendation below confidence threshold",
@@ -552,7 +595,11 @@ class ServiceAgent:
                     confidence=confidence,
                     threshold=self.agent_config.confidence_threshold,
                 )
-                return None
+                confidence_warnings.append(
+                    f"LOW CONFIDENCE: Confidence score {confidence:.2f} is below "
+                    f"the minimum threshold of {self.agent_config.confidence_threshold:.2f}. "
+                    "This recommendation should be manually validated before implementation."
+                )
 
             recommendation = Recommendation(
                 id=rec_id,
@@ -574,10 +621,14 @@ class ServiceAgent:
                 prerequisites=llm_recommendation.get("prerequisites", []),
                 confidence_score=confidence,
                 agent_id=self.agent_id,
-                business_hours_impact=llm_recommendation.get("business_hours_impact", False),
+                business_hours_impact=llm_recommendation.get(
+                    "business_hours_impact", False
+                ),
                 downtime_required=llm_recommendation.get("downtime_required", False),
                 sla_impact=llm_recommendation.get("sla_impact"),
-                warnings=llm_recommendation.get("evidence_warnings", []),
+                warnings=llm_recommendation.get("evidence_warnings", [])
+                + confidence_warnings
+                + conversion_warnings,
             )
 
             return recommendation
@@ -589,7 +640,9 @@ class ServiceAgent:
                 resource_id=resource.resource_id,
                 error=str(e),
             )
-            return None
+            raise
+
+
 
     def _validate_resource_data(self, resource: Resource) -> bool:
         """Validate if resource has required data for analysis"""
@@ -1028,34 +1081,57 @@ class ServiceAgent:
                                 # Get the corresponding context data for evidence validation
                                 resource_context = next(
                                     (
-                                        ctx for i, ctx in enumerate(batch_context)
-                                        if resources[i].resource_id == rec_data["resource_id"]
+                                        ctx
+                                        for i, ctx in enumerate(batch_context)
+                                        if resources[i].resource_id
+                                        == rec_data["resource_id"]
                                     ),
-                                    {}
+                                    {},
                                 )
-                                
+
                                 # EVIDENCE VALIDATION for batch processing
                                 evidence_validation = self.evidence_validator.validate_recommendation_evidence(
                                     rec_data, resource_context
                                 )
-                                
+
                                 # Add warnings instead of rejecting recommendations with poor evidence
                                 evidence_warnings = []
-                                if evidence_validation["evidence_quality"] in ["poor", "fair"] and evidence_validation["unsupported_claims"]:
-                                    evidence_warnings.append(f"Evidence Quality: {evidence_validation['evidence_quality'].title()}")
+                                if (
+                                    evidence_validation["evidence_quality"]
+                                    in ["poor", "fair"]
+                                    and evidence_validation["unsupported_claims"]
+                                ):
+                                    evidence_warnings.append(
+                                        f"Evidence Quality: {evidence_validation['evidence_quality'].title()}"
+                                    )
                                     if evidence_validation["evidence_issues"]:
-                                        evidence_warnings.append(f"Issues: {'; '.join(evidence_validation['evidence_issues'])}")
+                                        evidence_warnings.append(
+                                            f"Issues: {'; '.join(evidence_validation['evidence_issues'])}"
+                                        )
                                     if evidence_validation["unsupported_claims"]:
-                                        evidence_warnings.extend([f"Unsupported: {claim}" for claim in evidence_validation["unsupported_claims"]])
-                                    
+                                        evidence_warnings.extend(
+                                            [
+                                                f"Unsupported: {claim}"
+                                                for claim in evidence_validation[
+                                                    "unsupported_claims"
+                                                ]
+                                            ]
+                                        )
+
                                     logger.warning(
                                         "Batch recommendation flagged with evidence warnings",
                                         resource_id=resource.resource_id,
-                                        evidence_quality=evidence_validation["evidence_quality"],
-                                        evidence_issues=evidence_validation["evidence_issues"],
-                                        unsupported_claims=evidence_validation["unsupported_claims"]
+                                        evidence_quality=evidence_validation[
+                                            "evidence_quality"
+                                        ],
+                                        evidence_issues=evidence_validation[
+                                            "evidence_issues"
+                                        ],
+                                        unsupported_claims=evidence_validation[
+                                            "unsupported_claims"
+                                        ],
                                     )
-                                
+
                                 # Add evidence warnings to the recommendation
                                 if evidence_warnings:
                                     rec_data["evidence_warnings"] = evidence_warnings
@@ -1071,8 +1147,16 @@ class ServiceAgent:
                                             filtered_rec, resource
                                         )
                                     )
-                                    if rec:
-                                        recommendations.append(rec)
+                                    if rec is not None:
+                                        recommendations.append(
+                                            rec
+                                        )  # Always add - now includes errors/warnings
+                                    else:
+                                        logger.error(
+                                            "Batch recommendation conversion returned None - this should not happen",
+                                            agent_id=self.agent_id,
+                                            resource_id=resource.resource_id,
+                                        )
 
                 except json.JSONDecodeError as e:
                     logger.error(

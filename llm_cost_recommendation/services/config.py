@@ -62,8 +62,24 @@ class ConfigManager:
 
         if not config_file.exists():
             # Create default configuration
+            # Get all available service types
+            all_services = []
+            all_services.append(ServiceType.DEFAULT.value)
+            
+            # Add AWS services
+            for service in ServiceType.AWS:
+                all_services.append(service.value)
+            
+            # Add Azure services  
+            for service in ServiceType.Azure:
+                all_services.append(service.value)
+                
+            # Add GCP services
+            for service in ServiceType.GCP:
+                all_services.append(service.value)
+            
             default_config = {
-                "enabled_services": [service.value for service in ServiceType],
+                "enabled_services": all_services,
                 "similarity_threshold": 0.8,
                 "savings_weight": 0.4,
                 "risk_weight": 0.3,
@@ -96,10 +112,10 @@ class ConfigManager:
 
             # Ensure directory exists
             config_file.parent.mkdir(parents=True, exist_ok=True)
-            
+
             with open(config_file, "w") as f:
                 yaml.dump(default_config, f, default_flow_style=False)
-            
+
             config_data = default_config
         else:
             with open(config_file, "r") as f:
@@ -145,9 +161,7 @@ class ConfigManager:
             cloud = "gcp"
             service_name = service_str[4:]  # Remove 'gcp.' prefix
         else:
-            # Legacy service names without cloud prefix - assume AWS
-            cloud = "aws"
-            service_name = service_str
+            raise ValueError(f"Invalid service format: {service_str}. Must start with 'aws.', 'azure.', or 'gcp.'")
 
         return self.config_dir / "agents" / cloud / f"{service_name}.yaml"
 

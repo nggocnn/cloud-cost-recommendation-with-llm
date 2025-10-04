@@ -11,7 +11,7 @@ import json
 
 class PromptTemplates:
     """Unified prompt templates for AWS cost optimization recommendations."""
-    
+
     # Main system prompt for cost optimization recommendations
     SYSTEM_PROMPT = """You are an AWS cost optimization expert that ONLY makes recommendations based on actual data provided.
 
@@ -45,38 +45,37 @@ Your analysis must be evidence-based and transparent about data limitations. Whe
     def COMPLETE_SYSTEM_PROMPT(self) -> str:
         """Get the complete system prompt with JSON structure."""
         return self._get_system_prompt()
-    
+
     def create_user_prompt(
-        self, 
-        resource_data: Dict[str, Any], 
-        resource_type: str, 
-        service_type: str
+        self, resource_data: Dict[str, Any], resource_type: str, service_type: str
     ) -> str:
         """
         Create a user prompt that emphasizes factual analysis
         and prevents fabrication of metrics or claims.
-        
+
         Args:
             resource_data: Complete resource information including metrics
             resource_type: Type of AWS resource (instance, volume, etc.)
             service_type: AWS service (EC2, EBS, S3, etc.)
-            
+
         Returns:
             User prompt string with strict evidence requirements
         """
         base_prompt = self._get_system_prompt()
-        
+
         # Add resource-specific context
-        resource_context = self._build_resource_context(resource_data, resource_type, service_type)
-        
+        resource_context = self._build_resource_context(
+            resource_data, resource_type, service_type
+        )
+
         # Add service-specific guidance
         service_guidance = self._get_service_specific_guidance(service_type)
-        
+
         # Combine all components
         full_prompt = f"{base_prompt}\n\n{resource_context}\n\n{service_guidance}"
-        
+
         return full_prompt
-    
+
     def _get_system_prompt(self) -> str:
         """Get the main system prompt with strict evidence requirements."""
         return f"""{self.SYSTEM_PROMPT}
@@ -175,36 +174,35 @@ ADAPTIVE LIST SIZING GUIDELINES:
 - Quality over quantity: each list item should add genuine value"""
 
     def _build_resource_context(
-        self, 
-        resource_data: Dict[str, Any], 
-        resource_type: str, 
-        service_type: str
+        self, resource_data: Dict[str, Any], resource_type: str, service_type: str
     ) -> str:
         """Build context section with resource details."""
         context = f"RESOURCE ANALYSIS CONTEXT:\n"
         context += f"Service: {service_type}\n"
         context += f"Resource Type: {resource_type}\n"
-        
-        if 'id' in resource_data:
+
+        if "id" in resource_data:
             context += f"Resource ID: {resource_data['id']}\n"
-        
-        if 'configuration' in resource_data:
+
+        if "configuration" in resource_data:
             context += f"Configuration: {json.dumps(resource_data['configuration'], indent=2)}\n"
-        
-        if 'metrics' in resource_data:
-            context += f"Available Metrics: {json.dumps(resource_data['metrics'], indent=2)}\n"
+
+        if "metrics" in resource_data:
+            context += (
+                f"Available Metrics: {json.dumps(resource_data['metrics'], indent=2)}\n"
+            )
         else:
             context += "Available Metrics: None provided\n"
-        
-        if 'billing_data' in resource_data:
+
+        if "billing_data" in resource_data:
             context += f"Billing Information: {json.dumps(resource_data['billing_data'], indent=2)}\n"
-        
+
         return context
-    
+
     def _get_service_specific_guidance(self, service_type: str) -> str:
         """Get service-specific analysis guidance."""
         guidance_map = {
-            'EC2': """
+            "EC2": """
 EC2 ANALYSIS GUIDANCE:
 - Focus on CPU utilization, memory usage, and network patterns
 - Analyze time-series trends (increasing, decreasing, stable) and volatility patterns
@@ -220,7 +218,7 @@ EC2 ANALYSIS GUIDANCE:
 - Assess storage optimization (EBS volume types and sizes)
 - Only recommend instance type changes if utilization data clearly supports it and trends are considered
 """,
-            'EBS': """
+            "EBS": """
 EBS ANALYSIS GUIDANCE:
 - Analyze IOPS utilization vs provisioned IOPS
 - Review throughput patterns and volume type appropriateness
@@ -228,7 +226,7 @@ EBS ANALYSIS GUIDANCE:
 - Evaluate snapshot policies and lifecycle management
 - Only suggest volume type changes when performance data is available
 """,
-            'S3': """
+            "S3": """
 S3 ANALYSIS GUIDANCE:
 - Review storage class distribution and access patterns
 - Analyze request patterns (GET, PUT, LIST operations)
@@ -236,7 +234,7 @@ S3 ANALYSIS GUIDANCE:
 - Evaluate transfer costs and CloudFront integration opportunities
 - Base storage class recommendations on actual access frequency data
 """,
-            'RDS': """
+            "RDS": """
 RDS ANALYSIS GUIDANCE:
 - Focus on database performance metrics (CPU, memory, connections)
 - Analyze storage growth patterns and IOPS requirements
@@ -244,25 +242,28 @@ RDS ANALYSIS GUIDANCE:
 - Evaluate backup retention and cross-region replication costs
 - Only recommend instance changes when performance metrics support it
 """,
-            'Lambda': """
+            "Lambda": """
 LAMBDA ANALYSIS GUIDANCE:
 - Analyze execution duration, memory usage, and invocation patterns
 - Consider memory optimization based on actual usage
 - Evaluate cold start patterns and provisioned concurrency needs
 - Review error rates and timeout configurations
 - Base memory recommendations on actual execution profiles
-"""
+""",
         }
-        
-        return guidance_map.get(service_type, """
+
+        return guidance_map.get(
+            service_type,
+            """
 GENERAL ANALYSIS GUIDANCE:
 - Focus on resource utilization and cost efficiency
 - Consider scaling patterns and usage trends
 - Evaluate alternative service options when appropriate
 - Assess operational overhead vs cost savings
 - Base all recommendations on provided metrics and evidence
-""")
-    
+""",
+        )
+
     def create_simple_prompt(self, resource_type: str, service_type: str) -> str:
         """Create a simplified prompt for basic analysis."""
         return f"""Analyze this {service_type} {resource_type} for cost optimization opportunities.
@@ -305,24 +306,20 @@ Respond in JSON format with coordinated recommendations."""
 
     def should_skip_analysis(self, context_data: dict) -> tuple[bool, str]:
         """Determine if analysis should be skipped due to insufficient data"""
-        
+
         has_inventory = bool(context_data.get("resource"))
         has_any_cost_data = bool(context_data.get("billing"))
         has_metrics = bool(context_data.get("metrics"))
-        
+
         # Minimum requirement: at least inventory data
         if not has_inventory:
             return True, "No resource inventory data available"
-            
+
         # For cost optimization, we need at least some cost-related data or metrics
         if not has_any_cost_data and not has_metrics:
-            return True, "Insufficient data for cost optimization analysis - no billing or performance data"
-            
+            return (
+                True,
+                "Insufficient data for cost optimization analysis - no billing or performance data",
+            )
+
         return False, "Sufficient data available for analysis"
-
-
-# Legacy compatibility - can be removed after migration
-def create_user_prompt(resource_data: Dict[str, Any], resource_type: str, service_type: str) -> str:
-    """Legacy function for backward compatibility."""
-    templates = PromptTemplates()
-    return templates.create_user_prompt(resource_data, resource_type, service_type)

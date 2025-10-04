@@ -6,7 +6,7 @@ import asyncio
 import json
 from typing import Dict, List, Any, Optional
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.messages import SystemMessage
 from pydantic import BaseModel
 
 from .config import LLMConfig
@@ -198,9 +198,26 @@ class LLMService:
                 response_time_ms=response_time,
             )
 
+        except asyncio.TimeoutError as e:
+            logger.error("LLM request timeout", error=str(e), timeout=self.config.timeout)
+            raise ValueError(f"LLM request timed out after {self.config.timeout} seconds")
         except Exception as e:
-            logger.error("Failed to generate LLM response", error=str(e))
-            raise
+            # Handle different types of LLM errors
+            error_type = type(e).__name__
+            error_msg = str(e)
+            
+            if "rate" in error_msg.lower() or "limit" in error_msg.lower():
+                logger.warning("LLM rate limit exceeded", error=error_msg)
+                raise ValueError("LLM API rate limit exceeded. Please try again later.")
+            elif "auth" in error_msg.lower() or "key" in error_msg.lower():
+                logger.error("LLM authentication failed", error_type=error_type)
+                raise ValueError("LLM API authentication failed. Check your API key.")
+            elif "connection" in error_msg.lower() or "network" in error_msg.lower():
+                logger.error("LLM network error", error_type=error_type)
+                raise ValueError("Network error connecting to LLM API. Please check your connection.")
+            else:
+                logger.error("LLM API error", error_type=error_type, error=error_msg)
+                raise ValueError(f"LLM API error: {error_msg}")
 
     def _clean_json_response(self, response_content: str) -> str:
         """Remove markdown code blocks and comments from JSON response"""
@@ -214,9 +231,10 @@ class LLMService:
 
         # Remove JSON comments (// style comments)
         import re
+
         # Remove single-line comments like "// comment"
-        response_content = re.sub(r'\s*//.*?(?=\n|$)', '', response_content)
-        
+        response_content = re.sub(r"\s*//.*?(?=\n|$)", "", response_content)
+
         return response_content.strip()
 
     def _calculate_batch_tokens(self, batch_size: int) -> int:
@@ -340,8 +358,8 @@ class LLMService:
                 '        "metrics_analysis": "specific data supporting this recommendation",',
                 '        "cost_breakdown": "detailed cost analysis",',
                 '        "performance_impact": "expected performance changes"',
-                '        // Add additional evidence fields as needed (compliance_notes, security_implications, etc.)',
-                '      },',
+                "        // Add additional evidence fields as needed (compliance_notes, security_implications, etc.)",
+                "      },",
                 '      "current_config": {},',
                 '      "recommended_config": {},',
                 '      "current_monthly_cost": 100.00,',
@@ -350,20 +368,20 @@ class LLMService:
                 '      "confidence_score": 0.85,',
                 '      "risk_level": "low|medium|high",',
                 '      "implementation_steps": [',
-                '        // Provide 1-10 implementation steps based on complexity',
-                '        // Simple changes: 2-4 steps, Complex changes: 5-10 steps',
+                "        // Provide 1-10 implementation steps based on complexity",
+                "        // Simple changes: 2-4 steps, Complex changes: 5-10 steps",
                 '        "Step 1: Initial preparation step",',
                 '        "Step 2: Main implementation action",',
                 '        "Step 3: Verification and monitoring"',
-                '        // Add more steps if the change is complex',
-                '      ],',
+                "        // Add more steps if the change is complex",
+                "      ],",
                 '      "prerequisites": [',
-                '        // Include 0-5 prerequisites based on requirements',
-                '        // Simple changes may have no prerequisites (empty array [])',
-                '        // Complex changes may require multiple prerequisites',
+                "        // Include 0-5 prerequisites based on requirements",
+                "        // Simple changes may have no prerequisites (empty array [])",
+                "        // Complex changes may require multiple prerequisites",
                 '        "Example: Backup verification required"',
-                '        // Add more prerequisites only if actually needed',
-                '      ],',
+                "        // Add more prerequisites only if actually needed",
+                "      ],",
                 '      "rollback_plan": "how to revert this change if needed",',
                 '      "business_hours_impact": false,',
                 '      "downtime_required": false,',
@@ -374,7 +392,7 @@ class LLMService:
                 "",
                 "ADAPTIVE LIST SIZING GUIDELINES:",
                 "- implementation_steps: Use 1-10 steps based on actual complexity",
-                "- prerequisites: Use 0-5 items, empty array [] if none needed", 
+                "- prerequisites: Use 0-5 items, empty array [] if none needed",
                 "- evidence: Include 3+ relevant analysis fields, add custom fields as needed",
                 "- Determine list sizes based on actual recommendation complexity",
                 "- Quality over quantity - only include meaningful items",

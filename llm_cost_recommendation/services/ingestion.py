@@ -25,47 +25,128 @@ class DataIngestionService:
         (self.data_dir / "billing").mkdir(exist_ok=True)
         (self.data_dir / "inventory").mkdir(exist_ok=True)
         (self.data_dir / "metrics").mkdir(exist_ok=True)
+        
+        # Security limits
+        self.MAX_FILE_SIZE = 100 * 1024 * 1024  # 100MB
+        self.MAX_RECORDS = 1000000  # 1M records
+        self.MAX_STRING_LENGTH = 10000  # 10K chars per field
 
-    def _parse_json_field(self, field_value):
-        """Parse JSON field from CSV"""
+    def _parse_json_field(self, field_value, default_type="dict"):
+        """Parse JSON field from CSV with appropriate default type"""
         import json
-        if not field_value or pd.isna(field_value) or field_value == '':
-            return {}
+
+        # Set appropriate default based on expected type
+        default_value = [] if default_type == "list" else {}
+
+        if not field_value or pd.isna(field_value) or field_value == "":
+            return default_value
         try:
             if isinstance(field_value, str):
-                return json.loads(field_value)
+                parsed_value = json.loads(field_value)
+                # Validate that the parsed value matches expected type
+                if default_type == "list" and not isinstance(parsed_value, list):
+                    logger.warning(
+                        "Expected list for JSON field but got different type",
+                        field_value=str(field_value)[:100],
+                        parsed_type=type(parsed_value).__name__,
+                    )
+                    return default_value
+                return parsed_value
             return field_value
-        except (json.JSONDecodeError, TypeError):
-            return {}
+        except (json.JSONDecodeError, TypeError) as e:
+            logger.warning(
+                "Failed to parse JSON field",
+                field_value=str(field_value)[:100],
+                error=str(e),
+            )
+            return default_value
 
     def _parse_list_field(self, field_value):
         """Parse list field from CSV (comma-separated or JSON)"""
         import json
-        if not field_value or pd.isna(field_value) or field_value == '':
+
+        if not field_value or pd.isna(field_value) or field_value == "":
             return []
         try:
             if isinstance(field_value, str):
                 # Try JSON first
-                if field_value.startswith('[') and field_value.endswith(']'):
+                if field_value.startswith("[") and field_value.endswith("]"):
                     return json.loads(field_value)
                 # Otherwise, comma-separated
-                return [int(x.strip()) for x in field_value.split(',') if x.strip().isdigit()]
+                return [
+                    int(x.strip())
+                    for x in field_value.split(",")
+                    if x.strip().isdigit()
+                ]
             return field_value if isinstance(field_value, list) else []
         except (json.JSONDecodeError, ValueError, TypeError):
             return []
 
     def _safe_string_field(self, field_value):
         """Safely handle string fields that might be NaN"""
-        if pd.isna(field_value) or field_value == '':
+        if pd.isna(field_value) or field_value == "":
             return None
         return str(field_value)
+
+    def _validate_file_security(self, file_path: str) -> None:
+        """Validate file security constraints."""
+        try:
+            file_path_obj = Path(file_path)
+            
+            # Check if file exists
+            if not file_path_obj.exists():
+                raise FileNotFoundError(f"File not found: {file_path}")
+            
+            # Check file size
+            file_size = file_path_obj.stat().st_size
+            if file_size > self.MAX_FILE_SIZE:
+                raise ValueError(f"File too large: {file_size} bytes (max: {self.MAX_FILE_SIZE})")
+            
+            # Check file extension
+            allowed_extensions = {'.csv', '.json', '.xlsx', '.xls'}
+            if file_path_obj.suffix.lower() not in allowed_extensions:
+                raise ValueError(f"File type not allowed: {file_path_obj.suffix}")
+            
+            # Prevent directory traversal
+            resolved_path = file_path_obj.resolve()
+            if ".." in str(resolved_path) or str(resolved_path).startswith("/etc/") or str(resolved_path).startswith("/root/"):
+                raise ValueError(f"File path not allowed: {file_path}")
+                
+        except OSError as e:
+            raise ValueError(f"Error accessing file: {e}")
+
+    def _sanitize_string(self, value: Any) -> Optional[str]:
+        """Sanitize string input to prevent issues."""
+        if value is None or pd.isna(value):
+            return None
+            
+        str_value = str(value)
+        
+        # Limit string length
+        if len(str_value) > self.MAX_STRING_LENGTH:
+            logger.warning(f"String truncated from {len(str_value)} to {self.MAX_STRING_LENGTH} chars")
+            str_value = str_value[:self.MAX_STRING_LENGTH]
+        
+        # Remove potentially problematic characters
+        # Keep most characters but remove control characters except newline/tab
+        sanitized = ''.join(char for char in str_value if ord(char) >= 32 or char in '\n\t')
+        
+        return sanitized.strip() if sanitized else None
 
     def ingest_billing_data(self, csv_file_path: str) -> List[BillingData]:
         """Ingest billing data from CSV file"""
         logger.info("Ingesting billing data", file_path=csv_file_path)
 
+        # Validate file security
+        self._validate_file_security(csv_file_path)
+
         try:
-            df = pd.read_csv(csv_file_path)
+            # Read with size limits
+            df = pd.read_csv(csv_file_path, nrows=self.MAX_RECORDS)
+            
+            if len(df) == 0:
+                logger.warning("CSV file is empty", file_path=csv_file_path)
+                return []
             billing_records = []
 
             # Required columns mapping
@@ -243,11 +324,21 @@ class DataIngestionService:
                         cpu_utilization_min=row.get("cpu_utilization_min"),
                         cpu_utilization_max=row.get("cpu_utilization_max"),
                         cpu_utilization_stddev=row.get("cpu_utilization_stddev"),
-                        cpu_utilization_trend=self._safe_string_field(row.get("cpu_utilization_trend")),
-                        cpu_utilization_volatility=self._safe_string_field(row.get("cpu_utilization_volatility")),
-                        cpu_utilization_peak_hours=self._parse_list_field(row.get("cpu_utilization_peak_hours", "")),
-                        cpu_utilization_patterns=self._parse_json_field(row.get("cpu_utilization_patterns", "{}")),
-                        cpu_timeseries_data=self._parse_json_field(row.get("cpu_timeseries_data", "[]")),
+                        cpu_utilization_trend=self._safe_string_field(
+                            row.get("cpu_utilization_trend")
+                        ),
+                        cpu_utilization_volatility=self._safe_string_field(
+                            row.get("cpu_utilization_volatility")
+                        ),
+                        cpu_utilization_peak_hours=self._parse_list_field(
+                            row.get("cpu_utilization_peak_hours", "")
+                        ),
+                        cpu_utilization_patterns=self._parse_json_field(
+                            row.get("cpu_utilization_patterns", "{}"), "dict"
+                        ),
+                        cpu_timeseries_data=self._parse_json_field(
+                            row.get("cpu_timeseries_data", "[]"), "list"
+                        ),
                         memory_utilization_p50=row.get("memory_utilization_p50"),
                         memory_utilization_p90=row.get("memory_utilization_p90"),
                         memory_utilization_p95=row.get("memory_utilization_p95"),
@@ -279,6 +370,12 @@ class DataIngestionService:
         self, service_name: str
     ) -> Optional[Union[ServiceType.AWS, ServiceType.Azure, ServiceType.GCP]]:
         """Normalize service name to ServiceType enum"""
+        # Handle dotted notation like "AWS.EC2", "AZURE.VM", etc.
+        if "." in service_name:
+            parts = service_name.split(".")
+            if len(parts) == 2:
+                service_name = parts[1]  # Take the service part after the dot
+
         service_mapping = {
             "EC2": ServiceType.AWS.EC2,
             "ELASTIC COMPUTE CLOUD": ServiceType.AWS.EC2,
@@ -320,6 +417,211 @@ class DataIngestionService:
         }
 
         return service_mapping.get(service_name.upper())
+
+    def ingest_billing_data_json(
+        self, billing_records: List[BillingData]
+    ) -> List[BillingData]:
+        """Ingest billing data from JSON API request (direct data objects)"""
+        logger.info(
+            "Processing billing data from API", record_count=len(billing_records)
+        )
+
+        try:
+            processed_records = []
+
+            for i, record in enumerate(billing_records):
+                try:
+                    # Validate the record (Pydantic model validation already done)
+                    if not record.service:
+                        logger.warning("Billing record missing service", record_index=i)
+                        continue
+
+                    processed_records.append(record)
+
+                except Exception as e:
+                    logger.warning(
+                        "Failed to process billing record", record_index=i, error=str(e)
+                    )
+                    continue
+
+            logger.info(
+                "Billing data processing completed",
+                total_input=len(billing_records),
+                successfully_processed=len(processed_records),
+            )
+            return processed_records
+
+        except Exception as e:
+            logger.error("Failed to process billing data from API", error=str(e))
+            raise ValueError(f"Billing data processing failed: {str(e)}")
+
+    def ingest_inventory_data_json(
+        self, resource_records: List[Resource]
+    ) -> List[Resource]:
+        """Ingest resource inventory from JSON API request (direct data objects)"""
+        logger.info(
+            "Processing inventory data from API", record_count=len(resource_records)
+        )
+
+        try:
+            processed_resources = []
+
+            for i, record in enumerate(resource_records):
+                try:
+                    # Validate required fields (Pydantic validation already done)
+                    if not record.resource_id or not record.service:
+                        logger.warning(
+                            "Resource missing required fields", record_index=i
+                        )
+                        continue
+
+                    processed_resources.append(record)
+
+                except Exception as e:
+                    logger.warning(
+                        "Failed to process resource record",
+                        record_index=i,
+                        error=str(e),
+                    )
+                    continue
+
+            if not processed_resources:
+                raise ValueError("No valid resources found in the input data")
+
+            logger.info(
+                "Inventory data processing completed",
+                total_input=len(resource_records),
+                successfully_processed=len(processed_resources),
+            )
+            return processed_resources
+
+        except Exception as e:
+            logger.error("Failed to process inventory data from API", error=str(e))
+            raise ValueError(f"Inventory data processing failed: {str(e)}")
+
+    def ingest_metrics_data_json(self, metrics_records: List[Metrics]) -> List[Metrics]:
+        """Ingest metrics data from JSON API request (direct data objects)"""
+        logger.info(
+            "Processing metrics data from API", record_count=len(metrics_records)
+        )
+
+        try:
+            processed_metrics = []
+
+            for i, record in enumerate(metrics_records):
+                try:
+                    # Validate required fields (Pydantic validation already done)
+                    if not record.resource_id:
+                        logger.warning(
+                            "Metrics record missing resource_id", record_index=i
+                        )
+                        continue
+
+                    processed_metrics.append(record)
+
+                except Exception as e:
+                    logger.warning(
+                        "Failed to process metrics record", record_index=i, error=str(e)
+                    )
+                    continue
+
+            logger.info(
+                "Metrics data processing completed",
+                total_input=len(metrics_records),
+                successfully_processed=len(processed_metrics),
+            )
+            return processed_metrics
+
+        except Exception as e:
+            logger.error("Failed to process metrics data from API", error=str(e))
+            raise ValueError(f"Metrics data processing failed: {str(e)}")
+
+    def validate_request_data(
+        self,
+        resources: List[Resource],
+        billing: List[BillingData] = None,
+        metrics: List[Metrics] = None,
+    ) -> Dict[str, Any]:
+        """Validate and analyze the incoming request data"""
+
+        validation_result = {
+            "valid": True,
+            "warnings": [],
+            "errors": [],
+            "stats": {
+                "resources": len(resources),
+                "billing_records": len(billing or []),
+                "metrics_records": len(metrics or []),
+            },
+        }
+
+        try:
+            # Check for required resources
+            if not resources:
+                validation_result["errors"].append("At least one resource is required")
+                validation_result["valid"] = False
+                return validation_result
+
+            # Collect resource IDs for validation
+            resource_ids = set(r.resource_id for r in resources)
+
+            # Validate billing data alignment
+            if billing:
+                billing_resource_ids = set(
+                    b.resource_id for b in billing if b.resource_id is not None
+                )
+                unmatched_billing = billing_resource_ids - resource_ids
+                if unmatched_billing:
+                    validation_result["warnings"].append(
+                        f"Billing data found for {len(unmatched_billing)} resources "
+                        f"not in inventory: {list(unmatched_billing)[:5]}{'...' if len(unmatched_billing) > 5 else ''}"
+                    )
+
+            # Validate metrics data alignment
+            if metrics:
+                metrics_resource_ids = set(m.resource_id for m in metrics)
+                unmatched_metrics = metrics_resource_ids - resource_ids
+                if unmatched_metrics:
+                    validation_result["warnings"].append(
+                        f"Metrics data found for {len(unmatched_metrics)} resources "
+                        f"not in inventory: {list(unmatched_metrics)[:5]}{'...' if len(unmatched_metrics) > 5 else ''}"
+                    )
+
+                # Check for resources without metrics
+                missing_metrics = resource_ids - metrics_resource_ids
+                if missing_metrics:
+                    validation_result["warnings"].append(
+                        f"{len(missing_metrics)} resources have no metrics data, "
+                        f"which may limit recommendation accuracy"
+                    )
+
+            # Check service type distribution
+            service_counts = {}
+            for resource in resources:
+                service_name = (
+                    resource.service.value
+                    if hasattr(resource.service, "value")
+                    else str(resource.service)
+                )
+                service_counts[service_name] = service_counts.get(service_name, 0) + 1
+
+            validation_result["stats"]["service_distribution"] = service_counts
+
+            # Check for potential data quality issues
+            resources_without_tags = sum(1 for r in resources if not r.tags)
+            if resources_without_tags > 0:
+                validation_result["warnings"].append(
+                    f"{resources_without_tags} resources have no tags, "
+                    f"which may limit cost allocation insights"
+                )
+
+            return validation_result
+
+        except Exception as e:
+            logger.error("Validation failed", error=str(e))
+            validation_result["errors"].append(f"Validation error: {str(e)}")
+            validation_result["valid"] = False
+            return validation_result
 
     def create_sample_data(self, num_resources: int = 200):
         """Create realistic AWS data files for comprehensive testing"""

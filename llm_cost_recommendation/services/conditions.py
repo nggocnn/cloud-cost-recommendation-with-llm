@@ -176,7 +176,12 @@ class ConditionEvaluator:
             return getattr(metrics, field)
 
         # Handle custom metrics
-        if metrics and field in metrics.metrics:
+        if (
+            metrics
+            and hasattr(metrics, "metrics")
+            and metrics.metrics
+            and field in metrics.metrics
+        ):
             return metrics.metrics[field]
 
         # Handle boolean fields

@@ -1,0 +1,307 @@
+"""
+Resource Processor - Handles resource processing strategies and coordination.
+Extracted from CoordinatorAgent to implement strategy pattern and reduce complexity.
+"""
+
+import asyncio
+from typing import Dict, List, Optional, Any, Tuple
+from collections import defaultdict
+from abc import ABC, abstractmethod
+
+from ..models import Resource, Metrics, BillingData, Recommendation, ServiceType
+from ..utils.logging import get_logger
+from .base import ServiceAgent
+
+logger = get_logger(__name__)
+
+
+class ProcessingStrategy(ABC):
+    """Abstract strategy for processing resources."""
+    
+    @abstractmethod
+    async def process_resources(
+        self,
+        resources_by_service: Dict[ServiceType, List[Resource]],
+        agent_manager,
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> Tuple[List[Recommendation], List[Dict[str, Any]]]:
+        """Process resources using specific strategy."""
+        pass
+
+
+class BatchProcessingStrategy(ProcessingStrategy):
+    """Strategy for batch processing resources in parallel."""
+    
+    async def process_resources(
+        self,
+        resources_by_service: Dict[ServiceType, List[Resource]],
+        agent_manager,
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> Tuple[List[Recommendation], List[Dict[str, Any]]]:
+        """Process resources in parallel batches by service."""
+        logger.info("Starting batch processing", total_services=len(resources_by_service))
+        
+        analysis_tasks = []
+        
+        for service, service_resources in resources_by_service.items():
+            agent = agent_manager.get_agent_for_service(service)
+            if not agent:
+                logger.warning(f"No agent available for service {service.value}")
+                continue
+                
+            logger.info(
+                "Creating analysis task",
+                service=service.value,
+                resource_count=len(service_resources)
+            )
+            
+            task = self._analyze_service_resources_with_tracking(
+                agent, service_resources, metrics_data, billing_data
+            )
+            analysis_tasks.append(task)
+        
+        # Execute all services in parallel
+        if analysis_tasks:
+            logger.info("Executing parallel analysis", task_count=len(analysis_tasks))
+            service_results = await asyncio.gather(*analysis_tasks, return_exceptions=True)
+            return self._collect_results(service_results)
+        
+        logger.warning("No analysis tasks created")
+        return [], []
+    
+    async def _analyze_service_resources_with_tracking(
+        self,
+        agent: ServiceAgent,
+        resources: List[Resource],
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> Tuple[List[Recommendation], List[Dict[str, Any]]]:
+        """Analyze resources for a service with tracking."""
+        logger.debug(
+            "Analyzing service resources",
+            service=agent.service.value,
+            resource_count=len(resources)
+        )
+        
+        try:
+            recommendations = await agent.analyze_multiple_resources(
+                resources, metrics_data, billing_data
+            )
+            
+            # Track resources without recommendations
+            resources_without_recommendations = self._track_resources_without_recommendations(
+                resources, recommendations
+            )
+            
+            logger.info(
+                "Service analysis completed",
+                service=agent.service.value,
+                recommendations_generated=len(recommendations),
+                resources_without_recs=len(resources_without_recommendations)
+            )
+            
+            return recommendations, resources_without_recommendations
+            
+        except Exception as e:
+            logger.error(
+                "Service analysis failed",
+                service=agent.service.value,
+                error=str(e)
+            )
+            return [], []
+    
+    def _track_resources_without_recommendations(
+        self, resources: List[Resource], recommendations: List[Recommendation]
+    ) -> List[Dict[str, Any]]:
+        """Track resources that didn't get recommendations."""
+        resource_ids_with_recs = {rec.resource_id for rec in recommendations}
+        
+        resources_without_recommendations = []
+        for resource in resources:
+            if resource.resource_id not in resource_ids_with_recs:
+                resources_without_recommendations.append({
+                    "resource_id": resource.resource_id,
+                    "service": resource.service.value,
+                    "reason": "No recommendations generated by agent"
+                })
+        
+        return resources_without_recommendations
+    
+    def _collect_results(
+        self, service_results: List[Tuple[List[Recommendation], List[Dict[str, Any]]]]
+    ) -> Tuple[List[Recommendation], List[Dict[str, Any]]]:
+        """Collect results from parallel service analysis."""
+        all_recommendations = []
+        all_no_recommendations = []
+        
+        for result in service_results:
+            if isinstance(result, Exception):
+                logger.error(f"Service analysis error: {result}")
+                continue
+            
+            recommendations, no_recommendations = result
+            all_recommendations.extend(recommendations)
+            all_no_recommendations.extend(no_recommendations)
+        
+        return all_recommendations, all_no_recommendations
+
+
+class IndividualProcessingStrategy(ProcessingStrategy):
+    """Strategy for processing resources individually."""
+    
+    async def process_resources(
+        self,
+        resources_by_service: Dict[ServiceType, List[Resource]],
+        agent_manager,
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+    ) -> Tuple[List[Recommendation], List[Dict[str, Any]]]:
+        """Process each resource individually for maximum precision."""
+        # Flatten resources from all services
+        all_resources = []
+        for resources in resources_by_service.values():
+            all_resources.extend(resources)
+        
+        logger.info(
+            "Starting individual processing", 
+            total_resources=len(all_resources)
+        )
+        
+        all_recommendations = []
+        resources_without_recommendations = []
+        
+        total_resources = len(all_resources)
+        
+        for i, resource in enumerate(all_resources, 1):
+            agent = agent_manager.get_agent_for_service(resource.service)
+            
+            if not agent:
+                logger.warning(
+                    f"No agent for resource {i}/{total_resources}",
+                    resource_id=resource.resource_id
+                )
+                continue
+            
+            logger.debug(
+                f"Analyzing resource {i}/{total_resources}",
+                resource_id=resource.resource_id,
+                service=resource.service.value
+            )
+            
+            try:
+                resource_metrics = metrics_data.get(resource.resource_id) if metrics_data else None
+                resource_billing = billing_data.get(resource.resource_id) if billing_data else None
+                
+                recommendations = await agent.analyze_single_resource(
+                    resource, resource_metrics, resource_billing
+                )
+                
+                if recommendations:
+                    all_recommendations.extend(recommendations)
+                else:
+                    resources_without_recommendations.append({
+                        "resource_id": resource.resource_id,
+                        "service": resource.service.value,
+                        "reason": "No recommendations generated by individual analysis"
+                    })
+                    
+            except Exception as e:
+                logger.error(
+                    f"Individual analysis failed",
+                    resource_id=resource.resource_id,
+                    error=str(e)
+                )
+                resources_without_recommendations.append({
+                    "resource_id": resource.resource_id,
+                    "service": resource.service.value,
+                    "reason": f"Analysis failed: {str(e)}"
+                })
+        
+        logger.info(
+            "Individual processing completed",
+            total_recommendations=len(all_recommendations),
+            resources_without_recs=len(resources_without_recommendations)
+        )
+        
+        return all_recommendations, resources_without_recommendations
+
+
+class ResourceProcessor:
+    """Handles resource processing coordination using strategy pattern."""
+    
+    def __init__(self, config_manager):
+        self.config = config_manager.global_config
+        self.batch_strategy = BatchProcessingStrategy()
+        self.individual_strategy = IndividualProcessingStrategy()
+    
+    def group_resources_by_service(self, resources: List[Resource]) -> Dict[ServiceType, List[Resource]]:
+        """Group resources by service type for targeted processing."""
+        logger.debug("Grouping resources by service", total_resources=len(resources))
+        
+        grouped = defaultdict(list)
+        for resource in resources:
+            grouped[resource.service].append(resource)
+        
+        logger.info(
+            "Resources grouped by service",
+            services=len(grouped),
+            service_breakdown={service.value: len(resources) for service, resources in grouped.items()}
+        )
+        
+        return dict(grouped)
+    
+    async def process_resources(
+        self,
+        resources: List[Resource],
+        agent_manager,
+        metrics_data: Dict[str, Metrics] = None,
+        billing_data: Dict[str, List[BillingData]] = None,
+        batch_mode: bool = True,
+    ) -> Tuple[List[Recommendation], List[Dict[str, Any]]]:
+        """Process resources using appropriate strategy."""
+        logger.info(
+            "Starting resource processing",
+            total_resources=len(resources),
+            batch_mode=batch_mode
+        )
+        
+        # Group resources by service
+        resources_by_service = self.group_resources_by_service(resources)
+        
+        # Select processing strategy
+        strategy = self.batch_strategy if batch_mode else self.individual_strategy
+        strategy_name = "batch" if batch_mode else "individual"
+        
+        logger.info(f"Using {strategy_name} processing strategy")
+        
+        # Process resources
+        recommendations, resources_without_recs = await strategy.process_resources(
+            resources_by_service, agent_manager, metrics_data, billing_data
+        )
+        
+        logger.info(
+            "Resource processing completed",
+            strategy=strategy_name,
+            total_recommendations=len(recommendations),
+            resources_without_recs=len(resources_without_recs)
+        )
+        
+        return recommendations, resources_without_recs
+    
+    def get_processing_stats(self) -> Dict[str, Any]:
+        """Get statistics about resource processing capabilities."""
+        return {
+            "available_strategies": ["batch", "individual"],
+            "batch_strategy": {
+                "parallel_processing": True,
+                "service_level_batching": True,
+                "efficiency": "high"
+            },
+            "individual_strategy": {
+                "resource_level_processing": True,
+                "precision": "maximum",
+                "efficiency": "medium"
+            }
+        }

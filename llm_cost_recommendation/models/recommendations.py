@@ -51,9 +51,11 @@ class Recommendation(BaseModel):
     business_hours_impact: bool = False
     downtime_required: bool = False
     sla_impact: Optional[str] = None
-    
+
     # Quality warnings
-    warnings: List[str] = Field(default_factory=list, description="Quality warnings about this recommendation")
+    warnings: List[str] = Field(
+        default_factory=list, description="Quality warnings about this recommendation"
+    )
 
 
 class RecommendationReport(BaseModel):
@@ -88,9 +90,9 @@ class RecommendationReport(BaseModel):
     # Quality metrics
     coverage: Dict[str, Any] = Field(default_factory=dict)  # What was analyzed
     data_quality_issues: List[str] = Field(default_factory=list)
-    
+
     # Resources without recommendations
     resources_without_recommendations: List[Dict[str, Any]] = Field(
-        default_factory=list, 
-        description="Resources that were analyzed but didn't receive recommendations"
+        default_factory=list,
+        description="Resources that were analyzed but didn't receive recommendations",
     )
